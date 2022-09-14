@@ -1,6 +1,8 @@
 import {defineConfig} from 'vuepress/config'
 
 export default defineConfig({
+    base: "/wiki/",
+    dest: "./wiki",
     markdown: {
         lineNumbers: true
     },
