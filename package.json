@@ -1,0 +1,14 @@
+{
+  "name": "wiki",
+  "version": "1.0.0",
+  "description": "Self-host wiki system",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "docs:dev": "vuepress dev docs",
+    "docs:build": "vuepress build docs"
+  },
+  "author": "Ricardo Ren",
+  "devDependencies": {
+    "vuepress": "^1.9.7"
+  }
+}
