@@ -9,6 +9,7 @@
   },
   "author": "Ricardo Ren",
   "devDependencies": {
+    "markdown-it-mathjax3": "^4.3.1",
     "vuepress": "^1.9.7"
   }
 }

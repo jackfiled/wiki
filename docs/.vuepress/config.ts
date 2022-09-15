@@ -3,9 +3,6 @@ import {defineConfig} from 'vuepress/config'
 export default defineConfig({
     base: "/wiki/",
     dest: "./wiki",
-    markdown: {
-        lineNumbers: true
-    },
     locales: {
         '/': {
             lang: 'zh-CN',
@@ -28,11 +25,21 @@ export default defineConfig({
                 'missing-security',
                 'missing-potpourri'
             ],
+            '/data-structure/': [
+                '',
+                'foundation'
+            ],
             '/': [
                 '',
                 '/missing-semester/',
+                '/data-structure/'
             ]
         }
-    }
-
+    },
+    markdown: {
+        lineNumbers: true,
+        plugins: [
+            'markdown-it-mathjax3'
+        ]
+    },
 })
