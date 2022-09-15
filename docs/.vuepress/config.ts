@@ -1,4 +1,4 @@
-import {defineConfig} from 'vuepress/config'
+import { defineConfig } from 'vuepress/config'
 
 export default defineConfig({
     base: "/wiki/",
@@ -29,10 +29,15 @@ export default defineConfig({
                 '',
                 'foundation'
             ],
+            '/csapp/': [
+                '',
+                'bits'
+            ],
             '/': [
                 '',
                 '/missing-semester/',
-                '/data-structure/'
+                '/data-structure/',
+                '/csapp/'
             ]
         }
     },
