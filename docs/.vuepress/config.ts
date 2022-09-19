@@ -27,7 +27,8 @@ export default defineConfig({
             ],
             '/data-structure/': [
                 '',
-                'foundation'
+                'foundation',
+                'list'
             ],
             '/csapp/': [
                 '',
