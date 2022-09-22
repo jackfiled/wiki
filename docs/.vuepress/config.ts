@@ -40,7 +40,10 @@ export default defineConfig({
                 '/data-structure/',
                 '/csapp/'
             ]
-        }
+        },
+        logo: "/favicon.ico",
+        repo: "jackfiled/wiki",
+        sidebarDepth: 2
     },
     markdown: {
         lineNumbers: true,
