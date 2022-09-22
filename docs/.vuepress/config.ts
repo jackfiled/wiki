@@ -32,7 +32,8 @@ export default defineConfig({
             ],
             '/csapp/': [
                 '',
-                'bits'
+                'bits',
+                'machine'
             ],
             '/': [
                 '',
