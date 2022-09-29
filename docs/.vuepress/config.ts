@@ -6,7 +6,7 @@ export default defineConfig({
     locales: {
         '/': {
             lang: 'zh-CN',
-            title: "Ricardo Ren的个人知识图书馆",
+            title: "Ricardo Ren的知识图书馆",
             description: "大概所有的都是知识",
         }
     },
@@ -28,12 +28,14 @@ export default defineConfig({
             '/data-structure/': [
                 '',
                 'foundation',
-                'list'
+                'list',
+                'stack-and-dequeue'
             ],
             '/csapp/': [
                 '',
                 'bits',
-                'machine'
+                'machine',
+                'assembly-control'
             ],
             '/': [
                 '',
