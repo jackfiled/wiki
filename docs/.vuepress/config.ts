@@ -29,13 +29,15 @@ export default defineConfig({
                 '',
                 'foundation',
                 'list',
-                'stack-and-dequeue'
+                'stack-and-dequeue',
+                'lab'
             ],
             '/csapp/': [
                 '',
                 'bits',
                 'machine',
-                'assembly-control'
+                'assembly-control',
+                'assembly-procedure'
             ],
             '/': [
                 '',
