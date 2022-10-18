@@ -30,6 +30,7 @@ export default defineConfig({
                 'foundation',
                 'list',
                 'stack-and-dequeue',
+                'array-and-list',
                 'lab'
             ],
             '/csapp/': [
@@ -37,7 +38,8 @@ export default defineConfig({
                 'bits',
                 'machine',
                 'assembly-control',
-                'assembly-procedure'
+                'assembly-procedure',
+                'assembly-data'
             ],
             '/': [
                 '',
