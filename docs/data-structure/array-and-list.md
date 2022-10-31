@@ -93,5 +93,160 @@ $$
 - 程序的语句结构
 - m元多项式的表示
 
-## 广义表的存储结构
+### 广义表的存储结构
+
+#### 头尾链表形式
+
+为了区分原子节点和子表节点，我们先定义一个枚举：
+
+```c
+typedef enum {
+    Atom, // 原子类型
+    List, // 子表类型
+} ElementType;
+```
+
+然后再定义每个节点的数据类型：
+
+```C
+struct gl_node {
+    ElementType type;
+    union {
+        int value;
+        struct {
+            struct gl_node* head;
+            struct gl_node* tail;
+        } ptr;
+    };
+};
+
+typedef struct gl_node gl_node_t;
+```
+
+> 这里涉及到C语言中一种特殊的类型：联合
+
+#### 扩展的线性链表形式
+
+为了区分原子节点和子表节点，同上文中一样定义一个`ElementType`枚举。
+
+定义每个节点的数据类型：
+
+```C
+struct gl_node {
+    ElementType type;
+    union {
+        int value;
+        struct gl_node* head;
+    };
+    struct gl_node* tail;
+};
+
+typedef struct gl_node gl_node_t;
+```
+
+> 在课程PPT中，联合中的`head`节点还用`struct`包了一下。但是我感觉貌似没有用的样子
+
+### 广义表的递归算法
+
+广义表的相关操作较为复杂，且几乎都采用递归实现。
+
+为了简化相关算法的表达，我们规定例子中的广义表定义都不是递归的，且没有共享子表。
+
+#### 计算广义表的深度
+
+方法一：分析表中各节点的深度，取其深度的最大值
+
+```cpp
+int gl_depth(gl_node_t* g)
+{
+    if (g == nullptr)
+    {
+        // 空表
+        return 1;
+    }
+
+    if (g->type == Atom)
+    {
+        // 单原子表
+        return 0;
+    }
+
+    int max = 0;
+    for(gl_node_t* node = g; node != nullptr; node = node->ptr.tail)
+    {
+        int dep = gl_depth(node->ptr.head);
+        if (dep > max)
+        {
+            max = dep;
+        }
+    }
+
+    return max + 1;
+}
+```
+
+方法二：分析表头和表尾
+
+```cpp
+int gl_depth_1(gl_node_t* g)
+{
+    if (g == nullptr)
+    {
+        // 空表
+        return 0;
+    }
+
+    if (g->type == Atom)
+    {
+        // 单原子表
+        return 0;
+    }
+
+    int depth1 = gl_depth_1(g->ptr.head) + 1;
+    int depth2 = gl_depth_1(g->ptr.tail);
+
+    if (depth1 > depth2)
+    {
+        return depth1;
+    }
+    else 
+    {
+        return depth2;
+    }
+}
+```
+
+#### 广义表的复制算法
+
+```
+bool gl_copy(gl_node_t*& target, gl_node_t* g)
+{
+    if (g == nullptr)
+    {
+        // 被复制的广义表为空
+        return false;
+    }
+
+    target = (gl_node_t* )malloc(sizeof(gl_node_t));
+    if (target == nullptr)
+    {
+        // 空间分配失败
+        return false;
+    }
+    
+    target->type = g->type;
+    if (g->type == Atom)
+    {
+        // 原子节点
+        target->value = g->value;
+    }
+    else
+    {
+        gl_copy(target->ptr.head, g->ptr.head);
+        gl_copy(target->ptr.tail, g->ptr.tail);
+    }
+
+    return true;
+}
+```
 
