@@ -1,13 +1,11 @@
-import { defineConfig } from 'vuepress/config'
-
-export default defineConfig({
+module.exports = {
     base: "/wiki/",
-    dest: "./wiki",
+    dest: "./wiki/",
     locales: {
         '/': {
             lang: 'zh-CN',
             title: "Ricardo Ren的知识图书馆",
-            description: "大概所有的都是知识",
+            description: "所有的都是只是（大概）",
         }
     },
     themeConfig: {
@@ -31,7 +29,8 @@ export default defineConfig({
                 'list',
                 'stack-and-dequeue',
                 'array-and-list',
-                'lab'
+                'lab',
+                'tree'
             ],
             '/csapp/': [
                 '',
@@ -58,4 +57,7 @@ export default defineConfig({
             'markdown-it-mathjax3'
         ]
     },
-})
+    plugins: [
+        'vuepress-plugin-mermaidjs'
+    ]
+}
