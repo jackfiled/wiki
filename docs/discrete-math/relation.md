@@ -43,7 +43,7 @@
 #### Symmetry
 
 -  A binary relation $R$ on $A$ is symmetry if $R = R^{-1}$, that is if $(a,b) \in R \leftrightarrow (b,a) \in R$
-- A binary relation $R$ is antisymmetric if $ \forall a \not= b, (a,b) \in R \to (b,a) \not \in R$
+- A binary relation $R$ is antisymmetric if $\forall a \not= b, (a,b) \in R \to (b,a) \not \in R$
 
 #### Transitivity
 
@@ -59,7 +59,7 @@ Examples in Mathematics:
 
 ### Composition
 
-The composition of two relations $R:A \to B$ and $S: B \to C$, denoted by $S \circ R$, is the relation from $A$ to $C$ containing all pairs $(x,z)$ such that there is one $y \in B$ with $(x,y) \in R $ and $(y,z) \in S$.
+The composition of two relations $R:A \to B$ and $S: B \to C$, denoted by $S \circ R$, is the relation from $A$ to $C$ containing all pairs $(x,z)$ such that there is one $y \in B$ with $(x,y) \in R$ and $(y,z) \in S$.
 
 ### Power of a Relation
 
@@ -76,7 +76,7 @@ Let $R$ be a binary relation on $A$, then the power $R^n$ of the relation $R$ ca
 
 ### n-ary Relations
 
-- An n-ary relation $R$ on sets $A_1,A_2,A_3,\cdots,A_n$, a subset $ R \subseteq A_1 \times A_2 \times \cdots A_n$.
+- An n-ary relation $R$ on sets $A_1,A_2,A_3,\cdots,A_n$, a subset $R \subseteq A_1 \times A_2 \times \cdots A_n$.
 - The sets $A_i$ are called the **domains** of $R$.
 - The degree of $R$ is $n$.
 
@@ -84,7 +84,7 @@ Let $R$ be a binary relation on $A$, then the power $R^n$ of the relation $R$ ca
 
 #### Database
 
-- A database is viewed as a collection of records, each being a tuple of the form $ (value_1, value_2, ... ,value_n)$.
+- A database is viewed as a collection of records, each being a tuple of the form $(value_1, value_2, ... ,value_n)$.
 - In order to uniquely identify tuples in a database, we need to specify a field , which is the **primary key**.
 - Some database may not have primary key, instead they use a **composite key** made up of multiple fields.
 
@@ -92,7 +92,7 @@ Let $R$ be a binary relation on $A$, then the power $R^n$ of the relation $R$ ca
 
 - A model for databases, based on relations.
 - A domain $A_i$ is a primary key for the database if the relation R is functional in $A_i$.
-- A composite key for the database is a set of domains ${A_i, A_j,\cdots} $, such that $R$ contains at most 1 n-tuple $(a_i, a_j, \cdots)$for each composite  value.
+- A composite key for the database is a set of domains ${A_i, A_j,\cdots}$, such that $R$ contains at most 1 n-tuple $(a_i, a_j, \cdots)$for each composite  value.
 
 #### Operations on n-ary relations
 
@@ -125,7 +125,7 @@ For any property X , the "X closure" of a set A is defined as the smallest super
 
 For example:
 
-- The reflexive closure of relation $R$ on $A$ is obtained by adding $(a,a)$ to $R$ for each $a \in A$, as $ R \vee I_A$.
+- The reflexive closure of relation $R$ on $A$ is obtained by adding $(a,a)$ to $R$ for each $a \in A$, as $R \vee I_A$.
 - The symmetric closure of $R$ is obtained by adding $(b,a)$ to $R$, as $R \vee R^{-1}$.
 - The transitive closure or connectivity relation of $R$ is obtained by repeatedly adding $(a,c)$ to $R$ for each $(a,b), (b,c)$ in $R$.
 

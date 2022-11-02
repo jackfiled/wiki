@@ -29,8 +29,8 @@ module.exports = {
                 'list',
                 'stack-and-dequeue',
                 'array-and-list',
+                'tree',
                 'lab',
-                'tree'
             ],
             '/csapp/': [
                 '',
@@ -38,13 +38,19 @@ module.exports = {
                 'machine',
                 'assembly-control',
                 'assembly-procedure',
-                'assembly-data'
+                'assembly-data',
+                'assembly-advanced'
+            ],
+            '/discrete-math/': [
+                '',
+                'relation',
             ],
             '/': [
                 '',
                 '/missing-semester/',
                 '/data-structure/',
-                '/csapp/'
+                '/csapp/',
+                '/discrete-math/'
             ]
         },
         logo: "/favicon.ico",
