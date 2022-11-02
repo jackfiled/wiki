@@ -5,7 +5,7 @@ module.exports = {
         '/': {
             lang: 'zh-CN',
             title: "Ricardo Ren的知识图书馆",
-            description: "所有的都是只是（大概）",
+            description: "所有的都是知识（大概）",
         }
     },
     themeConfig: {
