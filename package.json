@@ -10,6 +10,7 @@
   "author": "Ricardo Ren",
   "devDependencies": {
     "markdown-it-mathjax3": "^4.3.1",
-    "vuepress": "^1.9.7"
+    "vuepress": "^1.9.7",
+    "vuepress-plugin-mermaidjs": "^1.9.1"
   }
 }
