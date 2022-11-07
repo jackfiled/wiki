@@ -1,6 +1,7 @@
 module.exports = {
     base: "/wiki/",
     dest: "./wiki/",
+    port: 4000,
     locales: {
         '/': {
             lang: 'zh-CN',
