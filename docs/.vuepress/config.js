@@ -40,7 +40,8 @@ module.exports = {
                 'assembly-control',
                 'assembly-procedure',
                 'assembly-data',
-                'assembly-advanced'
+                'assembly-advanced',
+                'exception-control-flow'
             ],
             '/discrete-math/': [
                 '',
