@@ -106,3 +106,106 @@ At this time, we don't have nice characterization of Hamiltonian graphs the way 
 
 - Dirac's Theorem: If $G$ is connected, simple, has $n \ge 3$ vertices, and $\forall v deg(v) \ge \frac{n}{2}$, then $G$ has a Hamiltonian circuit.
 - Ore's Corollary: If $G$ is connected, simple, has $n \ge 3$ nodes, and $deg(u) + deg(v) \ge n$ for every pair $u,v$ of non-adjacent nodes, then $G$ has a Hamiltonian circuit.
+
+## Shortest Path Problems
+
+### Introduction
+
+- A **weight graph** is one in which weight are assigned to all edges connecting each two vertices.
+- Such number may have different meanings, such as instance, travelling distance, monthly cost or travelling time between two vertices.
+- The **length** of a path in a weight graph is the sum of the weights of the edges of this path. This length is different from the number of edges in a path in a graph without weights.
+
+### Shortest Path Algorithm
+
+> Powered by Dijkstra
+
+1. 起始点的路径标为0，其他路径标为无穷大，在后续遍历中更新
+2. 定义一个已经标好最短路径的点的集合S
+3. 将最短路径的点放进去
+4. 从新放入的店开始，寻找其他点的最短路径
+5. 重复3~4，直到达到路径的目标
+
+#### Dijkstra's Algorithm Complexity
+
+- Dijkstra's algorithm finds the length of a shortest path between two vertices in a connected simple undirected and weighted graph.
+- Dijkstra's algorithm uses $O(n^2)$ operations(additions and comparisons) to find.
+
+### Related Problems
+
+- Determining the shortest path from $a$ to an assigned vertex
+- Determining the shortest path of any two vertices in the graph
+
+#### Finding the shortest path between any two vertices using distance matrix
+
+Distance Matrix: Let G is a graph with n vertices. The distance matrix of G is $D=(d_{ij})_{n \times n}$
+
+- $d_{ij}$ represent the weights of the edges $(v_i, v_j)$
+- If there is no edge between $v_i$ and $v_j$ then $d_{ij}=\infty$
+
+- $d_{ij}^2$ is the shortest length of the path from $v_i$ to $v_j$ with two edges
+- $d_{ij}^k$ is the shortest length of the path from $v_i$ to $v_j$ with $k$ edges
+
+To get the shortest length of path, we define $\oplus$: Let $A = (a_{ij})_{n \times n}$ and $B=(b_{ij})_{n \times n}$, and $C = A \oplus B$, where $c_{ij} = min(a_{ij} , b_{ij})$.
+
+So we can define $P=D \oplus D^2 \oplus D^3 \oplus \cdots \oplus D^n$, and in such matrix, $p_{ij}$ represent the shortest length from $v_i$ to $v_j$.
+
+#### Travelling Salesperson Problem
+
+In an undirected simple weighted graph, we need to find the shortest length of Hamilton path.
+
+> This is a NP problem
+
+## Planar Graph
+
+### Definition
+
+A graph is called planar if it can be drawn in the plane in such way that no two edges cross.
+
+A planar representation of a graph splits the plane into regions that we call it faces, including an unbound region.
+
+### Euler Theorem
+
+Let $G$ be a connected planar simple graph with $e$ edges , $v$ vertices. Let $r$ be the number of regions in a planar representation of $G$, then we have $r = e -v +2$
+
+We can prove this theorem by mathematical induction. Constructing a sequence of subgraphs $G_1, G_2, \cdots, G_n$ successively adding an edge at each stage.
+
+- Basic step: G have no cycle, so $e_1=1$, $v_1=2$, $r_1=1$
+- Inductive step: there are two ways to add an edge:
+  -  Adding an edge by connecting two existing vertices, which add a new region
+  - Adding a new vertex and connect it with graph, which keeps region unchanged
+
+#### Corollary
+
+- No matter how we redraw a planar graph it will have the same number of region
+
+- Every simple $n$-node ($n \ge 3$) planar graph $G$ has at most $3n-6$ edges.
+
+- If $G$ a connected planar simple graph, then $G$ has a vertex of degree not exceeding five.
+
+  The main idea in proof: Every face has at least 3 edges no its boundary. Every edge lies on the boundary of at most 2 faces Thus $2e \ge 3r$
+
+- If a connected planar simple graph has $e$ edges and $n$ vertices with $n \ge 3$ and no circuit if length three, then $e \le 2n -4$
+
+### Kuratowski Theorem
+
+#### Kuratowski Graph
+
+ Kuratowski graphs are two typically non-planar graphs.
+
+![](./images/kuratowski-graph.png)
+
+In the Kuratowski graph, we can find that:
+
+- If we replace edges in a Kuratowski graph by paths of whatever length, they remain non-replace.
+- If a graph contains a subgraph obtained by starting with $K_5$ or $K_{3,3}$ and replacing edges with paths, then $G$ is non-planar.
+
+#### Homeomorphic Graph
+
+If a graph is planar, so will be any graph obtained by removing an edge $\{u,v\}$ and adding a new vertex $w$ with edges $\{u,w\}$ and $\{w,v\}$ . Such an operation is called an **elementary subdivision** .
+
+The graphs are called **homeomorphic** if they are obtained from the same graph by a sequence of elementary subdivisions.
+
+#### Kuratowski Theorem
+
+A graph is planar if and only if it contains no subgraph obtained from $K_5$ or $K_{3,3}$ by replacing edges with paths.
+
