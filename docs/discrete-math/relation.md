@@ -37,7 +37,7 @@
 
 #### Reflexivity
 
-- A relation $R$ is reflexive if $ \forall a \in A, aRa$.
+- A relation $R$ is reflexive if $\forall a \in A, aRa$.
 - A relation $R$ is irreflexive if its complementary relation is reflexive.
 
 #### Symmetry

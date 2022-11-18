@@ -85,7 +85,7 @@ Unix I/O和C标准库中的I/O操作是两个不同层级的I/O，一个是系�
 
 ### 文件的类型
 
-每个文件都有一个特定的类型来标识他在系统中的作业：
+每个文件都有一个特定的类型来标识他在系统中的类型：
 
 - 文件
 - 目录
@@ -253,11 +253,105 @@ struct stat
     gid_t	st_gid;      /* Group ID of owner */
     dev_t	st_rdev;     /* Device type (if inodedevice) */
     off_t	st_size;     /* Total size, in bytes */
-    unsigned long st_blksize;  /* Blocksizefor filesystemI/O */
+    unsigned long st_blksize;  /* Block size for filesystemI/O */
     unsigned long st_blocks;   /* Number of blocks allocated */
     time_t	st_atime;    /* Time of last access */
     time_t	st_mtime;    /* Time of last modification */
     time_t	st_ctime;    /* Time of last change */
 };
 ```
+
+###  Linux如何打开文件
+
+两个不同的文件描述符将指向两个不同的文件。
+
+![](./images/open-file.png)
+
+#### 文件共享
+
+两个不同的文件描述符可以通过两个独立的文件打开表实例共享相同的磁盘文件。
+
+![](./images/file-sharing.png)
+
+#### 创建进程
+
+父进程可以通过调用`fork`函数创建一个新的子进程。
+
+- `fork`函数将给子进程返回0，给父进程返回子进程的`PID`
+- 子进程几乎和父进程一模一样：
+  - 子进程将得到一份父进程虚拟内存空间的拷贝，虽然完全独立
+  - 子进程也会得到父进程文件描述符的拷贝
+  - 子进程将有着和父进程不同的PID
+
+> 注意：`fork`函数常常令我们困惑，因为这个函数会返回两次，分别在子进程的父进程。
+
+### I/O 重定向
+
+> Shell 中实现管道和重定向的原理
+
+通过调用`dup2(oldFd, newFd)`函数就可以改变文件描述符指向的文件。
+
+## 标准I/O 函数
+
+在C语言的标准库中包含着一系列高级的标准I/O函数。
+
+### 标准I/O流
+
+C语言库会通过一种**流**的方式打开文件，这是C语言标准库对于内核中文件描述符和内存中缓存的一个抽象。
+
+在每个C语言程序开始运行的时候，C都会自动初始化三个打开的流：
+
+- `stdio`标准输入流
+- `stdout`标准输出流
+- `stderr`标准错误流
+
+这三个流通过全局变量的方式定义在`stdio.h`这个头文件中。
+
+C语言中实现流这种抽象的主要结构体是`FILE`：
+
+```c
+typedef struct __iobuf {
+	int cnt;       /* characters left */
+    char *ptr;      /* next characters position */
+    char *base;     /* location of buffers */
+    int flag;      /* mode of file access */
+    int fd;        /* file descripter*/
+} FILE;
+```
+
+> C语言这样抽象文件描述符的原因是：
+>
+> - 程序中常常只会一个字一个字的读取文件
+> - 然而每次系统调用都是较为耗时的，因为涉及到内核态和用户态的切换
+>
+> 所以采用这样一种缓存的方式提高文件读写的效率
+
+既然我们已经拥有了两个不同层面的I/O访问方法，那我们应该如何选择使用哪种API呢？
+
+首先来看看两种方式的优缺点：
+
+Unix I/O:
+
+- 优点 ：
+  - 是最通用、最底层的API，所有的其他I/O都是这个API的一个高层抽象
+  - 提供了获得文件元信息的方法
+  - 异步安全，可以用于信号处理程序中
+- 缺点：
+  - 不足值的处理比较困难的
+  - 读取大量的文本需要使用缓冲来提高效率
+
+C标准库I/O:
+
+- 优点：
+  - 使用缓冲降低了使用系统调用的数量，提高了效率
+  - 不足值会被自动的处理
+- 缺点：
+  - 没有提高访问元数据的函数
+  - 不是异步安全的，不适合在信号处理程序中使用
+  - 不适合读写网络套接字
+
+在了解两种API的差异之后，我们就可以大体上给出一些原则：
+
+- 第一，永远使用你能使用的最高级API
+- 第二，在信号处理程序和需要极端性能时，再使用底层API
 
