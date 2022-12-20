@@ -1,13 +1,17 @@
+# missing-shell-scripts
+
 ---
+
 title: missing-shell-scripts
 typora-root-url: missing-shell-scripts
 date: 2022-04-05 14:02:48
 tags:
-  - missing
-  - 学习资料
-toc: true
----
 
+- missing
+- 学习资料
+  toc: true
+
+---
 
 # The missing semester in the CS
 
@@ -49,8 +53,8 @@ As with most programming languages, bash supports control flow techniques includ
 - `$#` - Number of arguments
 - `$?` - Return code of the previous command
 - `$$` - Process identification number (PID) for the current script
-- `!!` - Entire last command, including arguments. 
-- `$_` - Last argument from the last command. 
+- `!!` - Entire last command, including arguments.
+- `$_` - Last argument from the last command.
 
 ```bash
 ricardo@g15:/tmp/missing$ date
@@ -83,9 +87,9 @@ ricardo@g15:/tmp/missing$ false ; echo "This will always run"
 This will always run
 ```
 
-Another common pattern is wanting to get the output of a command as a variable. This can be done with *command substitution*. Whenever you place `$( CMD )` it will execute `CMD`, get the output of the command and substitute it in place. 
+Another common pattern is wanting to get the output of a command as a variable. This can be done with *command substitution*. Whenever you place `$( CMD )` it will execute `CMD`, get the output of the command and substitute it in place.
 
-```bash 
+```bash
 ricardo@g15:/tmp/missing$ cat shell.sh
 #!/bin/bash
 
@@ -122,19 +126,19 @@ File temp does not have any foobar, adding one
 - Wildcards - Whenever you want to perform some sort of wildcard matching, you can use `?` and `*` to match one or any amount of characters respectively. For instance, given files `foo`, `foo1`, `foo2`, `foo10` and `bar`, the command `rm foo?` will delete `foo1` and `foo2` whereas `rm foo*` will delete all but `bar`.
 - Curly braces `{}` - Whenever you have a common substring in a series of commands, you can use curly braces for bash to expand this automatically. This comes in very handy when moving or converting files.
 
-Note that scripts need not necessarily be written in bash to be called from the terminal. The kernel knows to execute this script with a python interpreter instead of a shell command because we included a [shebang](https://en.wikipedia.org/wiki/Shebang_(Unix)) line at the top of the script. It is good practice to write shebang lines using the [`env`](https://www.man7.org/linux/man-pages/man1/env.1.html) command that will resolve to wherever the command lives in the system, increasing the portability of your scripts. To resolve the location, `env` will make use of the `PATH` environment variable we introduced in the first lecture. For this example the shebang line would look like `#!/usr/bin/env python`.
+Note that scripts need not necessarily be written in bash to be called from the terminal. The kernel knows to execute this script with a python interpreter instead of a shell command because we included a [shebang](https://en.wikipedia.org/wiki/Shebang_(Unix)) line at the top of the script. It is good practice to write shebang lines using the [env]()`` command that will resolve to wherever the command lives in the system, increasing the portability of your scripts. To resolve the location, `env` will make use of the `PATH` environment variable we introduced in the first lecture. For this example the shebang line would look like `#!/usr/bin/env python`.
 
 ## Shell Tools
 
 ### Finding how to use commands
 
-The first-order approach is to call said command with the `-h` or `--help` flags. A more detailed approach is to use the `man` command. Short for manual, [`man`](https://www.man7.org/linux/man-pages/man1/man.1.html) provides a manual page (called manpage) for a command you specify.
+The first-order approach is to call said command with the `-h` or `--help` flags. A more detailed approach is to use the `man` command. Short for manual, [man]()`` provides a manual page (called manpage) for a command you specify.
 
-Sometimes manpages can provide overly detailed descriptions of the commands, making it hard to decipher what flags/syntax to use for common use cases. [TLDR pages](https://tldr.sh/) are a nifty complementary solution that focuses on giving example use cases of a command so you can quickly figure out which options to use. 
+Sometimes manpages can provide overly detailed descriptions of the commands, making it hard to decipher what flags/syntax to use for common use cases. [TLDR pages](https://tldr.sh/) are a nifty complementary solution that focuses on giving example use cases of a command so you can quickly figure out which options to use.
 
 ### Finding files
 
-One of the most common repetitive tasks that every programmer faces is finding files or directories. All UNIX-like systems come packaged with [`find`](https://www.man7.org/linux/man-pages/man1/find.1.html), a great shell tool to find files. `find` will recursively search for files matching some criteria.
+One of the most common repetitive tasks that every programmer faces is finding files or directories. All UNIX-like systems come packaged with [find]()``, a great shell tool to find files. `find` will recursively search for files matching some criteria.
 
 ```bash
 # Find all directories named src
@@ -151,13 +155,13 @@ find . -name '*.tmp' -exec rm {} \;
 find . -name '*.png' -exec convert {} {}.jpg \;
 ```
 
-For instance, [`fd`](https://github.com/sharkdp/fd) is a simple, fast, and user-friendly alternative to `find`. It offers some nice defaults like colorized output, default regex matching, and Unicode support. 
+For instance, [fd]()`` is a simple, fast, and user-friendly alternative to `find`. It offers some nice defaults like colorized output, default regex matching, and Unicode support.
 
-Most would agree that `find` and `fd` are good, but some of you might be wondering about the efficiency of looking for files every time versus compiling some sort of index or database for quickly searching. That is what [`locate`](https://www.man7.org/linux/man-pages/man1/locate.1.html) is for. `locate` uses a database that is updated using [`updatedb`](https://www.man7.org/linux/man-pages/man1/updatedb.1.html). In most systems, `updatedb` is updated daily via [`cron`](https://www.man7.org/linux/man-pages/man8/cron.8.html). Therefore one trade-off between the two is speed vs freshness. Moreover `find` and similar tools can also find files using attributes such as file size, modification time, or file permissions, while `locate` just uses the file name.
+Most would agree that `find` and `fd` are good, but some of you might be wondering about the efficiency of looking for files every time versus compiling some sort of index or database for quickly searching. That is what [locate]()`` is for. `locate` uses a database that is updated using [updatedb]()``. In most systems, `updatedb` is updated daily via [cron]()``. Therefore one trade-off between the two is speed vs freshness. Moreover `find` and similar tools can also find files using attributes such as file size, modification time, or file permissions, while `locate` just uses the file name.
 
 ### Finding code
 
-A common scenario is wanting to search for all files that contain some pattern, along with where in those files said pattern occurs. To achieve this, most UNIX-like systems provide [`grep`](https://www.man7.org/linux/man-pages/man1/grep.1.html), a generic tool for matching patterns from the input text. 
+A common scenario is wanting to search for all files that contain some pattern, along with where in those files said pattern occurs. To achieve this, most UNIX-like systems provide [grep]()``, a generic tool for matching patterns from the input text.
 
 ### Finding shell commands
 
@@ -165,22 +169,22 @@ The first thing to know is that typing the up arrow will give you back your last
 
 The `history` command will let you access your shell history programmatically. It will print your shell history to the standard output. If we want to search there we can pipe that output to `grep` and search for patterns. `history | grep find` will print commands that contain the substring “find”.
 
-In most shells, you can make use of `Ctrl+R` to perform backwards search through your history. After pressing `Ctrl+R`, you can type a substring you want to match for commands in your history. As you keep pressing it, you will cycle through the matches in your history. 
+In most shells, you can make use of `Ctrl+R` to perform backwards search through your history. After pressing `Ctrl+R`, you can type a substring you want to match for commands in your history. As you keep pressing it, you will cycle through the matches in your history.
 
 Another cool history-related trick I really enjoy is **history-based autosuggestions**. First introduced by the [fish](https://fishshell.com/) shell, this feature dynamically autocompletes your current shell command with the most recent command that you typed that shares a common prefix with it. It can be enabled in [zsh](https://github.com/zsh-users/zsh-autosuggestions) and it is a great quality of life trick for your shell.
 
 ### Directory Navigation
 
-As with the theme of this course, you often want to optimize for the common case. Finding frequent and/or recent files and directories can be done through tools like [`fasd`](https://github.com/clvv/fasd) and [`autojump`](https://github.com/wting/autojump). Fasd ranks files and directories by [*frecency*](https://web.archive.org/web/20210421120120/https://developer.mozilla.org/en-US/docs/Mozilla/Tech/Places/Frecency_algorithm), that is, by both *frequency* and *recency*. By default, `fasd` adds a `z` command that you can use to quickly `cd` using a substring of a *frecent* directory. 
+As with the theme of this course, you often want to optimize for the common case. Finding frequent and/or recent files and directories can be done through tools like [fasd]()`` and [autojump]()``. Fasd ranks files and directories by *[frecency](https://web.archive.org/web/20210421120120/https://developer.mozilla.org/en-US/docs/Mozilla/Tech/Places/Frecency_algorithm)*, that is, by both *frequency* and *recency*. By default, `fasd` adds a `z` command that you can use to quickly `cd` using a substring of a *frecent* directory.
 
-More complex tools exist to quickly get an overview of a directory structure: [`tree`](https://linux.die.net/man/1/tree), [`broot`](https://github.com/Canop/broot) or even full fledged file managers like [`nnn`](https://github.com/jarun/nnn) or [`ranger`](https://github.com/ranger/ranger).
+More complex tools exist to quickly get an overview of a directory structure: [tree]()``, [broot]()`` or even full fledged file managers like [nnn]()`` or [ranger]()``.
 
 > 学完感觉自己还是不会用bash编写脚本，建议在看看专门讲bash脚本编写的教程
 
 ## Exercise
 
 1. 利用`man ls`查看`ls`相关的参数，满足自己的要求
-   
+
    ```bash
    ricardo@g15:~$ ls -l -h -t
    total 20K
@@ -190,21 +194,19 @@ More complex tools exist to quickly get an overview of a directory structure: [`
    drwxr-xr-x 4 ricardo ricardo 4.0K Mar 16 21:25 download
    drwxr-xr-x 3 ricardo ricardo 4.0K Jan 21 18:21 github
    ```
-   
 2. 直接在`.bashrc`文件里面添加
 
    ```bash
    path=/home/ricardo
-   
+
    marco () {
      path=$(pwd)
    }
-   
+
    polo () {
      cd $path
    }
    ```
-
    测试一下
 
    ```bash
@@ -213,14 +215,13 @@ More complex tools exist to quickly get an overview of a directory structure: [`
    ricardo@g15:~$ polo
    ricardo@g15:~/tmp$
    ```
-
-3. 将给出的运行代码保存为`exe.sh`,编写下列测试代码 
+3. 将给出的运行代码保存为`exe.sh`,编写下列测试代码
 
    ```bash
    #!/usr/bin/env bash
-   
+
    number=0
-   
+
    while true; do
        ((number++))
        result=$(bash ./exe.sh)
@@ -231,7 +232,6 @@ More complex tools exist to quickly get an overview of a directory structure: [`
        fi
    done
    ```
-
    测试
 
    ```bash
@@ -240,12 +240,8 @@ More complex tools exist to quickly get an overview of a directory structure: [`
    Something went wrong
    It has run for 228 times.
    ```
-
 4. 将找到的文件通过`xargs`传递给压缩程序
-   
+
    ```bash
    find . -name '*.html' | xargs tar
    ```
-
-
-

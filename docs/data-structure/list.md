@@ -1,3 +1,5 @@
+# list
+
 # 线性表
 
 > 观前提醒：本文中的代码未经严格测试，如存在缺陷还请指出。
@@ -22,10 +24,13 @@
 **ADT** List {
 
 数据对象：
+
 $$
 D=\{a_i|a_i \in ElementSet, i = 1, 2, ...,n, n \ge 0\}
 $$
+
 数据关系：
+
 $$
 R_1 = \{ <a_{i-1}, a_i> | a_i \in D, i = 2, ...,n\}
 $$
@@ -170,6 +175,7 @@ bool InsertList(SqList& l, int pos, int element)
 ```
 
 该操作的次数为$n-i+1$，$i$为插入的位置，操作的时间复杂度可以可以表达为：
+
 $$
 E_{in}=\sum_{i=0}^{n}p_i(n-i+1)=\frac{1}{n}\sum_{i=0}^{n}(n-i+1)=\frac{n}{2}
 $$
@@ -207,9 +213,11 @@ bool DeleteList(SqList& l, int pos, int& result)
 ```
 
 删除的操作的时间复杂度分析类似为插入的分析：
+
 $$
 E_{de}=\sum_{i=0}^{n}p_i(n-i)=\frac{1}{n}\sum_{i=0}^{n}(n-i)=\frac{n}{2}
 $$
+
 也就是说插入和删除操作在平均上都需要移动线性表中一半的元素，在时间复杂度上顺序表示不是很优秀。
 
 ### 销毁结构操作
@@ -475,10 +483,3 @@ bool DeleteList(const node_p& head, int pos, int* result)
 将单向链表或者双向列表的末尾节点和头节点连接起来，就构成了一种新的链表——循环列表。循环列表在遍历上使用起来很方便，但是容易引发死循环。
 
 > 代码省略
-
-
-
-
-
-
-

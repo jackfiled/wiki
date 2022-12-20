@@ -1,3 +1,5 @@
+# exception-control-flow
+
 # 异常控制流
 
 ## 控制流
@@ -29,13 +31,13 @@
 
 异常就是将控制流传送给操作系统内核来处理一系列的事件。操作系统内核是常驻于内存中的程序，事件可能是除数为0，算数指令溢出，`I/O`请求完成，键盘输入。
 
-![](./images/exception-handler.png)
+![](assets/exception-handler-20221120150651-q4hfwnk.png)
 
 由于系统中出现的异常可能是多种多样的，处理这些异常也就需要多段代码。为了根据异常找到指定的处理程序，我们就需要一张类。似于`switch`跳转表的**异常表**。每一种类型的错误都有一种独特的编号`k`，这就是跳转表中的索引编号，这个`k`有时也被称作**终端向量**。
 
 异常有着分类。
 
-![异常分类](./images/exception-taxonomy.png)
+![异常分类](assets/exception-taxonomy-20221120150652-rukcxad.png)
 
 ### 异步异常
 
@@ -67,17 +69,17 @@
 
 对于一个`x86-64`的系统来说，每一种系统调用都有一个特定的编号：
 
-| 编号 | 名称   | 描述                   |
-| ---- | ------ | ---------------------- |
-| 0    | read   | Read file              |
-| 1    | write  | Write file             |
-| 2    | open   | Open file              |
-| 3    | close  | Close file             |
-| 4    | stat   | Get info about file    |
-| 57   | fork   | Create Process         |
-| 59   | execve | Execute a program      |
-| 60   | _exit  | Terminate process      |
-| 62   | kill   | Send signal to process |
+|编号|名称|描述|
+| ----| ------| ----------------------|
+|0|read|Read file|
+|1|write|Write file|
+|2|open|Open file|
+|3|close|Close file|
+|4|stat|Get info about file|
+|57|fork|Create Process|
+|59|execve|Execute a program|
+|60|_exit|Terminate process|
+|62|kill|Send signal to process|
 
 我们描述一种系统调用的例子——打开文件：
 
@@ -101,4 +103,3 @@ e5d80:   48 3d 01 f0 ff ff   cmp  $0xfffffffffffff001,%rax
 
 - 系统调用是由系统内核执行的，代码执行的特权是不相同的
 - 系统的编号，我们不妨认为就是函数的地址，储存在`%rax`中
-

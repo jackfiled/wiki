@@ -1,13 +1,17 @@
----
-title: missing-potpourri
-tags: 
-  - missing
-  - 学习资料
-toc: true
-typora-root-url: missing-potpourri
-date: 2022-04-27 15:02:13
+# missing-potpourri
+
 ---
 
+title: missing-potpourri
+tags:
+
+- missing
+- 学习资料
+  toc: true
+  typora-root-url: missing-potpourri
+  date: 2022-04-27 15:02:13
+
+---
 
 # The Missing Semester in the CS
 
@@ -72,7 +76,7 @@ Restart=on-failure
 WantedBy=multi-user.target
 ```
 
-Also, if you just want to run some program with a given frequency there is no need to build a custom daemon, you can use [`cron`](https://www.man7.org/linux/man-pages/man8/cron.8.html), a daemon your system already runs to perform scheduled tasks.
+Also, if you just want to run some program with a given frequency there is no need to build a custom daemon, you can use [cron]()``, a daemon your system already runs to perform scheduled tasks.
 
 ## FUSE
 
@@ -108,7 +112,7 @@ Synchronization solutions are not backups. For instance, Dropbox/GDrive are conv
 
 Some core features of good backups solutions are versioning, deduplication and security. Versioning backups ensure that you can access your history of changes and efficiently recover files. Efficient backup solutions use data deduplication to only store incremental changes and reduce the storage overhead. Regarding security, you should ask yourself what someone would need to know/have in order to read your data and, more importantly, to delete all your data and associated backups. Lastly, blindly trusting backups is a terrible idea and you should verify regularly that you can use them to recover data.
 
-> deduplication 重复数据删除; incremental 增加的; 
+> deduplication 重复数据删除; incremental 增加的;
 
 Backups go beyond local files in your computer. Given the significant growth of web applications, large amounts of your data are only stored in the cloud. For instance, your webmail, social media photos, music playlists in streaming services or online docs are gone if you lose access to the corresponding accounts. Having an offline copy of this information is the way to go, and you can find online tools that people have built to fetch the data and save it.
 
@@ -210,7 +214,6 @@ You can also rent virtual machines on the cloud, and it’s a nice way to get in
 There are two primary ways in which people contribute to projects on GitHub:
 
 - Creating an [issue](https://help.github.com/en/github/managing-your-work-on-github/creating-an-issue). This can be used to report bugs or request a new feature. Neither of these involves reading or writing code, so it can be pretty lightweight to do. High-quality bug reports can be extremely valuable to developers. Commenting on existing discussions can be helpful too.
-
 - Contribute code through a [pull request](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/about-pull-requests). This is generally more involved than creating an issue. You can [fork](https://help.github.com/en/github/getting-started-with-github/fork-a-repo) a repository on GitHub, clone your fork, create a new branch, make some changes (e.g. fix a bug or implement a feature), push the branch, and then [create a pull request](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request). After this, there will generally be some back-and-forth with the project maintainers, who will give you feedback on your patch. Finally, if all goes well, your patch will be merged into the upstream repository. Often times, larger projects will have a contributing guide, tag beginner-friendly issues, and some even have mentorship programs to help first-time contributors become familiar with the project.
 
 > 没有什么是比合作开发一个开源软件更令人激动的了。

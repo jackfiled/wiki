@@ -1,13 +1,17 @@
+# missing-vim
+
 ---
+
 title: missing-vim
 typora-root-url: missing-vim
 date: 2022-04-11 18:34:41
 toc: true
 tags:
-  - missing
-  - 学习资料
----
 
+- missing
+- 学习资料
+
+---
 
 # The Missing Semester in the CS
 
@@ -39,7 +43,7 @@ When programming, you spend most of your time reading/editing, not writing. For 
 
 ## Model editing
 
-Vim’s design is based on the idea that a lot of programmer time is spent reading, navigating, and making small edits, as opposed to writing long streams of text. For this reason, Vim has multiple operating modes. Keystrokes have different meanings in different operating modes. 
+Vim’s design is based on the idea that a lot of programmer time is spent reading, navigating, and making small edits, as opposed to writing long streams of text. For this reason, Vim has multiple operating modes. Keystrokes have different meanings in different operating modes.
 
 - **Normal**: for moving around a file and making edits
 - **Insert**: for inserting text
@@ -148,8 +152,6 @@ You can combine nouns and verbs with a count, which will perform a given action 
 - `5j` move 5 lines down
 - `7dw` delete 7 words
 
-
-
 ### Modifiers
 
 You can use modifiers to change the meaning of a noun. Some modifiers are `i`, which means “inner” or “inside”, and `a`, which means “around”.
@@ -162,7 +164,7 @@ You can use modifiers to change the meaning of a noun. Some modifiers are `i`, w
 
 Vim is customized through a plain-text configuration file in `~/.vimrc` (containing Vimscript commands). There are probably lots of basic settings that you want to turn on.
 
-We are providing a well-documented basic config that you can use as a starting point. We recommend using this because it fixes some of Vim’s quirky default behavior. **Download our config [here](https://missing.csail.mit.edu/2020/files/vimrc) and save it to `~/.vimrc`.**
+We are providing a well-documented basic config that you can use as a starting point. We recommend using this because it fixes some of Vim’s quirky default behavior. **Download our config ​**​[here](https://missing.csail.mit.edu/2020/files/vimrc)****​**​ and save it to ​**​**`~/.vimrc`**​**.**
 
 > quirky 古怪的；
 
@@ -187,7 +189,7 @@ Many tools support Vim emulation. The quality varies from good to great; dependi
 
 ### Shell
 
-Use 
+Use
 
 ```bash
 export EDITOR=vim
@@ -215,10 +217,10 @@ Here are a few examples to show you the power of the editor. We can’t teach yo
 
 `:s` (substitute) command ([documentation](http://vim.wikia.com/wiki/Search_and_replace)).
 
-
 ```
 %s/foo/bar/g
 ```
+
 - replace foo with bar globally in file
 
 ```

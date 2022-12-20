@@ -1,3 +1,5 @@
+# relation
+
 # Relations
 
 ## Relations and Their Properties
@@ -7,17 +9,13 @@
 - Relations are **formal means** to specify which elements from two or more sets are related to each other.
 
   For example, students who takes courses, there are relations between students and courses; integers and their divisors, there are relations between integers and divisors.
-
 - Let $A$ and $B$ be two sets. A **binary relation** $R$ from $A$ to $B$ is a **subset** of $A \times B$.
-
-- Generally, let $A_1,A_2,A_3,A_4, \cdots, A_n$ be $n$ sets. An **n-ary relation** $R$ on these sets is a subset of $A_1 \times A_2 \times \cdots A_n$. 
-
+- Generally, let $A_1,A_2,A_3,A_4, \cdots, A_n$ be $n$ sets. An **n-ary relation** $R$ on these sets is a subset of $A_1 \times A_2 \times \cdots A_n$.
 - $aRb$ means that $(a,b) \in R$.
 
 ### Complementary and Inverse of  Relations
 
 - Let $R:A,B$ be any binary relations, the complement of $R$, is the binary relation defined by  $\{(a,b)|(a,b) \not \in R \} = (A \times B) -R$.
-
 - Any binary relation $R:A \times B$, has an inverse relation $R^{-1}:B \times A$, which is defined by$R^{-1}: \{(b,a)|(a,b) \in R\}$.
 
 ### Functions as relations
@@ -30,8 +28,8 @@
 
 ### Relations on a Set
 
-- A binary from a set $A$ to itself is called a **relation on the set $A$**.
-- A relation on a set A is **a subset of $A^2$**.
+- A binary from a set $A$ to itself is called a **relation on the set ​**​**$A$**.
+- A relation on a set A is **a subset of ​**​**$A^2$**.
 
 ### Properties of Relations
 
@@ -42,7 +40,7 @@
 
 #### Symmetry
 
--  A binary relation $R$ on $A$ is symmetry if $R = R^{-1}$, that is if $(a,b) \in R \leftrightarrow (b,a) \in R$
+- A binary relation $R$ on $A$ is symmetry if $R = R^{-1}$, that is if $(a,b) \in R \leftrightarrow (b,a) \in R$
 - A binary relation $R$ is antisymmetric if $\forall a \not= b, (a,b) \in R \to (b,a) \not \in R$
 
 #### Transitivity
@@ -51,11 +49,11 @@
 
 Examples in Mathematics:
 
-|             | reflexive | symmetric | antisymmetric | transitive |
-| ----------- | --------- | --------- | ------------- | ---------- |
-| $=$         | yes       | yes       | yes           | yes        |
-| $\not =$    | no        | yes       | no            | no         |
-| $\emptyset$ | no        | yes       | yes           | yes        |
+||reflexive|symmetric|antisymmetric|transitive|
+| -| ---------| ---------| -------------| ----------|
+|$=$|yes|yes|yes|yes|
+|$\not =$|no|yes|no|no|
+|$\emptyset$|no|yes|yes|yes|
 
 ### Composition
 
@@ -108,7 +106,7 @@ We can represent a binary relation $R:A \times B$ by an $|A| \times |B|$ 0-1 mat
 
 We can see some relation characteristics in the zero-one matrix.
 
--  Reflexive: all 1 are on diagonal
+- Reflexive: all 1 are on diagonal
 - Irreflexive: all 0 are on diagonal
 - Symmetric: all identical across diagonal
 - Antisymmetric: all 1 are across from 0.
@@ -141,17 +139,23 @@ A **path** of length $n$ from node $a$ to $b$ in the directed graph $G$ is a seq
 Let R be a relation on a set $A$, the connectivity relation $R^*$ consist of their pairs $(a,b)$ such that there is a path of length at least one from $a$ to $b$ in $R$.
 
 As $R^n$ consists of the pairs $(a,b)$ such that there is a path of length $n$ from $a$ to $b$, it follows that $R^*$ is the union of all the sets $R^n$.
+
 $$
 R^*= U_{n=1}^{\infty}R^n
 $$
+
 **Theorem**: Let $R$ be a relation on a set $A$, then $R^*$ equals the transitive closure of $R$
+
 $$
 t(R)=R^*=U_{n=1}^{\infty}R^n
 $$
-But in fact if $A$ is a set with $|A|=n$, and let $R$ be a relation on $A$. Then 
+
+But in fact if $A$ is a set with $|A|=n$, and let $R$ be a relation on $A$. Then
+
 $$
 U_{n=1}^{n}R^n
 $$
+
 which is much easier to calculate.
 
 ### Warshall's Algorithm
@@ -167,8 +171,3 @@ for k:=1 to n
 		w[ij] = w[ij] | (W[ik] & W[ki])
 return W
 ```
-
-
-
-
-

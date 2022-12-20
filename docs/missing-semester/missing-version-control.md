@@ -1,13 +1,17 @@
----
-title: missing-version-control
-tags:
-  - missing
-  - 学习资料
-toc: true
-typora-root-url: missing-version-control
-date: 2022-04-20 13:29:05
+# missing-version-control
+
 ---
 
+title: missing-version-control
+tags:
+
+- missing
+- 学习资料
+  toc: true
+  typora-root-url: missing-version-control
+  date: 2022-04-20 13:29:05
+
+---
 
 # The Missing Semester in the CS
 
@@ -57,7 +61,7 @@ Git models the history of a collection of files and folders within some top-leve
 
 In Git, a history is a directed acyclic graph (DAG) of snapshots. That may sound like a fancy math word, but don’t be intimidated. All this means is that each snapshot in Git refers to a set of “parents”, the snapshots that preceded it. It’s a set of parents rather than a single parent (as would be the case in a linear history) because a snapshot might descend from multiple parents, for example, due to combining (merging) two parallel branches of development.
 
-> acyclic 无环的; preceded 先于; 
+> acyclic 无环的; preceded 先于;
 
 Git calls these snapshots “commit”s. Visualizing a commit history might look something like this:
 
@@ -240,7 +244,6 @@ Git accommodates such scenarios by allowing you to specify which modifications s
 ## Miscellaneous
 
 - **GUIs**: there are many [GUI clients](https://git-scm.com/downloads/guis) out there for Git. We personally don’t use them and use the command-line interface instead.
-
 - **Shell integration**: it’s super handy to have a Git status as part of your shell prompt ([zsh](https://github.com/olivierverdier/zsh-git-prompt), [bash](https://github.com/magicmonty/bash-git-prompt)). Often included in frameworks like [Oh My Zsh](https://github.com/ohmyzsh/ohmyzsh).
 - **Editor integration**: similarly to the above, handy integrations with many features. [fugitive.vim](https://github.com/tpope/vim-fugitive) is the standard one for Vim.
 - **GitHub**: Git is not GitHub. GitHub has a specific way of contributing code to other projects, called [pull requests](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/about-pull-requests).

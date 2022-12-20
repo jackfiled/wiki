@@ -1,3 +1,5 @@
+# graph
+
 # Graph
 
 ## Connectivity
@@ -141,7 +143,6 @@ Distance Matrix: Let G is a graph with n vertices. The distance matrix of G is $
 
 - $d_{ij}$ represent the weights of the edges $(v_i, v_j)$
 - If there is no edge between $v_i$ and $v_j$ then $d_{ij}=\infty$
-
 - $d_{ij}^2$ is the shortest length of the path from $v_i$ to $v_j$ with two edges
 - $d_{ij}^k$ is the shortest length of the path from $v_i$ to $v_j$ with $k$ edges
 
@@ -171,19 +172,16 @@ We can prove this theorem by mathematical induction. Constructing a sequence of 
 
 - Basic step: G have no cycle, so $e_1=1$, $v_1=2$, $r_1=1$
 - Inductive step: there are two ways to add an edge:
-  -  Adding an edge by connecting two existing vertices, which add a new region
+  - Adding an edge by connecting two existing vertices, which add a new region
   - Adding a new vertex and connect it with graph, which keeps region unchanged
 
 #### Corollary
 
 - No matter how we redraw a planar graph it will have the same number of region
-
 - Every simple $n$-node ($n \ge 3$) planar graph $G$ has at most $3n-6$ edges.
-
 - If $G$ a connected planar simple graph, then $G$ has a vertex of degree not exceeding five.
 
   The main idea in proof: Every face has at least 3 edges no its boundary. Every edge lies on the boundary of at most 2 faces Thus $2e \ge 3r$
-
 - If a connected planar simple graph has $e$ edges and $n$ vertices with $n \ge 3$ and no circuit of length three, then $e \le 2n -4$
 
 ### Kuratowski Theorem
@@ -192,7 +190,7 @@ We can prove this theorem by mathematical induction. Constructing a sequence of 
 
  Kuratowski graphs are two typically non-planar graphs.
 
-![](./images/kuratowski-graph.png)
+![](assets/kuratowski-graph-20221120150711-hjoqnax.png)
 
 In the Kuratowski graph, we can find that:
 
@@ -215,9 +213,9 @@ A graph is planar if and only if it contains no subgraph obtained from $K_5$ or 
 
 ### Coloring graphs
 
-Suppose that $G=(V,E.\gamma)$ is a graph without no multiple edges, and $C={c_1, c_2, c_3,\cdots}$ is any set of $n$ colors. Any function $f:V \to C$ is called **a coloring of the graph $G$ using $n$ colors**.
+Suppose that $G=(V,E.\gamma)$ is a graph without no multiple edges, and $C={c_1, c_2, c_3,\cdots}$ is any set of $n$ colors. Any function $f:V \to C$ is called **a coloring of the graph ​**​**$G$**​**​ using ​**​**$n$**​**​ colors**.
 
-A coloring is proper if any two adjacent vertices $v$ and $u$ have different colors. The smallest number of colors needed to produce a proper coloring of a graph $G$ is called the **chromatic number of $G$**, which is denoted by $\chi(G)$.
+A coloring is proper if any two adjacent vertices $v$ and $u$ have different colors. The smallest number of colors needed to produce a proper coloring of a graph $G$ is called the **chromatic number of ​**​**$G$**, which is denoted by $\chi(G)$.
 
 ### Four-color Theorem
 
@@ -235,11 +233,11 @@ Let $G$ be a node-minimal counter-example to the theorem, for example,  a planar
 
 As $G$ is a planar graph, we can get $G$ must have a node $q$ with degree $\le 5$. Let the nodes adjacent to q be named as $v_1, v_2, v_3, v_4, v_5$, and this five nodes can not form $K_5$, also because this is a planar graph. So there must be two vertices $a_1, a_2$ in this five vertices that have no edge between them.
 
-So we can "contract" the edges $<q,v_1>$ and $<a,v_2$ to get a new planar graph $G'$, and the vertices $v_1$, $v_2$ and $q$ become a new vertices in $G'$.  $G'$ is 5 colorable since it has fewer nodes than $G$, so we can find that we color the $G$ using the five colors in the $G'$, which meaning the counter example is not counter.
+So we can "contract" the edges $&lt;q,v_1&gt;$ and $&lt;a,v_2$ to get a new planar graph $G'$, and the vertices $v_1$, $v_2$ and $q$ become a new vertices in $G'$.  $G'$ is 5 colorable since it has fewer nodes than $G$, so we can find that we color the $G$ using the five colors in the $G'$, which meaning the counter example is not counter.
 
 ### Applications of Graph Coloring
 
--  Fifteen different foods are to be held in refrigerated compartments within the same refrigator.
+- Fifteen different foods are to be held in refrigerated compartments within the same refrigator.
 - How can the final exams be scheduled at a university so that no students has two exams at the same time.
 - Frequency assignment. we need to assign different radio frequency to two radio station whose distance is to short.
 
@@ -252,26 +250,28 @@ For example, for a linear graph $L_4$, we have the chromatic polynomials $x(x-1)
 ### Theorem 1
 
 If $G$ is disconnected graph with components $G_1, G_2, G_3,\cdots, G_m$, then $P_G(x)$ is the product of the chromatic polynomials for each components.
+
 $$
 P_G(x)=P_{G_1}(x)P_{G_2}(x)\cdots P_{G_m}(x)
 $$
 
 ### Subgraph and Quotient Graphs
 
-One of the most important subgraphs is the one that arises by deleting one edge and no vertices. If $G=(V>E,\gamma)$ is a graph and $e \in E$, then we denote by $G_e$ the subgraph obtained by omitting the edge $e$ from $E$ and keeping all vertices.
+One of the most important subgraphs is the one that arises by deleting one edge and no vertices. If $G=(V&gt;E,\gamma)$ is a graph and $e \in E$, then we denote by $G_e$ the subgraph obtained by omitting the edge $e$ from $E$ and keeping all vertices.
 
 Suppose that $G=(V,E,\gamma)$ is a graph without multiple edges between the same vertices and that $R$ is an equivalence relation on the set $V$. Construct the quotient graphs $G^R$ as follow: The vertices of $G^R$ are the equivalence classes of $V$ produced by $R$. If $[v]$ and $[w]$ are the equivalence classes of vertices $v$ and $w$, then there is an edge in 	$G^R$ from $[v]$ to $[w]$ if and only if some vertices in $[v]$ is connected to sone vertices in $[w]$ in the graph $G$.
 
 ### Theorem 2
 
 Let $G=(E,V,\gamma)$ be a graph without multiple edges, and let $e \in e$, say $e=\{a,b\}$. So we have $G_e$, subgraph obtained by deleting $e$ and $G^e$, the quotient graph of $G$ obtained by merging  the end points of $e$. And then with $x$ colors:
+
 $$
 P_G(x)=P_{G_e}(x)-P_{G^e}(x)
 $$
 
 ## Transport Networks
 
-An important use of labeled graph is to model what are commonly called transport networks. The label on an edge represents the maximum flow that can be passed through that edge and is called the capacity of the edge. 
+An important use of labeled graph is to model what are commonly called transport networks. The label on an edge represents the maximum flow that can be passed through that edge and is called the capacity of the edge.
 
 ### Transport Network
 
@@ -309,21 +309,40 @@ Let $N$ be a network with $n$ nodes and $G$ be the symmetric closure of $N$. All
 
 #### STEP 2
 
--  Let node $j$ in $N_1$ be the node with the smallest node number  and let $N_2(j)$ be the set of all unlabeled nodes,
+- Let node $j$ in $N_1$ be the node with the smallest node number  and let $N_2(j)$ be the set of all unlabeled nodes,
 
   other than the source and those are joined to node $j$ and have positive excess capacity.
 
 - Suppose that node $k$ is in $N_2(j)$ and $(j,k)$ is the edge with positive excess capacity. Label node $k$ with $[E_k,j]$, where $E_k$ is the minimum of $E_j$ and the excess capacity $e_{jk}$ of edge $(j,k)$.
-
 - When all the nodes in $N_2(j)$ are all labeled in this way, repeat this process for the other nodes in $N_1$. Let
+
   $$
   N_2 = U_{j \in N_1}N_2(j)
   $$
 
 #### STEP 3
 
-- Repeat Step 2 , labeling all previously unlabeled nodes $N_3$ that can be reached from a node in $N_2$ by an edge having positive excess capacity.
-- Continue this process forming  sets $N_4$, $N_5$, ... until after a finite number or steps either the sink has not been labeled and no other nodes can be labeled. It can happened that no nodes have been labeled; remember that the source is not labeled or the sink has been reached.
+* Repeat Step 2 , labeling all previously unlabeled nodes $N_3$ that can be reached from a node in $N_2$ by an edge having positive excess capacity.
+* Continue this process forming  sets $N_4$, $N_5$, ... until after a finite number or steps
+*  
+
+  * either the sink has not been labeled and no other nodes can be labeled. It can happened that no nodes have been labeled; remember that the source is not labeled or the sink has been reached.
+
+    In this case, the algorithm terminates and the total flow is a maximum flow.
+  * or the sink has been labeled.
+
+    In this case,  the sink has been labeled with $[E_n,m]$ where $E_n$ is the amount of extra flow that can be made to reach the sink through the path.
+
+#### STEP 4
+
+We examine the path in reverse:
+
+* If edge $(i, j) \in N$, we increase the flow in $(i,j)$  and decrease the excess capacity $e_{ij}$ by the sam amount. Simultaneously, we increase excess capacity of the virtual edge $(i.j)$
+* If  on the other hand , edge $(i,j) \not \in N$, we decrease the flow in $(j,i)$ and increase its excess capacity. Same as before, decrease the excess capcaity in $(i.j)$.
+
+Back to the step 1.
+
+>  What a complex algorithm!
 
 ### Cut
 
@@ -337,4 +356,4 @@ And we have a theorem that a maximum flow $F$ in a network has value equal to th
 
 When we meet a network with sources or sinks more than one, we can add a virtual source or virtual sink to use the labeling algorithm, which is connected with the real source and sink with large enough edge. These virtual source and sink is are called super source and super sink.
 
- 
+‍

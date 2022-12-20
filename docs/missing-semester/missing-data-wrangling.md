@@ -1,13 +1,17 @@
----
-title: missing-data-wrangling
-tags:
-  - missing
-  - 学习资料
-toc: true
-typora-root-url: missing-data-wrangling
-date: 2022-04-17 12:37:08
+# missing-data-wrangling
+
 ---
 
+title: missing-data-wrangling
+tags:
+
+- missing
+- 学习资料
+  toc: true
+  typora-root-url: missing-data-wrangling
+  date: 2022-04-17 12:37:08
+
+---
 
 # The Missing Semester in the CS
 
@@ -87,7 +91,7 @@ Jan 17 03:13:00 thesquareplanet.com sshd[2631]: Disconnected from invalid user D
 
 What would we end up with? Well, `*` and `+` are, by default, “greedy”. They will match as much text as they can. So, in the above, we’d end up with just
 
-```bash 
+```bash
 46.97.239.16 port 55920 [preauth]
 ```
 
@@ -146,7 +150,7 @@ ssh myserver journalctl
 
 `sort -n` will sort in numeric (instead of lexicographic) order. `-k1,1` means “sort by only the first whitespace-separated column”. The `,n` part says “sort until the `n`th field, where the default is the end of the line. In this *particular* example, sorting by the whole line wouldn’t matter, but we’re here to learn!
 
-> lexicographic 字典序的; 
+> lexicographic 字典序的;
 
 > md， 开始魔法起来了
 
@@ -164,11 +168,11 @@ ssh myserver journalctl
 
 Let’s start with `paste`: it lets you combine lines (`-s`) by a given single-character delimiter (`-d`; `,` in this case). But what’s this `awk` business?
 
-> delimiter 分隔符; 
+> delimiter 分隔符;
 
 ### awk-another editor
 
-`awk` is a programming language that just happens to be really good at processing text streams. 
+`awk` is a programming language that just happens to be really good at processing text streams.
 
 First, what does `{print $2}` do? Well, `awk` programs take the form of an optional pattern plus a block saying what to do if the pattern matches a given line. The default pattern (which we used above) matches all lines. Inside the block, `$0` is set to the entire line’s contents, and `$1` through `$n` are set to the `n`th *field* of that line, when separated by the `awk` field separator (whitespace by default, change with `-F`). In this case, we’re saying that, for every line, print the contents of the second field, which happens to be the username!
 
@@ -206,7 +210,7 @@ echo "2*($(data | paste -sd+))" | bc -l
 
 > elaborate 精心制作的;
 
-You can get stats in a variety of ways. [`st`](https://github.com/nferraz/st) is pretty neat, but if you already have [R](https://www.r-project.org/):
+You can get stats in a variety of ways. [st]()`` is pretty neat, but if you already have [R](https://www.r-project.org/):
 
 ```bash
 ssh myserver journalctl
@@ -263,4 +267,3 @@ ffmpeg -loglevel panic -i /dev/video0 -frames 1 -f image2 -
 [只要我开摆了，那我就是无敌的](https://摆烂.top)
 
 > 这种鬼才地址，不要问我是怎么发现的。
-

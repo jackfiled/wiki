@@ -1,9 +1,3 @@
----
-title: 首页
----
-
-
-
 # Ricardo Ren 的知识图书馆
 
 采用[VuePress](https://vuepress.vuejs.org/zh/)构建。
@@ -12,13 +6,13 @@ title: 首页
 
 ### 课程笔记
 
-- [数据结构](/data-structure/)(持续更新中...)
-- [计算机系统基础](/csapp/)(持续更新中...)
-- [离散数学](/discrete-math/)(持续更新中...)
+* [数据结构](/data-structure/)(持续更新中...)
+* [计算机系统基础](/csapp/)(持续更新中...)
+* [离散数学](/discrete-math/)(持续更新中...)
 
 ### 自学笔记
 
-- [计算机教育中缺失的一课](/missing-semester/)(已完结)
+* [计算机教育中缺失的一课](/missing-semester/)(已完结)
 
 ## 贡献
 
@@ -34,3 +28,4 @@ title: 首页
 
 本作品采用<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">知识共享署名-相同方式共享 4.0 国际许可协议</a>进行许可。
 
+‍

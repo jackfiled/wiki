@@ -1,13 +1,17 @@
----
-title: missing-metaprogramming
-tags:
-  - missing
-  - 学习资料
-toc: true
-typora-root-url: missing-metaprogramming
-date: 2022-04-24 11:53:22
+# missing-metaprogramming
+
 ---
 
+title: missing-metaprogramming
+tags:
+
+- missing
+- 学习资料
+  toc: true
+  typora-root-url: missing-metaprogramming
+  date: 2022-04-24 11:53:22
+
+---
 
 # The Missing Semester in the CS
 
@@ -27,7 +31,7 @@ For most projects, whether they contain code or not, there is a “build process
 
 These are usually called “build systems”, and there are *many* of them. Which one you use depends on the task at hand, your language of preference, and the size of the project. At their core, they are all very similar though. You define a number of *dependencies*, a number of *targets*, and *rules* for going from one to the other. You tell the build system that you want a particular target, and its job is to find all the transitive dependencies of that target, and then apply the rules to produce intermediate targets all the way until the final target has been produced. Ideally, the build system does this without unnecessarily executing rules for targets whose dependencies haven’t changed and where the result is available from a previous build.
 
-> intermediate 中间的; 
+> intermediate 中间的;
 
 `make` is one of the most common build systems out there, and you will usually find it installed on pretty much any UNIX-based computer. It has its warts, but works quite well for simple-to-moderate projects. When you run `make`, it consults a file called `Makefile` in the current directory. All the targets, their dependencies, and the rules are defined in that file.
 
@@ -114,7 +118,7 @@ What we *will* cover is some of the common terminology they all use. The first a
 
 > underlying 底层的;
 
-That also isn’t ideal though! What if I issue a security update which does *not* change the public interface of my library (its “API”), and which any project that depended on the old version should immediately start using? This is where the different groups of numbers in a version come in. The exact meaning of each one varies between projects, but one relatively common standard is [*semantic versioning*](https://semver.org/). With semantic versioning, every version number is of the form: major.minor.patch. The rules are:
+That also isn’t ideal though! What if I issue a security update which does *not* change the public interface of my library (its “API”), and which any project that depended on the old version should immediately start using? This is where the different groups of numbers in a version come in. The exact meaning of each one varies between projects, but one relatively common standard is *[semantic versioning](https://semver.org/)*. With semantic versioning, every version number is of the form: major.minor.patch. The rules are:
 
 - If a new release does not change the API, increase the patch version.
 - If you *add* to your API in a backwards-compatible way, increase the minor version.
@@ -134,7 +138,7 @@ Continuous integration, or CI, is an umbrella term for “stuff that runs whenev
 
 > README.md里面的badge是相当好玩的。
 
-### A brief aside on testing 
+### A brief aside on testing
 
 Most large software projects come with a “test suite”. You may already be familiar with the general concept of testing, but we thought we’d quickly mention some approaches to testing and testing terminology that you may encounter in the wild:
 
@@ -143,4 +147,3 @@ Most large software projects come with a “test suite”. You may already be fa
 - Integration test: a “macro-test” that runs a larger part of the system to check that different feature or components work *together*.
 - Regression test: a test that implements a particular pattern that *previously* caused a bug to ensure that the bug does not resurface.
 - Mocking: to replace a function, module, or type with a fake implementation to avoid testing unrelated functionality. For example, you might “mock the network” or “mock the disk”.
-

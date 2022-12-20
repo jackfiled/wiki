@@ -1,12 +1,16 @@
----
-title: missing-command-line
-tags:
-  - 学习资料
-  - missing
-toc: true
-date: 2022-04-19 20:47:56
+# missing-command-line
+
 ---
 
+title: missing-command-line
+tags:
+
+- 学习资料
+- missing
+  toc: true
+  date: 2022-04-19 20:47:56
+
+---
 
 # The Missing Semester in the CS
 
@@ -54,19 +58,19 @@ I got a SIGINT, but I am not stopping
 47^\[1]    89 quit       python3 shell.py
 ```
 
-While `SIGINT` and `SIGQUIT` are both usually associated with terminal related requests, a more generic signal for asking a process to exit gracefully is the `SIGTERM` signal. To send this signal we can use the [`kill`](https://www.man7.org/linux/man-pages/man1/kill.1.html) command, with the syntax `kill -TERM <PID>`.
+While `SIGINT` and `SIGQUIT` are both usually associated with terminal related requests, a more generic signal for asking a process to exit gracefully is the `SIGTERM` signal. To send this signal we can use the [kill]()`` command, with the syntax `kill -TERM <PID>`.
 
 ### Pausing and backgrounding process
 
 Signals can do other things beyond killing a process. For instance, `SIGSTOP` pauses a process. In the terminal, typing `Ctrl-Z` will prompt the shell to send a `SIGTSTP` signal, short for Terminal Stop (i.e. the terminal’s version of `SIGSTOP`).
 
-We can then continue the paused job in the foreground or in the background using [`fg`](https://www.man7.org/linux/man-pages/man1/fg.1p.html) or [`bg`](http://man7.org/linux/man-pages/man1/bg.1p.html), respectively.
+We can then continue the paused job in the foreground or in the background using [fg]()`` or [bg]()``, respectively.
 
-The [`jobs`](https://www.man7.org/linux/man-pages/man1/jobs.1p.html) command lists the unfinished jobs associated with the current terminal session. You can refer to those jobs using their pid (you can use [`pgrep`](https://www.man7.org/linux/man-pages/man1/pgrep.1.html) to find that out). More intuitively, you can also refer to a process using the percent symbol followed by its job number (displayed by `jobs`). To refer to the last backgrounded job you can use the `$!` special parameter.
+The [jobs]()`` command lists the unfinished jobs associated with the current terminal session. You can refer to those jobs using their pid (you can use [pgrep]()`` to find that out). More intuitively, you can also refer to a process using the percent symbol followed by its job number (displayed by `jobs`). To refer to the last backgrounded job you can use the `$!` special parameter.
 
 One more thing to know is that the `&` suffix in a command will run the command in the background, giving you the prompt back, although it will still use the shell’s STDOUT which can be annoying (use shell redirections in that case).
 
-To background an already running program you can do `Ctrl-Z` followed by `bg`. Note that backgrounded processes are still children processes of your terminal and will die if you close the terminal (this will send yet another signal, `SIGHUP`). To prevent that from happening you can run the program with [`nohup`](https://www.man7.org/linux/man-pages/man1/nohup.1.html) (a wrapper to ignore `SIGHUP`), or use `disown` if the process has already been started. Alternatively, you can use a terminal multiplexer as we will see in the next section.
+To background an already running program you can do `Ctrl-Z` followed by `bg`. Note that backgrounded processes are still children processes of your terminal and will die if you close the terminal (this will send yet another signal, `SIGHUP`). To prevent that from happening you can run the program with [nohup]()`` (a wrapper to ignore `SIGHUP`), or use `disown` if the process has already been started. Alternatively, you can use a terminal multiplexer as we will see in the next section.
 
 ```bash
 ➜  tmp sleep 1000
@@ -102,11 +106,11 @@ A special signal is `SIGKILL` since it cannot be captured by the process and it 
 
 > orphaned 孤儿的;
 
-You can learn more about these and other signals [here](https://en.wikipedia.org/wiki/Signal_(IPC)) or typing [`man signal`](https://www.man7.org/linux/man-pages/man7/signal.7.html) or `kill -l`.
+You can learn more about these and other signals [here](https://en.wikipedia.org/wiki/Signal_(IPC)) or typing [man signal]()`` or `kill -l`.
 
 ## Terminal Multiplexers
 
-Terminal multiplexers like [`tmux`](https://www.man7.org/linux/man-pages/man1/tmux.1.html) allow you to multiplex terminal windows using panes and tabs so you can interact with multiple shell sessions. Moreover, terminal multiplexers let you detach a current terminal session and reattach at some point later in time. This can make your workflow much better when working with remote machines since it avoids the need to use `nohup` and similar tricks.
+Terminal multiplexers like [tmux]()`` allow you to multiplex terminal windows using panes and tabs so you can interact with multiple shell sessions. Moreover, terminal multiplexers let you detach a current terminal session and reattach at some point later in time. This can make your workflow much better when working with remote machines since it avoids the need to use `nohup` and similar tricks.
 
 `tmux` expects you to know its keybindings, and they all have the form `<C-b> x` where that means (1) press `Ctrl+b`, (2) release `Ctrl+b`, and then (3) press `x`.
 
@@ -116,17 +120,16 @@ Terminal multiplexers like [`tmux`](https://www.man7.org/linux/man-pages/man1/tm
 
 - Sessions
 
-  \- a session is an independent workspace with one or more windows
+  - a session is an independent workspace with one or more windows
 
   - `tmux` starts a new session.
   - `tmux new -s NAME` starts it with that name.
   - `tmux ls` lists the current sessions
   - Within `tmux` typing `<C-b> d` detaches the current session
   - `tmux a` attaches the last session. You can use `-t` flag to specify which
-
 - Windows
 
-  \- Equivalent to tabs in editors or browsers, they are visually separate parts of the same session
+  - Equivalent to tabs in editors or browsers, they are visually separate parts of the same session
 
   - `<C-b> c` Creates a new window. To close it you can just terminate the shells doing `<C-d>`
   - `<C-b> N` Go to the *N* th window. Note they are numbered
@@ -134,10 +137,9 @@ Terminal multiplexers like [`tmux`](https://www.man7.org/linux/man-pages/man1/tm
   - `<C-b> n` Goes to the next window
   - `<C-b> ,` Rename the current window
   - `<C-b> w` List current windows
-
 - Panes
 
-  \- Like vim splits, panes let you have multiple shells in the same visual display.
+  - Like vim splits, panes let you have multiple shells in the same visual display.
 
   - `<C-b> "` Split the current pane horizontally
   - `<C-b> %` Split the current pane vertically
@@ -146,7 +148,7 @@ Terminal multiplexers like [`tmux`](https://www.man7.org/linux/man-pages/man1/tm
   - `<C-b> [` Start scrollback. You can then press `<space>` to start a selection and `<enter>` to copy that selection.
   - `<C-b> <space>` Cycle through pane arrangements.
 
-![tmux截图](./images/1.png)
+![tmux截图](./assets/1-20221120150726-k7252bf.png)
 
 ## Alias
 
@@ -156,7 +158,7 @@ It can become tiresome typing long commands that involve many flags or verbose o
 alias alias_name="command_to_alias arg1 arg2"
 ```
 
-Note that there is no space around the equal sign `=`, because [`alias`](https://www.man7.org/linux/man-pages/man1/alias.1p.html) is a shell command that takes a single argument.
+Note that there is no space around the equal sign `=`, because [alias]()`` is a shell command that takes a single argument.
 
 ```bash
 # Make shorthands for common flags
@@ -266,19 +268,19 @@ Key-based authentication exploits public-key cryptography to prove to the server
 
 #### Key generating
 
-To generate a pair you can run [`ssh-keygen`](https://www.man7.org/linux/man-pages/man1/ssh-keygen.1.html).
+To generate a pair you can run [ssh-keygen]()``.
 
 ```bash
 ssh-keygen -o -a 100 -t ed25519 -f ~/.ssh/id_ed25519
 ```
 
-You should choose a passphrase, to avoid someone who gets hold of your private key to access authorized servers. Use [`ssh-agent`](https://www.man7.org/linux/man-pages/man1/ssh-agent.1.html) or [`gpg-agent`](https://linux.die.net/man/1/gpg-agent) so you do not have to type your passphrase every time.
+You should choose a passphrase, to avoid someone who gets hold of your private key to access authorized servers. Use [ssh-agent]()`` or [gpg-agent]()`` so you do not have to type your passphrase every time.
 
 If you have ever configured pushing to GitHub using SSH keys, then you have probably done the steps outlined [here](https://help.github.com/articles/connecting-to-github-with-ssh/) and have a valid key pair already. To check if you have a passphrase and validate it you can run `ssh-keygen -y -f /path/to/key`.
 
 #### key based authentication
 
-`ssh` will look into `.ssh/authorized_keys` to determine which clients it should let in. 
+`ssh` will look into `.ssh/authorized_keys` to determine which clients it should let in.
 
 ```bash
 ssh-copy-id -i .ssh/id_ed25519 foobar@remote
@@ -288,9 +290,9 @@ ssh-copy-id -i .ssh/id_ed25519 foobar@remote
 
 There are many ways to copy files over ssh:
 
-- `ssh+tee`, the simplest is to use `ssh` command execution and STDIN input by doing `cat localfile | ssh remote_server tee serverfile`. Recall that [`tee`](https://www.man7.org/linux/man-pages/man1/tee.1.html) writes the output from STDIN into a file.
-- [`scp`](https://www.man7.org/linux/man-pages/man1/scp.1.html) when copying large amounts of files/directories, the secure copy `scp` command is more convenient since it can easily recurse over paths. The syntax is `scp path/to/local_file remote_host:path/to/remote_file`
-- [`rsync`](https://www.man7.org/linux/man-pages/man1/rsync.1.html) improves upon `scp` by detecting identical files in local and remote, and preventing copying them again. It also provides more fine grained control over symlinks, permissions and has extra features like the `--partial` flag that can resume from a previously interrupted copy. `rsync` has a similar syntax to `scp`.
+- `ssh+tee`, the simplest is to use `ssh` command execution and STDIN input by doing `cat localfile | ssh remote_server tee serverfile`. Recall that [tee]()`` writes the output from STDIN into a file.
+- [scp]()`` when copying large amounts of files/directories, the secure copy `scp` command is more convenient since it can easily recurse over paths. The syntax is `scp path/to/local_file remote_host:path/to/remote_file`
+- [rsync]()`` improves upon `scp` by detecting identical files in local and remote, and preventing copying them again. It also provides more fine grained control over symlinks, permissions and has extra features like the `--partial` flag that can resume from a previously interrupted copy. `rsync` has a similar syntax to `scp`.
 
 ### Port Forwarding
 
@@ -300,11 +302,11 @@ This is called *port forwarding* and it comes in two flavors: Local Port Forward
 
 #### Local Port Forwarding
 
-![本地代理](./images/2.png)
+![本地代理](assets/2-20221120150726-pnr9n1t.png)
 
 #### Remote Port Forwarding
 
-![远程代理](./images/3.png)
+![远程代理](assets/3-20221120150726-4gx9ds3.png)
 
 The most common scenario is local port forwarding, where a service in the remote machine listens in a port and you want to link a port in your local machine to forward to the remote port. For example, if we execute `jupyter notebook` in the remote server that listens to the port `8888`. Thus, to forward that to the local port `9999`, we would do `ssh -L 9999:localhost:8888 foobar@remote_server` and then navigate to `locahost:9999` in our local machine.
 
@@ -372,7 +374,7 @@ One thing to note when using these frameworks is that they may slow down your sh
 
 ## Terminal Emulators
 
-Along with customizing your shell, it is worth spending some time figuring out your choice of **terminal emulator** and its settings. 
+Along with customizing your shell, it is worth spending some time figuring out your choice of **terminal emulator** and its settings.
 
 Since you might be spending hundreds to thousands of hours in your terminal it pays off to look into its settings. Some of the aspects that you may want to modify in your terminal include:
 
@@ -382,4 +384,3 @@ Since you might be spending hundreds to thousands of hours in your terminal it p
 - Tab/Pane support
 - Scrollback configuration
 - Performance (some newer terminals like [Alacritty](https://github.com/jwilm/alacritty) or [kitty](https://sw.kovidgoyal.net/kitty/) offer GPU acceleration).
-

@@ -1,13 +1,17 @@
+# missing-the-shell
+
 ---
+
 title: missing-the-shell
 typora-root-url: missing-the-shell
 date: 2022-04-05 13:48:39
 tags:
-   - missing
-   - 学习资料
-toc: true
----
 
+- missing
+- 学习资料
+  toc: true
+
+---
 
 # The missing semester in the CS
 
@@ -96,7 +100,7 @@ ricardo@g15:/$ ls
 bin  boot  build  dev  etc  home  init  lib  lib32  lib64  libx32  lost+found  media  mnt  opt  proc  root  run  sbin  snap  srv  sys  tmp  usr  var
 ```
 
-Unless a directory is given as its first argument, `ls` will print the contents of the current directory. 
+Unless a directory is given as its first argument, `ls` will print the contents of the current directory.
 
 Most commands accept flags and options (flags with values) that start with `-` to modify their behavior. Usually, running a program with the `-h` or `--help` flag will print some help text that tells you what flags and options are available.
 
@@ -166,41 +170,35 @@ One thing you need to be root in order to do is writing to the `sysfs` file syst
 
 > 这里教程通过在`/sys/class/backlight`下属的文件中写值的方式改变亮度，但是我Linux环境中并没有这个文件，也就是我的Linux不支持调节亮度。
 
->在这个例子中还提到了像`|`, `>`, `<`这类的操作是由shell程序来完成的，因此他们的执行权限仅仅是当前登录用户的权限，在写入一些需要高权限的文件是可能会出现`Permission denied`
+> 在这个例子中还提到了像`|`, `>`, `<`这类的操作是由shell程序来完成的，因此他们的执行权限仅仅是当前登录用户的权限，在写入一些需要高权限的文件是可能会出现`Permission denied`
 
 ## Exercises
 
 1. 直接查看`$SHELL`变量就可以
-   
-   
+
    ```bash
    ricardo@g15:~$ echo $SHELL
    /bin/bash
    ```
-   
 2. 创建文件夹
-   
-   
+
    ```bash
    ricardo@g15:/tmp$ mkdir missing
    ```
-   
 3. 查看`touch`命令的用法
-   
-   ```bash	
+
+   ```bash
    ricardo@g15:/tmp$ man touch
    ```
-
    > touch 就是改变一个文件的最后修改时间，如果没有就是创建
-   
+   >
 4. 利用`touch`创建文件
-   
+
    ```bash
    ricardo@g15:/tmp$ touch missing/semester
    ```
-   
 5. 在文件中写入数据
-   
+
    ```bash
    ricardo@g15:/tmp/missing$ touch semester
    ricardo@g15:/tmp/missing$ echo '#!/bin/sh' > semester
@@ -209,9 +207,8 @@ One thing you need to be root in order to do is writing to the `sysfs` file syst
    #!/bin/sh
    curl --head --silent https://missing.csail.mit.edu
    ```
-   
 6. 尝试直接运行文件，发现文件没有直接被执行的权限
-   
+
    ```bash
    ricardo@g15:/tmp/missing$ ./semester
    -bash: ./semester: Permission denied
@@ -221,9 +218,8 @@ One thing you need to be root in order to do is writing to the `sysfs` file syst
    drwxrwxrwt 7 root    root    20480 Mar 28 08:38 ../
    -rw-r--r-- 1 ricardo ricardo    61 Mar 28 08:47 semester
    ```
-   
 7. 利用指定的解释器运行写入的程序
-   
+
    ```bash
    ricardo@g15:/tmp/missing$ sh ./semester
    HTTP/2 200
@@ -248,11 +244,10 @@ One thing you need to be root in order to do is writing to the `sysfs` file syst
    x-fastly-request-id: e71e5760a7ed66425c9ad2eb9572e5a12b23bee6
    content-length: 7991
    ```
-   
 8. > chmod命令用于修改文件的权限
-
+   >
 9. 修改文件的权限后直接执行
-   
+
    ```bash
    ricardo@g15:/tmp/missing$ sudo chmod 777 semester
    [sudo] password for ricardo:
@@ -285,15 +280,14 @@ One thing you need to be root in order to do is writing to the `sysfs` file syst
    x-fastly-request-id: 8271d76f868dc9951a9dc5b5d2b1da1d1ace0e89
    content-length: 7991
    ```
-   
 10. 用`grep`命令筛选指定的内容
-    
+
     ```bash
     ricardo@g15:/tmp/missing$ ./semester | grep --ignore-case last-modified | cut --delimiter=':' -f2 > /home/ricardo/last-modified.txt
     ricardo@g15:/tmp/missing$ cat /home/ricardo/last-modified.txt
      Fri, 04 Mar 2022 17
     ```
-    
-11. >卡牌名称：WSL系统
+11. > 卡牌名称：WSL系统
     >
-    >卡牌效果:当遇到使用`sysfs`的题目时，打出此牌，即可跳过该回合
+    > 卡牌效果:当遇到使用`sysfs`的题目时，打出此牌，即可跳过该回合
+    >

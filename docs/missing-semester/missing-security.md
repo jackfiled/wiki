@@ -1,13 +1,17 @@
----
-title: missing-security
-tags:
-  - missing
-  - 学习资料
-toc: true
-typora-root-url: missing-security
-date: 2022-04-26 20:46:56
+# missing-security
+
 ---
 
+title: missing-security
+tags:
+
+- missing
+- 学习资料
+  toc: true
+  typora-root-url: missing-security
+  date: 2022-04-26 20:46:56
+
+---
 
 # The Missing Semester in the CS
 
@@ -166,4 +170,3 @@ When you run `ssh-keygen`, it generates an asymmetric keypair, `public_key, priv
 > 不过我们貌似在ssh-keygen时，都是把passphrase留空的。
 
 In use, once the server knows the client’s public key (stored in the `.ssh/authorized_keys` file), a connecting client can prove its identity using asymmetric signatures. This is done through [challenge-response](https://en.wikipedia.org/wiki/Challenge–response_authentication). At a high level, the server picks a random number and sends it to the client. The client then signs this message and sends the signature back to the server, which checks the signature against the public key on record. This effectively proves that the client is in possession of the private key corresponding to the public key that’s in the server’s `.ssh/authorized_keys` file, so the server can allow the client to log in.
-
