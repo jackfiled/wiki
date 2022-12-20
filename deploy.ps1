@@ -1,1 +1,0 @@
-scp -r .\wiki\ aliyun:/home/rcj/website
