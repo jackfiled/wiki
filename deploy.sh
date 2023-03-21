@@ -8,3 +8,5 @@ message="Update at: $time"
 
 git add -A 
 git commit -m "$message"
+
+git push
