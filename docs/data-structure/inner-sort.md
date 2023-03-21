@@ -1,5 +1,3 @@
-# inner-sort
-
 # 内部排序
 
 ## 排序
@@ -267,7 +265,7 @@ void SelectSort(std::vector<int>& list)
 
 ### 树形选择排序
 
-​![image](assets/image-20221128142909-itq554s.png)​
+​![image](./assets/image-20221128142909-itq554s.png)​
 
 ### 堆排序
 
@@ -297,11 +295,11 @@ $n$个关键字的序列当且仅当满足下列条件之一：
 
 我们可以通过筛选的方法，在将堆顶元素输出之后的堆调整为新的大顶堆：
 
-​![image](assets/image-20221201103503-2x31sg1.png)​
+​![image](./assets/image-20221201103503-2x31sg1.png)​
 
 在从一群无序的元素建立一个大顶堆的时候，就从低到高依次筛选建立大顶堆：
 
-​![image](assets/image-20221201103600-3vsu6r8.png)​
+​![image](./assets/image-20221201103600-3vsu6r8.png)​
 
 #### 算法实现
 
@@ -393,7 +391,7 @@ void HeapSort(std::vector<int>& heap)
 
 以游程（自然的有序段）作为子序列进行归并，可以比直接两路归并更加有效。
 
-​![image](assets/image-20221201152549-4mk6086.png)​
+​![image](./assets/image-20221201152549-4mk6086.png)​
 
 ## 基数排序
 

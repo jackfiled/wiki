@@ -1,4 +1,4 @@
-# Ricardo Ren 的知识图书馆
+# README
 
 采用[VuePress](https://vuepress.vuejs.org/zh/)构建。
 

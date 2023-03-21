@@ -1,18 +1,3 @@
-# missing-metaprogramming
-
----
-
-title: missing-metaprogramming
-tags:
-
-- missing
-- 学习资料
-  toc: true
-  typora-root-url: missing-metaprogramming
-  date: 2022-04-24 11:53:22
-
----
-
 # The Missing Semester in the CS
 
 ## Introduction

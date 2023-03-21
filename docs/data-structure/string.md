@@ -1,5 +1,3 @@
-# string
-
 # 字符串
 
 ## 串的概念和基本操作
@@ -86,17 +84,82 @@ int simpleIndex(string source, string target)
 
 算法主要改进在遍历时主串回溯这一问题，使在比对时指向主串中比对位置的指针不必回退。实现这一点的关键就是，在完成一个部分匹配之后，先对子串部分匹配的部分进行一个自匹配，因为此时子串部分匹配的部分和主串时相同的。
 
-![](assets/kmp-20221120150358-i5ftw3k.png)
+![](./assets/kmp-20221120150358-i5ftw3k.png)
 
 在设计实现KMP算法中主要的难点就是：如何确定已经部分匹配的子串应该向前滑动的长度？
 
 由于确定这个长度和主串没有关系而只和子串有关系，我们可以先针对子串生成一个数组来存储当部分匹配到某一个位置之后，子串可以向后面滑动的长度。而且由于子串向后滑动等效于向前移动子串的开始匹配位置，我们可以先根据子串建立起一个当前匹配位置和下一次匹配位置的对应数组。
 
-已知一个模式字符串`abcaababc`，我们建立一个对应数组作为示例：
+#### next数组
 
-|字符|a|b|c|a|a|b|a|b|c|
-| -----------------| --| -| -| -| -| -| -| -| -|
-|位置|0|1|2|3|4|5|6|7|8|
-|NextPositionArray|-1|0|0|1|1|1|2|1|2|
+在`kmp`​算法中比较重要的部分就是next数组的获得。next数组从定义来说是当前字符串的前缀和后缀最多匹配的位数。
+
+|字符串|next|
+| -----------| ------|
+|a|0|
+|ab|0|
+|abb|0|
+|abbc|0|
+|abbca|1|
+|abbcad|0|
+|abbcada|1|
+|abbcadab|2|
+|abbcadabb|3|
+
+下面是通过通过模式串求得next数组的算法。
+
+```c
+int getNext(int nextArray[], char str[], int length)
+{
+    int j = 0;
+    int k = -1;
+
+    nextArray[0] = -1;
+
+    while(j < length)
+    {
+        if (k == -1 || str[j] == str[k])
+        {
+            j++;
+            k++;
+            nextArray[j] = k;
+        }
+        else
+        {
+            k = nextArray[k];
+        }
+    }
+}
+```
+
+在获得了next数组之后，我们就可以简单的写出`kmp`​算法的匹配部分。
+
+```c
+int kmpMatch(char pattern[], char str[], int patternLength, int strLength)
+{
+    int nextArray[patternLength];
+
+    getNext(nextArray, pattern, patternLength);
+
+    int patternPos = 0;
+    for(int pos = 0; pos < strLength; pos++)
+    {
+        if (pattern[patternPos] == str[pos])
+        {
+            patternPos++;
+            pos++;
+
+            if (patternPos == patternLength)
+            {
+                return pos;
+            }
+        }
+        else
+        {
+            patternPos = nextArray[patternPos - 1];
+        }
+    }
+}
+```
 
 ‍

@@ -1,10 +1,8 @@
-# assembly-advanced
-
 # 程序的机器级表达——高级话题
 
 ## Linux内存分配
 
-![image-layout](assets/memory-layout-20221120150651-wgcsiv5.png)
+![image-layout](./assets/memory-layout-20221120150651-wgcsiv5.png)
 
 内存中一般被分配为下列积几个部分：
 
@@ -129,7 +127,7 @@ void call_echo()
 
 然后画出内存中空间分配的示意图：
 
-![overflow-example](assets/overflow-example-20221120150651-brs5aut.png)
+![overflow-example](./assets/overflow-example-20221120150651-brs5aut.png)
 
 虽然在程序中的字符数组只有4个字符的大小，但是汇编代码中给这个函数分配了0x18个字节的空间，但是这并不影响这段代码仍然是危险的，如果输入的字符串当长于24个字符的时候，栈上的数据就开始被破坏。而攻击的关键就在这里，这里的数据是函数的返回地址，如果我们输入的字符串中这里的数据”恰好“是一段可执行代码的地址，那在这个函数结束之后，程序就会开始执行意料之外的程序。
 

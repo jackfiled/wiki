@@ -1,5 +1,3 @@
-# assembly-procedure
-
 # 程序的机器级表示——过程
 
 我们主要介绍在C语言中函数调用的实现，包括：
@@ -82,7 +80,7 @@ long mult2(long a, long b)
 
 这一段被分配的栈空间就被称作栈帧。在一些情况下，还存在着一个栈帧寄存器`%rbp`，它指向当前栈帧开始的内存地址，这段内存地址中存储的内容是上一段栈帧的起始地址。
 
-![stack-frame](assets/stack-frame-20221120150651-1glbdr7.png)
+![stack-frame](./assets/stack-frame-20221120150651-1glbdr7.png)
 
 在这段栈帧中保存着这些信息：
 

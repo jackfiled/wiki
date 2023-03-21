@@ -1,6 +1,59 @@
-# graph
-
 # Graph
+
+## Introduction of Graph
+
+### Definition of Graph
+
+#### Multigraphs
+
+#### Pseduographs
+
+#### Directed Graphs
+
+#### Directed Multigraphs
+
+​![image](./assets/image-20221226213219-vhgne1f.png)​
+
+### Graphs Models
+
+## Graph Terminology
+
+We will learn the following terms:
+
+* Adjacent
+* connect
+* endpoint
+* neighborhood
+* degree
+* initial
+* terminal
+* in-degree
+* out-degree
+* complete
+* cycles
+* wheels
+* n-cubes
+* bipartite
+* subgraph
+* union
+
+### Special Types of Graphs
+
+### Bipartite Graphs
+
+### New Graphs from Olds
+
+## Graph Representation & Isomorphism
+
+### Graph Representation
+
+#### Adjacency List
+
+#### Adjacency Matrices
+
+#### Incidence Matrices
+
+### Graph Isomorphism
 
 ## Connectivity
 
@@ -190,7 +243,7 @@ We can prove this theorem by mathematical induction. Constructing a sequence of 
 
  Kuratowski graphs are two typically non-planar graphs.
 
-![](assets/kuratowski-graph-20221120150711-hjoqnax.png)
+![](./assets/kuratowski-graph-20221120150711-hjoqnax.png)
 
 In the Kuratowski graph, we can find that:
 

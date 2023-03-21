@@ -1,3 +1,0 @@
-# discrete-math
-
-‍

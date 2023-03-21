@@ -1,5 +1,3 @@
-# advanced-counting
-
 # Advanced Counting Techniques
 
 Example: How many bit string of length $n$ do not contain two consecutive zeros?
@@ -18,7 +16,7 @@ A particular sequence, described non-recurisely, is said to solve the given recu
 
 #### The Tower of Hanoi
 
-​![image](assets/image-20221122203100-6jtn1ng.png)​
+​![image](./assets/image-20221122203100-6jtn1ng.png)​
 
 Let $H_n$ represent the number of moves for a stack of $n$ disks.
 
@@ -120,7 +118,7 @@ Let $f(x)=\sum_{k=0}^na_kx^k$ and $g(x)=\sum_{k=0}^{n}b_kx^k$, and we have:
 
 Let $u \in R$ and $k \in Z^+ \cup \{0\}$, the extended binomail coeffcient $(^n_k)$ is defined by 
 
-​![image](assets/image-20221125175435-ttdbxdp.png)​
+​![image](./assets/image-20221125175435-ttdbxdp.png)​
 
 #### Extended Binomail Theroem
 
@@ -132,6 +130,6 @@ $$
 
 As we have two theroems about generating functions, we give a list of some generating functions:
 
-​![image](assets/image-20221125180112-75cweb2.png)​
+​![image](./assets/image-20221125180112-75cweb2.png)​
 
 ‍

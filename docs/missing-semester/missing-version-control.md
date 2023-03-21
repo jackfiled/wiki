@@ -1,18 +1,3 @@
-# missing-version-control
-
----
-
-title: missing-version-control
-tags:
-
-- missing
-- 学习资料
-  toc: true
-  typora-root-url: missing-version-control
-  date: 2022-04-20 13:29:05
-
----
-
 # The Missing Semester in the CS
 
 ## Introduction

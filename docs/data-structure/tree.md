@@ -1,5 +1,3 @@
-# tree
-
 # 树
 
 ## 树的结构定义和基本操作
@@ -461,7 +459,7 @@ typedef HuffmanNode HuffmanNodeP;
   - 对于每个节点，除了保留同父节点之间的连线之外，去掉该节点同其他所有节点的连线
   - 所得的树就是一颗二叉树。
 
-  ![](assets/tree-to-2-20221120150358-bfg7z8z.png)
+  ![](./assets/tree-to-2-20221120150358-bfg7z8z.png)
 - 二叉树到树：
 
   - 将左子节点的右子节点、右子节点的右子节点，……同父节点连接在一起
@@ -491,4 +489,4 @@ typedef HuffmanNode HuffmanNodeP;
 
 > 采用回溯的算法，在约束的条件下进行先序遍历，并在遍历的过程中剪去那些不满足条件的分支。
 
-![](assets/four-queen-20221120150358-gpk2rs2.png)
+![](./assets/four-queen-20221120150358-gpk2rs2.png)

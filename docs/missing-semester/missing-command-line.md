@@ -1,17 +1,3 @@
-# missing-command-line
-
----
-
-title: missing-command-line
-tags:
-
-- 学习资料
-- missing
-  toc: true
-  date: 2022-04-19 20:47:56
-
----
-
 # The Missing Semester in the CS
 
 ## Introduction
@@ -302,11 +288,11 @@ This is called *port forwarding* and it comes in two flavors: Local Port Forward
 
 #### Local Port Forwarding
 
-![本地代理](assets/2-20221120150726-pnr9n1t.png)
+![本地代理](./assets/2-20221120150726-pnr9n1t.png)
 
 #### Remote Port Forwarding
 
-![远程代理](assets/3-20221120150726-4gx9ds3.png)
+![远程代理](./assets/3-20221120150726-4gx9ds3.png)
 
 The most common scenario is local port forwarding, where a service in the remote machine listens in a port and you want to link a port in your local machine to forward to the remote port. For example, if we execute `jupyter notebook` in the remote server that listens to the port `8888`. Thus, to forward that to the local port `9999`, we would do `ssh -L 9999:localhost:8888 foobar@remote_server` and then navigate to `locahost:9999` in our local machine.
 

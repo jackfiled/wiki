@@ -1,5 +1,3 @@
-# relation
-
 # Relations
 
 ## Relations and Their Properties

@@ -1,5 +1,3 @@
-# find
-
 # 查找表
 
 ## 查找中涉及的概念和术语
@@ -101,7 +99,7 @@ int binarySearch(vector<int>& x, int target)
 
 为了编译分析查找的过程，我们可以引入一颗二叉树来描述这个过程，这棵树也被称为判定树。
 
-![](assets/find-tree-20221120150358-awrhdkv.png)
+![](./assets/find-tree-20221120150358-awrhdkv.png)
 
 这颗二叉树的深度为$\lfloor log_2n\rfloor +1$
 
@@ -373,16 +371,16 @@ typedef BSTNodeP BSTNodeP;
 
 * LL型平衡旋转——单向右旋：
 
-  ​![image](assets/image-20221120155220-dgcnic5.png)​
+  ​![image](./assets/image-20221120155220-dgcnic5.png)​
 * RR型平衡旋转——单项左旋：
 
-  ​![image](assets/image-20221120155259-246ap7z.png)​
+  ​![image](./assets/image-20221120155259-246ap7z.png)​
 * LR型平衡旋转——一次逆时针旋转和一次顺时针旋转
 
-  ​![image](assets/image-20221120155339-n4fiqh8.png)​
+  ​![image](./assets/image-20221120155339-n4fiqh8.png)​
 * RL型平衡旋转——一次顺时针旋转和一次逆时针旋转
 
-  ​![image](assets/image-20221120155603-4r0g8ev.png)​
+  ​![image](./assets/image-20221120155603-4r0g8ev.png)​
 
 删除平衡二叉树的思路：
 

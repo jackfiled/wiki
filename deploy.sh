@@ -1,12 +1,10 @@
-if [-x "docs"]; then
-    rm -rf docs
-fi
+#!/bin/sh
 
-mv ~/Downloads/课程笔记.zip .
-unzip 课程笔记.zip -d .
-rm 课程笔记.zip
-mv 课程笔记 docs
+# 确保shell会打印错误
+set -e
 
-python ./generate_config.py
-mv ./config.js ./vuepress/
-cp -r ./vuepress/ ./docs/.vuepress
+time=$(date "+%Y%m%d%H%M%S")
+message="Update at: $time"
+
+git add -A 
+git commit -m "$message"

@@ -1,5 +1,3 @@
-# assembly-control
-
 # 程序的机器级表示——控制
 
 在实际的程序执行过程中，代码并不总是从上到下依次执行的，需要根据数据的不同执行不同的语句。这里C语言中表现为流程控制语句，同样的，汇编代码也支持流程控制。我们通过学习C语言的流程控制语句如何在汇编语言中实现来学习汇编语言中的流程控制。
@@ -26,7 +24,7 @@
 
 在条件寄存器满足一定条件的基础上，将目的寄存器的最低位为设置为0或者1，下图给出了条件寄存器的使用条件。
 
-![flag-set](assets/flag-set-20221120150651-2c3d9wc.png)
+![flag-set](./assets/flag-set-20221120150651-2c3d9wc.png)
 
 例如下面一段C语言程序和其对应的汇编语言程序：
 
@@ -50,7 +48,7 @@ ret
 
 在条件寄存器满足一定条件时，跳转到程序的其他部分执行。
 
-![flag-jump](assets/flag-jump-20221120150651-wwww6fr.png)
+![flag-jump](./assets/flag-jump-20221120150651-wwww6fr.png)
 
 在汇编代码中，`jump`指令产生的效果类似于C语言中的`goto`语句，具体的使用在下面的流程控制的实现中具体介绍。
 
@@ -187,17 +185,17 @@ loop:
 
 `Do-While`翻译可以总结为以下的过程：
 
-![do-while](assets/do-while-20221120150651-ws26ilv.png)
+![do-while](./assets/do-while-20221120150651-ws26ilv.png)
 
 ### While循环
 
 有了上面学习`Do-while`的基础，我们直接给出一个`While`的翻译过程：
 
-![while](assets/while-20221120150651-894tbs6.png)
+![while](./assets/while-20221120150651-894tbs6.png)
 
 上面给出的翻译只是`while`语句的一种翻译方式，我们还可以将`while`循环先改写为`do-while`再翻译为汇编代码。
 
-![while-2](assets/while-2-20221120150651-pai3a1h.png)
+![while-2](./assets/while-2-20221120150651-pai3a1h.png)
 
 对于`gcc`而言，在使用`-Og`时会使用第一种翻译方式，在使用`-O1`时会使用第二种翻译方式。
 
@@ -205,7 +203,7 @@ loop:
 
 先将For循环翻译为While循环，再翻译为汇编语言。
 
-![for](assets/for-20221120150651-3ro0n7q.png)
+![for](./assets/for-20221120150651-3ro0n7q.png)
 
 ## Switch语句
 
@@ -270,4 +268,4 @@ my_switch:
 
 跳转表的设计也非常的考究，巧妙的实现了对于`Fall through`和相同分支的处理。
 
-![jump-table](assets/jump-table-20221120150651-k7yol83.png)
+![jump-table](./assets/jump-table-20221120150651-k7yol83.png)

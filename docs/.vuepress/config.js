@@ -1,6 +1,5 @@
 module.exports = {
-    base: "/wiki/",
-    dest: "./wiki/",
+    base: "/",
     port: 4000,
     locales: {
         '/': {
@@ -13,6 +12,7 @@ module.exports = {
         sidebar: {
                '/data-structure/': [
                    '',
+                   'graph',
                    'lab',
                    'outer-sort',
                    'string',
@@ -43,6 +43,16 @@ module.exports = {
                    'relation',
                    'tree',
                ],
+               '/computer-networks/': [
+                   '',
+                   'overview',
+                   'physical-layer',
+                   'data-link-layer',
+               ],
+               '/CS61B/': [
+                   '',
+                   'Introduction-to-Java',
+               ],
                '/missing-semester/': [
                    '',
                    'missing-debugging',
@@ -56,12 +66,21 @@ module.exports = {
                    'missing-metaprogramming',
                    'missing-the-shell',
                ],
+               '/computer-architecture/': [
+                   '',
+                   'overview',
+                   'calculator',
+                   'memory',
+               ],
                '/': [
                    '',
                    '/data-structure/',
                    '/csapp/',
                    '/discrete-math/',
+                   '/computer-networks/',
+                   '/CS61B/',
                    '/missing-semester/',
+                   '/computer-architecture/',
                ]
         },
         logo: "/favicon.ico",

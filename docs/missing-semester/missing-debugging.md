@@ -1,17 +1,3 @@
-# missing-debugging
-
----
-
-title: missing-debugging
-tags:
-
-- missing
-- 学习资料
-  toc: true
-  date: 2022-04-21 11:45:12
-
----
-
 # The Missing Semester in the CS
 
 ## Introduction
@@ -44,25 +30,25 @@ A second approach is to use logging in your program, instead of ad hoc print sta
 python logger.py
 ```
 
-![print](assets/8-20221120150726-9ymve52.png)
+![print](./assets/8-20221120150726-9ymve52.png)
 
 ```bash
 python logger.py log
 ```
 
-![log](assets/9-20221120150727-46cjhzb.png)
+![log](./assets/9-20221120150727-46cjhzb.png)
 
 ```bash
 python logger.py log ERROR
 ```
 
-![ERROR](assets/10-20221120150727-rwko7y4.png)
+![ERROR](./assets/10-20221120150727-rwko7y4.png)
 
 ```bash
 python logger.py color
 ```
 
-![color](assets/4-20221120150727-p4teqn2.png)
+![color](./assets/4-20221120150727-p4teqn2.png)
 
 By now you probably have realized that your terminal uses colors to make things more readable. But how does it do it? Programs like `ls` or `grep` are using [ANSI escape codes](https://en.wikipedia.org/wiki/ANSI_escape_code), which are special sequences of characters to indicate your shell to change the color of the output. For example, executing `echo -e "\e[38;2;255;0;0mThis is red\e[0m"` prints the message `This is red` in red on your terminal, as long as it supports [true color](https://github.com/termstandard/colors#truecolor-support-in-output-devices). If your terminal doesn’t support this (e.g. macOS’s Terminal.app), you can use the more universally supported escape codes for 16 color choices, for example `echo -e "\e[31;1mThis is red\e[0m"`.
 
@@ -79,7 +65,7 @@ for R in $(seq 0 20 255); do
 done
 ```
 
-![Colorful](assets/5-20221120150727-5excbbk.png)
+![Colorful](./assets/5-20221120150727-5excbbk.png)
 
 ### Third party logs
 
@@ -221,7 +207,7 @@ We can profile this code using the following command. Analyzing the output we ca
 python -m cProfile -s tottime grep.py 1000 '^(import|\s*def)[^,]*$' *.py
 ```
 
-![profile](assets/6-20221120150727-8r13x07.png)
+![profile](./assets/6-20221120150727-8r13x07.png)
 
 A caveat of Python’s `cProfile` profiler (and many profilers for that matter) is that they display time per function call. That can become unintuitive really fast, especially if you are using third party libraries in your code since internal function calls are also accounted for. A more intuitive way of displaying profiling information is to include the time taken per line of code, which is what *line profilers* do.
 
@@ -288,7 +274,7 @@ if __name__ == '__main__':
     my_func()
 ```
 
-![memory](assets/7-20221120150727-o51hmvv.png)
+![memory](./assets/7-20221120150727-o51hmvv.png)
 
 #### Event Profiling
 

@@ -1,18 +1,3 @@
-# missing-vim
-
----
-
-title: missing-vim
-typora-root-url: missing-vim
-date: 2022-04-11 18:34:41
-toc: true
-tags:
-
-- missing
-- 学习资料
-
----
-
 # The Missing Semester in the CS
 
 ## Introduction
