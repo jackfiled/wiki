@@ -7,11 +7,18 @@ jobs:
     - name: Checkout
       uses: actions/checkout@master
 
-    - name: Build and Deploy
-      uses: jenkey2011/vuepress-deploy@master
+    - name: Setup Node.js
+      users: actions/setup-node@v3
+      with:
+        node-version: 16
+    
+    - name: Build Vuepress
+      run: npm install && npm run docs:build
+    
+    - name: Deploy to Github Pages
+      users: crazy-max/ghaction-github-pages@v3
+      with:
+        target_branch: gh-pages
+        build_dir: docs/.vuepress/dict/
       env:
-        ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-        TARGET_REPO: jackfiled/wiki
-        TARGET_BRANCH: gh_pages
-        BUILD_SCRIPT: git config --global --add safe.directory "*" && npm install && npm run docs:build
-        BUILD_DIR: docs/.vuepress/dist/
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
