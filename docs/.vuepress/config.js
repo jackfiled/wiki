@@ -1,5 +1,5 @@
 module.exports = {
-    base: "/",
+    base: "/wiki/",
     port: 4000,
     locales: {
         '/': {
