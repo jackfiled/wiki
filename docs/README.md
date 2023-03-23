@@ -6,13 +6,16 @@
 
 ### 课程笔记
 
-* [数据结构](/data-structure/)(持续更新中...)
-* [计算机系统基础](/csapp/)(持续更新中...)
-* [离散数学](/discrete-math/)(持续更新中...)
+* [数据结构](/data-structure/)(课程已完结)
+* [计算机系统基础](/csapp/)(课程已完结)
+* [离散数学](/discrete-math/)(课程已完结)
+* [计算机组成原理](/computer-architecture/)(持续更新中...)
+* [计算机网络](/computer-networks/)(持续更新中...)
 
 ### 自学笔记
 
 * [计算机教育中缺失的一课](/missing-semester/)(已完结)
+* [CS61B](/CS61B/)(持续更新中...)
 
 ## 贡献
 
