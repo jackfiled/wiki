@@ -48,6 +48,7 @@ module.exports = {
                    'overview',
                    'physical-layer',
                    'data-link-layer',
+                   'mac',
                ],
                '/CS61B/': [
                    '',
@@ -71,6 +72,7 @@ module.exports = {
                    'overview',
                    'calculator',
                    'memory',
+                   'instruction',
                ],
                '/': [
                    '',
