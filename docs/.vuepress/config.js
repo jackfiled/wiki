@@ -73,6 +73,7 @@ module.exports = {
                    'calculator',
                    'memory',
                    'instruction',
+                   'cpu',
                ],
                '/': [
                    '',
