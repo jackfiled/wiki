@@ -19,7 +19,7 @@ public class HelloWorld {
 * 代码块的开始和结束采用中括号作为标记。
 * 语句需要以分号结尾
 
-### 静态类型
+### 变量
 
 ```java
 public class HelloNumbers {
