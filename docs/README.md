@@ -29,7 +29,14 @@
 
 > 直白一点就是我想白嫖你的笔记
 
-如果你在阅读的时候发现了笔记中的错误之处，也欢迎在[仓库](https://github.com/jackfiled/wiki)中提出Issue或者直接Pull Request修正错误。
+如果您在阅读的时候发现了笔记中的错误之处，也欢迎在[仓库](https://github.com/jackfiled/wiki)中提出Issue或者直接Pull Request修正错误。
+
+在提交合并请求时，请您务必注意：
+
+- 新笔记的目录结构必须符合`vuepress`的要求
+- 文件的命令尽量使用英文
+- 仓库中的图像文件采用`LFS`进行管理
+- `markdown`文件中的相对路径需要以`.`开始
 
 ## 协议
 
