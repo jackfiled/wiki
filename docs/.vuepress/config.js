@@ -75,6 +75,10 @@ module.exports = {
                    'instruction',
                    'cpu',
                ],
+               '/formal-language/': [
+                    '',
+                    'fa'
+               ],
                '/': [
                    '',
                    '/data-structure/',
@@ -84,6 +88,7 @@ module.exports = {
                    '/CS61B/',
                    '/missing-semester/',
                    '/computer-architecture/',
+                   '/formal-language/'
                ]
         },
         logo: "/favicon.ico",
