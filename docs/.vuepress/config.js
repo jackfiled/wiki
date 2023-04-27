@@ -49,6 +49,7 @@ module.exports = {
                    'physical-layer',
                    'data-link-layer',
                    'mac',
+                   'mid-term',
                    'network-layer'
                ],
                '/CS61B/': [
