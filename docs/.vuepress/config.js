@@ -76,6 +76,8 @@ module.exports = {
                    'memory',
                    'instruction',
                    'cpu',
+                   'bus',
+                   'io'
                ],
                '/formal-language/': [
                     '',
