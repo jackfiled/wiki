@@ -1,5 +1,4 @@
-
-
+# 有限自动机
 
 
 ## $DFA-NFA-\epsilon-NFA-RE$的互相转换
@@ -8,7 +7,7 @@
 
 
 
-###① P49：NFA转DFA
+### ① P49：NFA转DFA
 
 T：不变
 
@@ -78,8 +77,8 @@ $\delta_1$：**重点。**
 
 ![image-20230418013010327](./assets/image-20230418013010327.png)
 
-- 形如（a）的，表示为**$(R^*+SU^*T)^*SU^*$** 
-- 形如（b）的，表示为**$R^*$** 
+- 形如（a）的，表示为 **$(R^*+SU^*T)^*SU^*$** 
+- 形如（b）的，表示为 **$R^*$** 
 
 至此，以上四者的相互转换就完成了，一些没有列出的途径可以多用几次上述来间接的完成，比如从NFA得到一个正则式，可以先走①变成DFA，然后走④变成正则式——当然，如果熟练也可以直接完成转换，这里是纯粹只用书上讲过的方法来完成
 
@@ -97,7 +96,7 @@ $\delta_1$：**重点。**
 
 直接带入公式即可
 
-$$设x=\alpha x+\beta,\alpha \in T^*,\beta \in (N \or T)^*,x \in N,其解x=\alpha^*\beta$$
+$$设x=\alpha x+\beta,\alpha \in T^*,\beta \in (N \vee T)^*,x \in N,其解x=\alpha^*\beta$$
 
 唯一需要注意的一点是，一定要$x=\alpha x+\beta$，不要看到$x=\alpha A+\beta$就直接带入公式了。得要都是相同的非终结符，不能一个是S一个是A，那样子的不能用这个。另外注意$\alpha和\beta$的定义
 
@@ -123,9 +122,9 @@ $$设x=\alpha x+\beta,\alpha \in T^*,\beta \in (N \or T)^*,x \in N,其解x=\alph
 
 生成式P：如下
 
-​		$当\delta(A,a)=B,则有A \rightarrow aB \in P $
+​		$当\delta(A,a)=B,则有A \rightarrow aB \in P$
 
-​		$当\delta(A,a)=B，且B \in F,则有A \rightarrow a \in P $
+​		$当\delta(A,a)=B，且B \in F,则有A \rightarrow a \in P$
 
 ​		此外，根据文法会不会有$A \rightarrow \epsilon$，可能结果会不一样，但是可以推出空串的往往更简洁
 

@@ -49,6 +49,8 @@ module.exports = {
                    'physical-layer',
                    'data-link-layer',
                    'mac',
+                   'mid-term',
+                   'network-layer'
                ],
                '/CS61B/': [
                    '',
@@ -74,6 +76,12 @@ module.exports = {
                    'memory',
                    'instruction',
                    'cpu',
+                   'bus',
+                   'io'
+               ],
+               '/formal-language/': [
+                    '',
+                    'fa'
                ],
                '/': [
                    '',
@@ -84,6 +92,7 @@ module.exports = {
                    '/CS61B/',
                    '/missing-semester/',
                    '/computer-architecture/',
+                   '/formal-language/'
                ]
         },
         logo: "/favicon.ico",
