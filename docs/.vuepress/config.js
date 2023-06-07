@@ -50,7 +50,8 @@ module.exports = {
                    'data-link-layer',
                    'mac',
                    'mid-term',
-                   'network-layer'
+                   'network-layer',
+                   'lab2'
                ],
                '/CS61B/': [
                    '',
@@ -83,6 +84,9 @@ module.exports = {
                     '',
                     'fa'
                ],
+               '/socialist/': [
+                'maozedong'
+                ],
                '/': [
                    '',
                    '/data-structure/',
@@ -92,7 +96,8 @@ module.exports = {
                    '/CS61B/',
                    '/missing-semester/',
                    '/computer-architecture/',
-                   '/formal-language/'
+                   '/formal-language/',
+                   '/socialist/'
                ]
         },
         logo: "/favicon.ico",
