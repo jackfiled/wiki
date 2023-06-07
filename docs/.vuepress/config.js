@@ -51,6 +51,7 @@ module.exports = {
                    'mac',
                    'mid-term',
                    'network-layer',
+                   'transport-layer',
                    'lab2'
                ],
                '/CS61B/': [
@@ -78,14 +79,16 @@ module.exports = {
                    'instruction',
                    'cpu',
                    'bus',
-                   'io'
+                   'io',
+                   'external'
                ],
                '/formal-language/': [
                     '',
                     'fa'
                ],
                '/socialist/': [
-                'maozedong'
+                    '',
+                    'maozedong'
                 ],
                '/': [
                    '',
