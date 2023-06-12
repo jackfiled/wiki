@@ -88,7 +88,8 @@ module.exports = {
                ],
                '/socialist/': [
                     '',
-                    'maozedong'
+                    'maozedong',
+                    'others'
                 ],
                '/': [
                    '',
