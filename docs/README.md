@@ -9,10 +9,15 @@
 * [数据结构](/data-structure/)(课程已完结)
 * [计算机系统基础](/csapp/)(课程已完结)
 * [离散数学](/discrete-math/)(课程已完结)
-* [计算机组成原理](/computer-architecture/)(持续更新中...)
-* [计算机网络](/computer-networks/)(持续更新中...)
-* [形式语言与自动机](/formal-language/)(持续更新中...)
-* [毛泽东思想和中国特色社会注意理论体系概论](/socialist/)(持续更新中...)
+* [计算机组成原理](/computer-architecture/)(课程已完结)
+* [计算机网络](/computer-networks/)(课程已完结)
+* [形式语言与自动机](/formal-language/)(课程已完结)
+* [毛泽东思想和中国特色社会主义理论体系概论](/socialist/)(课程已完结)
+* [人工智能原理](/ai-principle/)(持续更新中...)
+* [操作系统](/operating-system)(持续更新中...)
+* [算法设计与分析](/algorithm/)(持续更新中...)
+* [编译原理与技术](/compiler)(持续更新中...)
+* [数据库系统概念](/database/)(持续更新中...)
 
 ### 自学笔记
 
