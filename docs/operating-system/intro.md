@@ -9,9 +9,11 @@ Goals of operating system:
 - Execute user programs and make solving user problems easier.
 - Make the computer system convenient to use.
 
+![image-20230918174041584](./intro/image-20230918174041584.png)
+
+
+
 ## Computer-System Organization
-
-
 
 ### Operating System Definitions
 
@@ -21,9 +23,48 @@ Goals of operating system:
 
 **Kernel**: the one program running at all times (all else being application programs).
 
+
+
+
+
 ## Operating System Structure
 
+### I/O Structure
+
+There are two I/O methods:
+
+![image-20230918174709496](./intro/image-20230918174709496.png)
+
+- **Synchronous**: after I/O starts, control returns to user program only upon I/O completion.
+- **Asynchronous**: after I/O starts, control returns to user program without waiting for I/O completion.
+
+#### Direct Memory Access Structure
+
+Device controller transfers blocks of data from buffer storage directly to main memory without CPU intervention, used for hight-speed I/O devices able to transmit information at close to memory speeds.
+
+### Storage Structure
+
+Storage systems organized in hierarchy, as speed, cost, volatility.
+
+**Caching**: copying information into faster storage system, main memory can be viewed as a last cache for secondary storage.
+
+![image-20230918175211759](./intro/image-20230918175211759.png)
+
+### Computer System Architecture
+
+- Single-processor Systems
+- Multi-processor Systems
+- Clustered Systems
+
+### Operation System Structure
+
 **Multiprogramming** need for efficiency. Single user cannot keep CPU and I/O devices busy at all times. Multiprogramming organizes jobs so CPU always has one to execute. Several jobs are kept in main memory at the same time, and the CPU is multiplexed among them.
+
+**Timesharing(multitasking)** is logical extension in which CPU switches jobs so frequently that users can interact with each jobs while it is running, creating **interactive** computing.
+
+![image-20230918175638084](./intro/image-20230918175638084.png)
+
+![image-20230918175719296](./intro/image-20230918175719296.png)
 
 OS need these features for multiprogramming:
 
@@ -33,6 +74,12 @@ OS need these features for multiprogramming:
 - Allocation of devices
 
 ## Operating System Operations
+
+### Interupt
+
+- Interrupt driven by hardware
+- Software error or request create **exception** or **trap**
+- Other process problems: infinite loop, processes modifying each other or operating system.
 
 #### Dual Mode
 
@@ -63,12 +110,21 @@ And process termination requires reclaim of any reusable resources.
 
 Single-threaded process has one **program counter** specifying location of next instruction to execute. Multi-threaded process has one program counter per thread.
 
+Operating system is responsible for the following activities in connection with process management:
+
+- Creating and deleting both user and system process
+- Suspending and resuming processes
+- Providing mechanisms for process synchronization
+- Providing mechanism for process communication
+- Providing mechanisms for deadlock handling
+
 ## Memory Management
 
 Memory management determines what is in memory when optimizing CPU utilization and computer response to users.
 
 - Keeping track of which parts of memory are currently being used and by whom
-- Deciding 
+- Deciding which processes and data to move into and out of memory
+- Allocating and deallocating memory space as needed
 
 ## Storage Management
 

@@ -93,7 +93,8 @@ module.exports = {
             ],
             '/ai-principle/': [
                 '',
-                'intro'
+                'intro',
+                'question-knowledge'
             ],
             '/algorithm/': [
                 '',
@@ -105,7 +106,8 @@ module.exports = {
             ],
             '/operating-system/': [
                 '',
-                'intro'
+                'intro',
+                'os-services'
             ],
             '/database/': [
                 '',
