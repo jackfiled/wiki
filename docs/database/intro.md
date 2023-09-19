@@ -98,10 +98,29 @@ Users are differentiated by the way they expect to interact with the system.
 - End users
 - Application programmers
 - Database analyzer and designer
-- Database administrators
+- Database administrators(`DBA`)
 - Database management system designer and implementer
 
 ## Database System Structure
+
+![image-20230919131146137](./intro/image-20230919131146137.png)
+
+### Storage Manager
+
+Storage Management is a program module that provides the interface between the low level data stored in the database and the application programs and queries submitted to the system.
+
+### Query Processor
+
+- DDL interpreter
+- DML compiler
+- Query optimization
+- Query evaluation engine
+
+### Transaction Management
+
+A **transaction** is a collection of operations that performs a single logical function in a database application.
+
+Transaction management component ensures that the database remains in a consistent state. Concurrency-control manager controls the interaction among the concurrent transactions, to ensure the consistency of the database.
 
 
 
