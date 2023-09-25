@@ -102,16 +102,20 @@ module.exports = {
             ],
             '/compiler/': [
                 '',
-                'intro'
+                'intro',
+                'lexical-analyzer'
             ],
             '/operating-system/': [
                 '',
                 'intro',
-                'os-services'
+                'os-services',
+                'processes',
+                'threads'
             ],
             '/database/': [
                 '',
-                'intro'
+                'intro',
+                'relation-model'
             ],
             '/': [
                 '',
