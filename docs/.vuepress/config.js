@@ -98,12 +98,14 @@ module.exports = {
             ],
             '/algorithm/': [
                 '',
-                'intro'
+                'intro',
+                'recurse-devide'
             ],
             '/compiler/': [
                 '',
                 'intro',
-                'lexical-analyzer'
+                'lexical-analyzer',
+                'grammar-analyzer'
             ],
             '/operating-system/': [
                 '',
