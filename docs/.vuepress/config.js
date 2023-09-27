@@ -99,7 +99,7 @@ module.exports = {
             '/algorithm/': [
                 '',
                 'intro',
-                'recurse-devide'
+                'recurse-divide'
             ],
             '/compiler/': [
                 '',
@@ -112,7 +112,8 @@ module.exports = {
                 'intro',
                 'os-services',
                 'processes',
-                'threads'
+                'threads',
+                'cpu-scheduling'
             ],
             '/database/': [
                 '',
