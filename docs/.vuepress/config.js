@@ -98,21 +98,27 @@ module.exports = {
             ],
             '/algorithm/': [
                 '',
-                'intro'
+                'intro',
+                'recurse-divide'
             ],
             '/compiler/': [
                 '',
-                'intro'
+                'intro',
+                'lexical-analyzer',
+                'grammar-analyzer'
             ],
             '/operating-system/': [
                 '',
                 'intro',
                 'os-structures',
-                'processes'
+                'processes',
+                'threads',
+                'cpu-scheduling'
             ],
             '/database/': [
                 '',
-                'intro'
+                'intro',
+                'relation-model'
             ],
             '/': [
                 '',

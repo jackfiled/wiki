@@ -163,7 +163,7 @@ aT(\frac{n}{b}) + f(n), n > 1
 $$
 则针对$f(n)$进行讨论：
 
-1. 如果$\exists \epsilon > 0 $, 使得$f(n)=O(n^{log_ba-\epsilon})$，那么我们有
+1. 如果$\exists \epsilon > 0$, 使得$f(n)=O(n^{log_ba-\epsilon})$，那么我们有
    $$
    T(n) = \theta(n^{log_ba})
    $$
