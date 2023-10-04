@@ -107,7 +107,8 @@ module.exports = {
             '/operating-system/': [
                 '',
                 'intro',
-                'os-services'
+                'os-structures',
+                'processes'
             ],
             '/database/': [
                 '',
