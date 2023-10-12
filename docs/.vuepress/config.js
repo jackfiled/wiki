@@ -110,7 +110,7 @@ module.exports = {
             '/operating-system/': [
                 '',
                 'intro',
-                'os-services',
+                'os-structures',
                 'processes',
                 'threads',
                 'cpu-scheduling',

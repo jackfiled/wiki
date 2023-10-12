@@ -156,7 +156,70 @@ Security: defense of the system against internal and external attacks.
 
 Systems generally first distinguish among users, to determine who can do what.
 
+- User identities include name and associated number, one per user
+- User ID then associated with all files, processes of tha user to determine access control
+- Group ID allows set of users to be defined and controls managed, then be associated with processes and files
 
+And we have **privilege escalation** allows user to change to effective ID with more rights.
 
 ## System and Computing Environment
+
+### Time-Sharing Systems-Interactive Computing
+
+The CPU is multiplexed among serveral jobs that are kept in memory and on disk, and the concept **time slot** is used to describe one single job use the CPU time.
+
+ ### Parallel Systems
+
+Multiprocessor systems with more than one CPU in close communication. The advantages of parallel system:
+
+- Increased throughput
+- Economical
+- Increased reliability
+
+There are two kinds of paralled systems:
+
+- Symmetric multiprocessing `SMP`
+
+  Each processor runs identical copy of the operating system. Many processes can run at once without performace deterioration. Most modern operating systems support SMP
+
+- Asymmertic multiprocessing 
+
+  Each processor is assigned a specific task, master processor schedules and allocated work to slave processors. Most common in extremely large systems.
+
+### Distributed Systems
+
+Distribute the computation among serveral physical processors. **Loosely coulped system**: each processor has its own local memory, processors communicate with one another through various communications lines,such as high-speed buses or telephone lins. Distributed systems has advantages:
+
+- Resources sharing
+- Computation speed up - load sharing
+- Reliability
+- Communications
+
+Distributed systems require networking infratructure, local area networks (LAN) or wide area networks (WAN) both are ok. A distribued system can be either client-server or peer-to-peer systems.
+
+### Clustered Systems
+
+Clustering allows two or more systems to share storage, provides high reliability. 
+
+- Asymmetric clustering: one server runs the application while other servers standby.
+- Symmetic clustering: all N hosts are running the application
+
+### Real-Time Systems
+
+Ofter used as a control device in a dedicated application such as controlling scientific experiments, medical imaging systems, industrial control systems and some display systems. Real time systems has well-defined fixed-time constraints. 
+
+Real time systems may be either *hard* or *soft* real-time.
+
+- Hard real-time: secondary storage limited or absent, data stored in short term memory or read-only memory. This mode will conflicts with time-sharing systems, not supported by general-purpose operating systems
+- Soft real-time: limited utility in industrial control of robotics, useful in applications but requiring advanced operating-system features
+
+### Handheld Systems
+
+The handheld systems is the operating systems used by personal digital assistants (PDAs) or cellular telephones. The issues with handheld systems are:
+
+- Limited memory
+- Slow processors
+- Small display screens
+
+
 
