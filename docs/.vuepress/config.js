@@ -113,12 +113,14 @@ module.exports = {
                 'os-services',
                 'processes',
                 'threads',
-                'cpu-scheduling'
+                'cpu-scheduling',
+                'process-synchronization'
             ],
             '/database/': [
                 '',
                 'intro',
-                'relation-model'
+                'relation-model',
+                'sql'
             ],
             '/': [
                 '',

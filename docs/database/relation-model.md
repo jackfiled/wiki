@@ -72,17 +72,145 @@ $$
 $$
 where $p$ is a formula in propositional calculus consisting of terms connected by $\vee$ and,  $\wedge$ or , $\neg$ not.
 
-### Project Operation
+### Project
 
+Notation:
+$$
+\Pi_{A_1, A_2,...,A_k}(r)
+$$
+where $A_1$ , $A_2$ are attribute names and $r$ is a relation name. 
 
+The result is defined as the relation of $k$ columns obtained by erasing the columns that are not listed. And the duplicate rows will be removed since relations are sets.
 
+### Union
 
+Notation:
+$$
+r \cup s = \{t | t \in r or t \in s\}
+$$
+For $r \cup s$ to be valid:
+
+- $r$ and $s$ must have the same number of attribute
+- The attribute domains must be **compatible**
+
+- And the attribute name can be not the same
+
+### Set Difference
+
+Notation:
+$$
+r - s = \{t | t \in r\ and\ t \notin s\}
+$$
+For $r - s$ to be valid, the $r$ and $s$ has the same requirements with union operation.
+
+### Cartesian Product
+
+Notation:
+$$
+r \times s = \{ t\ q| t \in r, q \in s\}
+$$
+Combine information from $r$ and $s$. Assume that there are $m$ relations in $r$ , $n$ relations in $s$, there will be $m \times n$ in $ r \times s$; Assume that $r$ has $a$ attributes and $s$ has $b$ attributes, there will be $a + b$ in $r \times s$ 
+
+### Rename
+
+Allow us to rename and therefore to refer to the result of relational-algebra expressions. And allow use to refer to a relation by more than one name.
+
+$ \rho_x(E)$ returns the expression $E$ under the name of $X$.
 
 ## Additional Relational-Algebra-Operations
+
+We define additional operations that do not add any power to the relation algebra but simplify common queries.
+
+### Set Intersection
+
+Notation:
+$$
+r \cap s =\{t \in r\ and \ t \in s\}
+$$
+Having the same requirements with union operation.
+
+And we have:
+$$
+r \cap s = r - (r - s)
+$$
+
+
+### Join
+
+$$
+r \Join_{A \vartheta B} s = \{t\ q | t \in r\ and\ q \in s\ and\ t[A] \vartheta t[B]\} \\
+= \sigma_{A\vartheta B}(r \times s)
+$$
+
+And the $\vartheta$ is 
+$$
+\vartheta \in \{=, >, < ,\neq,\ge, \le \}
+$$
+
+### Natural Join
+
+Natural join is the default of join:
+$$
+r \Join s = \Pi_{Attr(r) \cup \{B\}} \sigma_{r.B = s.B}(r \times s)
+$$
+$B$ is the same attribute of $r$ and $s$.
+
+### Outer Join
+
+An extension of the join operation to avoid loss of information. Computes the join and then adds tuples from one relation that does not match tuples in other relation to the result of the join; use **null** value to fulfill the nonexistent attribute.
+
+And there are three outer join:
+
+- Left outer join
+- Right outer join
+- Full outer join
 
 ## Extended Relational-Algebra-Operations
 
 ## Null Values
 
+It is possible for tuples to have a null value denoted by *null* for some of their attributes.
+
+**Null** signifies an unknown value or that a value does not exist.  The result of any arithmetic expression involving *null* is *null*. Aggregate functions simply ignore *null* values. Duplicate elimination and grouping, *null* is treated like any other value and two *null* are assumed to be the same.
+
+Comparisons with null values return the special truth value: **unknown**. And we can extend logic to three values with:
+
+- Unknown or true is true
+
+  Unknown or false is unknown
+
+  Unknown or Unknown is unknown
+
+- True and unknown is unknown
+
+  False and unknown is false
+
+  Unknown and Unknown is unknown
+
+- Not unknown is unknown
+
 ## Modification Of the Database
 
+### Deleting
+
+$$
+r \leftarrow r - E
+$$
+
+where $r$ is a relation and $E$ is a relation algebra query.
+
+### Insertion
+
+$$
+r \leftarrow r \cup E
+$$
+
+where $r$ is a relation and $E$ is a relation algebra query.
+
+### Updating
+
+$$
+r \leftarrow \Pi_{F_1, F_2,\cdots, F_i}(r)
+$$
+
+Each $F_i$ is either the ith attribute of $r$, if this attribute is not updated or if the attribute is to be updated, as an expression.

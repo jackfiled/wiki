@@ -39,6 +39,36 @@ The CPU scheduling decisions may take place when a process:
 
 ### First-Come First-Server
 
+### Shortest Job First
+
+
+
+### Shortest Remaining Time First
+
+### Priority Scheduling
+
+A priority number is associated with each process. The CPU is allocated to the process with the highest priority. 
+
+And there also can be two ways:
+
+- Preemptive
+- Nonpreemptive
+
+The shortest job first scheduling is also a priority scheduling where priority is the predicted next CPU burst time.
+
+But the problem is the low priority process may be never execute. We can age every process to make low priority process can be executed after a long time, though calculating priority every time may waste resources.
+
+### Round Robin
+
+### Multilevel Queue
+
+Ready queue is partitioned into two queues:
+
+- Foreground queue: `FCFS`
+- Background queue: `RR`
+
+
+
 
 
 ## Multiple Processor Scheduling 
