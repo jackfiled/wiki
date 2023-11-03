@@ -1,0 +1,26 @@
+name: Build wiki and deploy to the server
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: https://git.rrricardo.top/actions/checkout@v3
+      
+      - name: Checkout LFS
+        run: |
+          function EscapeForwardSlash() { echo "$1" | sed 's/\//\\\//g'; }
+          readonly ReplaceStr="EscapeForwardSlash ${{ gitea.repository }}.git/info/lfs/objects/batch"; sed -i "s/\(\[http\)\( \".*\)\"\]/\1\2`$ReplaceStr`\"]/" .git/config
+          git config --local lfs.transfer.maxretries 1
+          /usr/bin/git lfs fetch    origin refs/remotes/origin/${{ gitea.ref_name }}
+          /usr/bin/git lfs checkout
+      
+      - run: pnpm install
+      - run: pnpm run docs:build
+      - run: cd docs/.vuepress/dist
+      - run: |
+          cd docs/.vuepress/dist && \
+          git init && \
+          git remote add origin git@rrricardo.top:/home/git/repo/wiki-deploy.git && \
+          git add . && git commit -m "Update" && \
+          git push -u origin master --force

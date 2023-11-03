@@ -105,7 +105,8 @@ module.exports = {
                 '',
                 'intro',
                 'lexical-analyzer',
-                'grammar-analyzer'
+                'grammar-analyzer',
+                'grammar-driven-translation'
             ],
             '/operating-system/': [
                 '',
@@ -120,7 +121,9 @@ module.exports = {
                 '',
                 'intro',
                 'relation-model',
-                'sql'
+                'sql',
+                'intermediate-sql',
+                'entity-relation-model'
             ],
             '/': [
                 '',

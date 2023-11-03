@@ -1,29 +1,31 @@
 # Intro
 
-## What is an operating system?
+## What Operating Systems Do?
 
 A program that acts as an intermediary between a user of a computer and the computer hardware.
 
-Goals of operating system:
-
-- Execute user programs and make solving user problems easier.
-- Make the computer system convenient to use.
-
 ![image-20230918174041584](./intro/image-20230918174041584.png)
 
+In user view, depending the number using this computer, operating system does differently:
 
+- For single user: the operating system is designed mostly for ease of use and non paid to **resource utilization**
+- For many user: maximize resource utilization
+
+In system view, operating system is 
+
+- Resource allocator 
+- Control program
+
+### Defining Operating System
+
+In general, we have no completely adequate definition of an operating system. 
+
+A common definition is that operating system is the one program running at all times on the computer. This program is usually called as **kernel**. Along with kernel, we have two types of programs:
+
+- **System programs**: associated with the operating system but are not necessarily part of the kernel
+- **Application programs**
 
 ## Computer-System Organization
-
-### Operating System Definitions
-
-**Resource allocator**: manages and allocates resources.
-
-**Control program**: controls the execution of user programs and operations of I/O devices.
-
-**Kernel**: the one program running at all times (all else being application programs).
-
-
 
 
 
