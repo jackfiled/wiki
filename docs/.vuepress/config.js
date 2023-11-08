@@ -106,7 +106,8 @@ module.exports = {
                 'intro',
                 'lexical-analyzer',
                 'grammar-analyzer',
-                'grammar-driven-translation'
+                'grammar-driven-translation',
+                '期中复习（语法分析）'
             ],
             '/operating-system/': [
                 '',
