@@ -217,7 +217,7 @@ $$
    $$
    FIRST(\alpha) = \{a | \alpha \Rightarrow^* a \cdots \}
    $$
-   特别需要注意的是，如果`\alpha`可以推出空串，那么$\epsilon \in FIRST(\alpha)$。
+   特别需要注意的是，如果$\alpha$可以推出空串，那么$\epsilon \in FIRST(\alpha)$。
 
    构造`FIRST`集合：
 

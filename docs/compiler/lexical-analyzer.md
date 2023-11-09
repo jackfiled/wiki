@@ -130,7 +130,10 @@ $$
 $$
 转换为正规文法：
 $$
-id \to {\rm letter}\ rid \\
+id \to {\rm letter}\ rid
+$$
+
+$$
 rid \to \epsilon | {\rm letter}\ rid | {\rm digit}\ rid
 $$
 

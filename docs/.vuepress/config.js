@@ -115,7 +115,9 @@ module.exports = {
                 'processes',
                 'threads',
                 'cpu-scheduling',
-                'process-synchronization'
+                'process-synchronization',
+                'memory-management',
+                'virtual-memory'
             ],
             '/database/': [
                 '',
@@ -123,7 +125,8 @@ module.exports = {
                 'relation-model',
                 'sql',
                 'intermediate-sql',
-                'entity-relation-model'
+                'entity-relation-model',
+                'relation-database-design'
             ],
             '/': [
                 '',

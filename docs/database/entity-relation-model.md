@@ -103,5 +103,67 @@ Cardinality constraints on ternary relations:
 
 We designate sub-groupings within an entity set that are distinctive from other entities in the set. These sub-groupings become lower-level entity sets that have attributes or participate on relationships that do not apply to the higher level entity set. **Attribute inheritance**: a lower-level entity set inherits all the attributes and relationship participation of the higher-level entity set to which it is linked.
 
+Constraints on whether or not entities may belong to more than one lower-level entity set within a single generalization.
+
+- Disjoint: an entity can belong to only one lower-level entity
+- Overlapping: an entity can belong to more than one lower-level entity set
+
+Constraints on whether or not an entity in the higher-level entity set must belong to at least one of the lower-level entity sets within a generalization.
+
+- total: an entity must belong to one of the lower-level sets
+- partial: an entity need not belong to one of the lower-level entity sets
+
+### Generalization
+
+*A bottom up design process*: combine a number of entity sets that share the same features into a higher-level entity set.
+
+Specialization and generalization are simple inversion of each other.
+
+## Reduction to Relation Schemes
+
+Entity sets and relationship sets can be expressed uniformly as relation schemes that represent the contents of the database.
+
+### Representing Entity Sets
+
+A strong entity set reduces to a schema with the same attributes.
+
+A weak entity set becomes a table that includes a column for the primary key of the identifying strong entity set.
+
+If there are composite attribute: flat out by creating a separate attribute for each component attribute. For example: the composite attribute *name* ends with *name_first_name* and *name_last_name* attributes in the schemes. And prefix can be omitted if there is no ambiguity: *first_name* and *last_name*.
+
+If there is a multivalued attribute: create a separate schema for this attribute. This schema has attributes corresponding to the primary key of the original entity and an attribute corresponding to the multivalued attributes.
+
+### Representing Relationship Sets
+
+A many-to-many relationship set is represented as a schema with attributes for the primary keys for the two participating entity sets and any descriptive attributes of the relationship sets.
+
+Many-to-one and one-to-many relationship sets that are total on the many-side can be represented by adding an extra attribute to the *many* side containing the primary key of the *one* side. 
+
+> If participation is **partial** on the *many* side, the extra attribute in the schema corresponding to the *many* side could result in **null** value.
+
+### Representing Specialization and Generalization
+
+Method 1:
+
+- Form a schema for the higher-level entity
+- Form a schema for each lower-level entity set, include primary key of higher-level entity set and local attributes
+
+Method 2:
+
+- Form a schema for each entity set with all local and inherited attributes
+
+Drawback:
+
+- Method 1: getting information requires accessing two relations
+- Method 2: attributes may be stored redundantly
+
+
+
+
+
+
+
+
+
 
 
