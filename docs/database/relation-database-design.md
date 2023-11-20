@@ -80,7 +80,32 @@ And some additional rules:
   $$
   
 
+**Closure of attributes**, the set of attributes that are functionally determined by $\alpha$ under $F$.
+$$
+\alpha \to \beta \Leftrightarrow \beta \subseteq \alpha^+
+$$
+And using attribute closure:
 
+- Test for superkey: if $\alpha$ is a superkey, we computer $a^+$ and check if $\alpha^+$ contains all attributes of $R$.
+- Test functional dependencies: To check if a functional dependency $\alpha \to \beta$ holds, just check if $\beta \subseteq \alpha^+$
+- Computing closure of $F$
+
+**Equvialent functional dependencies**: Let $F$ and $G$ be two sets of functional dependencies: if $F^+=G^+$, then $F$ and $G$ are equvialent.
+
+### Canonical/Minimal Cover
+
+Set of functional dependencies may contains redundant dependencies that can be inferred from the others.
+
+A **canonical cover** of $F$ is a minimal set of functional dependencies equivalent to $F$, with no redundant dependencies or having redundant parts of dependencies.
+
+### Extraneous Attributes
+
+An attribute of a functional dependency is said to be extraneous if remove it without changing the closure of the set of functional dependencies.
+
+Consider a set of $F$ of functional dependencies and the functional dependency $\alpha \to \beta$ in $F$:
+
+- If $A \in \alpha$ and $F$ logical implies $(F - \{\alpha \to \beta\}) \cup \{(\alpha - A) \to \beta\}$, $A$ is an extraneous attribute.
+- If $A \in \beta$ and $F$ logical implies $(F - \{\alpha \to \beta\}) \cup \{\alpha \to (\beta \to A)\}$, $A$ is an extraneous attribute.
 
 
 
