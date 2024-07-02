@@ -8,22 +8,24 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
-      uses: actions/checkout@master
+      uses: actions/checkout@v4
       with:
         lfs: true
 
-    - name: Setup Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: 16
+    - uses: dtolnay/rust-toolchain@stable
     
-    - name: Build Vuepress
-      run: npm install && npm run docs:build
+    - name: install mdbook
+      run: |
+        cargo install mdbook --no-default-features --features search --vers "^0.4" --locked
+        cargo install mdbook-katex --vers "^0.9" --locked
     
+    - name: Build book
+      run: mdbook build
+
     - name: Deploy to Github Pages
       uses: crazy-max/ghaction-github-pages@v3
       with:
         target_branch: gh-pages
-        build_dir: docs/.vuepress/dist/
+        build_dir: book/
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
