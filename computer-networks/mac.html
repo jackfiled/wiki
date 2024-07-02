@@ -1,0 +1,1050 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>介质访问控制层 - Ricardo&#x27;s Wiki</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="我在北京邮电大学计算机科学与技术专业学习三年的部分笔记">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../katex.min.css">
+
+        <!-- MathJax -->
+        <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../index.html">主页</a></li><li class="chapter-item expanded affix "><li class="spacer"></li><li class="chapter-item expanded "><a href="../ai-principle/index.html"><strong aria-hidden="true">1.</strong> 人工智能原理</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../ai-principle/intro.html"><strong aria-hidden="true">1.1.</strong> 概述</a></li><li class="chapter-item expanded "><a href="../ai-principle/question-knowledge.html"><strong aria-hidden="true">1.2.</strong> 问题和知识表示</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../algorithm/index.html"><strong aria-hidden="true">2.</strong> 算法</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../algorithm/intro.html"><strong aria-hidden="true">2.1.</strong> 概述</a></li><li class="chapter-item expanded "><a href="../algorithm/recurse-divide.html"><strong aria-hidden="true">2.2.</strong> 分治算法</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../compiler/index.html"><strong aria-hidden="true">3.</strong> 编译原理</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../compiler/intro.html"><strong aria-hidden="true">3.1.</strong> 概述</a></li><li class="chapter-item expanded "><a href="../compiler/lexical-analyzer.html"><strong aria-hidden="true">3.2.</strong> 词法分析</a></li><li class="chapter-item expanded "><a href="../compiler/grammar-analyzer.html"><strong aria-hidden="true">3.3.</strong> 语法分析</a></li><li class="chapter-item expanded "><a href="../compiler/grammar-driven-translation.html"><strong aria-hidden="true">3.4.</strong> 语法制导翻译</a></li><li class="chapter-item expanded "><a href="../compiler/syntax-analyser.html"><strong aria-hidden="true">3.5.</strong> 语义分析</a></li><li class="chapter-item expanded "><a href="../compiler/runtime.html"><strong aria-hidden="true">3.6.</strong> 运行环境</a></li><li class="chapter-item expanded "><a href="../compiler/intermediate-code.html"><strong aria-hidden="true">3.7.</strong> 中间代码生成</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../computer-architecture/index.html"><strong aria-hidden="true">4.</strong> 计算机组成原理</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../computer-architecture/overview.html"><strong aria-hidden="true">4.1.</strong> 计算机系统概论</a></li><li class="chapter-item expanded "><a href="../computer-architecture/calculator.html"><strong aria-hidden="true">4.2.</strong> 运算方法和运算器</a></li><li class="chapter-item expanded "><a href="../computer-architecture/instruction.html"><strong aria-hidden="true">4.3.</strong> 指令系统</a></li><li class="chapter-item expanded "><a href="../computer-architecture/cpu.html"><strong aria-hidden="true">4.4.</strong> 中央处理器</a></li><li class="chapter-item expanded "><a href="../computer-architecture/memory.html"><strong aria-hidden="true">4.5.</strong> 存储系统</a></li><li class="chapter-item expanded "><a href="../computer-architecture/io.html"><strong aria-hidden="true">4.6.</strong> 输入输出设备</a></li><li class="chapter-item expanded "><a href="../computer-architecture/external.html"><strong aria-hidden="true">4.7.</strong> 外部设备</a></li><li class="chapter-item expanded "><a href="../computer-architecture/bus.html"><strong aria-hidden="true">4.8.</strong> 总线</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../computer-networks/index.html"><strong aria-hidden="true">5.</strong> 计算机网络</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../computer-networks/overview.html"><strong aria-hidden="true">5.1.</strong> 引言</a></li><li class="chapter-item expanded "><a href="../computer-networks/physical-layer.html"><strong aria-hidden="true">5.2.</strong> 物理层</a></li><li class="chapter-item expanded "><a href="../computer-networks/data-link-layer.html"><strong aria-hidden="true">5.3.</strong> 数据链路层</a></li><li class="chapter-item expanded "><a href="../computer-networks/mac.html" class="active"><strong aria-hidden="true">5.4.</strong> 介质访问控制层</a></li><li class="chapter-item expanded "><a href="../computer-networks/network-layer.html"><strong aria-hidden="true">5.5.</strong> 网络层</a></li><li class="chapter-item expanded "><a href="../computer-networks/transport-layer.html"><strong aria-hidden="true">5.6.</strong> 传输层</a></li><li class="chapter-item expanded "><a href="../computer-networks/mid-term.html"><strong aria-hidden="true">5.7.</strong> 期中复习</a></li><li class="chapter-item expanded "><a href="../computer-networks/final-term.html"><strong aria-hidden="true">5.8.</strong> 期末复习</a></li><li class="chapter-item expanded "><a href="../computer-networks/lab2.html"><strong aria-hidden="true">5.9.</strong> 实验二</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../csapp/index.html"><strong aria-hidden="true">6.</strong> 计算机系统基础</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../csapp/bits.html"><strong aria-hidden="true">6.1.</strong> 数据的位级表示</a></li><li class="chapter-item expanded "><a href="../csapp/machine.html"><strong aria-hidden="true">6.2.</strong> 程序的机器级表示</a></li><li class="chapter-item expanded "><a href="../csapp/assembly-data.html"><strong aria-hidden="true">6.3.</strong> 程序的机器级表示——数据</a></li><li class="chapter-item expanded "><a href="../csapp/assembly-control.html"><strong aria-hidden="true">6.4.</strong> 程序的机器级表示——控制</a></li><li class="chapter-item expanded "><a href="../csapp/assembly-procedure.html"><strong aria-hidden="true">6.5.</strong> 程序的机器级表示——过程</a></li><li class="chapter-item expanded "><a href="../csapp/assembly-advanced.html"><strong aria-hidden="true">6.6.</strong> 程序的机器级表示——高级话题</a></li><li class="chapter-item expanded "><a href="../csapp/exception-control-flow.html"><strong aria-hidden="true">6.7.</strong> 异常控制流</a></li><li class="chapter-item expanded "><a href="../csapp/linking.html"><strong aria-hidden="true">6.8.</strong> 链接</a></li><li class="chapter-item expanded "><a href="../csapp/io.html"><strong aria-hidden="true">6.9.</strong> 输入输出系统</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../data-structure/index.html"><strong aria-hidden="true">7.</strong> 数据结构</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../data-structure/foundation.html"><strong aria-hidden="true">7.1.</strong> 算法基础</a></li><li class="chapter-item expanded "><a href="../data-structure/inner-sort.html"><strong aria-hidden="true">7.2.</strong> 内部排序</a></li><li class="chapter-item expanded "><a href="../data-structure/outer-sort.html"><strong aria-hidden="true">7.3.</strong> 外部排序</a></li><li class="chapter-item expanded "><a href="../data-structure/array-and-list.html"><strong aria-hidden="true">7.4.</strong> 数组和广义表</a></li><li class="chapter-item expanded "><a href="../data-structure/list.html"><strong aria-hidden="true">7.5.</strong> 线性表</a></li><li class="chapter-item expanded "><a href="../data-structure/stack-and-dequeue.html"><strong aria-hidden="true">7.6.</strong> 栈和队列</a></li><li class="chapter-item expanded "><a href="../data-structure/tree.html"><strong aria-hidden="true">7.7.</strong> 树</a></li><li class="chapter-item expanded "><a href="../data-structure/graph.html"><strong aria-hidden="true">7.8.</strong> 图</a></li><li class="chapter-item expanded "><a href="../data-structure/string.html"><strong aria-hidden="true">7.9.</strong> 字符串</a></li><li class="chapter-item expanded "><a href="../data-structure/find.html"><strong aria-hidden="true">7.10.</strong> 查找表</a></li><li class="chapter-item expanded "><a href="../data-structure/lab.html"><strong aria-hidden="true">7.11.</strong> 实验</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../database/index.html"><strong aria-hidden="true">8.</strong> 数据库</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../database/intro.html"><strong aria-hidden="true">8.1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="../database/relation-model.html"><strong aria-hidden="true">8.2.</strong> Relation Model</a></li><li class="chapter-item expanded "><a href="../database/relation-database-design.html"><strong aria-hidden="true">8.3.</strong> Relation Database Design</a></li><li class="chapter-item expanded "><a href="../database/sql.html"><strong aria-hidden="true">8.4.</strong> SQL</a></li><li class="chapter-item expanded "><a href="../database/intermediate-sql.html"><strong aria-hidden="true">8.5.</strong> Intermediate SQL</a></li><li class="chapter-item expanded "><a href="../database/entity-relation-model.html"><strong aria-hidden="true">8.6.</strong> Entity Relation Model</a></li><li class="chapter-item expanded "><a href="../database/data-storage-structure.html"><strong aria-hidden="true">8.7.</strong> Data Storage Structure</a></li><li class="chapter-item expanded "><a href="../database/database-index.html"><strong aria-hidden="true">8.8.</strong> Index</a></li><li class="chapter-item expanded "><a href="../database/query-processing.html"><strong aria-hidden="true">8.9.</strong> Query Processing</a></li><li class="chapter-item expanded "><a href="../database/query-optimization.html"><strong aria-hidden="true">8.10.</strong> Query Optimization</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../discrete-math/index.html"><strong aria-hidden="true">9.</strong> 离散数学</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../discrete-math/relation.html"><strong aria-hidden="true">9.1.</strong> Relation</a></li><li class="chapter-item expanded "><a href="../discrete-math/advanced-counting.html"><strong aria-hidden="true">9.2.</strong> Advanced Counting</a></li><li class="chapter-item expanded "><a href="../discrete-math/tree.html"><strong aria-hidden="true">9.3.</strong> Tree</a></li><li class="chapter-item expanded "><a href="../discrete-math/graph.html"><strong aria-hidden="true">9.4.</strong> Graph</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../formal-language/index.html"><strong aria-hidden="true">10.</strong> 形式语言和自动机</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../formal-language/fa.html"><strong aria-hidden="true">10.1.</strong> 有限状态自动机</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../missing-semester/index.html"><strong aria-hidden="true">11.</strong> 计算机教学中缺少的一课</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../missing-semester/missing-the-shell.html"><strong aria-hidden="true">11.1.</strong> Shell</a></li><li class="chapter-item expanded "><a href="../missing-semester/missing-shell-scripts.html"><strong aria-hidden="true">11.2.</strong> Shell Scripts</a></li><li class="chapter-item expanded "><a href="../missing-semester/missing-vim.html"><strong aria-hidden="true">11.3.</strong> Vim</a></li><li class="chapter-item expanded "><a href="../missing-semester/missing-data-wrangling.html"><strong aria-hidden="true">11.4.</strong> Data Wrangling</a></li><li class="chapter-item expanded "><a href="../missing-semester/missing-command-line.html"><strong aria-hidden="true">11.5.</strong> Command Line</a></li><li class="chapter-item expanded "><a href="../missing-semester/missing-potpourri.html"><strong aria-hidden="true">11.6.</strong> Potpourri</a></li><li class="chapter-item expanded "><a href="../missing-semester/missing-version-control.html"><strong aria-hidden="true">11.7.</strong> Version Control</a></li><li class="chapter-item expanded "><a href="../missing-semester/missing-debugging.html"><strong aria-hidden="true">11.8.</strong> Debug</a></li><li class="chapter-item expanded "><a href="../missing-semester/missing-metaprogramming.html"><strong aria-hidden="true">11.9.</strong> Metaprogram</a></li><li class="chapter-item expanded "><a href="../missing-semester/missing-security.html"><strong aria-hidden="true">11.10.</strong> Security</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../operating-system/index.html"><strong aria-hidden="true">12.</strong> 操作系统</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../operating-system/intro.html"><strong aria-hidden="true">12.1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="../operating-system/os-structures.html"><strong aria-hidden="true">12.2.</strong> OS Structure</a></li><li class="chapter-item expanded "><a href="../operating-system/processes.html"><strong aria-hidden="true">12.3.</strong> Process</a></li><li class="chapter-item expanded "><a href="../operating-system/process-synchronization.html"><strong aria-hidden="true">12.4.</strong> Process Synchronization</a></li><li class="chapter-item expanded "><a href="../operating-system/cpu-scheduling.html"><strong aria-hidden="true">12.5.</strong> CPU Scheduling</a></li><li class="chapter-item expanded "><a href="../operating-system/threads.html"><strong aria-hidden="true">12.6.</strong> Thread</a></li><li class="chapter-item expanded "><a href="../operating-system/memory-management.html"><strong aria-hidden="true">12.7.</strong> Memory Management</a></li><li class="chapter-item expanded "><a href="../operating-system/virtual-memory.html"><strong aria-hidden="true">12.8.</strong> Virtual Memory</a></li><li class="chapter-item expanded "><a href="../operating-system/fs-interface.html"><strong aria-hidden="true">12.9.</strong> Filesystem Interface</a></li><li class="chapter-item expanded "><a href="../operating-system/fs-implementation.html"><strong aria-hidden="true">12.10.</strong> Filesystem Implementation</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../socialist/index.html"><strong aria-hidden="true">13.</strong> 毛泽东思想和中国特色理论体系概论</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../socialist/maozedong.html"><strong aria-hidden="true">13.1.</strong> 毛概期末总结</a></li><li class="chapter-item expanded "><a href="../socialist/others.html"><strong aria-hidden="true">13.2.</strong> 课后大题</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Ricardo&#x27;s Wiki</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="介质访问控制子层"><a class="header" href="#介质访问控制子层">介质访问控制子层</a></h1>
+<h2 id="信道分配问题"><a class="header" href="#信道分配问题">信道分配问题</a></h2>
+<p>一般来说，共享信道有着下面几种方式：</p>
+<p><img src="./mac/2023-03-31-10-00-20-image.png" alt="" /></p>
+<p>在图中：</p>
+<ul>
+<li>
+<p><code>SDTM</code>表示<strong>同步</strong>时分复用</p>
+<p>将时间分成不同的时间片，不同的设备轮流使用介质发送或者接受数据。每个设备都会得到固定长度的时间片供其使用，如果没有使用这个时间片就浪费了。</p>
+</li>
+<li>
+<p><code>ADTM</code>表示<strong>异步</strong>时分复用，也被称作统计复用。</p>
+</li>
+</ul>
+<p>对于局域网来说，静态信道分配（<code>FDM</code>、<code>STDM</code>）工作的并不良好。</p>
+<p>为了说明为什么工作的不好，我们首先引入一个公式：</p>
+<p><span class="katex-display"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.0908em;vertical-align:-0.7693em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3214em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal">u</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord mathnormal">λ</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.7693em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span></p>
+<p>在公式中：</p>
+<ul>
+<li>
+<p><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">u</span></span></span></span>表示平均服务速度</p>
+</li>
+<li>
+<p><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal">λ</span></span></span></span>表示平均到达时间</p>
+</li>
+<li>
+<p><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">T</span></span></span></span>表示平均等待时间</p>
+</li>
+</ul>
+<p>如果信道被平均分配到<code>N</code>个静态的子信道：</p>
+<p>通过公式可以计算出平均等待时间变成了原来的<code>N</code>倍。</p>
+<p><span class="katex-display"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.4365em;vertical-align:-1.1151em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3214em;"><span style="top:-2.2299em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8723em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.10903em;">N</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">u</span><span class="mord mathnormal mtight" style="margin-right:0.07153em;">C</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8801em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.10903em;">N</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">λ</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.1151em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">NT</span></span></span></span></span></p>
+<p>而信道的平均服务速率和平均到达速率均变成了原来的<code>N</code>分之一。</p>
+<p>因此静态信道分配表现并不好：</p>
+<ul>
+<li>
+<p>如果信道被分配为多个子信道：</p>
+<ul>
+<li>
+<p>FDM：延迟相对于原来大大增加</p>
+</li>
+<li>
+<p>TDM：存在一些问题</p>
+</li>
+</ul>
+</li>
+<li>
+<p>在面对互联网上常见的突发请求处理均不好</p>
+</li>
+</ul>
+<p>因此我们常用动态信道分配。</p>
+<h3 id="动态信道分配的分类"><a class="header" href="#动态信道分配的分类">动态信道分配的分类</a></h3>
+<ul>
+<li>
+<p>随机访问</p>
+<ul>
+<li>
+<p><code>ALOHA</code></p>
+</li>
+<li>
+<p><code>CSMA</code>，<code>CSMA/CD</code>，<code>CSMA/CA</code></p>
+</li>
+</ul>
+</li>
+<li>
+<p>控制访问</p>
+<ul>
+<li>
+<p>中心化的控制：轮询</p>
+</li>
+<li>
+<p>去中心化的控制：令牌</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="动态信道分配中涉及的假设"><a class="header" href="#动态信道分配中涉及的假设">动态信道分配中涉及的假设</a></h3>
+<ul>
+<li>
+<p>每个站点之间都是相互独立的，且是单用户系统</p>
+</li>
+<li>
+<p>只用一个可用的信道</p>
+</li>
+<li>
+<p>如果发送冲突则数据就废弃了</p>
+</li>
+<li>
+<p>时间分配：</p>
+<ul>
+<li>
+<p>连续时间分配：随时均可以占用信道时间</p>
+</li>
+<li>
+<p>分时隙：必须等待一个周期（称作<strong>时隙</strong>）开始才能占用</p>
+</li>
+</ul>
+</li>
+<li>
+<p>载波监听：发送之前能否判断信道是否被占用</p>
+<ul>
+<li>
+<p>提供载波监听</p>
+</li>
+<li>
+<p>没有载波监听</p>
+</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>时间分配和载波监听都是设计协议时需要二选一的选项</p>
+</blockquote>
+<h2 id="介质访问协议"><a class="header" href="#介质访问协议">介质访问协议</a></h2>
+<p>主要注意协议中是如何侦测冲突和从冲突中恢复的。</p>
+<h3 id="aloha"><a class="header" href="#aloha">ALOHA</a></h3>
+<h4 id="纯aloha-pure-aloha"><a class="header" href="#纯aloha-pure-aloha">纯ALOHA Pure ALOHA</a></h4>
+<p>第一个提供介质访问控制功能的协议，简单但是富有研究价值。</p>
+<p>不使用时隙机制和载波监听。</p>
+<p>协议的基本设计就是依赖确认帧来判断是否发生冲突：</p>
+<ul>
+<li>
+<p>每个站点不考虑是否冲突，在需要传输的时候直接发送数据帧</p>
+</li>
+<li>
+<p>如果没收到确认帧就重复发送</p>
+</li>
+</ul>
+<p><img src="./mac/2023-03-31-10-31-49-image.png" alt="" /></p>
+<p>注意在流程图中，为了避免总是发生冲突，协议中设计了一个随机的等待时间<code>k</code>。</p>
+<p>为了衡量不同协议的性能，首先引入一系列参数：</p>
+<p>首先用<strong>帧时</strong><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.1389em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>表示发送一个标准的、固定长度的帧需要的时间，同时假定站点产生的新帧符合一个帧时上产生<code>N</code>个帧的泊松分布，可以定义以下两个量表示协议的性能：</p>
+<ul>
+<li>
+<p>吞吐量<code>S</code>，在一个帧时中成功传输的帧数</p>
+</li>
+<li>
+<p>网络负载<code>P</code>，在一个帧时中到达的帧</p>
+</li>
+</ul>
+<p>不难发现存在下面这个关系：</p>
+<p><span class="katex-display"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">S</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.7667em;vertical-align:-0.0833em;"></span><span class="mord mathnormal">G</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">P</span><span class="mopen">(</span><span class="mord cjk_fallback">成功传输</span><span class="mclose">)</span></span></span></span></span></p>
+<p>一个帧被成功发送需要的条件是：在帧发送和传输的工程中没有帧到达。这段时间被称作<strong>脆弱期</strong>，这段时间的长度是<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord">2</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.1389em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>，利用这个值可以得出：</p>
+<p><span class="katex-display"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8193em;vertical-align:-0.136em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">S</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">≤</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8056em;vertical-align:-0.0556em;"></span><span class="mord">18.4%</span></span></span></span></span></p>
+<h4 id="含有时隙的aloha-slotted-aloha"><a class="header" href="#含有时隙的aloha-slotted-aloha">含有时隙的ALOHA Slotted ALOHA</a></h4>
+<ul>
+<li>
+<p>将时间分成帧时长度的时隙</p>
+</li>
+<li>
+<p>需要一个中央时钟，或者某种同步机制</p>
+</li>
+<li>
+<p>传输必须在时隙开始时才能开始</p>
+<p><img src="./mac/2023-03-31-10-48-04-image.png" alt="" /></p>
+</li>
+<li>
+<p>这是帧发送的脆弱期变为原来的一半：<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.1389em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></p>
+</li>
+</ul>
+<p>改进之后的协议吞吐量变成了原来的两倍：</p>
+<p><span class="katex-display"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8193em;vertical-align:-0.136em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">S</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">≤</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8056em;vertical-align:-0.0556em;"></span><span class="mord">36.8%</span></span></span></span></span></p>
+<h3 id="载波监听多点访问"><a class="header" href="#载波监听多点访问">载波监听多点访问</a></h3>
+<p>Carrier Sense Multiple Access Protocols，简称<code>CSMA</code>。</p>
+<p>这种协议的基本设计思想是：在发送信息之前监听信道。</p>
+<p>监听信道有着两种方式：</p>
+<ul>
+<li>
+<p>坚持听：一直监听信道，直到空闲</p>
+</li>
+<li>
+<p>周期监听：周期性的监听信道，直到发现空闲</p>
+</li>
+</ul>
+<p>坚持听到发现信道空闲之后是否发送也有着两种方式：</p>
+<ul>
+<li>
+<p>1坚持：遇到空闲直接发送</p>
+</li>
+<li>
+<p>P坚持：以概率P决定是否发送还是继续监听</p>
+</li>
+</ul>
+<p>这种协议的脆弱期就是信号在介质传播的时延。</p>
+<p><img src="./mac/2023-03-31-11-03-00-image.png" alt="" /></p>
+<h4 id="不同csma协议的比较"><a class="header" href="#不同csma协议的比较">不同CSMA协议的比较</a></h4>
+<ul>
+<li>
+<p>1坚持的CSMA</p>
+<p>当负载比较低的时候，吞吐量比较大且时延比较低。</p>
+<p>当负载比较高的时候，吞吐量比较低。</p>
+</li>
+<li>
+<p>非坚持的CSMA</p>
+<p>当负载比较高的时候，吞吐量高。</p>
+</li>
+</ul>
+<h3 id="带冲突检测的载波监听多路访问"><a class="header" href="#带冲突检测的载波监听多路访问">带冲突检测的载波监听多路访问</a></h3>
+<p>CSMA with Collision Detection，简称CSMA/CD。</p>
+<p>协议的基本思想：在发送数据的同时监听信道，如果发现冲突就停止发送。</p>
+<ul>
+<li>
+<p>如果冲突被发现了，停止发送数据，发送一系列的<strong>强化信号</strong>提醒所有的站点冲突发生了</p>
+</li>
+<li>
+<p>发送强化信号之后，等待一段随机的时间</p>
+</li>
+<li>
+<p>这就构成了一个半双工的系统。准确的说，是物理层为全双工的，但是数据链路层是半双工的，站点只能出在接收模式或者发送模型。</p>
+</li>
+<li>
+<p>节约了时间和带宽</p>
+</li>
+<li>
+<p>是以太网的基础</p>
+</li>
+<li>
+<p>这个协议没有设计确认帧</p>
+</li>
+<li>
+<p>这个协议的争用期也是信号在介质中传播时延的两倍</p>
+</li>
+</ul>
+<p>CSMA/CD协议有着三个状态：</p>
+<ul>
+<li>
+<p>发送期<code>transmission</code></p>
+</li>
+<li>
+<p>争用期<code>contention</code></p>
+</li>
+<li>
+<p>空闲期<code>idle</code></p>
+</li>
+</ul>
+<p>争用期这个状态比较复杂：</p>
+<p><img src="./mac/2023-03-31-12-19-23-image.png" alt="" /></p>
+<p><strong>争用时隙</strong>：一个站点最多需要两个传播时延才能发现错误，或者说如果在两个传播时延之内没有发现冲突，那么这次传输就不会发生冲突。</p>
+<blockquote>
+<p>这也是以太网中一个重要的网络参数。</p>
+</blockquote>
+<p>1-坚持的CSMA/CD重传的等待时间：</p>
+<p>选择一个介于0到d之间的随机数k，在等待k时间之后检查介质是否空闲。</p>
+<ul>
+<li>
+<p>如果此时的介质空闲，发送数据</p>
+</li>
+<li>
+<p>如果此时介质不空闲，等待到介质空闲。</p>
+</li>
+</ul>
+<p>如果在重发的过程中冲突再次发生，那么在此重复上述的过程。但是在过程中会记录重试的次数，如果超过一个最大的重发次数，就放弃这次重发。在这个过程中，最大等待时间都会增大到原来的两倍，这被称作<strong>指数退避算法</strong>。同时最大的等待时间可以设置一个最大值，例如增大到1024就不再增大了。</p>
+<p>例如第一次等待的时间介于[0,1]之间，第二次等待就介于[0,3]之间，第n次等待就介于<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.6644em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">n</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mclose">]</span></span></span></span>之间。</p>
+<p>下面是描述CSMA/CD的流程图：</p>
+<p><img src="./mac/2023-04-04-15-44-58-image.png" alt="" /></p>
+<h4 id="几种介质访问协议的比较"><a class="header" href="#几种介质访问协议的比较">几种介质访问协议的比较</a></h4>
+<div class="table-wrapper"><table><thead><tr><th>协议</th><th>如何避免冲突</th><th>如果判断冲突</th><th>解决冲突</th><th>脆弱期</th></tr></thead><tbody>
+<tr><td>Pure ALOHA</td><td>完全不避免</td><td>定时器没收到确认</td><td>重新发送</td><td>2<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.1389em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></td></tr>
+<tr><td>Slotted ALOHA</td><td>只能在时隙开始时发送</td><td>同上</td><td>同上</td><td><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.1389em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></td></tr>
+<tr><td>CSMA</td><td>发送前监听信道</td><td>同上</td><td>同上</td><td>传播时延的两倍</td></tr>
+<tr><td>CSMA/CD</td><td>发送前监听信息</td><td>发送时监听信息</td><td>同上</td><td>传播时延的两倍</td></tr>
+</tbody></table>
+</div>
+<h3 id="无冲突协议"><a class="header" href="#无冲突协议">无冲突协议</a></h3>
+<p>无冲突协议主要有以下几种实现方式：</p>
+<p><strong>轮训</strong><code>Polling</code>：</p>
+<ul>
+<li>
+<p>用在HDLC协议中，在Wi-Fi和蓝牙中也具有一定的应用</p>
+</li>
+<li>
+<p>具有一个中心控制器</p>
+</li>
+<li>
+<p>中心控制器会依次询问每个站点</p>
+</li>
+</ul>
+<p><strong>令牌传送</strong><code>Token Passing</code>:</p>
+<ul>
+<li>
+<p>分布式的模型</p>
+</li>
+<li>
+<p>令牌就是一个大小比较小的帧，代表发送消息的权限</p>
+</li>
+<li>
+<p>一般来说使用令牌传送的网络都是一个环网，令牌在相邻的站点之间传递，只有“持有”令牌的站点有权发送数据</p>
+</li>
+<li>
+<p>没有冲突</p>
+</li>
+</ul>
+<h3 id="无线网络wlan"><a class="header" href="#无线网络wlan">无线网络WLAN</a></h3>
+<p>无线网络中一般具有以下几种要素：</p>
+<ul>
+<li>
+<p>无线主机：运行应用程序的终端设备，例如笔记本电脑和手机</p>
+</li>
+<li>
+<p>基站：一般同有线网链接，负责在有限主机和无线主机之间转发数据，在<code>802.11</code>协议中也被称为接入点<code>access point</code></p>
+</li>
+<li>
+<p>无线链接</p>
+</li>
+</ul>
+<p>无线网络具有以下的特点：</p>
+<ul>
+<li>
+<p>随着距离增加信号强度下降，传输的距离有限</p>
+</li>
+<li>
+<p>全方位的传播</p>
+</li>
+<li>
+<p>误码率比较大</p>
+</li>
+</ul>
+<p>而且我们已经设计的协议，比如CSMA/CD，不太适用于无线网络之中。下面给出两个直接使用已有协议可能遇到的问题：</p>
+<ol>
+<li>
+<p>隐蔽站问题</p>
+<p><img src="./mac/2023-04-04-16-07-47-image.png" alt="" /></p>
+</li>
+<li>
+<p>暴露站问题</p>
+<p><img src="./mac/2023-04-04-16-08-46-image.png" alt="" /></p>
+</li>
+</ol>
+<p>可以用来解决上述问题的方法：</p>
+<ul>
+<li>
+<p>采用轮询的方式可以解决</p>
+</li>
+<li>
+<p>分布协调方法：站点之间握手确定谁能发送。这种方式称作CSMA/CA，CSMA with Collsion Avoidance</p>
+</li>
+</ul>
+<p>握手的过程：</p>
+<ul>
+<li>
+<p>站点发送<code>RTS</code>帧给接收方</p>
+</li>
+<li>
+<p>如果接收方可以接受，就返回<code>CTS</code>帧给发送方，发送法就可以开始发送</p>
+</li>
+<li>
+<p>如果发送方没有收到<code>CTS</code>帧，那么等待一段随机长度的时间，重新发送<code>RTS</code>帧</p>
+</li>
+</ul>
+<h2 id="局域网参考模型-ieee-802-rm"><a class="header" href="#局域网参考模型-ieee-802-rm">局域网参考模型 IEEE 802 RM</a></h2>
+<p>局域网的特点：</p>
+<ul>
+<li>
+<p>设备的数量有限</p>
+</li>
+<li>
+<p>传输的速度较快</p>
+</li>
+<li>
+<p>误码率比较低</p>
+</li>
+<li>
+<p>支持广播和多播</p>
+</li>
+<li>
+<p>只有单个管理站点</p>
+</li>
+</ul>
+<p>局域网的拓扑模型：</p>
+<ul>
+<li>
+<p>总线型</p>
+</li>
+<li>
+<p>星形</p>
+</li>
+<li>
+<p>环形</p>
+</li>
+<li>
+<p>树形</p>
+</li>
+</ul>
+<p>局域网常见的传输介质：</p>
+<ul>
+<li>双绞线</li>
+<li>射频</li>
+</ul>
+<p>IEEE 802参考模型和<code>OSI</code>模型的对比大致如图所示：</p>
+<p><img src="./mac/image-20230407095441071.png" alt="image-20230407095441071" /></p>
+<p>其中参考模型规定了三个层：</p>
+<ul>
+<li>
+<p>物理层：</p>
+<p>需要处理编码和解码</p>
+<p>直接传输位</p>
+<p>传输介质和传输拓扑</p>
+</li>
+<li>
+<p>介质访问控制子层</p>
+<p>成帧控制、错误纠正、物理地址（<code>mac</code>地址）</p>
+<p>使用同样的传输媒介</p>
+<p>本地网络交换，虚拟本地网络</p>
+</li>
+<li>
+<p>逻辑链路控制子层</p>
+<p>向网络层提供统一的接口，隐藏不同mac子层不同的实现</p>
+<p>流量控制和错误控制</p>
+<p>通过网桥连接不同的本地网络</p>
+</li>
+</ul>
+<h3 id="逻辑链路控制子层llc"><a class="header" href="#逻辑链路控制子层llc">逻辑链路控制子层<code>LLC</code></a></h3>
+<p><code>LLC</code>一般向上提供这些功能：</p>
+<ul>
+<li>不可靠的数据报服务。例如<code>Ethernet</code></li>
+<li>可靠的数据报服务，例如<code>WiFi</code></li>
+<li>可靠的面向连接的服务，例如<code>Token Ring</code></li>
+</ul>
+<p><code>LLC</code>协议：</p>
+<ul>
+<li>一般都是基于<code>HDLC</code>协议，但是并不唯一</li>
+<li>使用<code>LSAPs</code>提供多播</li>
+</ul>
+<h3 id="mac子层概述"><a class="header" href="#mac子层概述"><code>mac</code>子层概述</a></h3>
+<ul>
+<li>
+<p>在发送端将地址、错误纠正和数据封装成帧</p>
+</li>
+<li>
+<p>在接收端解包帧：</p>
+<p>提供地址识别</p>
+<p>提供错误侦测</p>
+</li>
+<li>
+<p>控制对于传输介质的访问</p>
+</li>
+<li>
+<p>对于相同的<code>LLC</code>层，可以使用不同的<code>mac</code>子层</p>
+</li>
+</ul>
+<h3 id="本地网络中的协议封装"><a class="header" href="#本地网络中的协议封装">本地网络中的协议封装</a></h3>
+<p><img src="./mac/image-20230407100919359.png" alt="image-20230407100919359" /></p>
+<h3 id="ieee-802-协议概览"><a class="header" href="#ieee-802-协议概览">IEEE 802 协议概览</a></h3>
+<p><img src="./mac/image-20230407101132273.png" alt="image-20230407101132273" /></p>
+<p>可以发现很多IEEE一些不仅规定了物理层的部分也规定了<code>mac</code>子层的功能。</p>
+<h2 id="ethernet"><a class="header" href="#ethernet">Ethernet</a></h2>
+<p>首先是以太网的发展历史：</p>
+<p><img src="./mac/image-20230407102005615.png" alt="image-20230407102005615" /></p>
+<h3 id="传统以太网-物理层"><a class="header" href="#传统以太网-物理层">传统以太网 物理层</a></h3>
+<h4 id="网卡"><a class="header" href="#网卡">网卡</a></h4>
+<p>网卡<code>Network Interface cards</code>的功能：</p>
+<ul>
+<li>实现数据链路层和物理层</li>
+<li>连接到主机的总线上</li>
+</ul>
+<p>每块网卡都有着一个唯一的<code>mac</code>地址。</p>
+<h4 id="传统以太网-10mbps"><a class="header" href="#传统以太网-10mbps">传统以太网 10Mbps</a></h4>
+<div class="table-wrapper"><table><thead><tr><th>名称</th><th>传输介质</th><th>最大传输距离</th><th>节点</th><th>优点</th></tr></thead><tbody>
+<tr><td>10Base5</td><td>粗同轴电缆</td><td>500m</td><td>100</td><td>比较原始的电缆，目前已经被弃用</td></tr>
+<tr><td>10Base2</td><td>细同轴电缆</td><td>185m</td><td>30</td><td>不需要集线器</td></tr>
+<tr><td>10BaseT</td><td>双绞线</td><td>100m</td><td>1024</td><td>最便宜的系统</td></tr>
+<tr><td>10BaseF</td><td>光纤</td><td>2000m</td><td>1024</td><td>在建筑物之间最好的系统</td></tr>
+</tbody></table>
+</div>
+<h4 id="10baset"><a class="header" href="#10baset">10BaseT</a></h4>
+<blockquote>
+<p>目前较为常用的协议</p>
+</blockquote>
+<p>没用共享的链路，使用集线器将双绞线连接在一起。</p>
+<p>使用<code>RJ-45</code>和<code>UTP5</code>作为传输介质：</p>
+<ul>
+<li>使用双绞线中的两对线，收发各一对</li>
+<li>差分传输：一对线中的一根线用正电平传输信号，另外一根线用负电平传输同一信号，减少电磁干扰</li>
+<li>同一对线绞合，减少近端干扰</li>
+</ul>
+<p>还有就是连线的标准：</p>
+<p><img src="./mac/image-20230407103819452.png" alt="image-20230407103819452" /></p>
+<p><img src="./mac/image-20230407103839333.png" alt="image-20230407103839333" /></p>
+<p>其中在连接设备时，双绞线有两种连接方式：</p>
+<ul>
+<li>
+<p>直连线：</p>
+<p>两端使用相同的标准，用于将不同的设备，例如电脑和集线器之间连接：</p>
+<p><img src="./mac/image-20230407104350754.png" alt="image-20230407104350754" /></p>
+</li>
+<li>
+<p>交叉线：</p>
+<p>两端使用不同的标准，用于链接相同的设备，例如电脑和电脑之间</p>
+<p><img src="./mac/image-20230407104521382.png" alt="image-20230407104521382" /></p>
+</li>
+</ul>
+<p>在系统中可以添加中继器以扩大覆盖范围：</p>
+<ul>
+<li>中继器是物理层协议</li>
+<li>中继器负责放大信号，让信号可以传播更远的距离</li>
+<li>可以扩大局域网的网段</li>
+<li>每个局域网可以最大使用4个中继器</li>
+</ul>
+<blockquote>
+<p>然而中继器已经是过时的技术了</p>
+</blockquote>
+<p>在系统中还有集线器：</p>
+<ul>
+<li>是一个多端口的中继器</li>
+<li>在物理上是星形的链路，但是在逻辑上实现了总线的拓扑结果</li>
+<li>支持多种速度的链路</li>
+</ul>
+<blockquote>
+<p>现在集线器已经完全取代了中继器</p>
+</blockquote>
+<h3 id="传统以太网-mac子层"><a class="header" href="#传统以太网-mac子层">传统以太网 <code>MAC</code>子层</a></h3>
+<p>采用<strong>广播</strong>链路，所有网络中的设备都能收到其他设备发送的数据帧，先校验地址是否为自己的地址，如果是就接收反之丢弃。</p>
+<p><strong>帧间间隔<code>IFG</code></strong>：协议中要求每个帧之间需要留出规定的时间，对于<code>10BaseT</code>协议，帧间间隔规定为9.6 us。</p>
+<blockquote>
+<p>在实践中，帧间间隔可能比协议中要求的小</p>
+</blockquote>
+<p>在添加帧间间隔之后，1-坚持的<code>CSMA/CD</code>步骤就变为：</p>
+<ol>
+<li>监听信道是否空闲</li>
+<li>如果空闲时间超过<code>IFG</code>，则发送</li>
+<li>如果信道忙，持续监听</li>
+<li>边发送边检测冲突</li>
+<li>如果发现冲突，发送强化信号</li>
+<li>收到强化信号，所有站点退避一段时间后重新监听信道</li>
+</ol>
+<h4 id="帧结构"><a class="header" href="#帧结构">帧结构</a></h4>
+<p><img src="./mac/image-20230407111106098.png" alt="image-20230407111106098" /></p>
+<ul>
+<li>
+<p>前导码<code>Preamble</code>：用于时钟同步功能，有物理层负责处理，不计入数据链路层</p>
+</li>
+<li>
+<p>地址：<code>MAC</code>地址</p>
+<p>6个字节，常常使用十六进制表示</p>
+<p>前3个字节表示网卡的生产厂家，后3个字节表示该网卡厂家生产网卡的序列号，每个网卡是唯一的</p>
+<p>利用<code>mac</code>地址还可以区分单播地址和多播地址</p>
+</li>
+<li>
+<p>种类：表示传输的上层数据的协议种类</p>
+</li>
+<li>
+<p>长度：表示<code>Data</code>字段和<code>Pad</code>字段的总共长度</p>
+<p>数据字段有着一个最大值：1500字节</p>
+<p>同时数据字段也有着一个<strong>最小值</strong>：46字节，这也就是为什么需要一个<code>Pad</code>字段</p>
+<blockquote>
+<p>整个帧的最大长度是1518字节</p>
+</blockquote>
+</li>
+<li>
+<p>校验和：<code>CRC</code>校验和，如果校验失败，这个帧就被丢弃</p>
+</li>
+</ul>
+<blockquote>
+<p>为什么需要设置帧的最小值？</p>
+<p>为了让主机有足够的时间侦测冲突。这个值可以利用<strong>争用时隙</strong>这个参数计算出来：</p>
+<p>在最大长度为<code>2500m</code>和4个中继器的<code>10Mbps</code>网络中，传播时延<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal" style="margin-right:0.1132em;">τ</span></span></span></span> 大概是<code>25.6us</code> ，而<code>CSMA/CD</code>的争用时隙长度为<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">2</span><span class="mord mathnormal" style="margin-right:0.1132em;">τ</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">51.2</span><span class="mord mathnormal">u</span><span class="mord mathnormal">s</span></span></span></span>，可以计算出在争用时隙中可以发送的数据包长度就是<code>64B</code>，所以数据字段长度的最小值就是46字节。</p>
+</blockquote>
+<h3 id="以太网性能分析"><a class="header" href="#以太网性能分析">以太网性能分析</a></h3>
+<p>为了进行i性能分析，首先假设信道上具有较重和稳定的负载，例如总有<code>k</code>个站点准备发送，而重传的概率为一个常数。</p>
+<p>于是通过理论推导可以得到一个信道利用效率的表达式：
+<span class="katex-display"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">E</span><span class="mord mathnormal" style="margin-right:0.10764em;">ff</span><span class="mord mathnormal">i</span><span class="mord mathnormal">c</span><span class="mord mathnormal">i</span><span class="mord mathnormal">e</span><span class="mord mathnormal">n</span><span class="mord mathnormal" style="margin-right:0.03588em;">cy</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.4288em;vertical-align:-1.1073em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3214em;"><span style="top:-2.2377em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8723em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">c</span><span class="mord mathnormal mtight" style="margin-right:0.13889em;">F</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span><span class="mord mathnormal mtight" style="margin-right:0.05017em;">B</span><span class="mord mathnormal mtight">L</span><span class="mord mathnormal mtight">e</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.1073em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span>
+在公式中，<code>L</code>表示信道的长度，<code>c</code>表示信道中信号的传输速度，<code>B</code>表示信道的带宽，<code>F</code>表示单个数据帧的长度。</p>
+<p>总的来说，为了获得比较高的信道利用率，帧不能太长，电缆不能太长。</p>
+<p><img src="./mac/image-20230411150217519.png" alt="image-20230411150217519" /></p>
+<p>为了提高以太网的传输速度，我们可以采用这些错误：</p>
+<ul>
+<li>
+<p>通过减少冲突：</p>
+<ul>
+<li>
+<p>使用交换式局域网而不是共享式局域网</p>
+</li>
+<li>
+<p>降低在同一个局域网中计算机设备的数量</p>
+<p>使用网桥将不同的局域网链接</p>
+</li>
+</ul>
+</li>
+<li>
+<p>提高数据传输速率</p>
+<ul>
+<li>使用吉比特以太网</li>
+</ul>
+</li>
+</ul>
+<h3 id="交换式以太网"><a class="header" href="#交换式以太网">交换式以太网</a></h3>
+<ul>
+<li>使用中心的交换机替代原有局域网中的集线器</li>
+<li>交换机只将数据帧转发到确定的输出线路上</li>
+<li>没有被使用的线路可以用来传送不同的信号，这就允许量同时的多方传输</li>
+<li>大幅提高了局域网的带宽，如果局域网中接入了<code>2N</code>个端口，那么带宽将被提升为原来的<code>N</code>倍</li>
+<li>这种方式也比传统的局域网更加安全</li>
+</ul>
+<blockquote>
+<p>注意需要区分冲突域和广播域：广播域是发送广播包可以收到相关包的所有主机的结合，冲突域是会发送冲突的一系列计算机的集合。</p>
+</blockquote>
+<p>在交换机网络中，交换器没有使用<code>CSMA/CD</code>协议。但是如果交换机下面直接链接了集线器，那么仍然会发生冲突，<code>CSMA/CS</code>协议仍然被需要。</p>
+<h3 id="快速以太网"><a class="header" href="#快速以太网">快速以太网</a></h3>
+<ul>
+<li>保持了传统以太网的帧结构，网卡和其他文本上规则。</li>
+<li>将比特时间从之前的<code>100ns</code>调整到<code>10ns</code></li>
+<li>最小帧大小没有变化</li>
+<li>所有的快速以太网设备都需要使用集线器和交换机</li>
+</ul>
+<div class="table-wrapper"><table><thead><tr><th>Name</th><th>Code</th><th>Max-Segment</th><th>Advangages</th></tr></thead><tbody>
+<tr><td>100BaseT4</td><td>Twisted Pair</td><td>100m</td><td>使用CAT3等级的双绞线</td></tr>
+<tr><td>100Base-TX</td><td>Twisted Pair</td><td>100m</td><td>100<code>Mpbs</code>全双工</td></tr>
+<tr><td>100Base-FX</td><td>光纤</td><td>2000m</td><td>1000<code>Mbps</code>全双工</td></tr>
+</tbody></table>
+</div>
+<h4 id="100base-t4"><a class="header" href="#100base-t4">100Base-T4</a></h4>
+<ul>
+<li>
+<p>使用25<code>MHz</code>的信号速率</p>
+</li>
+<li>
+<p>需要双绞线中的四对线</p>
+<p>其中有两对的传输方向固定，而另外两对的传输方向可以切换，总的来说是半双工的</p>
+</li>
+<li>
+<p>不能使用曼彻斯特编码</p>
+</li>
+</ul>
+<h4 id="100base-tx"><a class="header" href="#100base-tx">100Base-TX</a></h4>
+<ul>
+<li>
+<p>使用125<code>MHz</code>的信号速率</p>
+</li>
+<li>
+<p>需要双绞线中的两对线</p>
+<p>传输方向固定，全双工</p>
+</li>
+</ul>
+<p><img src="./mac/image-20230411153425783.png" alt="image-20230411153425783" /></p>
+<p>快速以太网还提供了速率协商的功能，可以同网络中的设备协商传输速度和全/半双工，提供了向上的兼容性。</p>
+<h3 id="吉比特以太网"><a class="header" href="#吉比特以太网">吉比特以太网</a></h3>
+<ul>
+<li>再次将以太网的传输速度提高了一倍</li>
+<li>仍然保持了对以前以前以太网标准的支持</li>
+<li>同时允许了点对点链接和共享广播链接</li>
+</ul>
+<h4 id="交换机"><a class="header" href="#交换机">交换机</a></h4>
+<p>由于此时交换机的存在，以太网工作在全双工模式，<code>CSMA/CD</code>协议也不用了，最大的传输距离基本值取决于信号的强度。</p>
+<h4 id="集线器"><a class="header" href="#集线器">集线器</a></h4>
+<p>由于集线器仍然是构成总线型的网络，冲突可能会产生，于是<code>CSMA/CD</code>协议是需要的。</p>
+<p>但是由于传输的速度过快，<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">2</span><span class="mord mathnormal" style="margin-right:0.1132em;">τ</span></span></span></span>的时间十分短，冲突检测就变得比困难，目前有两种方式可以解决：</p>
+<ul>
+<li>
+<p>载波扩展<code>Carrier extension</code></p>
+<p>将不同长度的帧都扩展到512字节的长度</p>
+</li>
+<li>
+<p>帧突发<code>Frame bursting</code></p>
+<p>允许发送方在一次发送中发送连续的许多帧</p>
+</li>
+</ul>
+<p><img src="./mac/image-20230411155604070.png" alt="image-20230411155604070" /></p>
+<h4 id="流量控制"><a class="header" href="#流量控制">流量控制</a></h4>
+<p>由于发送速度较快，使得即使是较短时间的暂停就很容易导致缓冲溢出。</p>
+<p>因此在快速以太网和吉比特以太网中，引入了特殊的控制帧，发送这个帧可以让其他的终端暂停发送一段时间。</p>
+<p><img src="./mac/image-20230411160049286.png" alt="image-20230411160049286" /></p>
+<h2 id="无线局域网"><a class="header" href="#无线局域网">无线局域网</a></h2>
+<h3 id="无线连接的相关标准"><a class="header" href="#无线连接的相关标准">无线连接的相关标准</a></h3>
+<p><img src="./mac/image-20230411160305108.png" alt="image-20230411160305108" /></p>
+<h3 id="无线局域网基础架构"><a class="header" href="#无线局域网基础架构">无线局域网：基础架构</a></h3>
+<p><img src="./mac/image-20230411160424049.png" alt="image-20230411160424049" /></p>
+<h3 id="无线网络自组织模式"><a class="header" href="#无线网络自组织模式">无线网络：自组织模式</a></h3>
+<p><img src="./mac/image-20230411160510207.png" alt="image-20230411160510207" /></p>
+<p>即没有独立的基站，利用不同的节点本身的信号发送能力将信号发送到附近的节点。</p>
+<p>节点们自行组成一个独立的网络。</p>
+<h3 id="ieee-80211-wi-fi"><a class="header" href="#ieee-80211-wi-fi">IEEE 802.11 Wi-Fi</a></h3>
+<h4 id="物理层协议"><a class="header" href="#物理层协议">物理层协议</a></h4>
+<p><img src="./mac/image-20230411160720360.png" alt="image-20230411160720360" /></p>
+<h4 id="mac子层"><a class="header" href="#mac子层">MAC子层</a></h4>
+<p>如何避免数据冲突：</p>
+<ul>
+<li>
+<p>此时冲突侦测机制已经失效</p>
+<p>当信号比较微弱时，难以收到冲突信号</p>
+<p>”隐藏基站“问题</p>
+</li>
+<li>
+<p>使用中心化的解决方案：<code>PCF</code>点协调功能</p>
+</li>
+<li>
+<p>使用去中心化的解决方案：<code>DCF</code>分布协调功能</p>
+<p>也就是<code>CSMA/CA</code></p>
+</li>
+</ul>
+<p><code>CSMA/CA</code>协议的具体设计如下：</p>
+<p>核心思想：不同正在信道上传输的信号发生冲突。</p>
+<ul>
+<li>单独的确认帧</li>
+<li>指数退避算法</li>
+<li>可选的冲突避免：<code>RTS</code>和<code>CTS</code></li>
+</ul>
+<p><img src="./mac/image-20230411161524813.png" alt="image-20230411161524813" /></p>
+<p>首先引入两个时间：</p>
+<ul>
+<li><code>DIFS</code>：<code>DCF</code>帧间间隔</li>
+<li><code>SIFS</code>：短帧间间隔</li>
+</ul>
+<p>首先对于发送方：</p>
+<ul>
+<li>当发现信道空闲的时间超过<code>DIFS</code>时，发送方发送数据</li>
+<li>当信道忙时，启动随机的退避定时器（但是此时定时器不走）。如果检测到信道空闲，开始减小定时器，在定时器到时间时发送。如果没有收到确认帧，还需要延长退避的时间。</li>
+</ul>
+<p>对于接收方：</p>
+<p>如果一个帧接受没有问题，在等待一个<code>SIFS</code>之后发送确认帧。</p>
+<p><img src="./mac/image-20230411162147984.png" alt="image-20230411162147984" /></p>
+<p>但是上述的设计还没有解决”隐蔽站“和”暴露站“的问题。802.11使用<code>RTS/CTS</code>和<code>NAV</code>来解决这种，其中<code>RTS/CTS</code>是可选的。</p>
+<p>网络分配向量<code>NAV</code>是一种<strong>虚拟监听</strong>机制。每个帧都会包括一个<code>NAV</code>字段，告知其他的站点这个帧的序列会占用信道多长的时间。所有的站点都会跟踪这个<code>NAV</code>字段来确定信道是否处于忙碌状态。</p>
+<blockquote>
+<p>由于这不是通过直接监听信道完成的，所以被称为虚拟监听。</p>
+</blockquote>
+<p><img src="./mac/image-20230414100027730.png" alt="image-20230414100027730" /></p>
+<p>802.11还设计了一种分段突发机制。由于随着帧的长度变长，帧在传输的过程中遇到错误的概率就越大。这个分段突发的机制允许发送方在发送数据的时候将比较长的帧划分为较短的帧，每个短帧都会被当作独立的帧进行处理。</p>
+<p>在802.11e中还引入了一种优先级控制系统，可以让优先级较高的帧得到优先发送。这个系统是通过设置不同的帧间间隔来实现的。</p>
+<p><img src="./mac/image-20230414101300948.png" alt="image-20230414101300948" /></p>
+<p>下面这张流程图表示了<code>CSMA/CA</code>的大致工作流程。</p>
+<p><img src="./mac/image-20230414101025015.png" alt="image-20230414101025015" /></p>
+<p>当Wi-Fi网络中同时存在高速设备和低速设备时，如果每个站点每次只能发送一个帧，那么快速站点的速度就会被慢速站点的速度严重拖慢，所以Wi-Fi协议引入了一个<code>TXOP</code>发送机会的概念，每个站点都能得到平均的时间，而不是平均的帧发送个数。</p>
+<p>下面介绍Wi-Fi协议中帧的结构：</p>
+<p><img src="./mac/image-20230414101952484.png" alt="image-20230414101952484" /></p>
+<p>这里帧同以太网中帧的不同有：</p>
+<ul>
+<li>帧的长度更长</li>
+<li>数据字段没有了最小的限制</li>
+</ul>
+<p>帧中有着三个地址字段，其中第一个地址是接受帧的主机地址，第二个地址是发送方的地址，第三个地址是路由的地址。</p>
+<h3 id="80215-蓝牙"><a class="header" href="#80215-蓝牙">802.15 蓝牙</a></h3>
+<p>主要在个域网中使用的短距离通信协议，一般都在10米范围内使用。蓝牙都是工作在<code>Ad Hoc</code>模式，没有其他的基础设施。</p>
+<p>蓝牙也可以通过<code>Master/Slave</code>模式构成一个局域网。</p>
+<h2 id="数据链路层交换"><a class="header" href="#数据链路层交换">数据链路层交换</a></h2>
+<p>为什么需要将多个局域网连接起来：</p>
+<ul>
+<li>局域网之间相互交流的需求</li>
+<li>不同局域网之间物理距离比较大，不能构成同一个局域网</li>
+<li>将多个局域网划分为多个冲突域，减少冲突</li>
+<li>隔离设备故障</li>
+</ul>
+<p><img src="./mac/image-20230414104544146.png" alt="image-20230414104544146" /></p>
+<h3 id="网桥"><a class="header" href="#网桥">网桥</a></h3>
+<p><strong>网桥</strong>是在数据链路层将多个局域网相互连接的设备。</p>
+<p>帧从一个局域网发送到另一个局域网时，网桥将根据<code>mac</code>地址在不更改帧的情况下直接转发。</p>
+<p>在两个局域网使用的协议不同时，例如Wi-Fi和以太网中，在转发的过程中网桥还会负责协议的转换，数据的重新封装。</p>
+<p>在网桥设计的过程中，还有下面这些问题：</p>
+<ul>
+<li>不同的局域网具有不同的帧格式</li>
+<li>不同的局域网工作在不同的速率</li>
+<li>不同的局域网具有不同的最大帧大小</li>
+<li>安全原因：Wi-Fi网络支持通信加密但是以太网不支持</li>
+<li>在使用网桥之后延迟会增加</li>
+<li>没有流量控制功能</li>
+<li>广播风暴问题没法解决，难以保证服务质量</li>
+</ul>
+<p>那么在转发的过程中，网桥如何知道网络地址在那个局域网？网桥是通过自我学习来构建这张查找表的，这种网桥也被称为<strong>透明网桥</strong>。这个网桥即插即用，在混杂模式之下工作。</p>
+<p>转发的过程大致如下：</p>
+<p>网桥收到一个帧，查表得到目的端口：</p>
+<ul>
+<li>如果目的端口和接收到的端口相同，直接忽略</li>
+<li>如果目的端口和接收到的端口不同，转发</li>
+<li>如果没找到目的端口或者是广播地址，转发到全部的端口<code>flooding</code>（当然接受到的端口就不转发了）。</li>
+</ul>
+<p>网桥自我学习的过程是一个<strong>逆向学习</strong>的过程：</p>
+<ul>
+<li>当设备启动的时候，查找表中没有内容</li>
+<li>当网桥收到帧时，网桥就能够通过帧中的发送方地址和接受到这个帧的端口号确定发送方就是在这个端口对应的网络上，把记录写入查找表中</li>
+</ul>
+<p>在<code>MAC</code>查找表中还有这些值得注意的地方：</p>
+<ul>
+<li>和<code>ip</code>地址不同，<code>mac</code>地址是本地的</li>
+<li>查找表也是本地的，只在一个子网的内部使用</li>
+<li>构建查找表在构建到路由之后就不再向外部构建了</li>
+</ul>
+<h3 id="生成树网桥"><a class="header" href="#生成树网桥">生成树网桥</a></h3>
+<p>生成树网桥是不同于学习网桥的一种网桥。</p>
+<p>生成树网桥的出现主要是为了解决以下两个问题：</p>
+<ul>
+<li>为了提高可靠性，两个局域网之间可能使用多个网桥相连</li>
+<li>当局域网比较复杂的时候，在网络拓扑图中可能会存在环形结构</li>
+</ul>
+<p><code>IEEE 802.1d</code>规定了一种构建生成树的分布式算法：</p>
+<ul>
+<li>每个网桥会周期性的广播自己的识别码（通常基于网桥自己的<code>mac</code>地址）</li>
+<li>拥有最小识别码的网桥将自动成为生成树的根</li>
+<li>算法将自动构建一个从根到每个网桥和设备的最短路径树</li>
+<li>算法会在网络拓扑结构改变时自动重新生成树</li>
+</ul>
+<h3 id="互联设备的总结"><a class="header" href="#互联设备的总结">互联设备的总结</a></h3>
+<p>不同互联设备的冲突域有着非常大的不同：</p>
+<p><img src="./mac/image-20230418145812642.png" alt="image-20230418145812642" /></p>
+<h4 id="网桥和交换机的对比"><a class="header" href="#网桥和交换机的对比">网桥和交换机的对比</a></h4>
+<p>网桥的帧转发是通过软件实现的，而交换机常常通过硬件实现。</p>
+<p>网桥通常同时只能分析和转发一个帧，交换机可以同时在多个端口上处理多个帧</p>
+<p>网桥使用”存储-转发“策略而交换机使用直通策略。</p>
+<p>网桥在商业上失败了。</p>
+<h4 id="广播域"><a class="header" href="#广播域">广播域</a></h4>
+<p>能够收到<code>FF-FF-FF-FF-FF-FF</code>广播地址包的设备构成一个广播域。</p>
+<p>所有连接在同一个局域网上的设备都处在同一广播域。</p>
+<blockquote>
+<p>注意广播域和冲突域的区别。</p>
+</blockquote>
+<h2 id="虚拟局域网"><a class="header" href="#虚拟局域网">虚拟局域网</a></h2>
+<p>在物理局域网中构建出虚拟的逻辑局域网，用于自己的广播域。</p>
+<p>使用虚拟局域网主要解决以下几个问题：</p>
+<ul>
+<li>安全</li>
+<li>避免广播风暴。</li>
+<li>利用软件即可搭建新的逻辑局域网，减少了直接连接线路的成本开支。</li>
+</ul>
+<p>物理网桥/交换机使用<code>VLAN ID</code>来区别不同虚拟交换机。</p>
+<p>物理网桥和交换机通过<code>VLAN ID</code>知道下面三种信息中的一种：</p>
+<ul>
+<li>同这个ID相连接的端口</li>
+<li>同这个ID相连接的<code>mac</code>地址</li>
+<li>同这个ID相连接的网络层协议和地址</li>
+</ul>
+<p><code>IEEE 802.1Q</code>协议规定了支持虚拟局域网的帧类型：</p>
+<p><img src="./mac/image-20230418152058824.png" alt="image-20230418152058824" /></p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../computer-networks/data-link-layer.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../computer-networks/network-layer.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../computer-networks/data-link-layer.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../computer-networks/network-layer.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

@@ -1,0 +1,562 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>内部排序 - Ricardo&#x27;s Wiki</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="我在北京邮电大学计算机科学与技术专业学习三年的部分笔记">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../katex.min.css">
+
+        <!-- MathJax -->
+        <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../index.html">主页</a></li><li class="chapter-item expanded affix "><li class="spacer"></li><li class="chapter-item expanded "><a href="../ai-principle/index.html"><strong aria-hidden="true">1.</strong> 人工智能原理</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../ai-principle/intro.html"><strong aria-hidden="true">1.1.</strong> 概述</a></li><li class="chapter-item expanded "><a href="../ai-principle/question-knowledge.html"><strong aria-hidden="true">1.2.</strong> 问题和知识表示</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../algorithm/index.html"><strong aria-hidden="true">2.</strong> 算法</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../algorithm/intro.html"><strong aria-hidden="true">2.1.</strong> 概述</a></li><li class="chapter-item expanded "><a href="../algorithm/recurse-divide.html"><strong aria-hidden="true">2.2.</strong> 分治算法</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../compiler/index.html"><strong aria-hidden="true">3.</strong> 编译原理</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../compiler/intro.html"><strong aria-hidden="true">3.1.</strong> 概述</a></li><li class="chapter-item expanded "><a href="../compiler/lexical-analyzer.html"><strong aria-hidden="true">3.2.</strong> 词法分析</a></li><li class="chapter-item expanded "><a href="../compiler/grammar-analyzer.html"><strong aria-hidden="true">3.3.</strong> 语法分析</a></li><li class="chapter-item expanded "><a href="../compiler/grammar-driven-translation.html"><strong aria-hidden="true">3.4.</strong> 语法制导翻译</a></li><li class="chapter-item expanded "><a href="../compiler/syntax-analyser.html"><strong aria-hidden="true">3.5.</strong> 语义分析</a></li><li class="chapter-item expanded "><a href="../compiler/runtime.html"><strong aria-hidden="true">3.6.</strong> 运行环境</a></li><li class="chapter-item expanded "><a href="../compiler/intermediate-code.html"><strong aria-hidden="true">3.7.</strong> 中间代码生成</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../computer-architecture/index.html"><strong aria-hidden="true">4.</strong> 计算机组成原理</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../computer-architecture/overview.html"><strong aria-hidden="true">4.1.</strong> 计算机系统概论</a></li><li class="chapter-item expanded "><a href="../computer-architecture/calculator.html"><strong aria-hidden="true">4.2.</strong> 运算方法和运算器</a></li><li class="chapter-item expanded "><a href="../computer-architecture/instruction.html"><strong aria-hidden="true">4.3.</strong> 指令系统</a></li><li class="chapter-item expanded "><a href="../computer-architecture/cpu.html"><strong aria-hidden="true">4.4.</strong> 中央处理器</a></li><li class="chapter-item expanded "><a href="../computer-architecture/memory.html"><strong aria-hidden="true">4.5.</strong> 存储系统</a></li><li class="chapter-item expanded "><a href="../computer-architecture/io.html"><strong aria-hidden="true">4.6.</strong> 输入输出设备</a></li><li class="chapter-item expanded "><a href="../computer-architecture/external.html"><strong aria-hidden="true">4.7.</strong> 外部设备</a></li><li class="chapter-item expanded "><a href="../computer-architecture/bus.html"><strong aria-hidden="true">4.8.</strong> 总线</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../computer-networks/index.html"><strong aria-hidden="true">5.</strong> 计算机网络</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../computer-networks/overview.html"><strong aria-hidden="true">5.1.</strong> 引言</a></li><li class="chapter-item expanded "><a href="../computer-networks/physical-layer.html"><strong aria-hidden="true">5.2.</strong> 物理层</a></li><li class="chapter-item expanded "><a href="../computer-networks/data-link-layer.html"><strong aria-hidden="true">5.3.</strong> 数据链路层</a></li><li class="chapter-item expanded "><a href="../computer-networks/mac.html"><strong aria-hidden="true">5.4.</strong> 介质访问控制层</a></li><li class="chapter-item expanded "><a href="../computer-networks/network-layer.html"><strong aria-hidden="true">5.5.</strong> 网络层</a></li><li class="chapter-item expanded "><a href="../computer-networks/transport-layer.html"><strong aria-hidden="true">5.6.</strong> 传输层</a></li><li class="chapter-item expanded "><a href="../computer-networks/mid-term.html"><strong aria-hidden="true">5.7.</strong> 期中复习</a></li><li class="chapter-item expanded "><a href="../computer-networks/final-term.html"><strong aria-hidden="true">5.8.</strong> 期末复习</a></li><li class="chapter-item expanded "><a href="../computer-networks/lab2.html"><strong aria-hidden="true">5.9.</strong> 实验二</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../csapp/index.html"><strong aria-hidden="true">6.</strong> 计算机系统基础</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../csapp/bits.html"><strong aria-hidden="true">6.1.</strong> 数据的位级表示</a></li><li class="chapter-item expanded "><a href="../csapp/machine.html"><strong aria-hidden="true">6.2.</strong> 程序的机器级表示</a></li><li class="chapter-item expanded "><a href="../csapp/assembly-data.html"><strong aria-hidden="true">6.3.</strong> 程序的机器级表示——数据</a></li><li class="chapter-item expanded "><a href="../csapp/assembly-control.html"><strong aria-hidden="true">6.4.</strong> 程序的机器级表示——控制</a></li><li class="chapter-item expanded "><a href="../csapp/assembly-procedure.html"><strong aria-hidden="true">6.5.</strong> 程序的机器级表示——过程</a></li><li class="chapter-item expanded "><a href="../csapp/assembly-advanced.html"><strong aria-hidden="true">6.6.</strong> 程序的机器级表示——高级话题</a></li><li class="chapter-item expanded "><a href="../csapp/exception-control-flow.html"><strong aria-hidden="true">6.7.</strong> 异常控制流</a></li><li class="chapter-item expanded "><a href="../csapp/linking.html"><strong aria-hidden="true">6.8.</strong> 链接</a></li><li class="chapter-item expanded "><a href="../csapp/io.html"><strong aria-hidden="true">6.9.</strong> 输入输出系统</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../data-structure/index.html"><strong aria-hidden="true">7.</strong> 数据结构</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../data-structure/foundation.html"><strong aria-hidden="true">7.1.</strong> 算法基础</a></li><li class="chapter-item expanded "><a href="../data-structure/inner-sort.html" class="active"><strong aria-hidden="true">7.2.</strong> 内部排序</a></li><li class="chapter-item expanded "><a href="../data-structure/outer-sort.html"><strong aria-hidden="true">7.3.</strong> 外部排序</a></li><li class="chapter-item expanded "><a href="../data-structure/array-and-list.html"><strong aria-hidden="true">7.4.</strong> 数组和广义表</a></li><li class="chapter-item expanded "><a href="../data-structure/list.html"><strong aria-hidden="true">7.5.</strong> 线性表</a></li><li class="chapter-item expanded "><a href="../data-structure/stack-and-dequeue.html"><strong aria-hidden="true">7.6.</strong> 栈和队列</a></li><li class="chapter-item expanded "><a href="../data-structure/tree.html"><strong aria-hidden="true">7.7.</strong> 树</a></li><li class="chapter-item expanded "><a href="../data-structure/graph.html"><strong aria-hidden="true">7.8.</strong> 图</a></li><li class="chapter-item expanded "><a href="../data-structure/string.html"><strong aria-hidden="true">7.9.</strong> 字符串</a></li><li class="chapter-item expanded "><a href="../data-structure/find.html"><strong aria-hidden="true">7.10.</strong> 查找表</a></li><li class="chapter-item expanded "><a href="../data-structure/lab.html"><strong aria-hidden="true">7.11.</strong> 实验</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../database/index.html"><strong aria-hidden="true">8.</strong> 数据库</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../database/intro.html"><strong aria-hidden="true">8.1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="../database/relation-model.html"><strong aria-hidden="true">8.2.</strong> Relation Model</a></li><li class="chapter-item expanded "><a href="../database/relation-database-design.html"><strong aria-hidden="true">8.3.</strong> Relation Database Design</a></li><li class="chapter-item expanded "><a href="../database/sql.html"><strong aria-hidden="true">8.4.</strong> SQL</a></li><li class="chapter-item expanded "><a href="../database/intermediate-sql.html"><strong aria-hidden="true">8.5.</strong> Intermediate SQL</a></li><li class="chapter-item expanded "><a href="../database/entity-relation-model.html"><strong aria-hidden="true">8.6.</strong> Entity Relation Model</a></li><li class="chapter-item expanded "><a href="../database/data-storage-structure.html"><strong aria-hidden="true">8.7.</strong> Data Storage Structure</a></li><li class="chapter-item expanded "><a href="../database/database-index.html"><strong aria-hidden="true">8.8.</strong> Index</a></li><li class="chapter-item expanded "><a href="../database/query-processing.html"><strong aria-hidden="true">8.9.</strong> Query Processing</a></li><li class="chapter-item expanded "><a href="../database/query-optimization.html"><strong aria-hidden="true">8.10.</strong> Query Optimization</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../discrete-math/index.html"><strong aria-hidden="true">9.</strong> 离散数学</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../discrete-math/relation.html"><strong aria-hidden="true">9.1.</strong> Relation</a></li><li class="chapter-item expanded "><a href="../discrete-math/advanced-counting.html"><strong aria-hidden="true">9.2.</strong> Advanced Counting</a></li><li class="chapter-item expanded "><a href="../discrete-math/tree.html"><strong aria-hidden="true">9.3.</strong> Tree</a></li><li class="chapter-item expanded "><a href="../discrete-math/graph.html"><strong aria-hidden="true">9.4.</strong> Graph</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../formal-language/index.html"><strong aria-hidden="true">10.</strong> 形式语言和自动机</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../formal-language/fa.html"><strong aria-hidden="true">10.1.</strong> 有限状态自动机</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../missing-semester/index.html"><strong aria-hidden="true">11.</strong> 计算机教学中缺少的一课</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../missing-semester/missing-the-shell.html"><strong aria-hidden="true">11.1.</strong> Shell</a></li><li class="chapter-item expanded "><a href="../missing-semester/missing-shell-scripts.html"><strong aria-hidden="true">11.2.</strong> Shell Scripts</a></li><li class="chapter-item expanded "><a href="../missing-semester/missing-vim.html"><strong aria-hidden="true">11.3.</strong> Vim</a></li><li class="chapter-item expanded "><a href="../missing-semester/missing-data-wrangling.html"><strong aria-hidden="true">11.4.</strong> Data Wrangling</a></li><li class="chapter-item expanded "><a href="../missing-semester/missing-command-line.html"><strong aria-hidden="true">11.5.</strong> Command Line</a></li><li class="chapter-item expanded "><a href="../missing-semester/missing-potpourri.html"><strong aria-hidden="true">11.6.</strong> Potpourri</a></li><li class="chapter-item expanded "><a href="../missing-semester/missing-version-control.html"><strong aria-hidden="true">11.7.</strong> Version Control</a></li><li class="chapter-item expanded "><a href="../missing-semester/missing-debugging.html"><strong aria-hidden="true">11.8.</strong> Debug</a></li><li class="chapter-item expanded "><a href="../missing-semester/missing-metaprogramming.html"><strong aria-hidden="true">11.9.</strong> Metaprogram</a></li><li class="chapter-item expanded "><a href="../missing-semester/missing-security.html"><strong aria-hidden="true">11.10.</strong> Security</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../operating-system/index.html"><strong aria-hidden="true">12.</strong> 操作系统</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../operating-system/intro.html"><strong aria-hidden="true">12.1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="../operating-system/os-structures.html"><strong aria-hidden="true">12.2.</strong> OS Structure</a></li><li class="chapter-item expanded "><a href="../operating-system/processes.html"><strong aria-hidden="true">12.3.</strong> Process</a></li><li class="chapter-item expanded "><a href="../operating-system/process-synchronization.html"><strong aria-hidden="true">12.4.</strong> Process Synchronization</a></li><li class="chapter-item expanded "><a href="../operating-system/cpu-scheduling.html"><strong aria-hidden="true">12.5.</strong> CPU Scheduling</a></li><li class="chapter-item expanded "><a href="../operating-system/threads.html"><strong aria-hidden="true">12.6.</strong> Thread</a></li><li class="chapter-item expanded "><a href="../operating-system/memory-management.html"><strong aria-hidden="true">12.7.</strong> Memory Management</a></li><li class="chapter-item expanded "><a href="../operating-system/virtual-memory.html"><strong aria-hidden="true">12.8.</strong> Virtual Memory</a></li><li class="chapter-item expanded "><a href="../operating-system/fs-interface.html"><strong aria-hidden="true">12.9.</strong> Filesystem Interface</a></li><li class="chapter-item expanded "><a href="../operating-system/fs-implementation.html"><strong aria-hidden="true">12.10.</strong> Filesystem Implementation</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../socialist/index.html"><strong aria-hidden="true">13.</strong> 毛泽东思想和中国特色理论体系概论</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../socialist/maozedong.html"><strong aria-hidden="true">13.1.</strong> 毛概期末总结</a></li><li class="chapter-item expanded "><a href="../socialist/others.html"><strong aria-hidden="true">13.2.</strong> 课后大题</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Ricardo&#x27;s Wiki</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="内部排序"><a class="header" href="#内部排序">内部排序</a></h1>
+<h2 id="排序"><a class="header" href="#排序">排序</a></h2>
+<h3 id="评价排序算法的主要标准"><a class="header" href="#评价排序算法的主要标准">评价排序算法的主要标准</a></h3>
+<p>首先是算法的时间开销：</p>
+<ul>
+<li>比较关键字的次数</li>
+<li>移动记录的次数</li>
+</ul>
+<p>算法运行的时间还和输入实例的初始状态有关，分情况：</p>
+<ul>
+<li>最好</li>
+<li>最坏</li>
+<li>平均</li>
+</ul>
+<p>然后是算法的空间开销，这上面的比较相对比较简单，主要就是考虑算法中所需的辅助变量占据的空间。</p>
+<blockquote>
+<p>在讨论中我们先做一些约定：</p>
+<ul>
+<li>采用顺序存储</li>
+<li>按记录关键字非递减排序，关键字为整数</li>
+</ul>
+</blockquote>
+<h2 id="插入排序"><a class="header" href="#插入排序">插入排序</a></h2>
+<p>将序列分为两部分，前一部分为有序序列，后一部分为无序序列，通过遍历将无序序列中的元素插入有序序列中合适的位置上，直到无序序列为空。</p>
+<h3 id="直接插入排序"><a class="header" href="#直接插入排序">直接插入排序</a></h3>
+<p>利用顺序查找找到元素的插入位置。</p>
+<pre><code class="language-cpp">void InsertSort(std::vector&lt;int&gt;&amp; list)
+{
+    int length = list.size();
+
+    for (int i = 1; i &lt; length; i++)
+    {
+        if (list[i] &lt; list[i - 1])
+        {
+            // 只有当前值小于目前有序序列的最大值时才处理
+            int temp = list[i];
+            int j;
+            // 依次比较有序序列和当前元素
+            // 如果大于就将有序序列的元素向后面移动一位
+            // 当找到第一个不大于的元素时
+            // 在它的后面插入元素
+            for (j = i - 1; j &gt;= 0; j--)
+            {
+                if (list[j] &gt; temp)
+                {
+                    list[j + 1] = list[j];
+                }
+                else
+                {
+                    break;
+                }
+            }
+            list[j + 1] = temp;
+        }
+    }
+}
+</code></pre>
+<h4 id="性能分析"><a class="header" href="#性能分析">性能分析</a></h4>
+<ul>
+<li>
+<p>在最好的情况下，也就是原始的数据就是按照正序来排列的：</p>
+<p><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07153em;">C</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:-0.0715em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">min</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1.104em;vertical-align:-0.2997em;"></span><span class="mop"><span class="mop op-symbol small-op" style="position:relative;top:0em;">∑</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8043em;"><span style="top:-2.4003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">i</span><span class="mrel mtight">=</span><span class="mord mtight">2</span></span></span></span><span style="top:-3.2029em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2997em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6667em;vertical-align:-0.0833em;"></span><span class="mord mathnormal">n</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">1</span></span></span></span>​</p>
+<p><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.10903em;">M</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:-0.109em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">min</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">0</span></span></span></span>​</p>
+</li>
+<li>
+<p>在最坏的情况下，原始的数据按照逆序来排列：</p>
+<p><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07153em;">C</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.0715em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">ma</span><span class="mord mathnormal mtight">x</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1.355em;vertical-align:-0.345em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.01em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.485em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mopen mtight">(</span><span class="mord mathnormal mtight">n</span><span class="mbin mtight">+</span><span class="mord mtight">2</span><span class="mclose mtight">)</span><span class="mopen mtight">(</span><span class="mord mathnormal mtight">n</span><span class="mbin mtight">−</span><span class="mord mtight">1</span><span class="mclose mtight">)</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span>​</p>
+<p><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.10903em;">M</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.109em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">ma</span><span class="mord mathnormal mtight">x</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1.355em;vertical-align:-0.345em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.01em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.485em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mopen mtight">(</span><span class="mord mathnormal mtight">n</span><span class="mbin mtight">+</span><span class="mord mtight">4</span><span class="mclose mtight">)</span><span class="mopen mtight">(</span><span class="mord mathnormal mtight">n</span><span class="mbin mtight">−</span><span class="mord mtight">1</span><span class="mclose mtight">)</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span>​</p>
+</li>
+</ul>
+<p>总的来说，算法的时间复杂度在<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.0641em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal">n</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span>这个级别，辅助空间复杂度是<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord">1</span><span class="mclose">)</span></span></span></span>。</p>
+<h4 id="改进措施"><a class="header" href="#改进措施">改进措施</a></h4>
+<p>直接插入排序算法还存在不少的优化空间。</p>
+<ul>
+<li>
+<p>折半插入排序</p>
+<p>将循环中每一次在有序序列上的查找从顺序查找改为折半查找，有效的减少了关键字之间的比较次数</p>
+</li>
+<li>
+<p>2路插入排序</p>
+<p>设置一个个原始序列相同大小的辅助空间，首先将原始序列中的第一个元素复制到辅助序列中，遍历序列中的元素，同辅助空间的第一个元素比较大小，如果大于就插入在第一个元素之后的序列中，如果小于就插入到第一个元素之前的序列之中。通过辅助变量空间的变大可以有效的减少记录移动的次数。</p>
+<blockquote>
+<p>说实话，我没看懂</p>
+</blockquote>
+</li>
+<li>
+<p>表插入排序</p>
+<p>构造静态链表，通过改变指针来代替移动记录的操作，效果同上面一个优化的方法一样，都是减少记录移动的次数。</p>
+</li>
+</ul>
+<h3 id="希尔排序"><a class="header" href="#希尔排序">希尔排序</a></h3>
+<p>对待整体的序列先做“宏观”的调整，再进行“微观”的调整。</p>
+<p>先选定一个记录下标的增量，将整个记录序列按增量从第一个记录划分为若干组，对每组使用直接插入排序的方法；然后减小增量的值，不断的重复上述的过程，直到增量的大小等于1。</p>
+<pre><code class="language-cpp">void ShellSort(std::vector&lt;int&gt;&amp; list)
+{
+    int length = list.size();
+    for (int delta = length &gt;&gt; 1; delta &gt; 0; delta = delta &gt;&gt; 1)
+    {
+        for (int i = delta; i &lt; length; i++)
+        {
+            int temp = list[i];
+            int j = 0;
+            for (j = i - delta; j &gt;= 0 and list[j] &gt; temp; j = j - delta)
+            {
+                list[j + delta] = list[j];
+            }
+            list[j + delta] = temp;
+        }
+    }
+}
+</code></pre>
+<h4 id="性能分析-1"><a class="header" href="#性能分析-1">性能分析</a></h4>
+<p>希尔排序的性能主要取决于增量序列的选择，在上面的实现中我是直接使用的折半序列，目前还没有关于最佳序列选择的定论，但是一般的决定原则是：</p>
+<ul>
+<li>最后一个增量是1</li>
+<li>避免增量序列中的值，尤其是相邻的值，有公因子</li>
+</ul>
+<p>经过在现实世界中的实验结果，在<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">n</span></span></span></span>比较大的时候，比较和移动的次数约在<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span class="mord mathnormal">n</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1.25</span></span></span></span></span></span></span></span></span></span></span></span>到<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord">1.6</span><span class="mord"><span class="mord mathnormal">n</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1.25</span></span></span></span></span></span></span></span></span></span></span></span>之间。</p>
+<p>希尔排序不算是稳定的排序算法。</p>
+<h2 id="交换排序"><a class="header" href="#交换排序">交换排序</a></h2>
+<h3 id="冒泡排序"><a class="header" href="#冒泡排序">冒泡排序</a></h3>
+<p>将两个相邻记录的关键词进行比较，若为逆序则交换两者的位置，小者往上浮，大者往下沉。</p>
+<pre><code class="language-cpp">void BubbleSort(std::vector&lt;int&gt;&amp; list)
+{
+    int length = list.size();
+    // 设置sort可以避免一些不必要的循环
+    bool sorted = false;
+
+    for (int i = 1; i &lt; length and !sorted; i++)
+    {
+        sorted = true;
+
+        for (int j = 0; j &lt; length - i; j++)
+        {
+            if (list[j] &gt; list[j + 1])
+            {
+                int swap = list[j];
+                list[j] = list[j + 1];
+                list[j + 1] = swap;
+                sorted = false; 
+            }
+        }
+    }
+}
+</code></pre>
+<h4 id="性能分析-2"><a class="header" href="#性能分析-2">性能分析</a></h4>
+<p>在最好情况下，即原始数据就按照正序排序：<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07153em;">C</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:-0.0715em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">min</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6667em;vertical-align:-0.0833em;"></span><span class="mord mathnormal">n</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">1</span></span></span></span> <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.10903em;">M</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:-0.109em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">min</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">0</span></span></span></span>​</p>
+<p>在最坏的情况下，原始数据按照逆序排序，<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07153em;">C</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.0715em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">ma</span><span class="mord mathnormal mtight">x</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1.2537em;vertical-align:-0.2997em;"></span><span class="mop"><span class="mop op-symbol small-op" style="position:relative;top:0em;">∑</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.954em;"><span style="top:-2.4003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">i</span><span class="mrel mtight">=</span><span class="mord mtight">1</span></span></span></span><span style="top:-3.2029em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">n</span><span class="mbin mtight">−</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2997em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1.1901em;vertical-align:-0.345em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8451em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal">n</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">n</span><span class="mclose">)</span></span></span></span> <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.10903em;">M</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.109em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">ma</span><span class="mord mathnormal mtight">x</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1.2537em;vertical-align:-0.2997em;"></span><span class="mord">3</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mop"><span class="mop op-symbol small-op" style="position:relative;top:0em;">∑</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.954em;"><span style="top:-2.4003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">i</span><span class="mrel mtight">=</span><span class="mord mtight">1</span></span></span></span><span style="top:-3.2029em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">n</span><span class="mbin mtight">−</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2997em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">i</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1.1901em;vertical-align:-0.345em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8451em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">3</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal">n</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">n</span><span class="mclose">)</span></span></span></span></p>
+<p>总的来说，冒泡排序的时间复杂度为<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.0641em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal">n</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span>，辅助空间的复杂度为<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord">1</span><span class="mclose">)</span></span></span></span>。</p>
+<h3 id="快速排序"><a class="header" href="#快速排序">快速排序</a></h3>
+<p>指定枢轴（或者称为支点、基准记录），通过一次排序将其放在正确的位置上，而且这个元素将待排的记录分为独立的两个部分，使得在枢轴左侧的记录都小于等于枢轴，在枢轴右侧的记录都大于等于枢轴。对枢轴左右两侧的元素重复这个过程，直到形成的子序列中只剩下一个记录或者是没有记录。</p>
+<h4 id="分治的算法原理"><a class="header" href="#分治的算法原理">分治的算法原理</a></h4>
+<ul>
+<li>分解：将原问题分解为若干个子问题</li>
+<li>求解：递归的求解子问题，如果子问题的规模足够小，则直接求解</li>
+<li>组合：将各子问题的解组合成原问题的解</li>
+</ul>
+<pre><code class="language-cpp">void QuickSortR(std::vector&lt;int&gt;&amp; list, int begin, int end)
+{
+    if (begin &lt; end)
+    {
+        int key = list[begin];
+        int low = begin;
+        int high = end;
+
+        while (low &lt; high)
+        {
+            while(low &lt; high and list[high] &gt;= key)
+            {
+                high--;
+            }
+            list[low] = list[high];
+            while (low &lt; high and list[low] &lt;= key)
+            {
+                low++;
+            }
+            list[high] = list[low];
+        }
+
+        list[low] = key;
+
+        QuickSortR(list, begin, low - 1);
+        QuickSortR(list, low + 1, end);
+    }
+}
+
+void QuickSort(std::vector&lt;int&gt;&amp; list)
+{
+    QuickSortR(list, 0, list.size() - 1);
+}
+</code></pre>
+<h4 id="性能分析-3"><a class="header" href="#性能分析-3">性能分析</a></h4>
+<p>对于快速排序而言，有序的情况反而是最坏的情况，在当输入的数据就是正序或者逆序时，排序的时间复杂度为<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.0641em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal">n</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span>。而快速排序最好的情况是每次划分的结果是枢轴的左右两个子序列的长度基本相同，在这种情况下时间复杂度为<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">n</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">o</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0359em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mclose">)</span></span></span></span>。</p>
+<p>在平均情况下，算法的时间复杂度为<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">kn</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">o</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0359em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mclose">)</span></span></span></span>。如果仅就平均时间复杂度而言，快速排序被认为是较好的一种内部排序算法。</p>
+<p>关于辅助空间的复杂度：在最好情况下为<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">o</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0359em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mclose">)</span></span></span></span>，在最坏的情况下为<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mclose">)</span></span></span></span>。</p>
+<h2 id="选择排序"><a class="header" href="#选择排序">选择排序</a></h2>
+<h3 id="简单选择排序"><a class="header" href="#简单选择排序">简单选择排序</a></h3>
+<p>每次从待排序列中选出关键字最小的记录作为有序序列中最后的一个记录，直到最后一个记录为止。</p>
+<pre><code class="language-cpp">void SelectSort(std::vector&lt;int&gt;&amp; list)
+{
+    int length = list.size();
+
+    for (int i = 0; i &lt; length; i++)
+    {
+        int j = i;
+        for (int k = i + 1; k &lt; length; k++)
+        {
+            if (list[j] &gt; list[k])
+            {
+                j = k;
+            }
+        }
+
+        if (i != j)
+        {
+            int swap = list[i];
+            list[i] = list[j];
+            list[j] = swap;
+        }
+    }
+}
+</code></pre>
+<h4 id="性能分析-4"><a class="header" href="#性能分析-4">性能分析</a></h4>
+<p>总的比较册次数和记录初始的排列状态没有关系，都是<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.355em;vertical-align:-0.345em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.01em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.485em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">n</span><span class="mopen mtight">(</span><span class="mord mathnormal mtight">n</span><span class="mbin mtight">−</span><span class="mord mtight">1</span><span class="mclose mtight">)</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span>，不过移动的次数就和初始状态有关系，在最好的条件下，也就是初始记录就是正序时，移动的次数为<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">0</span></span></span></span>，在最坏的条件下，也就是初始记录就是完全逆序的情况下：<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">3</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mclose">)</span></span></span></span>。</p>
+<p>总的来说，平均的时间复杂度为<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.0641em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal">n</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span>, 而辅助空间复杂度为<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord">1</span><span class="mclose">)</span></span></span></span>。</p>
+<h3 id="树形选择排序"><a class="header" href="#树形选择排序">树形选择排序</a></h3>
+<p>​<img src="./assets/image-20221128142909-itq554s.png" alt="image" />​</p>
+<h3 id="堆排序"><a class="header" href="#堆排序">堆排序</a></h3>
+<ul>
+<li>较直接选择排序减少重复排序</li>
+<li>较树形选择排序减少辅助存储空间（仅需一个）</li>
+</ul>
+<h4 id="二叉堆的定义"><a class="header" href="#二叉堆的定义">二叉堆的定义</a></h4>
+<p><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">n</span></span></span></span>个关键字的序列当且仅当满足下列条件之一：</p>
+<ul>
+<li><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8444em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:-0.0315em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">≤</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8444em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:-0.0315em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span><span class="mord mathnormal mtight">i</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> 且 <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8444em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:-0.0315em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">≤</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.9028em;vertical-align:-0.2083em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:-0.0315em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span><span class="mord mathnormal mtight">i</span><span class="mbin mtight">+</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2083em;"><span></span></span></span></span></span></span></span></span></span>，称为小根堆</li>
+<li><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8444em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:-0.0315em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">≥</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8444em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:-0.0315em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span><span class="mord mathnormal mtight">i</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> 且 <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8444em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:-0.0315em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">≥</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.9028em;vertical-align:-0.2083em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:-0.0315em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span><span class="mord mathnormal mtight">i</span><span class="mbin mtight">+</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2083em;"><span></span></span></span></span></span></span></span></span></span>，称为大根堆</li>
+</ul>
+<p>堆的定义和完全二叉树的顺序存储结构比较相似。</p>
+<h4 id="基本思想"><a class="header" href="#基本思想">基本思想</a></h4>
+<ul>
+<li>将初始文件建成一个大根堆</li>
+<li>将大根堆的堆顶，也就是最大的元素，同最末尾的元素交换</li>
+<li>将新形成的无序部分调整为大根堆</li>
+<li>重复2~3步，直到所有元素都排序完成</li>
+</ul>
+<p>在基本思想中就存在两个问题需要我们解决：</p>
+<ul>
+<li>如何从一个无序的序列建成一个堆</li>
+<li>如何在输出堆顶元素之后，调整剩余元素，使之成为一个新的堆</li>
+</ul>
+<p>我们可以通过筛选的方法，在将堆顶元素输出之后的堆调整为新的大顶堆：</p>
+<p>​<img src="./assets/image-20221201103503-2x31sg1.png" alt="image" />​</p>
+<p>在从一群无序的元素建立一个大顶堆的时候，就从低到高依次筛选建立大顶堆：</p>
+<p>​<img src="./assets/image-20221201103600-3vsu6r8.png" alt="image" />​</p>
+<h4 id="算法实现"><a class="header" href="#算法实现">算法实现</a></h4>
+<p>首先我们需要实现从一个无序的堆建立大根堆的函数：</p>
+<pre><code class="language-cpp">void HeapAdjust(std::vector&lt;int&gt;&amp; heap, int begin, int end)
+{
+    // 初始化父节点 子节点的位置
+    int dad = begin;
+    int son = dad * 2 + 1;
+
+    while (son &lt;= end)
+    {
+        if (son + 1 &lt;= end and heap[son] &lt; heap[son + 1])
+        {
+            // 选择左右节点中较大者
+            son++;
+        }
+        if (heap[dad] &gt; heap[son])
+        {
+            break;
+        }
+        else
+        {
+            // 交换父子节点
+            int temp = heap[dad];
+            heap[dad] = heap[son];
+            heap[son] = temp;
+
+            // 继续下一个父节点
+            dad = son;
+            son = dad * 2 + 1;
+        }
+    }
+}
+</code></pre>
+<p>在拥有上面这个调整函数之后，我们就可以写出堆排序：</p>
+<pre><code class="language-cpp">void HeapSort(std::vector&lt;int&gt;&amp; heap)
+{
+    int length = heap.size();
+    // 将无序堆初始化为大根堆
+    // 从最后一个父节点开始调整
+    for (int i = length / 2 - 1; i &gt;= 0; i--)
+    {
+        HeapAdjust(heap, i, length - 1);
+    }
+    for (int i = length - 1; i &gt; 0; i--)
+    {
+        // 交换最大的元素和末尾的元素
+        int temp = heap[i];
+        heap[i] = heap[0];
+        heap[0] = temp;
+        // 重新将前面的无序堆调整为大根堆
+        HeapAdjust(heap, 0, i - 1);
+    }
+}
+</code></pre>
+<h4 id="性能分析-5"><a class="header" href="#性能分析-5">性能分析</a></h4>
+<p>在最坏的情况下，算法的时间复杂度为<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">o</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0359em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord mathnormal">n</span><span class="mclose">)</span></span></span></span>​</p>
+<ul>
+<li>在建立初始堆时，比较的次数不超过<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">4</span><span class="mord mathnormal">n</span></span></span></span>​</li>
+<li>在反复调整堆时，比较的次数不会超过<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">2</span><span class="mord mathnormal">n</span><span class="mopen">⌊</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">o</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0359em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord mathnormal">n</span><span class="mclose">⌋</span></span></span></span>​</li>
+</ul>
+<p>通过在实际环境中的反复实验，平均性能比较接近于算法的最坏时间复杂度。</p>
+<p>算法的辅助空间复杂度为<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord">1</span><span class="mclose">)</span></span></span></span>​</p>
+<p>这是一种不稳定的排序算法，在对于数据较大的序列进行排序时用处比较大。</p>
+<h2 id="归并排序"><a class="header" href="#归并排序">归并排序</a></h2>
+<p>将两个或者两个以上同序的序列归并为一个序列的操作成为归并。</p>
+<h3 id="两路归并排序"><a class="header" href="#两路归并排序">两路归并排序</a></h3>
+<p>首先将待排序列看作是<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">n</span></span></span></span>个长度为1的有序子序列，两两归并成为长度为2的有序子序列；将上一步得到的子序列两两归并；……；直到合并成为一个序列为止。</p>
+<h4 id="性能分析-6"><a class="header" href="#性能分析-6">性能分析</a></h4>
+<p>在任何情况下算法的时间复杂度都是<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">o</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0359em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord mathnormal">n</span><span class="mclose">)</span></span></span></span>，空间的复杂度都是<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mclose">)</span></span></span></span>，很少用于内部排序。</p>
+<h3 id="自然两路归并排序"><a class="header" href="#自然两路归并排序">自然两路归并排序</a></h3>
+<p>以游程（自然的有序段）作为子序列进行归并，可以比直接两路归并更加有效。</p>
+<p>​<img src="./assets/image-20221201152549-4mk6086.png" alt="image" />​</p>
+<h2 id="基数排序"><a class="header" href="#基数排序">基数排序</a></h2>
+<p>通过“分配”和“收集”过程来实现排序，时间复杂度可以突破基于关键字比较一类方法的下界<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">o</span><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="mord mathnormal">n</span><span class="mclose">)</span></span></span></span>，达到<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mclose">)</span></span></span></span>。</p>
+<blockquote>
+<p>基数排序的算法思想来自于多关键字排序中的思想。在多关键字排序中存在两个排序思想：最高位优先法(MSD)和最低位优先法(LSD)</p>
+</blockquote>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../data-structure/foundation.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../data-structure/outer-sort.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../data-structure/foundation.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../data-structure/outer-sort.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

@@ -1,0 +1,410 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Potpourri - Ricardo&#x27;s Wiki</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="我在北京邮电大学计算机科学与技术专业学习三年的部分笔记">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../katex.min.css">
+
+        <!-- MathJax -->
+        <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../index.html">主页</a></li><li class="chapter-item expanded affix "><li class="spacer"></li><li class="chapter-item expanded "><a href="../ai-principle/index.html"><strong aria-hidden="true">1.</strong> 人工智能原理</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../ai-principle/intro.html"><strong aria-hidden="true">1.1.</strong> 概述</a></li><li class="chapter-item expanded "><a href="../ai-principle/question-knowledge.html"><strong aria-hidden="true">1.2.</strong> 问题和知识表示</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../algorithm/index.html"><strong aria-hidden="true">2.</strong> 算法</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../algorithm/intro.html"><strong aria-hidden="true">2.1.</strong> 概述</a></li><li class="chapter-item expanded "><a href="../algorithm/recurse-divide.html"><strong aria-hidden="true">2.2.</strong> 分治算法</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../compiler/index.html"><strong aria-hidden="true">3.</strong> 编译原理</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../compiler/intro.html"><strong aria-hidden="true">3.1.</strong> 概述</a></li><li class="chapter-item expanded "><a href="../compiler/lexical-analyzer.html"><strong aria-hidden="true">3.2.</strong> 词法分析</a></li><li class="chapter-item expanded "><a href="../compiler/grammar-analyzer.html"><strong aria-hidden="true">3.3.</strong> 语法分析</a></li><li class="chapter-item expanded "><a href="../compiler/grammar-driven-translation.html"><strong aria-hidden="true">3.4.</strong> 语法制导翻译</a></li><li class="chapter-item expanded "><a href="../compiler/syntax-analyser.html"><strong aria-hidden="true">3.5.</strong> 语义分析</a></li><li class="chapter-item expanded "><a href="../compiler/runtime.html"><strong aria-hidden="true">3.6.</strong> 运行环境</a></li><li class="chapter-item expanded "><a href="../compiler/intermediate-code.html"><strong aria-hidden="true">3.7.</strong> 中间代码生成</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../computer-architecture/index.html"><strong aria-hidden="true">4.</strong> 计算机组成原理</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../computer-architecture/overview.html"><strong aria-hidden="true">4.1.</strong> 计算机系统概论</a></li><li class="chapter-item expanded "><a href="../computer-architecture/calculator.html"><strong aria-hidden="true">4.2.</strong> 运算方法和运算器</a></li><li class="chapter-item expanded "><a href="../computer-architecture/instruction.html"><strong aria-hidden="true">4.3.</strong> 指令系统</a></li><li class="chapter-item expanded "><a href="../computer-architecture/cpu.html"><strong aria-hidden="true">4.4.</strong> 中央处理器</a></li><li class="chapter-item expanded "><a href="../computer-architecture/memory.html"><strong aria-hidden="true">4.5.</strong> 存储系统</a></li><li class="chapter-item expanded "><a href="../computer-architecture/io.html"><strong aria-hidden="true">4.6.</strong> 输入输出设备</a></li><li class="chapter-item expanded "><a href="../computer-architecture/external.html"><strong aria-hidden="true">4.7.</strong> 外部设备</a></li><li class="chapter-item expanded "><a href="../computer-architecture/bus.html"><strong aria-hidden="true">4.8.</strong> 总线</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../computer-networks/index.html"><strong aria-hidden="true">5.</strong> 计算机网络</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../computer-networks/overview.html"><strong aria-hidden="true">5.1.</strong> 引言</a></li><li class="chapter-item expanded "><a href="../computer-networks/physical-layer.html"><strong aria-hidden="true">5.2.</strong> 物理层</a></li><li class="chapter-item expanded "><a href="../computer-networks/data-link-layer.html"><strong aria-hidden="true">5.3.</strong> 数据链路层</a></li><li class="chapter-item expanded "><a href="../computer-networks/mac.html"><strong aria-hidden="true">5.4.</strong> 介质访问控制层</a></li><li class="chapter-item expanded "><a href="../computer-networks/network-layer.html"><strong aria-hidden="true">5.5.</strong> 网络层</a></li><li class="chapter-item expanded "><a href="../computer-networks/transport-layer.html"><strong aria-hidden="true">5.6.</strong> 传输层</a></li><li class="chapter-item expanded "><a href="../computer-networks/mid-term.html"><strong aria-hidden="true">5.7.</strong> 期中复习</a></li><li class="chapter-item expanded "><a href="../computer-networks/final-term.html"><strong aria-hidden="true">5.8.</strong> 期末复习</a></li><li class="chapter-item expanded "><a href="../computer-networks/lab2.html"><strong aria-hidden="true">5.9.</strong> 实验二</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../csapp/index.html"><strong aria-hidden="true">6.</strong> 计算机系统基础</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../csapp/bits.html"><strong aria-hidden="true">6.1.</strong> 数据的位级表示</a></li><li class="chapter-item expanded "><a href="../csapp/machine.html"><strong aria-hidden="true">6.2.</strong> 程序的机器级表示</a></li><li class="chapter-item expanded "><a href="../csapp/assembly-data.html"><strong aria-hidden="true">6.3.</strong> 程序的机器级表示——数据</a></li><li class="chapter-item expanded "><a href="../csapp/assembly-control.html"><strong aria-hidden="true">6.4.</strong> 程序的机器级表示——控制</a></li><li class="chapter-item expanded "><a href="../csapp/assembly-procedure.html"><strong aria-hidden="true">6.5.</strong> 程序的机器级表示——过程</a></li><li class="chapter-item expanded "><a href="../csapp/assembly-advanced.html"><strong aria-hidden="true">6.6.</strong> 程序的机器级表示——高级话题</a></li><li class="chapter-item expanded "><a href="../csapp/exception-control-flow.html"><strong aria-hidden="true">6.7.</strong> 异常控制流</a></li><li class="chapter-item expanded "><a href="../csapp/linking.html"><strong aria-hidden="true">6.8.</strong> 链接</a></li><li class="chapter-item expanded "><a href="../csapp/io.html"><strong aria-hidden="true">6.9.</strong> 输入输出系统</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../data-structure/index.html"><strong aria-hidden="true">7.</strong> 数据结构</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../data-structure/foundation.html"><strong aria-hidden="true">7.1.</strong> 算法基础</a></li><li class="chapter-item expanded "><a href="../data-structure/inner-sort.html"><strong aria-hidden="true">7.2.</strong> 内部排序</a></li><li class="chapter-item expanded "><a href="../data-structure/outer-sort.html"><strong aria-hidden="true">7.3.</strong> 外部排序</a></li><li class="chapter-item expanded "><a href="../data-structure/array-and-list.html"><strong aria-hidden="true">7.4.</strong> 数组和广义表</a></li><li class="chapter-item expanded "><a href="../data-structure/list.html"><strong aria-hidden="true">7.5.</strong> 线性表</a></li><li class="chapter-item expanded "><a href="../data-structure/stack-and-dequeue.html"><strong aria-hidden="true">7.6.</strong> 栈和队列</a></li><li class="chapter-item expanded "><a href="../data-structure/tree.html"><strong aria-hidden="true">7.7.</strong> 树</a></li><li class="chapter-item expanded "><a href="../data-structure/graph.html"><strong aria-hidden="true">7.8.</strong> 图</a></li><li class="chapter-item expanded "><a href="../data-structure/string.html"><strong aria-hidden="true">7.9.</strong> 字符串</a></li><li class="chapter-item expanded "><a href="../data-structure/find.html"><strong aria-hidden="true">7.10.</strong> 查找表</a></li><li class="chapter-item expanded "><a href="../data-structure/lab.html"><strong aria-hidden="true">7.11.</strong> 实验</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../database/index.html"><strong aria-hidden="true">8.</strong> 数据库</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../database/intro.html"><strong aria-hidden="true">8.1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="../database/relation-model.html"><strong aria-hidden="true">8.2.</strong> Relation Model</a></li><li class="chapter-item expanded "><a href="../database/relation-database-design.html"><strong aria-hidden="true">8.3.</strong> Relation Database Design</a></li><li class="chapter-item expanded "><a href="../database/sql.html"><strong aria-hidden="true">8.4.</strong> SQL</a></li><li class="chapter-item expanded "><a href="../database/intermediate-sql.html"><strong aria-hidden="true">8.5.</strong> Intermediate SQL</a></li><li class="chapter-item expanded "><a href="../database/entity-relation-model.html"><strong aria-hidden="true">8.6.</strong> Entity Relation Model</a></li><li class="chapter-item expanded "><a href="../database/data-storage-structure.html"><strong aria-hidden="true">8.7.</strong> Data Storage Structure</a></li><li class="chapter-item expanded "><a href="../database/database-index.html"><strong aria-hidden="true">8.8.</strong> Index</a></li><li class="chapter-item expanded "><a href="../database/query-processing.html"><strong aria-hidden="true">8.9.</strong> Query Processing</a></li><li class="chapter-item expanded "><a href="../database/query-optimization.html"><strong aria-hidden="true">8.10.</strong> Query Optimization</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../discrete-math/index.html"><strong aria-hidden="true">9.</strong> 离散数学</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../discrete-math/relation.html"><strong aria-hidden="true">9.1.</strong> Relation</a></li><li class="chapter-item expanded "><a href="../discrete-math/advanced-counting.html"><strong aria-hidden="true">9.2.</strong> Advanced Counting</a></li><li class="chapter-item expanded "><a href="../discrete-math/tree.html"><strong aria-hidden="true">9.3.</strong> Tree</a></li><li class="chapter-item expanded "><a href="../discrete-math/graph.html"><strong aria-hidden="true">9.4.</strong> Graph</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../formal-language/index.html"><strong aria-hidden="true">10.</strong> 形式语言和自动机</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../formal-language/fa.html"><strong aria-hidden="true">10.1.</strong> 有限状态自动机</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../missing-semester/index.html"><strong aria-hidden="true">11.</strong> 计算机教学中缺少的一课</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../missing-semester/missing-the-shell.html"><strong aria-hidden="true">11.1.</strong> Shell</a></li><li class="chapter-item expanded "><a href="../missing-semester/missing-shell-scripts.html"><strong aria-hidden="true">11.2.</strong> Shell Scripts</a></li><li class="chapter-item expanded "><a href="../missing-semester/missing-vim.html"><strong aria-hidden="true">11.3.</strong> Vim</a></li><li class="chapter-item expanded "><a href="../missing-semester/missing-data-wrangling.html"><strong aria-hidden="true">11.4.</strong> Data Wrangling</a></li><li class="chapter-item expanded "><a href="../missing-semester/missing-command-line.html"><strong aria-hidden="true">11.5.</strong> Command Line</a></li><li class="chapter-item expanded "><a href="../missing-semester/missing-potpourri.html" class="active"><strong aria-hidden="true">11.6.</strong> Potpourri</a></li><li class="chapter-item expanded "><a href="../missing-semester/missing-version-control.html"><strong aria-hidden="true">11.7.</strong> Version Control</a></li><li class="chapter-item expanded "><a href="../missing-semester/missing-debugging.html"><strong aria-hidden="true">11.8.</strong> Debug</a></li><li class="chapter-item expanded "><a href="../missing-semester/missing-metaprogramming.html"><strong aria-hidden="true">11.9.</strong> Metaprogram</a></li><li class="chapter-item expanded "><a href="../missing-semester/missing-security.html"><strong aria-hidden="true">11.10.</strong> Security</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../operating-system/index.html"><strong aria-hidden="true">12.</strong> 操作系统</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../operating-system/intro.html"><strong aria-hidden="true">12.1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="../operating-system/os-structures.html"><strong aria-hidden="true">12.2.</strong> OS Structure</a></li><li class="chapter-item expanded "><a href="../operating-system/processes.html"><strong aria-hidden="true">12.3.</strong> Process</a></li><li class="chapter-item expanded "><a href="../operating-system/process-synchronization.html"><strong aria-hidden="true">12.4.</strong> Process Synchronization</a></li><li class="chapter-item expanded "><a href="../operating-system/cpu-scheduling.html"><strong aria-hidden="true">12.5.</strong> CPU Scheduling</a></li><li class="chapter-item expanded "><a href="../operating-system/threads.html"><strong aria-hidden="true">12.6.</strong> Thread</a></li><li class="chapter-item expanded "><a href="../operating-system/memory-management.html"><strong aria-hidden="true">12.7.</strong> Memory Management</a></li><li class="chapter-item expanded "><a href="../operating-system/virtual-memory.html"><strong aria-hidden="true">12.8.</strong> Virtual Memory</a></li><li class="chapter-item expanded "><a href="../operating-system/fs-interface.html"><strong aria-hidden="true">12.9.</strong> Filesystem Interface</a></li><li class="chapter-item expanded "><a href="../operating-system/fs-implementation.html"><strong aria-hidden="true">12.10.</strong> Filesystem Implementation</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../socialist/index.html"><strong aria-hidden="true">13.</strong> 毛泽东思想和中国特色理论体系概论</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../socialist/maozedong.html"><strong aria-hidden="true">13.1.</strong> 毛概期末总结</a></li><li class="chapter-item expanded "><a href="../socialist/others.html"><strong aria-hidden="true">13.2.</strong> 课后大题</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Ricardo&#x27;s Wiki</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="the-missing-semester-in-the-cs"><a class="header" href="#the-missing-semester-in-the-cs">The Missing Semester in the CS</a></h1>
+<h2 id="introduction"><a class="header" href="#introduction">Introduction</a></h2>
+<p>本篇是MIT的公开课程<a href="https://missing.csail.mit.edu/">计算机教学中消失的一学期</a>的学习笔记第五篇。在笔记中，我将摘抄我认为是重点的语句，文中举出的例子我会在自己的电脑上操作一遍并给出其产生的结果。</p>
+<p>本篇是<code>Potpourri</code>的学习笔记，说成人话就是大杂烩，课程的地址为<a href="https://missing.csail.mit.edu/2020/potpourri/">Potpourri</a>。</p>
+<blockquote>
+<p>potpourri 肉菜杂烩，这里引申为很多东西的综合体;</p>
+</blockquote>
+<!--more-->
+<h2 id="keyboard-remapping"><a class="header" href="#keyboard-remapping">Keyboard Remapping</a></h2>
+<p>The most basic change is to remap keys. This usually involves some software that is listening and, whenever a certain key is pressed, it intercepts that event and replaces it with another event corresponding to a different key. Some examples:</p>
+<ul>
+<li>Remap Caps Lock to Ctrl or Escape. We (the instructors) highly encourage this setting since Caps Lock has a very convenient location but is rarely used.</li>
+<li>Remapping PrtSc to Play/Pause music. Most OSes have a play/pause key.</li>
+<li>Swapping Ctrl and the Meta (Windows or Command) key.</li>
+</ul>
+<blockquote>
+<p>从一个游戏人的角度出发，最好在玩游戏的时候不要把<code>Cap Locks</code>绑定为<code>Esc</code>，否则一些不愉快的体验可能在游戏过程中出现。</p>
+</blockquote>
+<p>You can also map keys to arbitrary commands of your choosing. This is useful for common tasks that you perform. Here, some software listens for a specific key combination and executes some script whenever that event is detected.</p>
+<ul>
+<li>Open a new terminal or browser window.</li>
+<li>Inserting some specific text, e.g. your long email address or your MIT ID number.</li>
+<li>Sleeping the computer or the displays.</li>
+</ul>
+<p>There are even more complex modifications you can configure:</p>
+<ul>
+<li>Remapping sequences of keys, e.g. pressing shift five times toggles Caps Lock.</li>
+<li>Remapping on tap vs on hold, e.g. Caps Lock key is remapped to Esc if you quickly tap it, but is remapped to Ctrl if you hold it and use it as a modifier.</li>
+<li>Having remaps being keyboard or software specific.</li>
+</ul>
+<blockquote>
+<p>在Windows平台下面，我还是强力推荐<a href="https://github.com/microsoft/PowerToys">PowerToys</a>这个微软和社区合作开发的开发者工具，它的官方文档在<a href="https://docs.microsoft.com/zh-cn/windows/powertoys">这里</a>。这个软件不仅有键盘自定义这种功能，还提供了其他一下开发者可能用到的实用工具。</p>
+</blockquote>
+<h2 id="daemons"><a class="header" href="#daemons">Daemons</a></h2>
+<blockquote>
+<p>daemons 守护进程;</p>
+</blockquote>
+<p>Most computers have a series of processes that are always running in the background rather than waiting for a user to launch them and interact with them. These processes are called daemons and the programs that run as daemons often end with a <code>d</code> to indicate so. For example <code>sshd</code>, the SSH daemon, is the program responsible for listening to incoming SSH requests and checking that the remote user has the necessary credentials to log in.</p>
+<p>In Linux, <code>systemd</code> (the system daemon) is the most common solution for running and setting up daemon processes. You can run <code>systemctl status</code> to list the current running daemons. Most of them might sound unfamiliar but are responsible for core parts of the system such as managing the network, solving DNS queries or displaying the graphical interface for the system. <code>systemd</code> can be interacted with the <code>systemctl</code> command in order to <code>enable</code>, <code>disable</code>, <code>start</code>, <code>stop</code>, <code>restart</code> or check the <code>status</code> of services (those are the <code>systemctl</code> commands).</p>
+<p>More interestingly, <code>systemd</code> has a fairly accessible interface for configuring and enabling new daemons (or services). Below is an example of a daemon for running a simple Python app. We won’t go in the details but as you can see most of the fields are pretty self explanatory.</p>
+<pre><code class="language-bash"># /etc/systemd/system/myapp.service
+[Unit]
+Description=My Custom App
+After=network.target
+
+[Service]
+User=foo
+Group=foo
+WorkingDirectory=/home/foo/projects/mydaemon
+ExecStart=/usr/bin/local/python3.7 app.py
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
+</code></pre>
+<p>Also, if you just want to run some program with a given frequency there is no need to build a custom daemon, you can use <a href="">cron</a>``, a daemon your system already runs to perform scheduled tasks.</p>
+<h2 id="fuse"><a class="header" href="#fuse">FUSE</a></h2>
+<p>Modern software systems are usually composed of smaller building blocks that are composed together. Your operating system supports using different filesystem backends because there is a common language of what operations a filesystem supports. For instance, when you run <code>touch</code> to create a file, <code>touch</code> performs a system call to the kernel to create the file and the kernel performs the appropriate filesystem call to create the given file. A caveat is that UNIX filesystems are traditionally implemented as kernel modules and only the kernel is allowed to perform filesystem calls.</p>
+<blockquote>
+<p>caveat 警告; implement 实施;</p>
+</blockquote>
+<p><a href="https://en.wikipedia.org/wiki/Filesystem_in_Userspace">FUSE</a> (Filesystem in User Space) allows filesystems to be implemented by a user program. FUSE lets users run user space code for filesystem calls and then bridges the necessary calls to the kernel interfaces. In practice, this means that users can implement arbitrary functionality for filesystem calls.</p>
+<p>For example, FUSE can be used so whenever you perform an operation in a virtual filesystem, that operation is forwarded through SSH to a remote machine, performed there, and the output is returned back to you. This way, local programs can see the file as if it was in your computer while in reality it’s in a remote server. This is effectively what <code>sshfs</code> does.</p>
+<p>Some interesting examples of FUSE filesystems are:</p>
+<ul>
+<li><a href="https://github.com/libfuse/sshfs">sshfs</a> - Open locally remote files/folder through an SSH connection.</li>
+<li><a href="https://rclone.org/commands/rclone_mount/">rclone</a> - Mount cloud storage services like Dropbox, GDrive, Amazon S3 or Google Cloud Storage and open data locally.</li>
+<li><a href="https://nuetzlich.net/gocryptfs/">gocryptfs</a> - Encrypted overlay system. Files are stored encrypted but once the FS is mounted they appear as plaintext in the mountpoint.</li>
+<li><a href="https://keybase.io/docs/kbfs">kbfs</a> - Distributed filesystem with end-to-end encryption. You can have private, shared and public folders.</li>
+<li><a href="https://borgbackup.readthedocs.io/en/stable/usage/mount.html">borgbackup</a> - Mount your deduplicated, compressed and encrypted backups for ease of browsing.</li>
+</ul>
+<blockquote>
+<p>感觉在WSL2中访问Windows下的文件就是利用的这类东西，只不过由于是利用网络作为桥梁在性能上不堪重任。</p>
+</blockquote>
+<h2 id="backups"><a class="header" href="#backups">Backups</a></h2>
+<p>Any data that you haven’t backed up is data that could be gone at any moment, forever. It’s easy to copy data around, it’s hard to reliably backup data. Here are some good backup basics and the pitfalls of some approaches.</p>
+<blockquote>
+<p>pitfalls 陷阱;</p>
+</blockquote>
+<p>First, a copy of the data in the same disk is not a backup, because the disk is the single point of failure for all the data. Similarly, an external drive in your home is also a weak backup solution since it could be lost in a fire/robbery/&amp;c. Instead, having an off-site backup is a recommended practice.</p>
+<p>Synchronization solutions are not backups. For instance, Dropbox/GDrive are convenient solutions, but when data is erased or corrupted they propagate the change. For the same reason, disk mirroring solutions like RAID are not backups. They don’t help if data gets deleted, corrupted or encrypted by ransomware.</p>
+<blockquote>
+<p>synchronization 同步; erase 擦除; corrupted 损坏的; propagate 传播; ransomware 勒索软件;</p>
+</blockquote>
+<p>Some core features of good backups solutions are versioning, deduplication and security. Versioning backups ensure that you can access your history of changes and efficiently recover files. Efficient backup solutions use data deduplication to only store incremental changes and reduce the storage overhead. Regarding security, you should ask yourself what someone would need to know/have in order to read your data and, more importantly, to delete all your data and associated backups. Lastly, blindly trusting backups is a terrible idea and you should verify regularly that you can use them to recover data.</p>
+<blockquote>
+<p>deduplication 重复数据删除; incremental 增加的;</p>
+</blockquote>
+<p>Backups go beyond local files in your computer. Given the significant growth of web applications, large amounts of your data are only stored in the cloud. For instance, your webmail, social media photos, music playlists in streaming services or online docs are gone if you lose access to the corresponding accounts. Having an offline copy of this information is the way to go, and you can find online tools that people have built to fetch the data and save it.</p>
+<blockquote>
+<p>这种数据备份未免有点过于未雨绸缪了;</p>
+</blockquote>
+<h2 id="apis"><a class="header" href="#apis">APIs</a></h2>
+<p>We’ve talked a lot in this class about using your computer more efficiently to accomplish <em>local</em> tasks, but you will find that many of these lessons also extend to the wider internet. Most services online will have “APIs” that let you programmatically access their data.</p>
+<blockquote>
+<p>讲道理，中国的政府机构也应该设计一套比较完善的数据接口供公众使用，这也应该是“数字政府”的重要组成部分。</p>
+</blockquote>
+<p>Most of these APIs have a similar format. They are structured URLs, often rooted at <code>api.service.com</code>, where the path and query parameters indicate what data you want to read or what action you want to perform.</p>
+<p>Some APIs require authentication, and this usually takes the form of some sort of secret <em>token</em> that you need to include with the request. You should read the documentation for the API to see what the particular service you are looking for uses, but “<a href="https://www.oauth.com/">OAuth</a>” is a protocol you will often see used. At its heart, OAuth is a way to give you tokens that can “act as you” on a given service, and can only be used for particular purposes. Keep in mind that these tokens are <em>secret</em>, and anyone who gains access to your token can do whatever the token allows under <em>your</em> account!</p>
+<blockquote>
+<p>比如<code>github</code>就有相关的token供开发者可以自己生成。</p>
+</blockquote>
+<h2 id="common-command-line-flagspatterns"><a class="header" href="#common-command-line-flagspatterns">Common command-line flags/patterns</a></h2>
+<p>Command-line tools vary a lot, and you will often want to check out their <code>man</code> pages before using them. They often share some common features though that can be good to be aware of:</p>
+<ul>
+<li>Most tools support some kind of <code>--help</code> flag to display brief usage instructions for the tool.</li>
+<li>Many tools that can cause irrevocable change support the notion of a “dry run” in which they only print what they <em>would have done</em>, but do not actually perform the change. Similarly, they often have an “interactive” flag that will prompt you for each destructive action.</li>
+<li>You can usually use <code>--version</code> or <code>-V</code> to have the program print its own version (handy for reporting bugs!).</li>
+<li>Almost all tools have a <code>--verbose</code> or <code>-v</code> flag to produce more verbose output. You can usually include the flag multiple times (<code>-vvv</code>) to get <em>more</em> verbose output, which can be handy for debugging. Similarly, many tools have a <code>--quiet</code> flag for making it only print something on error.</li>
+</ul>
+<blockquote>
+<p>verbose 冗长的;</p>
+</blockquote>
+<ul>
+<li>In many tools, <code>-</code> in place of a file name means “standard input” or “standard output”, depending on the argument.</li>
+<li>Possibly destructive tools are generally not recursive by default, but support a “recursive” flag (often <code>-r</code>) to make them recurse.</li>
+<li>Sometimes, you want to pass something that <em>looks</em> like a flag as a normal argument. For example, imagine you wanted to remove a file called <code>-r</code>. Or you want to run one program “through” another, like <code>ssh machine foo</code>, and you want to pass a flag to the “inner” program (<code>foo</code>). The special argument <code>--</code> makes a program <em>stop</em> processing flags and options (things starting with <code>-</code>) in what follows, letting you pass things that look like flags without them being interpreted as such: <code>rm -- -r</code> or <code>ssh machine --for-ssh -- foo --for-foo</code>.</li>
+</ul>
+<h2 id="windows-managers"><a class="header" href="#windows-managers">Windows Managers</a></h2>
+<p>Most of you are used to using a “drag and drop” window manager, like what comes with Windows, macOS, and Ubuntu by default. There are windows that just sort of hang there on screen, and you can drag them around, resize them, and have them overlap one another. But these are only one <em>type</em> of window manager, often referred to as a “floating” window manager. There are many others, especially on Linux. A particularly common alternative is a “tiling” window manager. In a tiling window manager, windows never overlap, and are instead arranged as tiles on your screen, sort of like panes in tmux. With a tiling window manager, the screen is always filled by whatever windows are open, arranged according to some <em>layout</em>. If you have just one window, it takes up the full screen. If you then open another, the original window shrinks to make room for it (often something like 2/3 and 1/3). If you open a third, the other windows will again shrink to accommodate the new window. Just like with tmux panes, you can navigate around these tiled windows with your keyboard, and you can resize them and move them around, all without touching the mouse. They are worth looking into!</p>
+<blockquote>
+<p>有·高级</p>
+</blockquote>
+<h2 id="vpns"><a class="header" href="#vpns">VPNs</a></h2>
+<p>VPNs are all the rage these days, but it’s not clear that’s for <a href="https://gist.github.com/joepie91/5a9909939e6ce7d09e29">any good reason</a>. You should be aware of what a VPN does and does not get you. A VPN, in the best case, is <em>really</em> just a way for you to change your internet service provider as far as the internet is concerned. All your traffic will look like it’s coming from the VPN provider instead of your “real” location, and the network you are connected to will only see encrypted traffic.</p>
+<p>While that may seem attractive, keep in mind that when you use a VPN, all you are really doing is shifting your trust from you current ISP to the VPN hosting company. Whatever your ISP <em>could</em> see, the VPN provider now sees <em>instead</em>. If you trust them <em>more</em> than your ISP, that is a win, but otherwise, it is not clear that you have gained much. If you are sitting on some dodgy unencrypted public Wi-Fi at an airport, then maybe you don’t trust the connection much, but at home, the trade-off is not quite as clear.</p>
+<p>You should also know that these days, much of your traffic, at least of a sensitive nature, is <em>already</em> encrypted through HTTPS or TLS more generally. In that case, it usually matters little whether you are on a “bad” network or not – the network operator will only learn what servers you talk to, but not anything about the data that is exchanged.</p>
+<p>Notice that I said “in the best case” above. It is not unheard of for VPN providers to accidentally misconfigure their software such that the encryption is either weak or entirely disabled. Some VPN providers are malicious (or at the very least opportunist), and will log all your traffic, and possibly sell information about it to third parties. Choosing a bad VPN provider is often worse than not using one in the first place.</p>
+<blockquote>
+<p>确实，尽管由于各种各样的原因，我们可能需要VPN的辅助，但是VPN并不是可信的。</p>
+</blockquote>
+<h2 id="markdown"><a class="header" href="#markdown">Markdown</a></h2>
+<blockquote>
+<p>Markdown yyds</p>
+</blockquote>
+<p>You have probably seen Markdown already, or at least some variant of it. Subsets of it are used and supported almost everywhere, even if it’s not under the name Markdown. At its core, Markdown is an attempt to codify the way that people already often mark up text when they are writing plain text documents. Emphasis (<em>italics</em>) is added by surrounding a word with <code>*</code>. Strong emphasis (<strong>bold</strong>) is added using <code>**</code>. Lines starting with <code>#</code> are headings (and the number of <code>#</code>s is the subheading level). Any line starting with <code>-</code> is a bullet list item, and any line starting with a number + <code>.</code> is a numbered list item. Backtick is used to show words in <code>code font</code>, and a code block can be entered by indenting a line with four spaces or surrounding it with triple-backticks:</p>
+<pre><code class="language-markdown">```
+code here
+```
+</code></pre>
+<p>To add a link, place the <em>text</em> for the link in square brackets, and the URL immediately following that in parentheses: <code>[name](url)</code>. Markdown is easy to get started with, and you can use it nearly everywhere.</p>
+<h2 id="hammerspoon"><a class="header" href="#hammerspoon">Hammerspoon</a></h2>
+<blockquote>
+<p>Hammerspoon 很强大，但是只支持macOS，对不起，穷苦人家告辞。</p>
+</blockquote>
+<h2 id="bootinglive-usbs"><a class="header" href="#bootinglive-usbs">Booting+Live USBs</a></h2>
+<p>When your machine boots up, before the operating system is loaded, the <a href="https://en.wikipedia.org/wiki/BIOS">BIOS</a>/<a href="https://en.wikipedia.org/wiki/Unified_Extensible_Firmware_Interface">UEFI</a> initializes the system. During this process, you can press a specific key combination to configure this layer of software. For example, your computer may say something like “Press F9 to configure BIOS. Press F12 to enter boot menu.” during the boot process. You can configure all sorts of hardware-related settings in the BIOS menu. You can also enter the boot menu to boot from an alternate device instead of your hard drive.</p>
+<p><a href="https://en.wikipedia.org/wiki/Live_USB">Live USBs</a> are USB flash drives containing an operating system. You can create one of these by downloading an operating system (e.g. a Linux distribution) and burning it to the flash drive. This process is a little bit more complicated than simply copying a <code>.iso</code> file to the disk. There are tools like <a href="https://unetbootin.github.io/">UNetbootin</a> to help you create live USBs.</p>
+<p>Live USBs are useful for all sorts of purposes. Among other things, if you break your existing operating system installation so that it no longer boots, you can use a live USB to recover data or fix the operating system.</p>
+<blockquote>
+<p>中国人对于这个更熟悉的名称是PE盘。</p>
+</blockquote>
+<h2 id="docker-vagrant-vms-cloud"><a class="header" href="#docker-vagrant-vms-cloud">Docker, Vagrant, VMs, Cloud</a></h2>
+<p><a href="https://en.wikipedia.org/wiki/Virtual_machine">Virtual machines</a> and similar tools like containers let you emulate a whole computer system, including the operating system. This can be useful for creating an isolated environment for testing, development, or exploration (e.g. running potentially malicious code).</p>
+<p><a href="https://www.vagrantup.com/">Vagrant</a> is a tool that lets you describe machine configurations (operating system, services, packages, etc.) in code, and then instantiate VMs with a simple <code>vagrant up</code>. <a href="https://www.docker.com/">Docker</a> is conceptually similar but it uses containers instead.</p>
+<p>You can also rent virtual machines on the cloud, and it’s a nice way to get instant access to:</p>
+<ul>
+<li>A cheap always-on machine that has a public IP address, used to host services</li>
+<li>A machine with a lot of CPU, disk, RAM, and/or GPU</li>
+<li>Many more machines than you physically have access to (billing is often by the second, so if you want a lot of computing for a short amount of time, it’s feasible to rent 1000 computers for a couple of minutes)</li>
+</ul>
+<h2 id="notebook-programming"><a class="header" href="#notebook-programming">Notebook Programming</a></h2>
+<p><a href="https://en.wikipedia.org/wiki/Notebook_interface">Notebook programming environments</a> can be really handy for doing certain types of interactive or exploratory development. Perhaps the most popular notebook programming environment today is <a href="https://jupyter.org/">Jupyter</a>, for Python (and several other languages). <a href="https://www.wolfram.com/mathematica/">Wolfram Mathematica</a> is another notebook programming environment that’s great for doing math-oriented programming.</p>
+<h2 id="github"><a class="header" href="#github">GitHub</a></h2>
+<p><a href="https://github.com/">GitHub</a> is one of the most popular platforms for open-source software development. Many of the tools we’ve talked about in this class, from <a href="https://github.com/vim/vim">vim</a> to <a href="https://github.com/Hammerspoon/hammerspoon">Hammerspoon</a>, are hosted on GitHub. It’s easy to get started contributing to open-source to help improve the tools that you use every day.</p>
+<p>There are two primary ways in which people contribute to projects on GitHub:</p>
+<ul>
+<li>Creating an <a href="https://help.github.com/en/github/managing-your-work-on-github/creating-an-issue">issue</a>. This can be used to report bugs or request a new feature. Neither of these involves reading or writing code, so it can be pretty lightweight to do. High-quality bug reports can be extremely valuable to developers. Commenting on existing discussions can be helpful too.</li>
+<li>Contribute code through a <a href="https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/about-pull-requests">pull request</a>. This is generally more involved than creating an issue. You can <a href="https://help.github.com/en/github/getting-started-with-github/fork-a-repo">fork</a> a repository on GitHub, clone your fork, create a new branch, make some changes (e.g. fix a bug or implement a feature), push the branch, and then <a href="https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request">create a pull request</a>. After this, there will generally be some back-and-forth with the project maintainers, who will give you feedback on your patch. Finally, if all goes well, your patch will be merged into the upstream repository. Often times, larger projects will have a contributing guide, tag beginner-friendly issues, and some even have mentorship programs to help first-time contributors become familiar with the project.</li>
+</ul>
+<blockquote>
+<p>没有什么是比合作开发一个开源软件更令人激动的了。</p>
+</blockquote>
+<blockquote>
+<p>昨天我搞懂了<code>GitHub</code>和<code>GitLab</code>的区别，顺便在这里记一下</p>
+<ul>
+<li>GitHub是一个支持<code>git</code>的代码托管网站，只是不少的开源软件托管在上面。</li>
+<li>GitLab则是一个支持<code>git</code>的软件开发平台，相当是是一个用来搭建GitHub的软件。</li>
+</ul>
+</blockquote>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../missing-semester/missing-command-line.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../missing-semester/missing-version-control.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../missing-semester/missing-command-line.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../missing-semester/missing-version-control.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

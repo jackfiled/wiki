@@ -1,0 +1,857 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>数据链路层 - Ricardo&#x27;s Wiki</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="我在北京邮电大学计算机科学与技术专业学习三年的部分笔记">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../katex.min.css">
+
+        <!-- MathJax -->
+        <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../index.html">主页</a></li><li class="chapter-item expanded affix "><li class="spacer"></li><li class="chapter-item expanded "><a href="../ai-principle/index.html"><strong aria-hidden="true">1.</strong> 人工智能原理</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../ai-principle/intro.html"><strong aria-hidden="true">1.1.</strong> 概述</a></li><li class="chapter-item expanded "><a href="../ai-principle/question-knowledge.html"><strong aria-hidden="true">1.2.</strong> 问题和知识表示</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../algorithm/index.html"><strong aria-hidden="true">2.</strong> 算法</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../algorithm/intro.html"><strong aria-hidden="true">2.1.</strong> 概述</a></li><li class="chapter-item expanded "><a href="../algorithm/recurse-divide.html"><strong aria-hidden="true">2.2.</strong> 分治算法</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../compiler/index.html"><strong aria-hidden="true">3.</strong> 编译原理</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../compiler/intro.html"><strong aria-hidden="true">3.1.</strong> 概述</a></li><li class="chapter-item expanded "><a href="../compiler/lexical-analyzer.html"><strong aria-hidden="true">3.2.</strong> 词法分析</a></li><li class="chapter-item expanded "><a href="../compiler/grammar-analyzer.html"><strong aria-hidden="true">3.3.</strong> 语法分析</a></li><li class="chapter-item expanded "><a href="../compiler/grammar-driven-translation.html"><strong aria-hidden="true">3.4.</strong> 语法制导翻译</a></li><li class="chapter-item expanded "><a href="../compiler/syntax-analyser.html"><strong aria-hidden="true">3.5.</strong> 语义分析</a></li><li class="chapter-item expanded "><a href="../compiler/runtime.html"><strong aria-hidden="true">3.6.</strong> 运行环境</a></li><li class="chapter-item expanded "><a href="../compiler/intermediate-code.html"><strong aria-hidden="true">3.7.</strong> 中间代码生成</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../computer-architecture/index.html"><strong aria-hidden="true">4.</strong> 计算机组成原理</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../computer-architecture/overview.html"><strong aria-hidden="true">4.1.</strong> 计算机系统概论</a></li><li class="chapter-item expanded "><a href="../computer-architecture/calculator.html"><strong aria-hidden="true">4.2.</strong> 运算方法和运算器</a></li><li class="chapter-item expanded "><a href="../computer-architecture/instruction.html"><strong aria-hidden="true">4.3.</strong> 指令系统</a></li><li class="chapter-item expanded "><a href="../computer-architecture/cpu.html"><strong aria-hidden="true">4.4.</strong> 中央处理器</a></li><li class="chapter-item expanded "><a href="../computer-architecture/memory.html"><strong aria-hidden="true">4.5.</strong> 存储系统</a></li><li class="chapter-item expanded "><a href="../computer-architecture/io.html"><strong aria-hidden="true">4.6.</strong> 输入输出设备</a></li><li class="chapter-item expanded "><a href="../computer-architecture/external.html"><strong aria-hidden="true">4.7.</strong> 外部设备</a></li><li class="chapter-item expanded "><a href="../computer-architecture/bus.html"><strong aria-hidden="true">4.8.</strong> 总线</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../computer-networks/index.html"><strong aria-hidden="true">5.</strong> 计算机网络</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../computer-networks/overview.html"><strong aria-hidden="true">5.1.</strong> 引言</a></li><li class="chapter-item expanded "><a href="../computer-networks/physical-layer.html"><strong aria-hidden="true">5.2.</strong> 物理层</a></li><li class="chapter-item expanded "><a href="../computer-networks/data-link-layer.html" class="active"><strong aria-hidden="true">5.3.</strong> 数据链路层</a></li><li class="chapter-item expanded "><a href="../computer-networks/mac.html"><strong aria-hidden="true">5.4.</strong> 介质访问控制层</a></li><li class="chapter-item expanded "><a href="../computer-networks/network-layer.html"><strong aria-hidden="true">5.5.</strong> 网络层</a></li><li class="chapter-item expanded "><a href="../computer-networks/transport-layer.html"><strong aria-hidden="true">5.6.</strong> 传输层</a></li><li class="chapter-item expanded "><a href="../computer-networks/mid-term.html"><strong aria-hidden="true">5.7.</strong> 期中复习</a></li><li class="chapter-item expanded "><a href="../computer-networks/final-term.html"><strong aria-hidden="true">5.8.</strong> 期末复习</a></li><li class="chapter-item expanded "><a href="../computer-networks/lab2.html"><strong aria-hidden="true">5.9.</strong> 实验二</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../csapp/index.html"><strong aria-hidden="true">6.</strong> 计算机系统基础</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../csapp/bits.html"><strong aria-hidden="true">6.1.</strong> 数据的位级表示</a></li><li class="chapter-item expanded "><a href="../csapp/machine.html"><strong aria-hidden="true">6.2.</strong> 程序的机器级表示</a></li><li class="chapter-item expanded "><a href="../csapp/assembly-data.html"><strong aria-hidden="true">6.3.</strong> 程序的机器级表示——数据</a></li><li class="chapter-item expanded "><a href="../csapp/assembly-control.html"><strong aria-hidden="true">6.4.</strong> 程序的机器级表示——控制</a></li><li class="chapter-item expanded "><a href="../csapp/assembly-procedure.html"><strong aria-hidden="true">6.5.</strong> 程序的机器级表示——过程</a></li><li class="chapter-item expanded "><a href="../csapp/assembly-advanced.html"><strong aria-hidden="true">6.6.</strong> 程序的机器级表示——高级话题</a></li><li class="chapter-item expanded "><a href="../csapp/exception-control-flow.html"><strong aria-hidden="true">6.7.</strong> 异常控制流</a></li><li class="chapter-item expanded "><a href="../csapp/linking.html"><strong aria-hidden="true">6.8.</strong> 链接</a></li><li class="chapter-item expanded "><a href="../csapp/io.html"><strong aria-hidden="true">6.9.</strong> 输入输出系统</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../data-structure/index.html"><strong aria-hidden="true">7.</strong> 数据结构</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../data-structure/foundation.html"><strong aria-hidden="true">7.1.</strong> 算法基础</a></li><li class="chapter-item expanded "><a href="../data-structure/inner-sort.html"><strong aria-hidden="true">7.2.</strong> 内部排序</a></li><li class="chapter-item expanded "><a href="../data-structure/outer-sort.html"><strong aria-hidden="true">7.3.</strong> 外部排序</a></li><li class="chapter-item expanded "><a href="../data-structure/array-and-list.html"><strong aria-hidden="true">7.4.</strong> 数组和广义表</a></li><li class="chapter-item expanded "><a href="../data-structure/list.html"><strong aria-hidden="true">7.5.</strong> 线性表</a></li><li class="chapter-item expanded "><a href="../data-structure/stack-and-dequeue.html"><strong aria-hidden="true">7.6.</strong> 栈和队列</a></li><li class="chapter-item expanded "><a href="../data-structure/tree.html"><strong aria-hidden="true">7.7.</strong> 树</a></li><li class="chapter-item expanded "><a href="../data-structure/graph.html"><strong aria-hidden="true">7.8.</strong> 图</a></li><li class="chapter-item expanded "><a href="../data-structure/string.html"><strong aria-hidden="true">7.9.</strong> 字符串</a></li><li class="chapter-item expanded "><a href="../data-structure/find.html"><strong aria-hidden="true">7.10.</strong> 查找表</a></li><li class="chapter-item expanded "><a href="../data-structure/lab.html"><strong aria-hidden="true">7.11.</strong> 实验</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../database/index.html"><strong aria-hidden="true">8.</strong> 数据库</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../database/intro.html"><strong aria-hidden="true">8.1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="../database/relation-model.html"><strong aria-hidden="true">8.2.</strong> Relation Model</a></li><li class="chapter-item expanded "><a href="../database/relation-database-design.html"><strong aria-hidden="true">8.3.</strong> Relation Database Design</a></li><li class="chapter-item expanded "><a href="../database/sql.html"><strong aria-hidden="true">8.4.</strong> SQL</a></li><li class="chapter-item expanded "><a href="../database/intermediate-sql.html"><strong aria-hidden="true">8.5.</strong> Intermediate SQL</a></li><li class="chapter-item expanded "><a href="../database/entity-relation-model.html"><strong aria-hidden="true">8.6.</strong> Entity Relation Model</a></li><li class="chapter-item expanded "><a href="../database/data-storage-structure.html"><strong aria-hidden="true">8.7.</strong> Data Storage Structure</a></li><li class="chapter-item expanded "><a href="../database/database-index.html"><strong aria-hidden="true">8.8.</strong> Index</a></li><li class="chapter-item expanded "><a href="../database/query-processing.html"><strong aria-hidden="true">8.9.</strong> Query Processing</a></li><li class="chapter-item expanded "><a href="../database/query-optimization.html"><strong aria-hidden="true">8.10.</strong> Query Optimization</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../discrete-math/index.html"><strong aria-hidden="true">9.</strong> 离散数学</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../discrete-math/relation.html"><strong aria-hidden="true">9.1.</strong> Relation</a></li><li class="chapter-item expanded "><a href="../discrete-math/advanced-counting.html"><strong aria-hidden="true">9.2.</strong> Advanced Counting</a></li><li class="chapter-item expanded "><a href="../discrete-math/tree.html"><strong aria-hidden="true">9.3.</strong> Tree</a></li><li class="chapter-item expanded "><a href="../discrete-math/graph.html"><strong aria-hidden="true">9.4.</strong> Graph</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../formal-language/index.html"><strong aria-hidden="true">10.</strong> 形式语言和自动机</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../formal-language/fa.html"><strong aria-hidden="true">10.1.</strong> 有限状态自动机</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../missing-semester/index.html"><strong aria-hidden="true">11.</strong> 计算机教学中缺少的一课</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../missing-semester/missing-the-shell.html"><strong aria-hidden="true">11.1.</strong> Shell</a></li><li class="chapter-item expanded "><a href="../missing-semester/missing-shell-scripts.html"><strong aria-hidden="true">11.2.</strong> Shell Scripts</a></li><li class="chapter-item expanded "><a href="../missing-semester/missing-vim.html"><strong aria-hidden="true">11.3.</strong> Vim</a></li><li class="chapter-item expanded "><a href="../missing-semester/missing-data-wrangling.html"><strong aria-hidden="true">11.4.</strong> Data Wrangling</a></li><li class="chapter-item expanded "><a href="../missing-semester/missing-command-line.html"><strong aria-hidden="true">11.5.</strong> Command Line</a></li><li class="chapter-item expanded "><a href="../missing-semester/missing-potpourri.html"><strong aria-hidden="true">11.6.</strong> Potpourri</a></li><li class="chapter-item expanded "><a href="../missing-semester/missing-version-control.html"><strong aria-hidden="true">11.7.</strong> Version Control</a></li><li class="chapter-item expanded "><a href="../missing-semester/missing-debugging.html"><strong aria-hidden="true">11.8.</strong> Debug</a></li><li class="chapter-item expanded "><a href="../missing-semester/missing-metaprogramming.html"><strong aria-hidden="true">11.9.</strong> Metaprogram</a></li><li class="chapter-item expanded "><a href="../missing-semester/missing-security.html"><strong aria-hidden="true">11.10.</strong> Security</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../operating-system/index.html"><strong aria-hidden="true">12.</strong> 操作系统</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../operating-system/intro.html"><strong aria-hidden="true">12.1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="../operating-system/os-structures.html"><strong aria-hidden="true">12.2.</strong> OS Structure</a></li><li class="chapter-item expanded "><a href="../operating-system/processes.html"><strong aria-hidden="true">12.3.</strong> Process</a></li><li class="chapter-item expanded "><a href="../operating-system/process-synchronization.html"><strong aria-hidden="true">12.4.</strong> Process Synchronization</a></li><li class="chapter-item expanded "><a href="../operating-system/cpu-scheduling.html"><strong aria-hidden="true">12.5.</strong> CPU Scheduling</a></li><li class="chapter-item expanded "><a href="../operating-system/threads.html"><strong aria-hidden="true">12.6.</strong> Thread</a></li><li class="chapter-item expanded "><a href="../operating-system/memory-management.html"><strong aria-hidden="true">12.7.</strong> Memory Management</a></li><li class="chapter-item expanded "><a href="../operating-system/virtual-memory.html"><strong aria-hidden="true">12.8.</strong> Virtual Memory</a></li><li class="chapter-item expanded "><a href="../operating-system/fs-interface.html"><strong aria-hidden="true">12.9.</strong> Filesystem Interface</a></li><li class="chapter-item expanded "><a href="../operating-system/fs-implementation.html"><strong aria-hidden="true">12.10.</strong> Filesystem Implementation</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../socialist/index.html"><strong aria-hidden="true">13.</strong> 毛泽东思想和中国特色理论体系概论</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../socialist/maozedong.html"><strong aria-hidden="true">13.1.</strong> 毛概期末总结</a></li><li class="chapter-item expanded "><a href="../socialist/others.html"><strong aria-hidden="true">13.2.</strong> 课后大题</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Ricardo&#x27;s Wiki</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="数据链路层"><a class="header" href="#数据链路层">数据链路层</a></h1>
+<h2 id="数据链路层的位置功能和服务"><a class="header" href="#数据链路层的位置功能和服务">数据链路层的位置、功能和服务</a></h2>
+<h3 id="数据链路层和位置和功能"><a class="header" href="#数据链路层和位置和功能">数据链路层和位置和功能</a></h3>
+<p>数据链路层负责通过物理层以可靠、高效的方式将数据包（帧）在相邻节点之间传输。</p>
+<p>数据链路层提供了打包，流量控制，地址索引，错误控制，介质访问控制等的功能。</p>
+<blockquote>
+<p>其中介质访问控制是专属于局域网的技术，主要负责处理数据包广播中遇到的问题，而在广域网中常用点对点链接的方式，故没有相关的问题。</p>
+</blockquote>
+<p>设计目标就是在两个响铃的节点之间实现可靠、高效的通信。</p>
+<h3 id="封装"><a class="header" href="#封装">封装</a></h3>
+<p>​<img src="./assets/image-20230314152006-xcqa5cb.png" alt="image" /></p>
+<p>在数据链路层的封装：将上一层传输过来的<strong>净荷</strong>附加上帧头和帧尾构成一个帧。</p>
+<p>数据链路层中的传输是逐级进行的，被称作逐级通信<code>hop-to-hop communication</code>​。</p>
+<h3 id="数据链路层一般由网卡实现"><a class="header" href="#数据链路层一般由网卡实现">数据链路层一般由网卡实现</a></h3>
+<ul>
+<li>发送方：将网络层的包打包为一个帧，在加上错误纠正，可靠传输和流量控制等的功能</li>
+<li>接收方：首先检验传输过程中是否发生错误，并进行流量控制和可靠传输等的功能</li>
+<li>数据链路层常常通过硬件实体——网卡实现</li>
+</ul>
+<h3 id="数据链路层提供的服务"><a class="header" href="#数据链路层提供的服务">数据链路层提供的服务</a></h3>
+<ul>
+<li>
+<p>无连接的服务：</p>
+<ul>
+<li>无确认的无连接服务：没有确认帧和逻辑链接，大多数的局域网属于这种方式</li>
+<li>有确认的无连接服务：含有一个确认帧，在不可靠的传输信道中应用比较广泛，比如Wi-Fi</li>
+</ul>
+</li>
+<li>
+<p>面向连接的服务：</p>
+<p>需要建立连接，每一个传输的帧都会被编号。常见的有<code>ATM</code>​和<code>HDLC</code>​</p>
+</li>
+</ul>
+<h2 id="设计中处理的问题"><a class="header" href="#设计中处理的问题">设计中处理的问题</a></h2>
+<h3 id="成帧控制"><a class="header" href="#成帧控制">成帧控制</a></h3>
+<p>如何从物理层中传输的字节流中识别出不同的帧。</p>
+<h4 id="设计成帧功能的要求"><a class="header" href="#设计成帧功能的要求">设计成帧功能的要求</a></h4>
+<ul>
+<li>简单：易于实现</li>
+<li>透明：同传输的内容无关</li>
+<li>高效：使用的字节尽量少</li>
+<li>鲁棒：不易出错，即使出错也应该尽快恢复</li>
+</ul>
+<h4 id="字符计数法"><a class="header" href="#字符计数法">字符计数法</a></h4>
+<p>​<img src="./assets/image-20230314154546-j6vsp0v.png" alt="image" />​</p>
+<p>在帧头中添加一个表示内容中字符的数量（包括帧头）。但是如果传输的时候帧头中字符数量的字段发生了错误，这个错误不易纠正。</p>
+<h4 id="字节字符填充"><a class="header" href="#字节字符填充">字节/字符填充</a></h4>
+<p>在帧的首尾添加标志符以标记帧的开始和结束。标志符往往是传输内容中不常使用的字符。</p>
+<p>这种方式实现透明传输比较复杂：因为作为标志符的字符在传输内容中也可能使用。于是为了实现透明传输，在传输内容中使用标志符时需要在前面加上转义字符，通知接受者后面的标志符并不是标志符。</p>
+<p>这种方式在<code>PPP</code>​协议中得到使用。</p>
+<p>这种方式同传输内容的编码方式高度相关，而且往往都是字符编码，直接传输字节就显得不太可能。</p>
+<h4 id="比特填充"><a class="header" href="#比特填充">比特填充</a></h4>
+<p>使用固定的二进制位串位置帧开始和结束的标志：<code>01111110</code>​。</p>
+<p>但是在传输的数据中也会存在出现标志位串的可能性，于是为了避免这种问题，硬件会在内容中每遇到5个连续的1就在后面添加一个0。在接受方接受数据的时候，每接受到五个连续的1就去掉后面的0。</p>
+<p>​<img src="./assets/image-20230314155848-rx0uorr.png" alt="image" />​</p>
+<p>但是如果在传输的过程中遇到<code>01110110</code>​这种位串，其中发生了一次位翻转成为标志位，或者反过来，就可能导致传输错误。</p>
+<h4 id="物理层编码违例法"><a class="header" href="#物理层编码违例法">物理层编码违例法</a></h4>
+<p>利用物理层编码中违法的编码作为帧的开始和结束标志。</p>
+<h3 id="错误控制"><a class="header" href="#错误控制">错误控制</a></h3>
+<h4 id="错误的类型"><a class="header" href="#错误的类型">错误的类型</a></h4>
+<ul>
+<li>帧丢失：发出的帧就没有达到接收方。这种错误属于流量控制的部分。</li>
+<li>帧损坏：接受帧的部分比特错误。</li>
+</ul>
+<p>单比特错误就是只有一个比特发生了错误。</p>
+<p>突发错误意味着至少两个比特在传输过程中发生了错误。突发错误的长度不是指错误比特的数量。</p>
+<p>​<img src="./assets/image-20230314161242-g7oi433.png" alt="image" />​</p>
+<h4 id="错误的侦测"><a class="header" href="#错误的侦测">错误的侦测</a></h4>
+<ul>
+<li>奇偶校验检测单个比特错误</li>
+<li>循环冗余校验可以检测部分突发性的错误</li>
+</ul>
+<h5 id="奇偶校验"><a class="header" href="#奇偶校验">奇偶校验</a></h5>
+<p>通过添加一个奇偶校验位来验证数据的传输过程中是否发生错误。</p>
+<p>奇偶校验只能检验奇数的错误。</p>
+<h5 id="汉明码"><a class="header" href="#汉明码">汉明码</a></h5>
+<p>为了校验单个错误需要的校验码位数：</p>
+<p>设<code>m</code>​表示信息的位数，<code>r</code>​表示校验码的位置，<code>n</code>​为传输的位置，即<code>n=m+r</code>​。</p>
+<p>为了纠正单个的错误，需要有下列的不等式成立：</p>
+<p><span class="katex-display"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mclose">)</span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7144em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">m</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">≤</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.7144em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7144em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">n</span></span></span></span></span></span></span></span></span></span></span></span></p>
+<p>化简得到：</p>
+<p><span class="katex-display"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6667em;vertical-align:-0.0833em;"></span><span class="mord mathnormal">m</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6667em;vertical-align:-0.0833em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.7804em;vertical-align:-0.136em;"></span><span class="mord">1</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">≤</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.7144em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7144em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.02778em;">r</span></span></span></span></span></span></span></span></span></span></span></span></p>
+<p>为了设计汉明码，首先需要给每一位编号：从左到右，从1开始依次编号。</p>
+<p>在编码中，2的次方位（2，4，8，16）是校验码位，剩下的位数就是传输的数据位。其中每一个校验位覆盖的数据为是不同的，例如对于8位的ASCII码的进行编码：</p>
+<div class="table-wrapper"><table><thead><tr><th>编号</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>10</th><th>11</th></tr></thead><tbody>
+<tr><td>码字</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td></tr>
+</tbody></table>
+</div>
+<p>发送前编码：</p>
+<p>3=1+2，5=1+4，6=2+4，7=1+2+4，9=1+8，10=2+8，11=1+2+8</p>
+<p>所以校验码1就需要检验1，3，5，7，9，11，所以值就是0，其他的检验码依次类推，需要检验所有编码中设计的位。</p>
+<p>生成汉明码还有一种简便方法：</p>
+<p>在需要生成编码时，将码字中为1的各位码字表示为二进制码，再按模2求和，所得的结果就是校验码，下图中是将数据<code>1011</code>进行编码的示例：</p>
+<p><img src="./data-link-layer/2023-03-25-14-53-15-image.png" alt="" /></p>
+<blockquote>
+<p>需要注意的是，得到的校验码是倒序的。</p>
+</blockquote>
+<p>在需要阶码的时候，将码字中为1的各位码字位号表示为二进制码，再按模2求和，如果和为0表示无差错，如果不为0表示差错的位号。</p>
+<h5 id="crc循环冗余校验"><a class="header" href="#crc循环冗余校验">CRC循环冗余校验</a></h5>
+<p>CRC主要用于突发错误的侦测。</p>
+<p>将位串当作多项式项目的系数。例如<code>110001</code>​就可以写成多项式：</p>
+<p><span class="katex-display"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.9474em;vertical-align:-0.0833em;"></span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">5</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.9474em;vertical-align:-0.0833em;"></span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">4</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.8641em;"></span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span></span></span></span></span></span></span></span></span></p>
+<p>发送方和接收方首先需要约定好一个相同的校验多项式<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">G</span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mclose">)</span></span></span></span>。校验码的位数同校验多项式最高次项的次数相同。</p>
+<p>发送方在生成校验码时，首先在数据的后面补上同校验码位数相同的零，再和校验多项式做除法取余数，余数就是生成的校验位。</p>
+<p>​<img src="./assets/image-20230317104513-wcl187o.png" alt="image" /></p>
+<p>接受方在接收到数据之后利用校验多项式计算除法的余数，如果余数为0则说明传输中没有问题，反之则存在错误。</p>
+<p>​<code>r</code>​位的校验码可以发现所有长度在<code>r</code>​以下的错误。</p>
+<p>所有奇数个比特翻转的错误一定能够被发现。</p>
+<p>对于长度大于<code>r</code>​的错误被遗漏的概率为<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7713em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7713em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">−</span><span class="mord mathnormal mtight" style="margin-right:0.02778em;">r</span></span></span></span></span></span></span></span></span></span></span></span>。</p>
+<h4 id="错误的纠正"><a class="header" href="#错误的纠正">错误的纠正</a></h4>
+<p>当传输的介质比较可靠的时候，使用错误侦测再进行重传是更加便宜的方式。</p>
+<p>当传输的介质不是特别可靠的时候，比如无线网络，最好使用错误纠正码来确保接受者能够纠正少量的错误。</p>
+<h3 id="流量控制"><a class="header" href="#流量控制">流量控制</a></h3>
+<p>流量控制的目的就是为了防止接收方被发送方过快的发送阻塞，导致传输的数据丢失。</p>
+<p>数据链路层的流量控制都是基于反馈的流量控制，即通过发送方通过接受接受方发送的<code>ACK</code>​信息来决定怎么发送数据。</p>
+<h4 id="基础流量控制协议"><a class="header" href="#基础流量控制协议">基础流量控制协议</a></h4>
+<p>使用<code>C</code>​语言编写代码表示协议，定义一个头文件<code>protocol.h</code>​：</p>
+<pre><code class="language-java">//
+// Created by ricardo on 23-3-17.
+//
+
+#ifndef DATA_LINK_LAYER_PROTOCOL_H
+#define DATA_LINK_LAYER_PROTOCOL_H
+
+#define MAX_PKT 1024
+
+typedef enum {
+    false,
+    true
+} boolean;
+
+typedef unsigned int seq_nr;
+
+typedef struct {
+    unsigned char data[MAX_PKT];
+} packet;
+
+typedef enum {
+    data,
+    ack,
+    nck,
+} frame_kind;
+
+typedef struct {
+    frame_kind kind;
+    seq_nr seq;
+    seq_nr ack;
+    packet info;
+} frame;
+
+void wait_for_event(event_type *event);
+
+void from_network_layer(packet *p);
+
+void to_network_layer(packet* p);
+
+void from_physical_layer(packet *p);
+
+void to_physical_layer(packet* p);
+
+void start_timer(seq_nr k);
+
+void end_timer(seq_nr k);
+
+void start_ack_time();
+
+void end_ack_time();
+
+void enable_network_layer();
+
+void disable_network_layer();
+
+#endif //DATA_LINK_LAYER_PROTOCOL_H
+</code></pre>
+<h5 id="协议1-乌托邦单工协议"><a class="header" href="#协议1-乌托邦单工协议">协议1 乌托邦单工协议</a></h5>
+<p>这个协议假设：</p>
+<ul>
+<li>通信的单工的</li>
+<li>通信是无错的</li>
+<li>接收方有着无限的缓存</li>
+</ul>
+<p>即：这个协议不需要任何的错误控制和流量控制</p>
+<p>​<img src="./assets/image-20230317131231-0xw9d7m.png" alt="image" />​</p>
+<pre><code class="language-java">//
+// Created by ricardo on 23-3-17.
+//
+
+typedef enum {
+    frame_arrival
+} event_type;
+#include "protocol.h"
+
+void send() {
+    frame s;
+    packet buffer;
+
+    while (true) {
+        from_network_layer(&amp;buffer);
+        s.info = buffer;
+        to_physical_layer(&amp;s);
+    }
+}
+
+void receive() {
+    frame r;
+    event_type event;
+
+    while (true) {
+        wait_for_event(&amp;event);
+
+        from_physical_layer(&amp;r);
+        to_network_layer(&amp;r.info);
+    }
+}
+</code></pre>
+<h5 id="协议2-单工发送等待协议"><a class="header" href="#协议2-单工发送等待协议">协议2 单工发送——等待协议</a></h5>
+<p>这个协议假设：</p>
+<ul>
+<li>通信是单工的</li>
+<li>通信是没有错误的</li>
+<li>接受者有着有限的缓存</li>
+</ul>
+<p>这个协议使用了一种发送——等待机制：</p>
+<ul>
+<li>发送方发送数据开始等待</li>
+<li>接收方接受数据并发送确认帧<code>ACK</code>​​</li>
+<li>发送方收到确认帧，继续发送</li>
+</ul>
+<p>​<img src="./assets/image-20230317131347-otg5vff.png" alt="image" />​</p>
+<pre><code class="language-java">//
+// Created by ricardo on 23-3-17.
+//
+
+typedef enum {
+    frame_arrival
+} event_type;
+
+#include "protocol.h"
+
+void send()
+{
+    frame s;
+    packet buffer;
+    event_type event;
+
+    while (true)
+    {
+        from_network_layer(&amp;buffer);
+        s.info = buffer;
+        to_physical_layer(&amp;s);
+        wait_for_event(&amp;event);
+    }
+}
+
+void receive()
+{
+    frame r, s;
+    event_type event;
+
+    while (true) {
+        wait_for_event(&amp;event);
+        from_physical_layer(&amp;r);
+        to_network_layer(&amp;r.info);
+        to_physical_layer(&amp;s);
+    }
+}
+</code></pre>
+<h5 id="协议3-带有重试的主动确认协议"><a class="header" href="#协议3-带有重试的主动确认协议">协议3 带有重试的主动确认协议</a></h5>
+<p>如果将协议2应用在不可靠的传输信道上：</p>
+<ul>
+<li>
+<p>传输过程中帧损坏了：</p>
+<p>接受者可以使用<code>CRC</code>​纠错码发现和丢弃这个损坏的帧</p>
+<p>发送者在等待<code>ACK</code>​帧的过程中超时之后重新发送这个帧</p>
+</li>
+<li>
+<p>传输过程中帧丢失了：</p>
+<p>如果是数据帧丢失了：发送者超时之后重新发送</p>
+<p>如果是<code>ACK</code>​帧丢失了：发送者超时之后重新发送</p>
+</li>
+</ul>
+<p>但是<code>ACK</code>​帧丢失之后重传可能遇到一个问题：发送者重新发送的数据帧会被接受者当作是新的数据帧。</p>
+<p>​<img src="./assets/image-20230317132728-bl3crdb.png" alt="image" />​</p>
+<p>为了解决这个问题，我们可以在数据帧的帧头上添加序列编号。</p>
+<p>在这里由于实际上只需要两种状态，序列编号只需要一个比特，传输0或者1就可以了。</p>
+<p>这样就将这个协议改造成了一个自动重传协议<code>Automatic Repeat reQuest aka ARQ</code>​。</p>
+<p>这个协议称为：单向传输数据的停止等待ARQ协议</p>
+<ul>
+<li>发送方在数据帧中添加校验字段，发送之后启动超时定时器</li>
+<li>接受方在接受数据之后利用校验码检查错误，出错就丢弃数据，校验无误的情况下发送确认帧</li>
+<li>发送法收到确认帧，发送下一帧，重启定时器</li>
+<li>如果发送方定时器超时，发送方重新发送刚发送的数据帧</li>
+<li>在数据帧还携带一个序号，接受方根据序号来判断是否是重复发送的数据帧</li>
+<li>确认帧中也携带序号，发送方通过序号确定是否是重复的确认帧</li>
+</ul>
+<p>‍那么确认帧是必须携带序号吗：</p>
+<p>在确认帧发送比较缓慢的时候，缺少序号的确认帧就可能导致问题。</p>
+<p><img src="./data-link-layer/2023-03-21-14-55-47-image.png?msec=1679391165957" alt="" /></p>
+<p>因此确认帧是需要序号的，发送方通过序确认是否是重复的确认帧。</p>
+<pre><code class="language-c">#define MAX_SEQ 1
+typedef enum
+{
+    frame_arrival,
+    cksum_err,
+    timeout
+} event_type;
+
+#include "protocol.h"
+
+void send()
+{
+    seq_nr next_frame_to_send;
+    frame s;
+    packet buffer;
+    event_type event;
+
+    next_frame_to_send = 0;
+    from_network_layer(&amp;buffer);
+    while (true)
+    {
+        s.info = buffer;
+        s.seq = next_frame_to_send;
+        to_physical_layer(&amp;s);
+        start_timer(s.seq);
+        wait_for_event(&amp;event);
+
+        if (event == frame_arrival)
+        {
+            from_physical_layer(&amp;s);
+            if (s.ack == next_frame_to_send)
+            {
+                stop_timer(s.ack);
+                from_network_layer(&amp;buffer);
+                next_frame_to_send = 1 - next_frame_to_send;
+            }
+        }
+    }
+}
+
+void receive()
+{
+    seq_nr frame_expected;
+    frame r, s;
+    event_type event;
+
+    frame_expected = 0;
+    while (true)
+    {
+        wait_for_event(&amp;event);
+
+        if (event == frame_arrival)
+        {
+            from_physical_layer(&amp;r);
+            if (r.seq == frame_expected)
+            {
+                to_network_layer(&amp;r.info);
+                frame_expected = 1 - frame_expected;
+            }
+            s.ack = 1 - frame_expected;
+            to_physical_layer(&amp;s);
+        }
+    }
+}
+</code></pre>
+<h5 id="协议4-实用的停止等待arq协议"><a class="header" href="#协议4-实用的停止等待arq协议">协议4 实用的停止等待ARQ协议</a></h5>
+<p>设计原则：</p>
+<ul>
+<li>
+<p>在数据帧中增加校验字段，发送帧之后启动超时定时器</p>
+</li>
+<li>
+<p>接收方对于收到的数据进行校验，如果出错则丢弃，如果校验无错，就发送确认帧或者通过下一个帧进行捎带确认</p>
+</li>
+<li>
+<p>收到确认之后发送下一帧，重启定时器</p>
+</li>
+<li>
+<p>如果定时器超时，则重新发送刚发送的数据帧</p>
+</li>
+<li>
+<p>数据帧中携带发送序号，根据需要判断是否需要是重复的数据帧</p>
+</li>
+<li>
+<p>根据确认帧判断是否重复的确认帧</p>
+</li>
+</ul>
+<p>捎带应答：</p>
+<p>当收到一个数据帧时，不同于立刻发送一个确认帧，而是等待网络层给出下一个需要发送的数据包，并把确认帧附在需要发送的数据帧之后一同发送出去。</p>
+<p>在这个过程中，发送方和确认方都需要维持一个滑动窗口。</p>
+<pre><code class="language-c">#define MAX_SEQ 1
+typedef enum
+{
+    frame_arrival,
+    cksum_err,
+    timeout
+} event_type;
+
+#include "protocol.h"
+
+void protocol()
+{
+    seq_nr next_frame_to_send;
+    seq_nr frame_expected;
+
+    frame r, s;
+    packet buffer;
+    event_type event;
+
+    from_network_layer(&amp;buffer);
+    s.info = buffer;
+    s.seq = next_frame_to_send;
+    s.ack = 1 - frame_expected;
+    to_physical_layer(&amp;s);
+    start_timer(s.seq);
+
+    while (true)
+    {
+        wait_for_event(&amp;event);
+
+        if (event == frame_arrival)
+        {
+            from_physical_layer(&amp;r);
+
+            if (r.seq = frame_expected)
+            {
+                to_network_layer(&amp;r.info);
+                frame_expected = 1 - frame_expected;
+            }
+
+            if (r.ack == next_frame_to_send)
+            {
+                stop_timer(r.ack);
+                from_network_layer(&amp;buffer);
+                next_frame_to_send = 1 - next_frame_to_send;
+            }
+
+            s.info = buffer;
+            s.seq = next_frame_to_send;
+            s.ack = 1 - frame_expected;
+            to_physical_layer(&amp;s);
+            start_timer(s.seq);
+        }
+    }
+}
+</code></pre>
+<p>但是这个协议的效率非常的低。</p>
+<p>在大部分的时间里，使用这个协议的信道都被阻塞等待确认帧。</p>
+<h5 id="协议5-回退n步协议"><a class="header" href="#协议5-回退n步协议">协议5 回退N步协议</a></h5>
+<p>设计原则：</p>
+<ul>
+<li>
+<p>发送方和接收方都需要维持一个滑动窗口：</p>
+<p>发送窗口： 发送帧的缓冲队列</p>
+<p>接受窗口：接受帧的缓冲队列</p>
+</li>
+<li>
+<p>发送者将被允许在收到确认帧之前发送多个数据帧</p>
+</li>
+<li>
+<p>如果接收方发现了传输错误，那么发送方必须回退到这个错误的帧重发进行纠错，已经发送的数据帧就废弃了</p>
+</li>
+</ul>
+<p>‍发送窗口大小的约束：</p>
+<p>当序号的位数只有<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">n</span></span></span></span>时，假设发送窗口的大小达到<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6644em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.6644em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">n</span></span></span></span></span></span></span></span></span></span></span>。</p>
+<p>如果发送方发送所有可以发送的帧，而接收方在接受所有的数据之后发送确认帧时失败了，但是此时接受者的序号和发送者的序号相同，接受者会把发送者重新发送的帧当作新发送的帧接受。</p>
+<p><img src="./data-link-layer/2023-03-21-16-18-52-image.png?msec=1679391165968" alt="" /></p>
+<p>‍因此该协议的发送窗口大小必须满足：</p>
+<p><span class="katex-display"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8304em;vertical-align:-0.136em;"></span><span class="mord mathnormal">Win</span><span class="mord mathnormal">d</span><span class="mord mathnormal">o</span><span class="mord mathnormal" style="margin-right:0.05764em;">wS</span><span class="mord mathnormal">i</span><span class="mord mathnormal">ze</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">≤</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.7977em;vertical-align:-0.0833em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7144em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">n</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">1</span></span></span></span></span></p>
+<p>式子中的<code>n</code>表示序号的位数。</p>
+<p>协议5的示例实现：</p>
+<p><img src="./data-link-layer/2023-03-24-10-05-39-image.png" alt="" /></p>
+<p><img src="./data-link-layer/2023-03-24-10-07-39-image.png" alt="" /></p>
+<p><img src="./data-link-layer/2023-03-24-10-07-52-image.png" alt="" /></p>
+<p><img src="./data-link-layer/2023-03-24-10-08-08-image.png" alt="" /></p>
+<h5 id="协议6-选择重传协议"><a class="header" href="#协议6-选择重传协议">协议6 选择重传协议</a></h5>
+<p><code>Select Repeat/Select Reject</code>。</p>
+<p>接收方的缓存大于1，可以接受乱序的帧，并且只要求重传错误的帧。</p>
+<p>选择重传中对于窗口大小的限制：</p>
+<ul>
+<li>发送窗口和接受窗口大小之和不能大于<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6644em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.6644em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">n</span></span></span></span></span></span></span></span></span></span></span>:</li>
+</ul>
+<p><span class="katex-display"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.02691em;">w</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.0269em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">s</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.786em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.02691em;">w</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.0269em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.02778em;">r</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">≤</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.7144em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7144em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">n</span></span></span></span></span></span></span></span></span></span></span></span></p>
+<ul>
+<li>
+<p>发送窗口的大小大于接受窗口的大小</p>
+</li>
+<li>
+<p>一般来说，取发送窗口和接受窗口大小为<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">n</span><span class="mbin mtight">−</span><span class="mord mtight">1</span></span></span></span></span></span></span></span></span></span></span></span></p>
+</li>
+</ul>
+<p>协议6相对于协议5的改进：</p>
+<ul>
+<li>
+<p>设置确认帧定时器：</p>
+<p>在收到数据帧之后，等待一段时间的回传帧以进行捎带确认。如果定时器超时还没有等到回传的数据，直接发送确认帧。</p>
+<p>利用这种方式减少单独确认帧的发送，提高信道的使用效率。</p>
+</li>
+<li>
+<p><code>NAK</code>帧：对于同一帧的错误，发送一次NAK</p>
+<p>NAK帧的序号就是出错帧的序号。</p>
+<p>帧接受之后校验出错和序号不对都算是出错。</p>
+</li>
+</ul>
+<p>协议6的示例实现：</p>
+<p><img src="./data-link-layer/2023-03-24-10-49-16-image.png" alt="" /></p>
+<p><img src="./data-link-layer/2023-03-24-10-55-14-image.png" alt="" /></p>
+<p><img src="./data-link-layer/2023-03-24-10-55-37-Screenshot_20230324_105446.png" alt="" /></p>
+<p><img src="./data-link-layer/2023-03-24-10-55-55-image.png" alt="" /></p>
+<h4 id="协议效率的分析"><a class="header" href="#协议效率的分析">协议效率的分析</a></h4>
+<p>为了比较不同的协议效率的不同，一般采用<strong>最大信道利用率</strong>来描述一个协议的效率。</p>
+<h5 id="停等协议的效率"><a class="header" href="#停等协议的效率">停等协议的效率</a></h5>
+<p>在发送过程中没有遇到错误，需要确认帧的情况下，发送数据帧的总时间：</p>
+<p><span class="katex-display"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:-0.1389em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.13889em;">F</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2806em;"><span style="top:-2.55em;margin-left:-0.1389em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">t</span><span class="mord mathnormal mtight" style="margin-right:0.02778em;">r</span><span class="mord mathnormal mtight">an</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.9694em;vertical-align:-0.2861em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.1389em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">p</span><span class="mord mathnormal mtight">ro</span><span class="mord mathnormal mtight">p</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.9694em;vertical-align:-0.2861em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.1389em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">p</span><span class="mord mathnormal mtight">roc</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:-0.1389em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">a</span><span class="mord mathnormal mtight">c</span><span class="mord mathnormal mtight" style="margin-right:0.03148em;">k</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.9694em;vertical-align:-0.2861em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.1389em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">p</span><span class="mord mathnormal mtight">ro</span><span class="mord mathnormal mtight">p</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.9694em;vertical-align:-0.2861em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.1389em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">p</span><span class="mord mathnormal mtight">roc</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span></span></span></span></span></p>
+<p>一般来说认为处理时间和发送确认帧的时间是可以忽略不计的，所以总的时间就是：</p>
+<p><span class="katex-display"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:-0.1389em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.13889em;">F</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2806em;"><span style="top:-2.55em;margin-left:-0.1389em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">t</span><span class="mord mathnormal mtight" style="margin-right:0.02778em;">r</span><span class="mord mathnormal mtight">an</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.9694em;vertical-align:-0.2861em;"></span><span class="mord">2</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.1389em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">p</span><span class="mord mathnormal mtight">ro</span><span class="mord mathnormal mtight">p</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span></span></span></span></span></p>
+<p>计算出信道利用率：</p>
+<p><span class="katex-display"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.10903em;">U</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.3324em;vertical-align:-0.9721em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3603em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">2</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.1389em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">p</span><span class="mord mathnormal mtight">ro</span><span class="mord mathnormal mtight">p</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2806em;"><span style="top:-2.55em;margin-left:-0.1389em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">t</span><span class="mord mathnormal mtight" style="margin-right:0.02778em;">r</span><span class="mord mathnormal mtight">an</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2806em;"><span style="top:-2.55em;margin-left:-0.1389em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">t</span><span class="mord mathnormal mtight" style="margin-right:0.02778em;">r</span><span class="mord mathnormal mtight">an</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.9721em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span></p>
+<p>因此当传播延迟<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.9694em;vertical-align:-0.2861em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.1389em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">p</span><span class="mord mathnormal mtight">ro</span><span class="mord mathnormal mtight">p</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span></span></span></span>越小，信道的利用率越高。</p>
+<p>再考虑传输中遇到错误的问题。假设每一帧遇到错误的概率为<code>p</code>，可以首先计算出传输出错的数量为：</p>
+<p><span class="katex-display"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.10903em;">N</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.109em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.02778em;">r</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.9291em;vertical-align:-1.2777em;"></span><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.6514em;"><span style="top:-1.8723em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">i</span><span class="mrel mtight">=</span><span class="mord mtight">1</span></span></span></span><span style="top:-3.05em;"><span class="pstrut" style="height:3.05em;"></span><span><span class="mop op-symbol large-op">∑</span></span></span><span style="top:-4.3em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">∞</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.2777em;"><span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">i</span><span class="mord"><span class="mord mathnormal">p</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8747em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">i</span><span class="mbin mtight">−</span><span class="mord mtight">1</span></span></span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">p</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.2019em;vertical-align:-0.8804em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3214em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord mathnormal">p</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.8804em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span></p>
+<p>不难发现测试的信道利用率就是：</p>
+<p><span class="katex-display"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.10903em;">U</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.3324em;vertical-align:-0.9721em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3603em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">2</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.1389em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">p</span><span class="mord mathnormal mtight">ro</span><span class="mord mathnormal mtight">p</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2806em;"><span style="top:-2.55em;margin-left:-0.1389em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">t</span><span class="mord mathnormal mtight" style="margin-right:0.02778em;">r</span><span class="mord mathnormal mtight">an</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2806em;"><span style="top:-2.55em;margin-left:-0.1389em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">t</span><span class="mord mathnormal mtight" style="margin-right:0.02778em;">r</span><span class="mord mathnormal mtight">an</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.9721em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.10903em;">N</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.109em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.02778em;">r</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.3991em;vertical-align:-0.9721em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.427em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">2</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.1389em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">p</span><span class="mord mathnormal mtight">ro</span><span class="mord mathnormal mtight">p</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2806em;"><span style="top:-2.55em;margin-left:-0.1389em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">t</span><span class="mord mathnormal mtight" style="margin-right:0.02778em;">r</span><span class="mord mathnormal mtight">an</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2806em;"><span style="top:-2.55em;margin-left:-0.1389em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">t</span><span class="mord mathnormal mtight" style="margin-right:0.02778em;">r</span><span class="mord mathnormal mtight">an</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mopen">(</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord mathnormal">p</span><span class="mclose">)</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.9721em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span></p>
+<p>引入一个概念——带宽时延积<code>BD</code>：在单程传播时延的时间内，信道可以容纳多少为的数据。带宽时延积还可以用传输时延<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.9694em;vertical-align:-0.2861em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.1389em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">p</span><span class="mord mathnormal mtight">ro</span><span class="mord mathnormal mtight">p</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span></span></span></span>和发送时延来计算<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2806em;"><span style="top:-2.55em;margin-left:-0.1389em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">t</span><span class="mord mathnormal mtight" style="margin-right:0.02778em;">r</span><span class="mord mathnormal mtight">an</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>：</p>
+<p><span class="katex-display"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.05017em;">B</span><span class="mord mathnormal" style="margin-right:0.02778em;">D</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.1963em;vertical-align:-0.836em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3603em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2806em;"><span style="top:-2.55em;margin-left:-0.1389em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">t</span><span class="mord mathnormal mtight" style="margin-right:0.02778em;">r</span><span class="mord mathnormal mtight">an</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.1389em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">p</span><span class="mord mathnormal mtight">ro</span><span class="mord mathnormal mtight">p</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.836em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span></p>
+<p>上述协议的效率还可以写成：</p>
+<p><span class="katex-display"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.10903em;">U</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.0908em;vertical-align:-0.7693em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3214em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord">2</span><span class="mord mathnormal" style="margin-right:0.05017em;">B</span><span class="mord mathnormal" style="margin-right:0.02778em;">D</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.7693em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span></p>
+<p><span class="katex-display"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.10903em;">U</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.0908em;vertical-align:-0.7693em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3214em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord">2</span><span class="mord mathnormal" style="margin-right:0.05017em;">B</span><span class="mord mathnormal" style="margin-right:0.02778em;">D</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord mathnormal">p</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.7693em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span></p>
+<p>现在再研究具有滑动窗口的停等协议：</p>
+<p><span class="katex-display"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.10903em;">U</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.1297em;vertical-align:-0.7693em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3603em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord">2</span><span class="mord mathnormal">a</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.13889em;">W</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.7693em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span></p>
+<p>其中<code>W</code>是发送窗口的大小，而且效率的最大值是1。</p>
+<p>在考虑上捎带确认的功能，不用发送单独的确认帧，信道的效率还可以提高为：</p>
+<p><span class="katex-display"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.10903em;">U</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.1297em;vertical-align:-0.7693em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3603em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">2</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord">2</span><span class="mord mathnormal" style="margin-right:0.05017em;">B</span><span class="mord mathnormal" style="margin-right:0.02778em;">D</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.10903em;">U</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.7693em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span></p>
+<h2 id="示例协议"><a class="header" href="#示例协议">示例协议</a></h2>
+<h3 id="hdlc"><a class="header" href="#hdlc">HDLC</a></h3>
+<h4 id="hdlc-帧结构"><a class="header" href="#hdlc-帧结构">HDLC 帧结构</a></h4>
+<ul>
+<li>
+<p>同步传输</p>
+</li>
+<li>
+<p>以位为单位</p>
+</li>
+<li>
+<p>可以点对点之间通信，也可以按照主从模型进行通信</p>
+</li>
+</ul>
+<p><img src="./data-link-layer/2023-03-28-15-20-27-image.png" alt="" /></p>
+<p>其中HDLC的帧还有三种类型：</p>
+<ul>
+<li>
+<p>信息：需要传输给上一层的数据。</p>
+<p>流量控制，错误纠正等的确认帧也在这部分</p>
+</li>
+<li>
+<p>监督帧：当没有使用</p>
+</li>
+</ul>
+<h3 id="ppp"><a class="header" href="#ppp">PPP</a></h3>
+<ul>
+<li>
+<p>无连接的协议，没有确认帧</p>
+</li>
+<li>
+<p>以字节为单元进行传输</p>
+</li>
+<li>
+<p>只能进行点对点直接通信</p>
+</li>
+</ul>
+<h4 id="ppp和hdlc之间的对比"><a class="header" href="#ppp和hdlc之间的对比">PPP和HDLC之间的对比</a></h4>
+<p>总的来说就是更加简单。</p>
+<p>PPP增加了：</p>
+<ul>
+<li>
+<p>可以和多种网络协议共同工作</p>
+</li>
+<li>
+<p>连接和数据压缩的协商</p>
+</li>
+<li>
+<p>用户的身份认证</p>
+</li>
+<li>
+<p>物理层可以使同步或者异步的</p>
+</li>
+</ul>
+<p>同时PPP移除了：</p>
+<ul>
+<li>
+<p>错误纠正，但是保留了错误发现</p>
+</li>
+<li>
+<p>流量控制</p>
+</li>
+<li>
+<p>序列号</p>
+</li>
+</ul>
+<h4 id="pppoe"><a class="header" href="#pppoe">PPPoE</a></h4>
+<blockquote>
+<p>就是PPP over Ethernet，广泛用于家庭网络中</p>
+</blockquote>
+<p><img src="./data-link-layer/2023-03-28-15-50-11-image.png" alt="" /></p>
+<ul>
+<li>
+<p>没有序号的帧结构</p>
+</li>
+<li>
+<p>使用字节填充</p>
+<p><code>0x7D</code>作为转义字符</p>
+<p>在所有的ASCII控制字符（也就是<code>0x20</code>及其以下）之前都需要添加转义字符</p>
+</li>
+<li>
+<p>地址<code>0xFF</code>表示所有用户都可以接受，但是由于是点对点通信，故实际意义不大</p>
+</li>
+<li>
+<p>控制<code>0x03</code>表示使用无序号的模式</p>
+</li>
+<li>
+<p>协议字段指明负载中使用的协议，比如IP</p>
+</li>
+<li>
+<p>校验和，使用CRC校验，可以是16位或者是32位</p>
+</li>
+</ul>
+<p>然后介绍一下PPP的状态转移图：</p>
+<p><img src="./data-link-layer/2023-03-28-15-55-01-image.png" alt="" /></p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../computer-networks/physical-layer.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../computer-networks/mac.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../computer-networks/physical-layer.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../computer-networks/mac.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

@@ -1,0 +1,485 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Vim - Ricardo&#x27;s Wiki</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="我在北京邮电大学计算机科学与技术专业学习三年的部分笔记">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../katex.min.css">
+
+        <!-- MathJax -->
+        <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../index.html">主页</a></li><li class="chapter-item expanded affix "><li class="spacer"></li><li class="chapter-item expanded "><a href="../ai-principle/index.html"><strong aria-hidden="true">1.</strong> 人工智能原理</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../ai-principle/intro.html"><strong aria-hidden="true">1.1.</strong> 概述</a></li><li class="chapter-item expanded "><a href="../ai-principle/question-knowledge.html"><strong aria-hidden="true">1.2.</strong> 问题和知识表示</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../algorithm/index.html"><strong aria-hidden="true">2.</strong> 算法</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../algorithm/intro.html"><strong aria-hidden="true">2.1.</strong> 概述</a></li><li class="chapter-item expanded "><a href="../algorithm/recurse-divide.html"><strong aria-hidden="true">2.2.</strong> 分治算法</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../compiler/index.html"><strong aria-hidden="true">3.</strong> 编译原理</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../compiler/intro.html"><strong aria-hidden="true">3.1.</strong> 概述</a></li><li class="chapter-item expanded "><a href="../compiler/lexical-analyzer.html"><strong aria-hidden="true">3.2.</strong> 词法分析</a></li><li class="chapter-item expanded "><a href="../compiler/grammar-analyzer.html"><strong aria-hidden="true">3.3.</strong> 语法分析</a></li><li class="chapter-item expanded "><a href="../compiler/grammar-driven-translation.html"><strong aria-hidden="true">3.4.</strong> 语法制导翻译</a></li><li class="chapter-item expanded "><a href="../compiler/syntax-analyser.html"><strong aria-hidden="true">3.5.</strong> 语义分析</a></li><li class="chapter-item expanded "><a href="../compiler/runtime.html"><strong aria-hidden="true">3.6.</strong> 运行环境</a></li><li class="chapter-item expanded "><a href="../compiler/intermediate-code.html"><strong aria-hidden="true">3.7.</strong> 中间代码生成</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../computer-architecture/index.html"><strong aria-hidden="true">4.</strong> 计算机组成原理</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../computer-architecture/overview.html"><strong aria-hidden="true">4.1.</strong> 计算机系统概论</a></li><li class="chapter-item expanded "><a href="../computer-architecture/calculator.html"><strong aria-hidden="true">4.2.</strong> 运算方法和运算器</a></li><li class="chapter-item expanded "><a href="../computer-architecture/instruction.html"><strong aria-hidden="true">4.3.</strong> 指令系统</a></li><li class="chapter-item expanded "><a href="../computer-architecture/cpu.html"><strong aria-hidden="true">4.4.</strong> 中央处理器</a></li><li class="chapter-item expanded "><a href="../computer-architecture/memory.html"><strong aria-hidden="true">4.5.</strong> 存储系统</a></li><li class="chapter-item expanded "><a href="../computer-architecture/io.html"><strong aria-hidden="true">4.6.</strong> 输入输出设备</a></li><li class="chapter-item expanded "><a href="../computer-architecture/external.html"><strong aria-hidden="true">4.7.</strong> 外部设备</a></li><li class="chapter-item expanded "><a href="../computer-architecture/bus.html"><strong aria-hidden="true">4.8.</strong> 总线</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../computer-networks/index.html"><strong aria-hidden="true">5.</strong> 计算机网络</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../computer-networks/overview.html"><strong aria-hidden="true">5.1.</strong> 引言</a></li><li class="chapter-item expanded "><a href="../computer-networks/physical-layer.html"><strong aria-hidden="true">5.2.</strong> 物理层</a></li><li class="chapter-item expanded "><a href="../computer-networks/data-link-layer.html"><strong aria-hidden="true">5.3.</strong> 数据链路层</a></li><li class="chapter-item expanded "><a href="../computer-networks/mac.html"><strong aria-hidden="true">5.4.</strong> 介质访问控制层</a></li><li class="chapter-item expanded "><a href="../computer-networks/network-layer.html"><strong aria-hidden="true">5.5.</strong> 网络层</a></li><li class="chapter-item expanded "><a href="../computer-networks/transport-layer.html"><strong aria-hidden="true">5.6.</strong> 传输层</a></li><li class="chapter-item expanded "><a href="../computer-networks/mid-term.html"><strong aria-hidden="true">5.7.</strong> 期中复习</a></li><li class="chapter-item expanded "><a href="../computer-networks/final-term.html"><strong aria-hidden="true">5.8.</strong> 期末复习</a></li><li class="chapter-item expanded "><a href="../computer-networks/lab2.html"><strong aria-hidden="true">5.9.</strong> 实验二</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../csapp/index.html"><strong aria-hidden="true">6.</strong> 计算机系统基础</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../csapp/bits.html"><strong aria-hidden="true">6.1.</strong> 数据的位级表示</a></li><li class="chapter-item expanded "><a href="../csapp/machine.html"><strong aria-hidden="true">6.2.</strong> 程序的机器级表示</a></li><li class="chapter-item expanded "><a href="../csapp/assembly-data.html"><strong aria-hidden="true">6.3.</strong> 程序的机器级表示——数据</a></li><li class="chapter-item expanded "><a href="../csapp/assembly-control.html"><strong aria-hidden="true">6.4.</strong> 程序的机器级表示——控制</a></li><li class="chapter-item expanded "><a href="../csapp/assembly-procedure.html"><strong aria-hidden="true">6.5.</strong> 程序的机器级表示——过程</a></li><li class="chapter-item expanded "><a href="../csapp/assembly-advanced.html"><strong aria-hidden="true">6.6.</strong> 程序的机器级表示——高级话题</a></li><li class="chapter-item expanded "><a href="../csapp/exception-control-flow.html"><strong aria-hidden="true">6.7.</strong> 异常控制流</a></li><li class="chapter-item expanded "><a href="../csapp/linking.html"><strong aria-hidden="true">6.8.</strong> 链接</a></li><li class="chapter-item expanded "><a href="../csapp/io.html"><strong aria-hidden="true">6.9.</strong> 输入输出系统</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../data-structure/index.html"><strong aria-hidden="true">7.</strong> 数据结构</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../data-structure/foundation.html"><strong aria-hidden="true">7.1.</strong> 算法基础</a></li><li class="chapter-item expanded "><a href="../data-structure/inner-sort.html"><strong aria-hidden="true">7.2.</strong> 内部排序</a></li><li class="chapter-item expanded "><a href="../data-structure/outer-sort.html"><strong aria-hidden="true">7.3.</strong> 外部排序</a></li><li class="chapter-item expanded "><a href="../data-structure/array-and-list.html"><strong aria-hidden="true">7.4.</strong> 数组和广义表</a></li><li class="chapter-item expanded "><a href="../data-structure/list.html"><strong aria-hidden="true">7.5.</strong> 线性表</a></li><li class="chapter-item expanded "><a href="../data-structure/stack-and-dequeue.html"><strong aria-hidden="true">7.6.</strong> 栈和队列</a></li><li class="chapter-item expanded "><a href="../data-structure/tree.html"><strong aria-hidden="true">7.7.</strong> 树</a></li><li class="chapter-item expanded "><a href="../data-structure/graph.html"><strong aria-hidden="true">7.8.</strong> 图</a></li><li class="chapter-item expanded "><a href="../data-structure/string.html"><strong aria-hidden="true">7.9.</strong> 字符串</a></li><li class="chapter-item expanded "><a href="../data-structure/find.html"><strong aria-hidden="true">7.10.</strong> 查找表</a></li><li class="chapter-item expanded "><a href="../data-structure/lab.html"><strong aria-hidden="true">7.11.</strong> 实验</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../database/index.html"><strong aria-hidden="true">8.</strong> 数据库</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../database/intro.html"><strong aria-hidden="true">8.1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="../database/relation-model.html"><strong aria-hidden="true">8.2.</strong> Relation Model</a></li><li class="chapter-item expanded "><a href="../database/relation-database-design.html"><strong aria-hidden="true">8.3.</strong> Relation Database Design</a></li><li class="chapter-item expanded "><a href="../database/sql.html"><strong aria-hidden="true">8.4.</strong> SQL</a></li><li class="chapter-item expanded "><a href="../database/intermediate-sql.html"><strong aria-hidden="true">8.5.</strong> Intermediate SQL</a></li><li class="chapter-item expanded "><a href="../database/entity-relation-model.html"><strong aria-hidden="true">8.6.</strong> Entity Relation Model</a></li><li class="chapter-item expanded "><a href="../database/data-storage-structure.html"><strong aria-hidden="true">8.7.</strong> Data Storage Structure</a></li><li class="chapter-item expanded "><a href="../database/database-index.html"><strong aria-hidden="true">8.8.</strong> Index</a></li><li class="chapter-item expanded "><a href="../database/query-processing.html"><strong aria-hidden="true">8.9.</strong> Query Processing</a></li><li class="chapter-item expanded "><a href="../database/query-optimization.html"><strong aria-hidden="true">8.10.</strong> Query Optimization</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../discrete-math/index.html"><strong aria-hidden="true">9.</strong> 离散数学</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../discrete-math/relation.html"><strong aria-hidden="true">9.1.</strong> Relation</a></li><li class="chapter-item expanded "><a href="../discrete-math/advanced-counting.html"><strong aria-hidden="true">9.2.</strong> Advanced Counting</a></li><li class="chapter-item expanded "><a href="../discrete-math/tree.html"><strong aria-hidden="true">9.3.</strong> Tree</a></li><li class="chapter-item expanded "><a href="../discrete-math/graph.html"><strong aria-hidden="true">9.4.</strong> Graph</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../formal-language/index.html"><strong aria-hidden="true">10.</strong> 形式语言和自动机</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../formal-language/fa.html"><strong aria-hidden="true">10.1.</strong> 有限状态自动机</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../missing-semester/index.html"><strong aria-hidden="true">11.</strong> 计算机教学中缺少的一课</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../missing-semester/missing-the-shell.html"><strong aria-hidden="true">11.1.</strong> Shell</a></li><li class="chapter-item expanded "><a href="../missing-semester/missing-shell-scripts.html"><strong aria-hidden="true">11.2.</strong> Shell Scripts</a></li><li class="chapter-item expanded "><a href="../missing-semester/missing-vim.html" class="active"><strong aria-hidden="true">11.3.</strong> Vim</a></li><li class="chapter-item expanded "><a href="../missing-semester/missing-data-wrangling.html"><strong aria-hidden="true">11.4.</strong> Data Wrangling</a></li><li class="chapter-item expanded "><a href="../missing-semester/missing-command-line.html"><strong aria-hidden="true">11.5.</strong> Command Line</a></li><li class="chapter-item expanded "><a href="../missing-semester/missing-potpourri.html"><strong aria-hidden="true">11.6.</strong> Potpourri</a></li><li class="chapter-item expanded "><a href="../missing-semester/missing-version-control.html"><strong aria-hidden="true">11.7.</strong> Version Control</a></li><li class="chapter-item expanded "><a href="../missing-semester/missing-debugging.html"><strong aria-hidden="true">11.8.</strong> Debug</a></li><li class="chapter-item expanded "><a href="../missing-semester/missing-metaprogramming.html"><strong aria-hidden="true">11.9.</strong> Metaprogram</a></li><li class="chapter-item expanded "><a href="../missing-semester/missing-security.html"><strong aria-hidden="true">11.10.</strong> Security</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../operating-system/index.html"><strong aria-hidden="true">12.</strong> 操作系统</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../operating-system/intro.html"><strong aria-hidden="true">12.1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="../operating-system/os-structures.html"><strong aria-hidden="true">12.2.</strong> OS Structure</a></li><li class="chapter-item expanded "><a href="../operating-system/processes.html"><strong aria-hidden="true">12.3.</strong> Process</a></li><li class="chapter-item expanded "><a href="../operating-system/process-synchronization.html"><strong aria-hidden="true">12.4.</strong> Process Synchronization</a></li><li class="chapter-item expanded "><a href="../operating-system/cpu-scheduling.html"><strong aria-hidden="true">12.5.</strong> CPU Scheduling</a></li><li class="chapter-item expanded "><a href="../operating-system/threads.html"><strong aria-hidden="true">12.6.</strong> Thread</a></li><li class="chapter-item expanded "><a href="../operating-system/memory-management.html"><strong aria-hidden="true">12.7.</strong> Memory Management</a></li><li class="chapter-item expanded "><a href="../operating-system/virtual-memory.html"><strong aria-hidden="true">12.8.</strong> Virtual Memory</a></li><li class="chapter-item expanded "><a href="../operating-system/fs-interface.html"><strong aria-hidden="true">12.9.</strong> Filesystem Interface</a></li><li class="chapter-item expanded "><a href="../operating-system/fs-implementation.html"><strong aria-hidden="true">12.10.</strong> Filesystem Implementation</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../socialist/index.html"><strong aria-hidden="true">13.</strong> 毛泽东思想和中国特色理论体系概论</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../socialist/maozedong.html"><strong aria-hidden="true">13.1.</strong> 毛概期末总结</a></li><li class="chapter-item expanded "><a href="../socialist/others.html"><strong aria-hidden="true">13.2.</strong> 课后大题</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Ricardo&#x27;s Wiki</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="the-missing-semester-in-the-cs"><a class="header" href="#the-missing-semester-in-the-cs">The Missing Semester in the CS</a></h1>
+<h2 id="introduction"><a class="header" href="#introduction">Introduction</a></h2>
+<p>本篇是MIT的公开课程<a href="https://missing.csail.mit.edu/">计算机教学中消失的一学期</a>的学习笔记第三篇。在笔记中，我将摘抄我认为是重点的语句，文中举出的例子我会在自己的电脑上操作一遍并给出其产生的结果。</p>
+<p>本篇是<code>Editors(Vim)</code>部分的学习笔记，课程地址为<a href="https://missing.csail.mit.edu/2020/editors/">editors</a></p>
+<blockquote>
+<p>If it seems like there should be a better way to do something, there probably is.</p>
+</blockquote>
+<!--more-->
+<h2 id="which-editor-to-learn"><a class="header" href="#which-editor-to-learn">Which editor to learn?</a></h2>
+<p>Programmers have <a href="https://en.wikipedia.org/wiki/Editor_war">strong opinions</a> about their text editors. <a href="https://code.visualstudio.com/">Visual Studio Code</a> is the most popular editor. <a href="https://www.vim.org/">Vim</a> is the most popular command-line-based editor.</p>
+<h3 id="vim"><a class="header" href="#vim">Vim</a></h3>
+<p>Vim has a rich history; it originated from the Vi editor (1976), and it’s still being developed today. Vim has some really neat ideas behind it, and for this reason, lots of tools support a Vim emulation mode.</p>
+<blockquote>
+<p>由于许多的IDE都有Vim模式，在学习这篇的时候，也不必一定使用命令行界面的Vim编辑器，也可以使用各种IDE的Vim模式。</p>
+</blockquote>
+<h2 id="philosophy-of-vim"><a class="header" href="#philosophy-of-vim">Philosophy of Vim</a></h2>
+<p>When programming, you spend most of your time reading/editing, not writing. For this reason, Vim is a <em>modal</em> editor: it has different modes for inserting text vs manipulating text. Vim is programmable (with Vimscript and also other languages like Python), and Vim’s interface itself is a programming language: keystrokes (with mnemonic names) are commands, and these commands are composable. Vim avoids the use of the mouse, because it’s too slow; Vim even avoids using the arrow keys because it requires too much movement.</p>
+<blockquote>
+<p>manipulate 操纵；keystroke 击键；mnemonic 助记符；</p>
+</blockquote>
+<h2 id="model-editing"><a class="header" href="#model-editing">Model editing</a></h2>
+<p>Vim’s design is based on the idea that a lot of programmer time is spent reading, navigating, and making small edits, as opposed to writing long streams of text. For this reason, Vim has multiple operating modes. Keystrokes have different meanings in different operating modes.</p>
+<ul>
+<li><strong>Normal</strong>: for moving around a file and making edits</li>
+<li><strong>Insert</strong>: for inserting text</li>
+<li><strong>Replace</strong>: for replacing text</li>
+<li><strong>Visual</strong> (plain, line, or block): for selecting blocks of text</li>
+<li><strong>Command-line</strong>: for running a command</li>
+</ul>
+<p>In its default configuration, Vim shows the current mode in the bottom left. The initial/default mode is Normal mode.</p>
+<p>You change modes by pressing <code>&lt;ESC&gt;</code> (the escape key) to switch from any mode back to Normal mode. From Normal mode, enter Insert mode with <code>i</code>, Replace mode with <code>R</code>, Visual mode with <code>v</code>, Visual Line mode with <code>V</code>, Visual Block mode with <code>&lt;C-v&gt;</code> (Ctrl-V, sometimes also written <code>^V</code>), and Command-line mode with <code>:</code>.You will use the <code>&lt;ESC&gt;</code>key a lot when using Vim, consider remapping Caps Lock to Escape.</p>
+<blockquote>
+<p>在Windows系统中重设键盘键位时，不需要修改注册表值，可以使用<a href="https://github.com/microsoft/PowerToys">PowerToys</a>这个微软官方开发的辅助开发者的工具集。他的官方文档在[这里](<a href="https://docs.microsoft.com/zh-cn/windows/powertoys/">Microsoft PowerToys | Microsoft Docs</a>)</p>
+</blockquote>
+<h2 id="basics"><a class="header" href="#basics">Basics</a></h2>
+<h3 id="inserting-text"><a class="header" href="#inserting-text">Inserting text</a></h3>
+<p>From Normal mode, press <code>i</code> to enter Insert mode. Now, Vim behaves like any other text editor, until you press <code>&lt;ESC&gt;</code> to return to Normal mode.</p>
+<h3 id="bufferstabs-and-windows"><a class="header" href="#bufferstabs-and-windows">Buffers,tabs, and windows</a></h3>
+<p>Vim maintains a set of open files, called “buffers”. A Vim session has a number of tabs, each of which has a number of windows (split panes). Each window shows a single buffer. Unlike other programs you are familiar with, like web browsers, there is not a 1-to-1 correspondence between buffers and windows; windows are merely views. A given buffer may be open in <em>multiple</em> windows, even within the same tab. This can be quite handy, for example, to view two different parts of a file at the same time.</p>
+<p>By default, Vim opens with a single tab, which contains a single window.</p>
+<blockquote>
+<p>buffer 缓冲区; pane 窗格;</p>
+</blockquote>
+<h3 id="command-line"><a class="header" href="#command-line">Command-line</a></h3>
+<p>Command mode can be entered by typing <code>:</code> in Normal mode. Your cursor will jump to the command line at the bottom of the screen upon pressing <code>:</code>. This mode has many functionalities, including opening, saving, and closing files, and <a href="https://twitter.com/iamdevloper/status/435555976687923200">quitting Vim</a>.</p>
+<blockquote>
+<p>这个链接指向一条推文，是一个关于退出Vim编辑器的冷笑话。（个人理解</p>
+<p>推文如下：</p>
+<p>I've been using Vim for about 2 years now, mostly because I can't figure out how to exit it.</p>
+</blockquote>
+<ul>
+<li><code>:q</code> quit (close window)</li>
+<li><code>:w</code> save (“write”)</li>
+<li><code>:wq</code> save and quit</li>
+<li><code>:e {name of file}</code> open file for editing</li>
+<li><code>:ls</code> show open buffers</li>
+<li><code>:help {topic}</code> open help
+<ul>
+<li><code>:help :w</code> opens help for the <code>:w</code> command</li>
+<li><code>:help w</code> opens help for the <code>w</code> movement</li>
+</ul>
+</li>
+</ul>
+<h2 id="vims-interface-is-a-proggramming-language"><a class="header" href="#vims-interface-is-a-proggramming-language">Vim's interface is a proggramming language</a></h2>
+<p>The most important idea in Vim is that Vim’s interface itself is a programming language. Keystrokes (with mnemonic names) are commands, and these commands <em>compose</em>. This enables efficient movement and edits, especially once the commands become muscle memory.</p>
+<h3 id="movement"><a class="header" href="#movement">Movement</a></h3>
+<p>You should spend most of your time in Normal mode, using movement commands to navigate the buffer. Movements in Vim are also called “nouns”, because they refer to chunks of text.</p>
+<blockquote>
+<p>nouns 名词; chunk 块;</p>
+</blockquote>
+<ul>
+<li>Basic movement: <code>hjkl</code> (left, down, up, right)</li>
+<li>Words: <code>w</code> (next word), <code>b</code> (beginning of word), <code>e</code> (end of word)</li>
+<li>Lines: <code>0</code> (beginning of line), <code>^</code> (first non-blank character), <code>$</code> (end of line)</li>
+<li>Screen: <code>H</code> (top of screen), <code>M</code> (middle of screen), <code>L</code> (bottom of screen)</li>
+<li>Scroll: <code>Ctrl-u</code> (up), <code>Ctrl-d</code> (down)</li>
+<li>File: <code>gg</code> (beginning of file), <code>G</code> (end of file)</li>
+<li>Line numbers: <code>:{number}&lt;CR&gt;</code> or <code>{number}G</code> (line {number})</li>
+<li>Misc: <code>%</code> (corresponding item)</li>
+<li>Find: <code>f{character}</code>, <code>t{character}</code>, <code>F{character}</code>, <code>T{character}</code>
+<ul>
+<li>find/to forward/backward {character} on the current line</li>
+<li><code>,</code> / <code>;</code> for navigating matches</li>
+</ul>
+</li>
+<li>Search: <code>/{regex}</code>, <code>n</code> / <code>N</code> for navigating matches</li>
+</ul>
+<h3 id="selection"><a class="header" href="#selection">Selection</a></h3>
+<p>Visual modes:</p>
+<ul>
+<li>Visual: <code>v</code></li>
+<li>Visual Line: <code>V</code></li>
+<li>Visual Block: <code>Ctrl-v</code></li>
+</ul>
+<p>Can use movement keys to make selection.</p>
+<h3 id="edits"><a class="header" href="#edits">Edits</a></h3>
+<p>Everything that you used to do with the mouse, you now do with the keyboard using editing commands that compose with movement commands. Here’s where Vim’s interface starts to look like a programming language. Vim’s editing commands are also called “verbs”, because verbs act on nouns.</p>
+<ul>
+<li><code>i</code>enter Insert mode
+<ul>
+<li>but for manipulating/deleting text, want to use something more than backspace</li>
+</ul>
+</li>
+<li><code>o</code> / <code>O</code> insert line below / above</li>
+<li><code>d{motion}</code>delete {motion}
+<ul>
+<li>e.g. <code>dw</code> is delete word, <code>d$</code> is delete to end of line, <code>d0</code> is delete to beginning of line</li>
+</ul>
+</li>
+<li><code>c{motion}</code>change {motion}
+<ul>
+<li>e.g. <code>cw</code> is change word</li>
+<li>like <code>d{motion}</code> followed by <code>i</code></li>
+</ul>
+</li>
+<li><code>x</code> delete character (equal do <code>dl</code>)</li>
+<li><code>s</code> substitute character (equal to <code>xi</code>)</li>
+<li>Visual mode + manipulation
+<ul>
+<li>select text, <code>d</code> to delete it or <code>c</code> to change it</li>
+</ul>
+</li>
+<li><code>u</code> to undo, <code>&lt;C-r&gt;</code> to redo</li>
+<li><code>y</code> to copy / “yank” (some other commands like <code>d</code> also copy)</li>
+<li><code>p</code> to paste</li>
+<li>Lots more to learn: e.g. <code>~</code> flips the case of a character</li>
+</ul>
+<h3 id="counts"><a class="header" href="#counts">Counts</a></h3>
+<p>You can combine nouns and verbs with a count, which will perform a given action a number of times.</p>
+<ul>
+<li><code>3w</code> move 3 words forward</li>
+<li><code>5j</code> move 5 lines down</li>
+<li><code>7dw</code> delete 7 words</li>
+</ul>
+<h3 id="modifiers"><a class="header" href="#modifiers">Modifiers</a></h3>
+<p>You can use modifiers to change the meaning of a noun. Some modifiers are <code>i</code>, which means “inner” or “inside”, and <code>a</code>, which means “around”.</p>
+<ul>
+<li><code>ci(</code> change the contents inside the current pair of parentheses</li>
+<li><code>ci[</code> change the contents inside the current pair of square brackets</li>
+<li><code>da'</code> delete a single-quoted string, including the surrounding single quotes</li>
+</ul>
+<h2 id="customizing-vim"><a class="header" href="#customizing-vim">Customizing Vim</a></h2>
+<p>Vim is customized through a plain-text configuration file in <code>~/.vimrc</code> (containing Vimscript commands). There are probably lots of basic settings that you want to turn on.</p>
+<p>We are providing a well-documented basic config that you can use as a starting point. We recommend using this because it fixes some of Vim’s quirky default behavior. <strong>Download our config ​</strong>​<a href="https://missing.csail.mit.edu/2020/files/vimrc">here</a><strong><strong>​<strong>​ and save it to ​</strong>​</strong><code>~/.vimrc</code><strong>​</strong>.</strong></p>
+<blockquote>
+<p>quirky 古怪的；</p>
+</blockquote>
+<p>Vim is heavily customizable, and it’s worth spending time exploring customization options. You can look at people’s dotfiles on GitHub for inspiration. There are lots of good blog posts on this topic too. Try not to copy-and-paste people’s full configuration, but read it, understand it, and take what you need.</p>
+<h2 id="extending-vim"><a class="header" href="#extending-vim">Extending Vim</a></h2>
+<p>There are tons of plugins for extending Vim. Contrary to outdated advice that you might find on the internet, you do <em>not</em> need to use a plugin manager for Vim (since Vim 8.0). Instead, you can use the built-in package management system. Simply create the directory <code>~/.vim/pack/vendor/start/</code>, and put plugins in there (e.g. via <code>git clone</code>).</p>
+<p>Here are some of our favorite plugins:</p>
+<ul>
+<li><a href="https://github.com/ctrlpvim/ctrlp.vim">ctrlp.vim</a>: fuzzy file finder</li>
+<li><a href="https://github.com/mileszs/ack.vim">ack.vim</a>: code search</li>
+<li><a href="https://github.com/scrooloose/nerdtree">nerdtree</a>: file explorer</li>
+<li><a href="https://github.com/easymotion/vim-easymotion">vim-easymotion</a>: magic motions</li>
+</ul>
+<p>We’re trying to avoid giving an overwhelmingly long list of plugins here. You can check out the instructors’ dotfiles (<a href="https://github.com/anishathalye/dotfiles">Anish</a>, <a href="https://github.com/jonhoo/configs">Jon</a>, <a href="https://github.com/JJGO/dotfiles">Jose</a>) to see what other plugins we use. Check out <a href="https://vimawesome.com/">Vim Awesome</a> for more awesome Vim plugins.</p>
+<h2 id="vim-mode-in-other-programs"><a class="header" href="#vim-mode-in-other-programs">Vim mode in other programs</a></h2>
+<p>Many tools support Vim emulation. The quality varies from good to great; depending on the tool, it may not support the fancier Vim features, but most cover the basics pretty well.</p>
+<h3 id="shell"><a class="header" href="#shell">Shell</a></h3>
+<p>Use</p>
+<pre><code class="language-bash">export EDITOR=vim
+</code></pre>
+<p>This is the environment variable used to decide which editor is launched when a program wants to start an editor.</p>
+<h3 id="readline"><a class="header" href="#readline">Readline</a></h3>
+<p>Many programs use the <a href="https://tiswww.case.edu/php/chet/readline/rltop.html">GNU Readline</a> library for their command-line interface. Readline supports (basic) Vim emulation too, which can be enabled by adding the following line to the <code>~/.inputrc</code> file:</p>
+<pre><code>set editing-mode vi
+</code></pre>
+<p>With this setting, for example, the Python REPL will support Vim bindings.</p>
+<h2 id="advanced-vim"><a class="header" href="#advanced-vim">Advanced Vim</a></h2>
+<p>Here are a few examples to show you the power of the editor. We can’t teach you all of these kinds of things, but you’ll learn them as you go. A good heuristic: whenever you’re using your editor and you think “there must be a better way of doing this”, there probably is: look it up online.</p>
+<blockquote>
+<p>heuristic 启发式；</p>
+</blockquote>
+<h3 id="search-and-replace"><a class="header" href="#search-and-replace">Search and replace</a></h3>
+<p><code>:s</code> (substitute) command (<a href="http://vim.wikia.com/wiki/Search_and_replace">documentation</a>).</p>
+<pre><code>%s/foo/bar/g
+</code></pre>
+<ul>
+<li>replace foo with bar globally in file</li>
+</ul>
+<pre><code>%s/\[.*\](\(.*\))/\1/g
+</code></pre>
+<ul>
+<li>replace named Markdown links with plain URLs</li>
+</ul>
+<h3 id="multiple-windows"><a class="header" href="#multiple-windows">Multiple windows</a></h3>
+<ul>
+<li><code>:sp</code> / <code>:vsp</code> to split windows</li>
+<li>Can have multiple views of the same buffer.</li>
+</ul>
+<h3 id="macros"><a class="header" href="#macros">Macros</a></h3>
+<ul>
+<li><code>q{character}</code> to start recording a macro in register <code>{character}</code></li>
+<li><code>q</code> to stop recording</li>
+<li><code>@{character}</code> replays the macro</li>
+<li>Macro execution stops on error</li>
+<li><code>{number}@{character}</code> executes a macro {number} times</li>
+<li>Macros can be recursive
+<ul>
+<li>first clear the macro with <code>q{character}q</code></li>
+<li>record the macro, with <code>@{character}</code> to invoke the macro recursively (will be a no-op until recording is complete)</li>
+</ul>
+</li>
+<li>Example: convert xml to json (<a href="https://missing.csail.mit.edu/2020/files/example-data.xml">file</a>)
+<ul>
+<li>Array of objects with keys “name” / “email”</li>
+<li>Use a Python program?</li>
+<li>Use sed / regexes
+<ul>
+<li><code>g/people/d</code></li>
+<li><code>%s/&lt;person&gt;/{/g</code></li>
+<li><code>%s/&lt;name&gt;\(.*\)&lt;\/name&gt;/"name": "\1",/g</code></li>
+<li>…</li>
+</ul>
+</li>
+<li>Vim commands / macros
+<ul>
+<li><code>Gdd</code>, <code>ggdd</code> delete first and last lines</li>
+<li>Macro to format a single element (register<code>e</code>)
+<ul>
+<li>Go to line with <code>&lt;name&gt;</code></li>
+<li><code>qe^r"f&gt;s": "&lt;ESC&gt;f&lt;C"&lt;ESC&gt;q</code></li>
+</ul>
+</li>
+<li>Macro to format a person
+<ul>
+<li>Go to line with <code>&lt;person&gt;</code></li>
+<li><code>qpS{&lt;ESC&gt;j@eA,&lt;ESC&gt;j@ejS},&lt;ESC&gt;q</code></li>
+</ul>
+</li>
+<li>Macro to format a person and go to the next person
+<ul>
+<li>Go to line with <code>&lt;person&gt;</code></li>
+<li><code>qq@pjq</code></li>
+</ul>
+</li>
+<li>Execute macro until end of file
+<ul>
+<li><code>999@q</code></li>
+</ul>
+</li>
+<li>Manually remove last <code>,</code> and add <code>[</code> and <code>]</code> delimiters</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>这个部分就已经是魔法了</p>
+</blockquote>
+<blockquote>
+<p>学习Vim还是得多练，这就在vscode里装Vim插件</p>
+</blockquote>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../missing-semester/missing-shell-scripts.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../missing-semester/missing-data-wrangling.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../missing-semester/missing-shell-scripts.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../missing-semester/missing-data-wrangling.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

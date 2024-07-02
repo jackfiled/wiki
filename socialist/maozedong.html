@@ -1,0 +1,464 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>毛概期末总结 - Ricardo&#x27;s Wiki</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="我在北京邮电大学计算机科学与技术专业学习三年的部分笔记">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../katex.min.css">
+
+        <!-- MathJax -->
+        <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../index.html">主页</a></li><li class="chapter-item expanded affix "><li class="spacer"></li><li class="chapter-item expanded "><a href="../ai-principle/index.html"><strong aria-hidden="true">1.</strong> 人工智能原理</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../ai-principle/intro.html"><strong aria-hidden="true">1.1.</strong> 概述</a></li><li class="chapter-item expanded "><a href="../ai-principle/question-knowledge.html"><strong aria-hidden="true">1.2.</strong> 问题和知识表示</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../algorithm/index.html"><strong aria-hidden="true">2.</strong> 算法</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../algorithm/intro.html"><strong aria-hidden="true">2.1.</strong> 概述</a></li><li class="chapter-item expanded "><a href="../algorithm/recurse-divide.html"><strong aria-hidden="true">2.2.</strong> 分治算法</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../compiler/index.html"><strong aria-hidden="true">3.</strong> 编译原理</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../compiler/intro.html"><strong aria-hidden="true">3.1.</strong> 概述</a></li><li class="chapter-item expanded "><a href="../compiler/lexical-analyzer.html"><strong aria-hidden="true">3.2.</strong> 词法分析</a></li><li class="chapter-item expanded "><a href="../compiler/grammar-analyzer.html"><strong aria-hidden="true">3.3.</strong> 语法分析</a></li><li class="chapter-item expanded "><a href="../compiler/grammar-driven-translation.html"><strong aria-hidden="true">3.4.</strong> 语法制导翻译</a></li><li class="chapter-item expanded "><a href="../compiler/syntax-analyser.html"><strong aria-hidden="true">3.5.</strong> 语义分析</a></li><li class="chapter-item expanded "><a href="../compiler/runtime.html"><strong aria-hidden="true">3.6.</strong> 运行环境</a></li><li class="chapter-item expanded "><a href="../compiler/intermediate-code.html"><strong aria-hidden="true">3.7.</strong> 中间代码生成</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../computer-architecture/index.html"><strong aria-hidden="true">4.</strong> 计算机组成原理</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../computer-architecture/overview.html"><strong aria-hidden="true">4.1.</strong> 计算机系统概论</a></li><li class="chapter-item expanded "><a href="../computer-architecture/calculator.html"><strong aria-hidden="true">4.2.</strong> 运算方法和运算器</a></li><li class="chapter-item expanded "><a href="../computer-architecture/instruction.html"><strong aria-hidden="true">4.3.</strong> 指令系统</a></li><li class="chapter-item expanded "><a href="../computer-architecture/cpu.html"><strong aria-hidden="true">4.4.</strong> 中央处理器</a></li><li class="chapter-item expanded "><a href="../computer-architecture/memory.html"><strong aria-hidden="true">4.5.</strong> 存储系统</a></li><li class="chapter-item expanded "><a href="../computer-architecture/io.html"><strong aria-hidden="true">4.6.</strong> 输入输出设备</a></li><li class="chapter-item expanded "><a href="../computer-architecture/external.html"><strong aria-hidden="true">4.7.</strong> 外部设备</a></li><li class="chapter-item expanded "><a href="../computer-architecture/bus.html"><strong aria-hidden="true">4.8.</strong> 总线</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../computer-networks/index.html"><strong aria-hidden="true">5.</strong> 计算机网络</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../computer-networks/overview.html"><strong aria-hidden="true">5.1.</strong> 引言</a></li><li class="chapter-item expanded "><a href="../computer-networks/physical-layer.html"><strong aria-hidden="true">5.2.</strong> 物理层</a></li><li class="chapter-item expanded "><a href="../computer-networks/data-link-layer.html"><strong aria-hidden="true">5.3.</strong> 数据链路层</a></li><li class="chapter-item expanded "><a href="../computer-networks/mac.html"><strong aria-hidden="true">5.4.</strong> 介质访问控制层</a></li><li class="chapter-item expanded "><a href="../computer-networks/network-layer.html"><strong aria-hidden="true">5.5.</strong> 网络层</a></li><li class="chapter-item expanded "><a href="../computer-networks/transport-layer.html"><strong aria-hidden="true">5.6.</strong> 传输层</a></li><li class="chapter-item expanded "><a href="../computer-networks/mid-term.html"><strong aria-hidden="true">5.7.</strong> 期中复习</a></li><li class="chapter-item expanded "><a href="../computer-networks/final-term.html"><strong aria-hidden="true">5.8.</strong> 期末复习</a></li><li class="chapter-item expanded "><a href="../computer-networks/lab2.html"><strong aria-hidden="true">5.9.</strong> 实验二</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../csapp/index.html"><strong aria-hidden="true">6.</strong> 计算机系统基础</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../csapp/bits.html"><strong aria-hidden="true">6.1.</strong> 数据的位级表示</a></li><li class="chapter-item expanded "><a href="../csapp/machine.html"><strong aria-hidden="true">6.2.</strong> 程序的机器级表示</a></li><li class="chapter-item expanded "><a href="../csapp/assembly-data.html"><strong aria-hidden="true">6.3.</strong> 程序的机器级表示——数据</a></li><li class="chapter-item expanded "><a href="../csapp/assembly-control.html"><strong aria-hidden="true">6.4.</strong> 程序的机器级表示——控制</a></li><li class="chapter-item expanded "><a href="../csapp/assembly-procedure.html"><strong aria-hidden="true">6.5.</strong> 程序的机器级表示——过程</a></li><li class="chapter-item expanded "><a href="../csapp/assembly-advanced.html"><strong aria-hidden="true">6.6.</strong> 程序的机器级表示——高级话题</a></li><li class="chapter-item expanded "><a href="../csapp/exception-control-flow.html"><strong aria-hidden="true">6.7.</strong> 异常控制流</a></li><li class="chapter-item expanded "><a href="../csapp/linking.html"><strong aria-hidden="true">6.8.</strong> 链接</a></li><li class="chapter-item expanded "><a href="../csapp/io.html"><strong aria-hidden="true">6.9.</strong> 输入输出系统</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../data-structure/index.html"><strong aria-hidden="true">7.</strong> 数据结构</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../data-structure/foundation.html"><strong aria-hidden="true">7.1.</strong> 算法基础</a></li><li class="chapter-item expanded "><a href="../data-structure/inner-sort.html"><strong aria-hidden="true">7.2.</strong> 内部排序</a></li><li class="chapter-item expanded "><a href="../data-structure/outer-sort.html"><strong aria-hidden="true">7.3.</strong> 外部排序</a></li><li class="chapter-item expanded "><a href="../data-structure/array-and-list.html"><strong aria-hidden="true">7.4.</strong> 数组和广义表</a></li><li class="chapter-item expanded "><a href="../data-structure/list.html"><strong aria-hidden="true">7.5.</strong> 线性表</a></li><li class="chapter-item expanded "><a href="../data-structure/stack-and-dequeue.html"><strong aria-hidden="true">7.6.</strong> 栈和队列</a></li><li class="chapter-item expanded "><a href="../data-structure/tree.html"><strong aria-hidden="true">7.7.</strong> 树</a></li><li class="chapter-item expanded "><a href="../data-structure/graph.html"><strong aria-hidden="true">7.8.</strong> 图</a></li><li class="chapter-item expanded "><a href="../data-structure/string.html"><strong aria-hidden="true">7.9.</strong> 字符串</a></li><li class="chapter-item expanded "><a href="../data-structure/find.html"><strong aria-hidden="true">7.10.</strong> 查找表</a></li><li class="chapter-item expanded "><a href="../data-structure/lab.html"><strong aria-hidden="true">7.11.</strong> 实验</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../database/index.html"><strong aria-hidden="true">8.</strong> 数据库</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../database/intro.html"><strong aria-hidden="true">8.1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="../database/relation-model.html"><strong aria-hidden="true">8.2.</strong> Relation Model</a></li><li class="chapter-item expanded "><a href="../database/relation-database-design.html"><strong aria-hidden="true">8.3.</strong> Relation Database Design</a></li><li class="chapter-item expanded "><a href="../database/sql.html"><strong aria-hidden="true">8.4.</strong> SQL</a></li><li class="chapter-item expanded "><a href="../database/intermediate-sql.html"><strong aria-hidden="true">8.5.</strong> Intermediate SQL</a></li><li class="chapter-item expanded "><a href="../database/entity-relation-model.html"><strong aria-hidden="true">8.6.</strong> Entity Relation Model</a></li><li class="chapter-item expanded "><a href="../database/data-storage-structure.html"><strong aria-hidden="true">8.7.</strong> Data Storage Structure</a></li><li class="chapter-item expanded "><a href="../database/database-index.html"><strong aria-hidden="true">8.8.</strong> Index</a></li><li class="chapter-item expanded "><a href="../database/query-processing.html"><strong aria-hidden="true">8.9.</strong> Query Processing</a></li><li class="chapter-item expanded "><a href="../database/query-optimization.html"><strong aria-hidden="true">8.10.</strong> Query Optimization</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../discrete-math/index.html"><strong aria-hidden="true">9.</strong> 离散数学</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../discrete-math/relation.html"><strong aria-hidden="true">9.1.</strong> Relation</a></li><li class="chapter-item expanded "><a href="../discrete-math/advanced-counting.html"><strong aria-hidden="true">9.2.</strong> Advanced Counting</a></li><li class="chapter-item expanded "><a href="../discrete-math/tree.html"><strong aria-hidden="true">9.3.</strong> Tree</a></li><li class="chapter-item expanded "><a href="../discrete-math/graph.html"><strong aria-hidden="true">9.4.</strong> Graph</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../formal-language/index.html"><strong aria-hidden="true">10.</strong> 形式语言和自动机</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../formal-language/fa.html"><strong aria-hidden="true">10.1.</strong> 有限状态自动机</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../missing-semester/index.html"><strong aria-hidden="true">11.</strong> 计算机教学中缺少的一课</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../missing-semester/missing-the-shell.html"><strong aria-hidden="true">11.1.</strong> Shell</a></li><li class="chapter-item expanded "><a href="../missing-semester/missing-shell-scripts.html"><strong aria-hidden="true">11.2.</strong> Shell Scripts</a></li><li class="chapter-item expanded "><a href="../missing-semester/missing-vim.html"><strong aria-hidden="true">11.3.</strong> Vim</a></li><li class="chapter-item expanded "><a href="../missing-semester/missing-data-wrangling.html"><strong aria-hidden="true">11.4.</strong> Data Wrangling</a></li><li class="chapter-item expanded "><a href="../missing-semester/missing-command-line.html"><strong aria-hidden="true">11.5.</strong> Command Line</a></li><li class="chapter-item expanded "><a href="../missing-semester/missing-potpourri.html"><strong aria-hidden="true">11.6.</strong> Potpourri</a></li><li class="chapter-item expanded "><a href="../missing-semester/missing-version-control.html"><strong aria-hidden="true">11.7.</strong> Version Control</a></li><li class="chapter-item expanded "><a href="../missing-semester/missing-debugging.html"><strong aria-hidden="true">11.8.</strong> Debug</a></li><li class="chapter-item expanded "><a href="../missing-semester/missing-metaprogramming.html"><strong aria-hidden="true">11.9.</strong> Metaprogram</a></li><li class="chapter-item expanded "><a href="../missing-semester/missing-security.html"><strong aria-hidden="true">11.10.</strong> Security</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../operating-system/index.html"><strong aria-hidden="true">12.</strong> 操作系统</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../operating-system/intro.html"><strong aria-hidden="true">12.1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="../operating-system/os-structures.html"><strong aria-hidden="true">12.2.</strong> OS Structure</a></li><li class="chapter-item expanded "><a href="../operating-system/processes.html"><strong aria-hidden="true">12.3.</strong> Process</a></li><li class="chapter-item expanded "><a href="../operating-system/process-synchronization.html"><strong aria-hidden="true">12.4.</strong> Process Synchronization</a></li><li class="chapter-item expanded "><a href="../operating-system/cpu-scheduling.html"><strong aria-hidden="true">12.5.</strong> CPU Scheduling</a></li><li class="chapter-item expanded "><a href="../operating-system/threads.html"><strong aria-hidden="true">12.6.</strong> Thread</a></li><li class="chapter-item expanded "><a href="../operating-system/memory-management.html"><strong aria-hidden="true">12.7.</strong> Memory Management</a></li><li class="chapter-item expanded "><a href="../operating-system/virtual-memory.html"><strong aria-hidden="true">12.8.</strong> Virtual Memory</a></li><li class="chapter-item expanded "><a href="../operating-system/fs-interface.html"><strong aria-hidden="true">12.9.</strong> Filesystem Interface</a></li><li class="chapter-item expanded "><a href="../operating-system/fs-implementation.html"><strong aria-hidden="true">12.10.</strong> Filesystem Implementation</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../socialist/index.html"><strong aria-hidden="true">13.</strong> 毛泽东思想和中国特色理论体系概论</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../socialist/maozedong.html" class="active"><strong aria-hidden="true">13.1.</strong> 毛概期末总结</a></li><li class="chapter-item expanded "><a href="../socialist/others.html"><strong aria-hidden="true">13.2.</strong> 课后大题</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Ricardo&#x27;s Wiki</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="毛概期末总结"><a class="header" href="#毛概期末总结">毛概期末总结</a></h1>
+<h2 id="各个会议的关键事件"><a class="header" href="#各个会议的关键事件">各个会议的关键事件</a></h2>
+<ul>
+<li>党的四大：提出工人阶级领导革命</li>
+<li>八七会议：确立土地革命和武装起义方针</li>
+<li>遵义会议：确立了中国革命的基本方针和毛泽东的领导地位</li>
+<li>古田会议：确立思想建党、政治建军的原则</li>
+<li>六届六中全会：第一次提出“马克思主义中国化”</li>
+<li>六届七中全会：整风运动的胜利，通过了中共中央《关于若干历史问题的决议》。</li>
+<li>党的七大：将毛泽东思想确立为全党的指导思想</li>
+<li>党的八大：提出我国社会主义建设长期战略目标</li>
+<li>十一届三中全会：开启了改革开放和社会主义现代化建设，确立社会主义初级阶段基本路线，创立邓小平理论</li>
+<li>十一届四中全会：形成“三个代表”重要思想</li>
+<li>十一届六中全会：通过了《关于建国以来党的若干历史问题的决议》，对中共的历史进行了总结和评价（毛泽东的错误）</li>
+<li>党的十三大：系统阐述社会主义初级阶段理论，确立新时代党的基本路线</li>
+<li>党的十四大：确立社会主义市场经济体制</li>
+<li>南方谈话：对社会主义本质作出了总结性的理论概括（见邓小平理论）</li>
+<li>党的十五大：把邓小平理论确立为党的指导思想</li>
+<li>党的十七大：将中国特色社会主义理论体系和科学发展观（十六届三中全会初步提出）写入党章</li>
+<li>党的十八大：中特社进入新时期，习近平中特社</li>
+</ul>
+<h2 id="绪论"><a class="header" href="#绪论">绪论</a></h2>
+<p>马克思主义中国化现代化的提出。节点，会议，内涵。程度，谁提出，邓小平，习的三个，核心问题</p>
+<h3 id="毛泽东思想的提出与发展"><a class="header" href="#毛泽东思想的提出与发展">毛泽东思想的提出与发展</a></h3>
+<ul>
+<li>
+<p>1917俄国十月革命一声炮响 ，给中国送来了马克思主义</p>
+</li>
+<li>
+<p>1938，党的六中全会，《论新阶段》，毛泽东提出<strong>马克思主义中国化</strong>（1931左的错误）</p>
+</li>
+<li>
+<p>1945，党的七大，刘少奇指出“<strong>毛泽东思想就是中国化的马克思主义</strong>”，将毛泽东思想写入党章</p>
+</li>
+</ul>
+<h4 id="内涵"><a class="header" href="#内涵">内涵</a></h4>
+<p>三层意思：</p>
+<ul>
+<li>把马克思主义与中国革命实际相结合，用马克思主义的方法论<strong>解决中国革命的实际问题</strong></li>
+<li>提炼中国革命经验，<strong>上升为理论</strong>，开辟新境界；</li>
+<li>用中国人民的民族语言来阐述马克思主义，使其植根中华文化，具有中国特色，<strong>为人民所喜爱</strong></li>
+</ul>
+<h4 id="进程"><a class="header" href="#进程">进程</a></h4>
+<ul>
+<li>
+<p>两次飞跃：遵义会议毛泽东思想、中国特色社会主义理论体系</p>
+</li>
+<li>
+<p>新民主主义革命时期，毛泽东为代表，结合实际，<strong>毛泽东思想</strong>，建国。新民主主义革命终结半殖半封</p>
+</li>
+<li>
+<p>1978党的<strong>十一届三中全会</strong>，伟大转折，开启了改革开放和社会主义现代化建设。邓小平确立实事求是，回答了什么是/怎么建设社会主义，初步形成中特社的路线，创立<strong>邓小平理论</strong>。</p>
+</li>
+<li>
+<p>20世纪80末90初，党的<strong>十三届四中全会</strong>后，江泽民提出**“三个代表”重要思想**，推向了21世纪</p>
+</li>
+<li>
+<p>21世纪，党的<strong>十六大</strong>后，胡锦涛形成<strong>科学发展观</strong>，实现新时代新发展</p>
+</li>
+<li>
+<p><strong>十七大</strong>，改革开放和社会主义现代化建设时期，<strong>形成中特社</strong>，<strong>新的飞跃</strong></p>
+</li>
+<li>
+<p>十八大以来，习，回答了<strong>中特社、现代化强国、马克思主义政党（什么样的、怎样去做</strong>，3*2个小问题）。核心问题，<strong>建设什么样的中特社、怎么建设</strong></p>
+</li>
+</ul>
+<h2 id="第一章第二节"><a class="header" href="#第一章第二节">第一章第二节</a></h2>
+<p>党的基本路线确立于<em>1987年10月召开的党的十三大</em></p>
+<h3 id="毛泽东思想的主要内容"><a class="header" href="#毛泽东思想的主要内容">毛泽东思想的主要内容</a></h3>
+<ul>
+<li>
+<p>a. 新民主主义革命理论（无产阶级领导的，人民大众的反对帝国主义、封建主义、官僚资本主义的革命）</p>
+</li>
+<li>
+<p>b. 社会主义革命与社会主义建设理论（一化三改，十大关系，调动一切积极因素为社会主义事业服务、正确处理社会主义社会矛盾、走中国工业化道路）、</p>
+</li>
+<li>
+<p>c. 革命军队建设和军事战略理论（农村包围城市武装夺取政权）</p>
+</li>
+<li>
+<p>d. 政策和策略的理论：精辟地论证了革命斗争中政策和策略问题的极端重要性；在统一战线中提出了许多重要的政策和策略思想。</p>
+</li>
+<li>
+<p>e. 思想政治工作与文化工作的理论：一定的文化是一定的社会政治和经济的反映，又作用于它；而经济是基础，政治是经济的集中表现</p>
+</li>
+<li>
+<p>f. 党的建设理论（<strong>三大法宝</strong>：统一战线，武装斗争，党的建设）：（隔壁第五题）</p>
+<p>统一战线和武装斗争是中国革命的两个基本特点，是战胜敌人的两个基本武器。统一战线是实行武装斗争的统一战线，武装斗争是统一战线的中心支柱，党的组织则是掌握统一战线和武装斗争这两个武器以实行对敌冲锋陷阵的英勇武士。党的建设是核心。</p>
+</li>
+</ul>
+<p>or</p>
+<ul>
+<li>
+<p>第一，创立了<strong>一条思想路线</strong>，即实事求是的思想路线；</p>
+</li>
+<li>
+<p>第二，探索了<strong>三条道路</strong>，即农村包围城市、武装夺取政权的中国式独特的革命道路；中国式的社会主义道路；中国式的社会主义建设道路；</p>
+</li>
+<li>
+<p>第三，形成了<strong>三套理论</strong>，即新民主主义革命理论；中国式社会主义改造理论；中国式社会主义社会矛盾理论。</p>
+</li>
+</ul>
+<h3 id="活的灵魂"><a class="header" href="#活的灵魂">活的灵魂</a></h3>
+<p>3个基本方面：<strong>实事求是、群众路线、独立自主</strong>。</p>
+<ul>
+<li><strong>实事求是</strong>：一切从实际出发，理论联系实际，坚持在实践中检验真理和发展真理。是马克思主义的根本观点，是中国共产党人认识世界、改造世界的根本要求，是我们党的基本思想方法、工作方法、领导方法，是党的根本思想路线。<img src="./assets/image-20230611200702604.png" alt="image-20230611200702604"  /></li>
+<li>**群众路线：一切为了群众，一切依靠群众、从群众中来，到群众中去。**它是党的生命线和根本工作路线，是党永葆青春活力和战斗力的重要传家宝。</li>
+<li>**独立自主：**即坚持独立思考，走自己的路，坚定不移地维护民族独立、捍卫国家主权。将立足点放在依靠自己力量的基础上，学习借鉴人类社会创造的一切有益的文明成果。</li>
+</ul>
+<p>https://www.233.com/kaoyan/mzt/202106/15112005864801.html</p>
+<h2 id="第二章第二节"><a class="header" href="#第二章第二节">第二章第二节</a></h2>
+<h3 id="新民主主义革命的总路线"><a class="header" href="#新民主主义革命的总路线">新民主主义革命的总路线</a></h3>
+<p>​	<strong>无产阶级领导的，人民大众的，反对帝国主义、封建主义和官僚资本主义的革命</strong>。它的目标是无产阶级牢牢掌握革命领导权，彻底完成反帝反封建的历史任务，并及时实现由新民主主义向社会主义的过渡。</p>
+<p>革命<strong>对象</strong>：帝国主义+封建主义（靠山与走狗）+官僚资本主义（又拉又打）</p>
+<p>革命<strong>动力</strong>：无产阶级（领导者，最基本的动力）、农民（革命的主力军）、城市小资产阶级（可靠的同盟军）、民族资产阶级（两面性，动力之一）</p>
+<p>革命的<strong>领导</strong>：无产阶级，而非资产阶级，是区分于民主主义革命的根本区别。</p>
+<p>革命的<strong>性质</strong>： 特殊的资产阶级民主主义革命，是社会主义革命的上半篇。</p>
+<h3 id="基本纲领三大"><a class="header" href="#基本纲领三大">基本纲领（三大）</a></h3>
+<p><strong>政治纲领</strong>:（推翻压迫建共和）推翻帝国主义和封建主义的统治，建立无产阶级领导的、以工农联盟为基础的、各革命阶级联合专政（国体）的新民主主义的共和国。政体：<strong>民主集中制的人民代表大会制度</strong></p>
+<p><strong>经济纲领</strong>:（<strong>两个没收一保护</strong>)没收封建地主阶级的土地归农民所有，没收官僚资产阶级的垄断资本归新民主主义的国家所有，保护民族工商业。</p>
+<p><strong>文化纲领</strong>:（<strong>民族科学大众</strong>化)是无产阶级领导的人民大众的反帝反封建的文化，即民族的科学的大众的文化。</p>
+<h2 id="第三章第二节"><a class="header" href="#第三章第二节">第三章第二节</a></h2>
+<h3 id="社会主义改造道路"><a class="header" href="#社会主义改造道路">社会主义改造道路</a></h3>
+<p>三大改造（1956基本完成）：积极引导，稳步前进</p>
+<ul>
+<li><strong>农业</strong>：互助合作，自愿互利、典型示范、国家帮助，稳步发展，分配土地</li>
+<li><strong>手工业</strong>：由小到大，由低级到高；手工业供销小组到手工业生产合作社</li>
+<li><strong>资本主义工商业</strong>：以<strong>和平赎买</strong>的方式，完成对资本主义工商业的改造；有偿的变为国营：给资本家逐年付钱取得所有权（<strong>隔壁第九题</strong>）</li>
+</ul>
+<h3 id="改造的基本经验"><a class="header" href="#改造的基本经验">改造的基本经验：</a></h3>
+<ul>
+<li>坚持社会主义改造与社会主义工业化并举。实现社会主义工业化以及个体农业、手工业、资本主义工商业改造（一化三改）</li>
+<li>采取积极引导、逐步过渡的措施。以从低级到高级的国家资本主义形式完成对资本主义工商业的改造，采用自愿互利、典型示范、国家帮助的形式进行农业改造等。</li>
+<li>采用和平方式改造。以和平赎买的方式完成对资本主义工商业的改造。</li>
+</ul>
+<h2 id="第四章"><a class="header" href="#第四章">第四章</a></h2>
+<h3 id="党在社会主义建设道路的初步探索中取得了哪些重要成果"><a class="header" href="#党在社会主义建设道路的初步探索中取得了哪些重要成果">党在社会主义建设道路的初步探索中取得了哪些重要成果</a></h3>
+<ul>
+<li>调动一切积极因素，为社会主义事业服务</li>
+<li>正确处理、认识社会主义社会的矛盾（敌我矛盾/人民内部矛盾）</li>
+<li>走中国工业化道路</li>
+</ul>
+<h4 id="如何认识党对社会主义建设道路初步探索的重大意义"><a class="header" href="#如何认识党对社会主义建设道路初步探索的重大意义">如何认识党对社会主义建设道路初步探索的重大意义</a></h4>
+<ul>
+<li>巩固和发展了我国的社会主义制度</li>
+<li>为开创中国特色社会主义提供了宝贵经验、理论准备、物质基础</li>
+<li>丰富了科学社会主义的理论和实践</li>
+</ul>
+<h3 id="党对社会主义建设道路的初步探索有哪些经验教训"><a class="header" href="#党对社会主义建设道路的初步探索有哪些经验教训">党对社会主义建设道路的初步探索有哪些经验教训</a></h3>
+<ul>
+<li>
+<p>必须将马克思主义的原理与中国实际相结合，探索符合中国特点的社会主义建设道路。</p>
+</li>
+<li>
+<p>必须正确认识社会主义社会的主要矛盾，集中力量发展生产力。</p>
+</li>
+<li>
+<p>必须从实际出发进行社会主义建设，建设的规模与速度要与国力相匹配，不能急于求成。</p>
+</li>
+<li>
+<p>必须发展社会主义民主，健全社会主义法治。</p>
+</li>
+<li>
+<p>必须坚持党的民主集中制和党的集体领导制度，加强执政党建设。</p>
+</li>
+<li>
+<p>必须坚持对外开放，借鉴和吸收人类文明成果以建设社会主义，不能关起门来搞建设。</p>
+</li>
+</ul>
+<p>见隔壁10~12题</p>
+<h2 id="第六章-邓小平理论"><a class="header" href="#第六章-邓小平理论">第六章 邓小平理论</a></h2>
+<p>回答了“什么是社会主义、怎样建设社会主义”</p>
+<p>提出于<em>1997年召开的中共第十五次全国代表大会</em>,</p>
+<h3 id="首要的基本的理论问题"><a class="header" href="#首要的基本的理论问题">首要的基本的理论问题</a></h3>
+<p><strong>什么是社会主义、怎样建设社会主义</strong>是邓小平理论要回答的首要基本的理论问题。</p>
+<p>具具体来说，邓小平在毛泽东探索的基础上，根据马克思主义基本原理和社会主义的实践经验，在1992年南方谈话中明确提出：<strong>社会主义的本质，是解放生产力，发展生产力，消灭剥削，消除两级分化，最终达到共同富裕</strong>。</p>
+<h3 id="精髓"><a class="header" href="#精髓">精髓</a></h3>
+<p>坚持解放思想，实事求是</p>
+<h3 id="主要内容"><a class="header" href="#主要内容">主要内容</a></h3>
+<ul>
+<li>
+<p><strong>社会主义初级阶段理论</strong>：我国已经进入社会主义社会，必须坚持而不能离开社会主义。我国的社会主义社会目前处在，也将长期处在不发达的阶段，必须正视而不能超越初级阶段。</p>
+</li>
+<li>
+<p><strong>党</strong>在社会主义初级阶段<strong>的基本路线</strong>：领导和团结全国各族人民，以经济建设为中心，坚持四项基本原则，坚持改革开放，自力更生，艰苦创业，为把我国建设成为富强、民主、文明的社会主义现代化国家而奋斗。</p>
+</li>
+<li>
+<p><strong>社会主义根本任务</strong>的理论：生产力是社会发展的最根本的决定性因素，社会主义的根本任务是发展生产力。社会主义革命是为了解放生产力，发展生产力。</p>
+</li>
+<li>
+<p>“三步走”基本实现现代化的<strong>发展战略</strong>：把我国社会主义现代化建设的目标具体化为切实可行的步骤，为基本实现现代化明确了发展方向，成为全国人民为共同理想而努力奋斗的行动纲领。（1990 GDP翻番，解决温饱——20世纪末再翻一倍，达到小康——21世纪中叶，达到中等发达国家，基本实现现代化），提出了“台阶式”发展的思想</p>
+</li>
+<li>
+<p><strong>社会主义改革开放理论</strong>：邓小平强调改革是中国的第二次革命，是中国现代化的必由之路。他指出，对外开放是建设中国特色社会主义的一项基本国策，应该吸收和利用世界各国包括资本主义发达国家所创造的一切先进文明成果来发展社会主义。这就为中国特色社会主义建设提供了根本动力，创造了必要的外部条件。</p>
+<p>改革是社会主义社会发展的直接动力。以是否有利于发展社会主义社会的生产力，是否有利于增强社会主义国家的综合国力，是否有利于提高人民的生活水平为标准。</p>
+</li>
+<li>
+<p><strong>社会主义市场经济理论</strong>：计划经济和市场经济不是划分社会制度的标志，计划经济不等于社会主义，市场经济也不等于资本主义。从根本上破除了把计划经济视为社会基本制度的思想束缚，为促进我国经济发展和社会进步注入了强大活力。</p>
+</li>
+<li>
+<p><strong>“两手抓，两手都要硬”</strong>：即一手抓物质文明建设、一手抓精神文明建设；一手抓四项基本原则、一手抓改革开放；一手抓建设、一手抓法制等。坚持了辩证法的全面性，坚持了两点论和重点论的统一</p>
+</li>
+<li>
+<p>“和平统一、一国两制”伟大构想的<strong>提出</strong>是从解决台湾问题开始的，在实践中首先运用于解决香港问题、澳门问题。</p>
+</li>
+<li>
+<p>“一国两制”构想的<strong>意义</strong>：“一国两制”是从中国的实际出发，解决台湾问题、香港问题和澳门问题，实现祖国和平统一的伟大构想。不局限于中国问题，而是世界通用的。</p>
+</li>
+</ul>
+<h3 id="历史地位"><a class="header" href="#历史地位">历史地位</a></h3>
+<p>邓小平理论的历史地位主要体现为：</p>
+<p>（1）邓小平理论，是马克思列宁主义基本原理与当代中国实际和时代特征相结合的产物，<strong>是马克思列宁主义、毛泽东思想的继承和发展</strong>，是全党全国人民集体智慧的结晶。</p>
+<p>（2）<strong>中国特色社会主义理论体系的开篇之作</strong>。邓小平作为中国特色社会主义理论的创立者，做出把党和国家工作中心转移到经济建设上来、实行改革开放的历史性决策，深刻揭示社会主义本质，确立社会主义初级阶段基本路线，明确提出走自己的路、建设中国特色社会主义，<strong>为建设中国特色社会主义提供了根本的科学指南</strong>。</p>
+<h2 id="第七章-三个代表重要思想"><a class="header" href="#第七章-三个代表重要思想">第七章 三个代表重要思想</a></h2>
+<p>回答了“建设什么样的党，怎样建设党”的问题</p>
+<h3 id="核心观点"><a class="header" href="#核心观点">核心观点</a></h3>
+<p>（详细的转隔壁15）</p>
+<p>“三个代表"重要思想集中概括为:中国共产党必须</p>
+<ul>
+<li><strong>始终代表中国先进生产力的发展要求</strong>：党需推动经济发展，适应先进生产力需求，制定正确政策，促进生产关系与上层建筑相适应，满足先进生产力的发展需求。</li>
+<li><strong>始终代表中国先进文化的前进方向</strong>：发展社会主义先进文化，满足人民需求，建设精神文明，发展现代化、科学的社会主义文化，弘扬民族精神，加强思想道德建设。</li>
+<li><strong>始终代表中国最广大人民的根本利益</strong>：代表人民利益：党以人民为根本力量，关注最广大人民利益，保障人民共享发展成果，处理利益关系，确保工作符合人民根本利益。</li>
+</ul>
+<h2 id="第八章-科学发展观"><a class="header" href="#第八章-科学发展观">第八章 科学发展观</a></h2>
+<p>对“实现什么样的发展、怎样发展”问题的集中而全面的回答</p>
+<h3 id="科学内涵"><a class="header" href="#科学内涵">科学内涵</a></h3>
+<ul>
+<li><strong>第一要义：推动经济社会发展是科学发展观的第一要义。</strong> 在当代中国，坚持发展的本质要求就是坚持科学发展观。</li>
+<li><strong>立场：以人为本是科学发展观的核心立场</strong>。“人”是指人民群众，“本”是指出发点和落脚点。集中体现了马克思主义历史唯物论的基本原理，体现了党全心全意为人民服务的根本宗旨和推动经济社会发展的根本目的。</li>
+<li><strong>基本要求：全面协调可持续发展是科学发展观的基本要求。</strong>“全面”是指发展要有全面性、整体性，不仅经济发展，而且各个方面都要发展；“协调”是指发展要有协调性、均衡性，各个方面、各个环节的发展要相互适应、相互促进。“可持续”是指发展要有持久性、连续性，不仅当前要发展，而且要保证长远发展。</li>
+<li><strong>方法：统筹兼顾是科学发展观的根本方法。</strong> 深刻体现了唯物辩证法在发展问题上的科学运用，深刻揭示了实现科学发展、促进社会和谐的基本途径，是正确处理经济社会发展中重大关系的方针原则。</li>
+<li>科学发展观的提出，是我们党对现代化建设指导思想的重大发展。</li>
+</ul>
+<p>最后三章的主题合起来就是<strong>中国特色社会主义理论体系</strong>回答的三大问题</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../socialist/index.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../socialist/others.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../socialist/index.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../socialist/others.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

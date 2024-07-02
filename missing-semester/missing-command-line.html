@@ -1,0 +1,558 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Command Line - Ricardo&#x27;s Wiki</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="我在北京邮电大学计算机科学与技术专业学习三年的部分笔记">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../katex.min.css">
+
+        <!-- MathJax -->
+        <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../index.html">主页</a></li><li class="chapter-item expanded affix "><li class="spacer"></li><li class="chapter-item expanded "><a href="../ai-principle/index.html"><strong aria-hidden="true">1.</strong> 人工智能原理</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../ai-principle/intro.html"><strong aria-hidden="true">1.1.</strong> 概述</a></li><li class="chapter-item expanded "><a href="../ai-principle/question-knowledge.html"><strong aria-hidden="true">1.2.</strong> 问题和知识表示</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../algorithm/index.html"><strong aria-hidden="true">2.</strong> 算法</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../algorithm/intro.html"><strong aria-hidden="true">2.1.</strong> 概述</a></li><li class="chapter-item expanded "><a href="../algorithm/recurse-divide.html"><strong aria-hidden="true">2.2.</strong> 分治算法</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../compiler/index.html"><strong aria-hidden="true">3.</strong> 编译原理</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../compiler/intro.html"><strong aria-hidden="true">3.1.</strong> 概述</a></li><li class="chapter-item expanded "><a href="../compiler/lexical-analyzer.html"><strong aria-hidden="true">3.2.</strong> 词法分析</a></li><li class="chapter-item expanded "><a href="../compiler/grammar-analyzer.html"><strong aria-hidden="true">3.3.</strong> 语法分析</a></li><li class="chapter-item expanded "><a href="../compiler/grammar-driven-translation.html"><strong aria-hidden="true">3.4.</strong> 语法制导翻译</a></li><li class="chapter-item expanded "><a href="../compiler/syntax-analyser.html"><strong aria-hidden="true">3.5.</strong> 语义分析</a></li><li class="chapter-item expanded "><a href="../compiler/runtime.html"><strong aria-hidden="true">3.6.</strong> 运行环境</a></li><li class="chapter-item expanded "><a href="../compiler/intermediate-code.html"><strong aria-hidden="true">3.7.</strong> 中间代码生成</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../computer-architecture/index.html"><strong aria-hidden="true">4.</strong> 计算机组成原理</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../computer-architecture/overview.html"><strong aria-hidden="true">4.1.</strong> 计算机系统概论</a></li><li class="chapter-item expanded "><a href="../computer-architecture/calculator.html"><strong aria-hidden="true">4.2.</strong> 运算方法和运算器</a></li><li class="chapter-item expanded "><a href="../computer-architecture/instruction.html"><strong aria-hidden="true">4.3.</strong> 指令系统</a></li><li class="chapter-item expanded "><a href="../computer-architecture/cpu.html"><strong aria-hidden="true">4.4.</strong> 中央处理器</a></li><li class="chapter-item expanded "><a href="../computer-architecture/memory.html"><strong aria-hidden="true">4.5.</strong> 存储系统</a></li><li class="chapter-item expanded "><a href="../computer-architecture/io.html"><strong aria-hidden="true">4.6.</strong> 输入输出设备</a></li><li class="chapter-item expanded "><a href="../computer-architecture/external.html"><strong aria-hidden="true">4.7.</strong> 外部设备</a></li><li class="chapter-item expanded "><a href="../computer-architecture/bus.html"><strong aria-hidden="true">4.8.</strong> 总线</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../computer-networks/index.html"><strong aria-hidden="true">5.</strong> 计算机网络</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../computer-networks/overview.html"><strong aria-hidden="true">5.1.</strong> 引言</a></li><li class="chapter-item expanded "><a href="../computer-networks/physical-layer.html"><strong aria-hidden="true">5.2.</strong> 物理层</a></li><li class="chapter-item expanded "><a href="../computer-networks/data-link-layer.html"><strong aria-hidden="true">5.3.</strong> 数据链路层</a></li><li class="chapter-item expanded "><a href="../computer-networks/mac.html"><strong aria-hidden="true">5.4.</strong> 介质访问控制层</a></li><li class="chapter-item expanded "><a href="../computer-networks/network-layer.html"><strong aria-hidden="true">5.5.</strong> 网络层</a></li><li class="chapter-item expanded "><a href="../computer-networks/transport-layer.html"><strong aria-hidden="true">5.6.</strong> 传输层</a></li><li class="chapter-item expanded "><a href="../computer-networks/mid-term.html"><strong aria-hidden="true">5.7.</strong> 期中复习</a></li><li class="chapter-item expanded "><a href="../computer-networks/final-term.html"><strong aria-hidden="true">5.8.</strong> 期末复习</a></li><li class="chapter-item expanded "><a href="../computer-networks/lab2.html"><strong aria-hidden="true">5.9.</strong> 实验二</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../csapp/index.html"><strong aria-hidden="true">6.</strong> 计算机系统基础</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../csapp/bits.html"><strong aria-hidden="true">6.1.</strong> 数据的位级表示</a></li><li class="chapter-item expanded "><a href="../csapp/machine.html"><strong aria-hidden="true">6.2.</strong> 程序的机器级表示</a></li><li class="chapter-item expanded "><a href="../csapp/assembly-data.html"><strong aria-hidden="true">6.3.</strong> 程序的机器级表示——数据</a></li><li class="chapter-item expanded "><a href="../csapp/assembly-control.html"><strong aria-hidden="true">6.4.</strong> 程序的机器级表示——控制</a></li><li class="chapter-item expanded "><a href="../csapp/assembly-procedure.html"><strong aria-hidden="true">6.5.</strong> 程序的机器级表示——过程</a></li><li class="chapter-item expanded "><a href="../csapp/assembly-advanced.html"><strong aria-hidden="true">6.6.</strong> 程序的机器级表示——高级话题</a></li><li class="chapter-item expanded "><a href="../csapp/exception-control-flow.html"><strong aria-hidden="true">6.7.</strong> 异常控制流</a></li><li class="chapter-item expanded "><a href="../csapp/linking.html"><strong aria-hidden="true">6.8.</strong> 链接</a></li><li class="chapter-item expanded "><a href="../csapp/io.html"><strong aria-hidden="true">6.9.</strong> 输入输出系统</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../data-structure/index.html"><strong aria-hidden="true">7.</strong> 数据结构</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../data-structure/foundation.html"><strong aria-hidden="true">7.1.</strong> 算法基础</a></li><li class="chapter-item expanded "><a href="../data-structure/inner-sort.html"><strong aria-hidden="true">7.2.</strong> 内部排序</a></li><li class="chapter-item expanded "><a href="../data-structure/outer-sort.html"><strong aria-hidden="true">7.3.</strong> 外部排序</a></li><li class="chapter-item expanded "><a href="../data-structure/array-and-list.html"><strong aria-hidden="true">7.4.</strong> 数组和广义表</a></li><li class="chapter-item expanded "><a href="../data-structure/list.html"><strong aria-hidden="true">7.5.</strong> 线性表</a></li><li class="chapter-item expanded "><a href="../data-structure/stack-and-dequeue.html"><strong aria-hidden="true">7.6.</strong> 栈和队列</a></li><li class="chapter-item expanded "><a href="../data-structure/tree.html"><strong aria-hidden="true">7.7.</strong> 树</a></li><li class="chapter-item expanded "><a href="../data-structure/graph.html"><strong aria-hidden="true">7.8.</strong> 图</a></li><li class="chapter-item expanded "><a href="../data-structure/string.html"><strong aria-hidden="true">7.9.</strong> 字符串</a></li><li class="chapter-item expanded "><a href="../data-structure/find.html"><strong aria-hidden="true">7.10.</strong> 查找表</a></li><li class="chapter-item expanded "><a href="../data-structure/lab.html"><strong aria-hidden="true">7.11.</strong> 实验</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../database/index.html"><strong aria-hidden="true">8.</strong> 数据库</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../database/intro.html"><strong aria-hidden="true">8.1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="../database/relation-model.html"><strong aria-hidden="true">8.2.</strong> Relation Model</a></li><li class="chapter-item expanded "><a href="../database/relation-database-design.html"><strong aria-hidden="true">8.3.</strong> Relation Database Design</a></li><li class="chapter-item expanded "><a href="../database/sql.html"><strong aria-hidden="true">8.4.</strong> SQL</a></li><li class="chapter-item expanded "><a href="../database/intermediate-sql.html"><strong aria-hidden="true">8.5.</strong> Intermediate SQL</a></li><li class="chapter-item expanded "><a href="../database/entity-relation-model.html"><strong aria-hidden="true">8.6.</strong> Entity Relation Model</a></li><li class="chapter-item expanded "><a href="../database/data-storage-structure.html"><strong aria-hidden="true">8.7.</strong> Data Storage Structure</a></li><li class="chapter-item expanded "><a href="../database/database-index.html"><strong aria-hidden="true">8.8.</strong> Index</a></li><li class="chapter-item expanded "><a href="../database/query-processing.html"><strong aria-hidden="true">8.9.</strong> Query Processing</a></li><li class="chapter-item expanded "><a href="../database/query-optimization.html"><strong aria-hidden="true">8.10.</strong> Query Optimization</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../discrete-math/index.html"><strong aria-hidden="true">9.</strong> 离散数学</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../discrete-math/relation.html"><strong aria-hidden="true">9.1.</strong> Relation</a></li><li class="chapter-item expanded "><a href="../discrete-math/advanced-counting.html"><strong aria-hidden="true">9.2.</strong> Advanced Counting</a></li><li class="chapter-item expanded "><a href="../discrete-math/tree.html"><strong aria-hidden="true">9.3.</strong> Tree</a></li><li class="chapter-item expanded "><a href="../discrete-math/graph.html"><strong aria-hidden="true">9.4.</strong> Graph</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../formal-language/index.html"><strong aria-hidden="true">10.</strong> 形式语言和自动机</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../formal-language/fa.html"><strong aria-hidden="true">10.1.</strong> 有限状态自动机</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../missing-semester/index.html"><strong aria-hidden="true">11.</strong> 计算机教学中缺少的一课</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../missing-semester/missing-the-shell.html"><strong aria-hidden="true">11.1.</strong> Shell</a></li><li class="chapter-item expanded "><a href="../missing-semester/missing-shell-scripts.html"><strong aria-hidden="true">11.2.</strong> Shell Scripts</a></li><li class="chapter-item expanded "><a href="../missing-semester/missing-vim.html"><strong aria-hidden="true">11.3.</strong> Vim</a></li><li class="chapter-item expanded "><a href="../missing-semester/missing-data-wrangling.html"><strong aria-hidden="true">11.4.</strong> Data Wrangling</a></li><li class="chapter-item expanded "><a href="../missing-semester/missing-command-line.html" class="active"><strong aria-hidden="true">11.5.</strong> Command Line</a></li><li class="chapter-item expanded "><a href="../missing-semester/missing-potpourri.html"><strong aria-hidden="true">11.6.</strong> Potpourri</a></li><li class="chapter-item expanded "><a href="../missing-semester/missing-version-control.html"><strong aria-hidden="true">11.7.</strong> Version Control</a></li><li class="chapter-item expanded "><a href="../missing-semester/missing-debugging.html"><strong aria-hidden="true">11.8.</strong> Debug</a></li><li class="chapter-item expanded "><a href="../missing-semester/missing-metaprogramming.html"><strong aria-hidden="true">11.9.</strong> Metaprogram</a></li><li class="chapter-item expanded "><a href="../missing-semester/missing-security.html"><strong aria-hidden="true">11.10.</strong> Security</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../operating-system/index.html"><strong aria-hidden="true">12.</strong> 操作系统</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../operating-system/intro.html"><strong aria-hidden="true">12.1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="../operating-system/os-structures.html"><strong aria-hidden="true">12.2.</strong> OS Structure</a></li><li class="chapter-item expanded "><a href="../operating-system/processes.html"><strong aria-hidden="true">12.3.</strong> Process</a></li><li class="chapter-item expanded "><a href="../operating-system/process-synchronization.html"><strong aria-hidden="true">12.4.</strong> Process Synchronization</a></li><li class="chapter-item expanded "><a href="../operating-system/cpu-scheduling.html"><strong aria-hidden="true">12.5.</strong> CPU Scheduling</a></li><li class="chapter-item expanded "><a href="../operating-system/threads.html"><strong aria-hidden="true">12.6.</strong> Thread</a></li><li class="chapter-item expanded "><a href="../operating-system/memory-management.html"><strong aria-hidden="true">12.7.</strong> Memory Management</a></li><li class="chapter-item expanded "><a href="../operating-system/virtual-memory.html"><strong aria-hidden="true">12.8.</strong> Virtual Memory</a></li><li class="chapter-item expanded "><a href="../operating-system/fs-interface.html"><strong aria-hidden="true">12.9.</strong> Filesystem Interface</a></li><li class="chapter-item expanded "><a href="../operating-system/fs-implementation.html"><strong aria-hidden="true">12.10.</strong> Filesystem Implementation</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../socialist/index.html"><strong aria-hidden="true">13.</strong> 毛泽东思想和中国特色理论体系概论</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../socialist/maozedong.html"><strong aria-hidden="true">13.1.</strong> 毛概期末总结</a></li><li class="chapter-item expanded "><a href="../socialist/others.html"><strong aria-hidden="true">13.2.</strong> 课后大题</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Ricardo&#x27;s Wiki</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="the-missing-semester-in-the-cs"><a class="header" href="#the-missing-semester-in-the-cs">The Missing Semester in the CS</a></h1>
+<h2 id="introduction"><a class="header" href="#introduction">Introduction</a></h2>
+<p>本篇是MIT的公开课程<a href="https://missing.csail.mit.edu/">计算机教学中消失的一学期</a>的学习笔记第五篇。在笔记中，我将摘抄我认为是重点的语句，文中举出的例子我会在自己的电脑上操作一遍并给出其产生的结果。</p>
+<p>本篇是<code>Command line environment</code>部分的学习笔记，课程地址为<a href="https://missing.csail.mit.edu/2020/command-line/">Command-ling</a></p>
+<!--more-->
+<h2 id="job-control"><a class="header" href="#job-control">Job Control</a></h2>
+<h3 id="killing-a-process"><a class="header" href="#killing-a-process">Killing a process</a></h3>
+<p>Shell is using a UNIX communication mechanism called a <em>signal</em> to communicate information to the process. When a process receives a signal it stops its execution, deals with the signal and potentially changes the flow of execution based on the information that the signal delivered. For this reason, signals are <em>software interrupts</em>.</p>
+<p>When typing <code>Ctrl-C</code> this prompts the shell to deliver a <code>SIGINT</code> signal to the process.</p>
+<p>Here’s a minimal example of a Python program that captures <code>SIGINT</code> and ignores it, no longer stopping. To kill this program we can now use the <code>SIGQUIT</code> signal instead, by typing <code>Ctrl-\</code>.</p>
+<pre><code class="language-python">#!/usr/bin/env python
+import signal, time
+
+def handler(signum, time):
+    print("\nI got a SIGINT, but I am not stopping")
+
+signal.signal(signal.SIGINT, handler)
+i = 0
+while True:
+    time.sleep(.1)
+    print("\r{}".format(i), end="")
+    i += 1
+</code></pre>
+<p>When running on my laptop:</p>
+<pre><code class="language-bash">➜  tmp python shell.py
+14^C
+I got a SIGINT, but I am not stopping
+32^C
+I got a SIGINT, but I am not stopping
+47^\[1]    89 quit       python3 shell.py
+</code></pre>
+<p>While <code>SIGINT</code> and <code>SIGQUIT</code> are both usually associated with terminal related requests, a more generic signal for asking a process to exit gracefully is the <code>SIGTERM</code> signal. To send this signal we can use the <a href="">kill</a>`` command, with the syntax <code>kill -TERM &lt;PID&gt;</code>.</p>
+<h3 id="pausing-and-backgrounding-process"><a class="header" href="#pausing-and-backgrounding-process">Pausing and backgrounding process</a></h3>
+<p>Signals can do other things beyond killing a process. For instance, <code>SIGSTOP</code> pauses a process. In the terminal, typing <code>Ctrl-Z</code> will prompt the shell to send a <code>SIGTSTP</code> signal, short for Terminal Stop (i.e. the terminal’s version of <code>SIGSTOP</code>).</p>
+<p>We can then continue the paused job in the foreground or in the background using <a href="">fg</a><code> or [bg]()</code>, respectively.</p>
+<p>The <a href="">jobs</a><code> command lists the unfinished jobs associated with the current terminal session. You can refer to those jobs using their pid (you can use [pgrep]()</code> to find that out). More intuitively, you can also refer to a process using the percent symbol followed by its job number (displayed by <code>jobs</code>). To refer to the last backgrounded job you can use the <code>$!</code> special parameter.</p>
+<p>One more thing to know is that the <code>&amp;</code> suffix in a command will run the command in the background, giving you the prompt back, although it will still use the shell’s STDOUT which can be annoying (use shell redirections in that case).</p>
+<p>To background an already running program you can do <code>Ctrl-Z</code> followed by <code>bg</code>. Note that backgrounded processes are still children processes of your terminal and will die if you close the terminal (this will send yet another signal, <code>SIGHUP</code>). To prevent that from happening you can run the program with <a href="">nohup</a>`` (a wrapper to ignore <code>SIGHUP</code>), or use <code>disown</code> if the process has already been started. Alternatively, you can use a terminal multiplexer as we will see in the next section.</p>
+<pre><code class="language-bash">➜  tmp sleep 1000
+^Z
+[1]  + 95 suspended  sleep 1000
+➜  tmp nohup sleep 2000 &amp;
+[2] 98
+➜  tmp nohup: ignoring input and appending output to 'nohup.out'
+jobs
+[1]  + suspended  sleep 1000
+[2]  - running    nohup sleep 2000
+➜  tmp bg %1
+[1]  - 95 continued  sleep 1000
+➜  tmp jobs
+[1]  - running    sleep 1000
+[2]  + running    nohup sleep 2000
+➜  tmp kill -STOP %1
+[1]  + 95 suspended (signal)  sleep 1000
+➜  tmp jobs
+[1]  + suspended (signal)  sleep 1000
+[2]  - running    nohup sleep 2000
+➜  tmp kill -SIGHUP %1
+[1]  + 95 hangup     sleep 1000
+➜  tmp jobs
+[2]  + running    nohup sleep 2000
+➜  tmp kill %2
+[2]  + 98 terminated  nohup sleep 2000
+➜  tmp jobs
+➜  tmp
+</code></pre>
+<p>A special signal is <code>SIGKILL</code> since it cannot be captured by the process and it will always terminate it immediately. However, it can have bad side effects such as leaving orphaned children processes.</p>
+<blockquote>
+<p>orphaned 孤儿的;</p>
+</blockquote>
+<p>You can learn more about these and other signals <a href="https://en.wikipedia.org/wiki/Signal_(IPC)">here</a> or typing <a href="">man signal</a>`` or <code>kill -l</code>.</p>
+<h2 id="terminal-multiplexers"><a class="header" href="#terminal-multiplexers">Terminal Multiplexers</a></h2>
+<p>Terminal multiplexers like <a href="">tmux</a>`` allow you to multiplex terminal windows using panes and tabs so you can interact with multiple shell sessions. Moreover, terminal multiplexers let you detach a current terminal session and reattach at some point later in time. This can make your workflow much better when working with remote machines since it avoids the need to use <code>nohup</code> and similar tricks.</p>
+<p><code>tmux</code> expects you to know its keybindings, and they all have the form <code>&lt;C-b&gt; x</code> where that means (1) press <code>Ctrl+b</code>, (2) release <code>Ctrl+b</code>, and then (3) press <code>x</code>.</p>
+<p><code>tmux</code> has the following hierarchy of objects:</p>
+<blockquote>
+<p>hierarchy 等级制度;</p>
+</blockquote>
+<ul>
+<li>
+<p>Sessions</p>
+<ul>
+<li>
+<p>a session is an independent workspace with one or more windows</p>
+</li>
+<li>
+<p><code>tmux</code> starts a new session.</p>
+</li>
+<li>
+<p><code>tmux new -s NAME</code> starts it with that name.</p>
+</li>
+<li>
+<p><code>tmux ls</code> lists the current sessions</p>
+</li>
+<li>
+<p>Within <code>tmux</code> typing <code>&lt;C-b&gt; d</code> detaches the current session</p>
+</li>
+<li>
+<p><code>tmux a</code> attaches the last session. You can use <code>-t</code> flag to specify which</p>
+</li>
+</ul>
+</li>
+<li>
+<p>Windows</p>
+<ul>
+<li>
+<p>Equivalent to tabs in editors or browsers, they are visually separate parts of the same session</p>
+</li>
+<li>
+<p><code>&lt;C-b&gt; c</code> Creates a new window. To close it you can just terminate the shells doing <code>&lt;C-d&gt;</code></p>
+</li>
+<li>
+<p><code>&lt;C-b&gt; N</code> Go to the <em>N</em> th window. Note they are numbered</p>
+</li>
+<li>
+<p><code>&lt;C-b&gt; p</code> Goes to the previous window</p>
+</li>
+<li>
+<p><code>&lt;C-b&gt; n</code> Goes to the next window</p>
+</li>
+<li>
+<p><code>&lt;C-b&gt; ,</code> Rename the current window</p>
+</li>
+<li>
+<p><code>&lt;C-b&gt; w</code> List current windows</p>
+</li>
+</ul>
+</li>
+<li>
+<p>Panes</p>
+<ul>
+<li>
+<p>Like vim splits, panes let you have multiple shells in the same visual display.</p>
+</li>
+<li>
+<p><code>&lt;C-b&gt; "</code> Split the current pane horizontally</p>
+</li>
+<li>
+<p><code>&lt;C-b&gt; %</code> Split the current pane vertically</p>
+</li>
+<li>
+<p><code>&lt;C-b&gt; &lt;direction&gt;</code> Move to the pane in the specified <em>direction</em>. Direction here means arrow keys.</p>
+</li>
+<li>
+<p><code>&lt;C-b&gt; z</code> Toggle zoom for the current pane</p>
+</li>
+<li>
+<p><code>&lt;C-b&gt; [</code> Start scrollback. You can then press <code>&lt;space&gt;</code> to start a selection and <code>&lt;enter&gt;</code> to copy that selection.</p>
+</li>
+<li>
+<p><code>&lt;C-b&gt; &lt;space&gt;</code> Cycle through pane arrangements.</p>
+</li>
+</ul>
+</li>
+</ul>
+<p><img src="./assets/1-20221120150726-k7252bf.png" alt="tmux截图" /></p>
+<h2 id="alias"><a class="header" href="#alias">Alias</a></h2>
+<p>It can become tiresome typing long commands that involve many flags or verbose options. For this reason, most shells support <em>aliasing</em>. A shell alias is a short form for another command that your shell will replace automatically for you. For instance, an alias in bash has the following structure:</p>
+<pre><code class="language-bash">alias alias_name="command_to_alias arg1 arg2"
+</code></pre>
+<p>Note that there is no space around the equal sign <code>=</code>, because <a href="">alias</a>`` is a shell command that takes a single argument.</p>
+<pre><code class="language-bash"># Make shorthands for common flags
+alias ll="ls -lh"
+
+# Save a lot of typing for common commands
+alias gs="git status"
+alias gc="git commit"
+alias v="vim"
+
+# Save you from mistyping
+alias sl=ls
+
+# Overwrite existing commands for better defaults
+alias mv="mv -i"           # -i prompts before overwrite
+alias mkdir="mkdir -p"     # -p make parent dirs as needed
+alias df="df -h"           # -h prints human readable format
+
+# Alias can be composed
+alias la="ls -A"
+alias lla="la -l"
+
+# To ignore an alias run it prepended with \
+\ls
+# Or disable an alias altogether with unalias
+unalias la
+
+# To get an alias definition just call it with alias
+alias ll
+# Will print ll='ls -lh'
+</code></pre>
+<h2 id="dotfiles"><a class="header" href="#dotfiles">Dotfiles</a></h2>
+<p>Many programs are configured using plain-text files known as <em>dotfiles</em> (because the file names begin with a <code>.</code>, e.g. <code>~/.vimrc</code>, so that they are hidden in the directory listing <code>ls</code> by default).</p>
+<p>Shells are one example of programs configured with such files. On startup, your shell will read many files to load its configuration. Depending on the shell, whether you are starting a login and/or interactive the entire process can be quite complex. For <code>bash</code>, editing your <code>.bashrc</code> or <code>.bash_profile</code> will work in most systems. Here you can include commands that you want to run on startup, like the alias we just described or modifications to your <code>PATH</code> environment variable.</p>
+<p>Some other examples of tools that can be configured through dotfiles are:</p>
+<ul>
+<li><code>bash</code> - <code>~/.bashrc</code>, <code>~/.bash_profile</code></li>
+<li><code>git</code> - <code>~/.gitconfig</code></li>
+<li><code>vim</code> - <code>~/.vimrc</code> and the <code>~/.vim</code> folder</li>
+<li><code>ssh</code> - <code>~/.ssh/config</code></li>
+<li><code>tmux</code> - <code>~/.tmux.conf</code></li>
+</ul>
+<p>How should you organize your dotfiles? They should be in their own folder, under version control, and <strong>symlinked</strong> into place using a script. This has the benefits of:</p>
+<ul>
+<li><strong>Easy installation</strong>: if you log in to a new machine, applying your customizations will only take a minute.</li>
+<li><strong>Portability</strong>: your tools will work the same way everywhere.</li>
+<li><strong>Synchronization</strong>: you can update your dotfiles anywhere and keep them all in sync.</li>
+<li><strong>Change tracking</strong>: you’re probably going to be maintaining your dotfiles for your entire programming career, and version history is nice to have for long-lived projects.</li>
+</ul>
+<h3 id="portability"><a class="header" href="#portability">Portability</a></h3>
+<p>A common pain with dotfiles is that the configurations might not work when working with several machines, e.g. if they have different operating systems or shells. Sometimes you also want some configuration to be applied only in a given machine.</p>
+<p>There are some tricks for making this easier. If the configuration file supports it, use the equivalent of if-statements to apply machine specific customizations. For example, your shell could have something like:</p>
+<pre><code class="language-bash">if [[ "$(uname)" == "Linux" ]]; then {do_something}; fi
+
+# Check before using shell-specific features
+if [[ "$SHELL" == "zsh" ]]; then {do_something}; fi
+
+# You can also make it machine-specific
+if [[ "$(hostname)" == "myServer" ]]; then {do_something}; fi
+</code></pre>
+<blockquote>
+<p>显然Windows用户就没戏了，<code>uname</code>这个指令在Windows下就没有。</p>
+</blockquote>
+<p>If the configuration file supports it, make use of includes. For example, a <code>~/.gitconfig</code> can have a setting:</p>
+<pre><code class="language-bash">[include]
+    path = ~/.gitconfig_local
+</code></pre>
+<p>And then on each machine, <code>~/.gitconfig_local</code> can contain machine-specific settings. You could even track these in a separate repository for machine-specific settings.</p>
+<p>This idea is also useful if you want different programs to share some configurations. For instance, if you want both <code>bash</code> and <code>zsh</code> to share the same set of aliases you can write them under <code>.aliases</code> and have the following block in both:</p>
+<pre><code class="language-bash"># Test if ~/.aliases exists and source it
+if [ -f ~/.aliases]; then
+	source ~/.aliases
+fi
+</code></pre>
+<h2 id="remote-machine"><a class="header" href="#remote-machine">Remote Machine</a></h2>
+<p>To <code>ssh</code> into a server you execute a command as follows</p>
+<pre><code class="language-bash">ssh foo@bar.mit.edu
+</code></pre>
+<p>Here we are trying to ssh as user <code>foo</code> in server <code>bar.mit.edu</code>. The server can be specified with a URL (like <code>bar.mit.edu</code>) or an IP (something like <code>foobar@192.168.1.42</code>).</p>
+<h3 id="executing-commands"><a class="header" href="#executing-commands">Executing commands</a></h3>
+<p>An often overlooked feature of <code>ssh</code> is the ability to run commands directly. <code>ssh foobar@server ls</code> will execute <code>ls</code> in the home folder of foobar. It works with pipes, so <code>ssh foobar@server ls | grep PATTERN</code> will grep locally the remote output of <code>ls</code> and <code>ls | ssh foobar@server grep PATTERN</code> will grep remotely the local output of <code>ls</code>.</p>
+<h3 id="ssh-keys"><a class="header" href="#ssh-keys">SSH Keys</a></h3>
+<p>Key-based authentication exploits public-key cryptography to prove to the server that the client owns the secret private key without revealing the key. This way you do not need to reenter your password every time. Nevertheless, the private key (often <code>~/.ssh/id_rsa</code> and more recently <code>~/.ssh/id_ed25519</code>) is effectively your password, so treat it like so.</p>
+<h4 id="key-generating"><a class="header" href="#key-generating">Key generating</a></h4>
+<p>To generate a pair you can run <a href="">ssh-keygen</a>``.</p>
+<pre><code class="language-bash">ssh-keygen -o -a 100 -t ed25519 -f ~/.ssh/id_ed25519
+</code></pre>
+<p>You should choose a passphrase, to avoid someone who gets hold of your private key to access authorized servers. Use <a href="">ssh-agent</a><code> or [gpg-agent]()</code> so you do not have to type your passphrase every time.</p>
+<p>If you have ever configured pushing to GitHub using SSH keys, then you have probably done the steps outlined <a href="https://help.github.com/articles/connecting-to-github-with-ssh/">here</a> and have a valid key pair already. To check if you have a passphrase and validate it you can run <code>ssh-keygen -y -f /path/to/key</code>.</p>
+<h4 id="key-based-authentication"><a class="header" href="#key-based-authentication">key based authentication</a></h4>
+<p><code>ssh</code> will look into <code>.ssh/authorized_keys</code> to determine which clients it should let in.</p>
+<pre><code class="language-bash">ssh-copy-id -i .ssh/id_ed25519 foobar@remote
+</code></pre>
+<h3 id="copying-files-over-ssh"><a class="header" href="#copying-files-over-ssh">Copying files over SSH</a></h3>
+<p>There are many ways to copy files over ssh:</p>
+<ul>
+<li><code>ssh+tee</code>, the simplest is to use <code>ssh</code> command execution and STDIN input by doing <code>cat localfile | ssh remote_server tee serverfile</code>. Recall that <a href="">tee</a>`` writes the output from STDIN into a file.</li>
+<li><a href="">scp</a>`` when copying large amounts of files/directories, the secure copy <code>scp</code> command is more convenient since it can easily recurse over paths. The syntax is <code>scp path/to/local_file remote_host:path/to/remote_file</code></li>
+<li><a href="">rsync</a>`` improves upon <code>scp</code> by detecting identical files in local and remote, and preventing copying them again. It also provides more fine grained control over symlinks, permissions and has extra features like the <code>--partial</code> flag that can resume from a previously interrupted copy. <code>rsync</code> has a similar syntax to <code>scp</code>.</li>
+</ul>
+<h3 id="port-forwarding"><a class="header" href="#port-forwarding">Port Forwarding</a></h3>
+<p>In many scenarios you will run into software that listens to specific ports in the machine. When this happens in your local machine you can type <code>localhost:PORT</code> or <code>127.0.0.1:PORT</code>, but what do you do with a remote server that does not have its ports directly available through the network/internet?</p>
+<p>This is called <em>port forwarding</em> and it comes in two flavors: Local Port Forwarding and Remote Port Forwarding (see the pictures for more details, credit of the pictures from <a href="https://unix.stackexchange.com/questions/115897/whats-ssh-port-forwarding-and-whats-the-difference-between-ssh-local-and-remot">this StackOverflow post</a>).</p>
+<h4 id="local-port-forwarding"><a class="header" href="#local-port-forwarding">Local Port Forwarding</a></h4>
+<p><img src="./assets/2-20221120150726-pnr9n1t.png" alt="本地代理" /></p>
+<h4 id="remote-port-forwarding"><a class="header" href="#remote-port-forwarding">Remote Port Forwarding</a></h4>
+<p><img src="./assets/3-20221120150726-4gx9ds3.png" alt="远程代理" /></p>
+<p>The most common scenario is local port forwarding, where a service in the remote machine listens in a port and you want to link a port in your local machine to forward to the remote port. For example, if we execute <code>jupyter notebook</code> in the remote server that listens to the port <code>8888</code>. Thus, to forward that to the local port <code>9999</code>, we would do <code>ssh -L 9999:localhost:8888 foobar@remote_server</code> and then navigate to <code>locahost:9999</code> in our local machine.</p>
+<blockquote>
+<p>相当于是把远程服务器上的端口映射在本地的计算机上，这样就是在本地上访问，或者反过来。</p>
+</blockquote>
+<h3 id="ssh-configuration"><a class="header" href="#ssh-configuration">SSH Configuration</a></h3>
+<p>We have covered many many arguments that we can pass. A tempting alternative is to create shell aliases that look like</p>
+<pre><code class="language-bash">alias my_server="ssh -i ~/.id_ed25519 --port 2222 -L 9999:localhost:8888 foobar@remote_server
+</code></pre>
+<p>However, there is a better alternative using <code>~/.ssh/config</code>.</p>
+<pre><code>Host vm
+    User foobar
+    HostName 172.16.174.141
+    Port 2222
+    IdentityFile ~/.ssh/id_ed25519
+    LocalForward 9999 localhost:8888
+
+# Configs can also take wildcards
+Host *.mit.edu
+    User foobaz
+</code></pre>
+<p>An additional advantage of using the <code>~/.ssh/config</code> file over aliases is that other programs like <code>scp</code>, <code>rsync</code>, <code>mosh</code>, &amp;c are able to read it as well and convert the settings into the corresponding flags.</p>
+<p>Note that the <code>~/.ssh/config</code> file can be considered a dotfile, and in general it is fine for it to be included with the rest of your dotfiles. However, if you make it public, think about the information that you are potentially providing strangers on the internet: addresses of your servers, users, open ports, &amp;c. This may facilitate some types of attacks so be thoughtful about sharing your SSH configuration.</p>
+<blockquote>
+<p>一定不要随便在github上传东西！</p>
+</blockquote>
+<p>Server side configuration is usually specified in <code>/etc/ssh/sshd_config</code>. Here you can make changes like disabling password authentication, changing ssh ports, enabling X11 forwarding, &amp;c. You can specify config settings on a per user basis.</p>
+<h3 id="miscellaneous"><a class="header" href="#miscellaneous">Miscellaneous</a></h3>
+<blockquote>
+<p>miscellaneous 各种各样的，杂项;</p>
+</blockquote>
+<p>A common pain when connecting to a remote server are disconnections due to shutting down/sleeping your computer or changing a network. Moreover if one has a connection with significant lag using ssh can become quite frustrating. <a href="https://mosh.org/">Mosh</a>, the mobile shell, improves upon ssh, allowing roaming connections, intermittent connectivity and providing intelligent local echo.</p>
+<p>Sometimes it is convenient to mount a remote folder. <a href="https://github.com/libfuse/sshfs">sshfs</a> can mount a folder on a remote server locally, and then you can use a local editor.</p>
+<h2 id="shells--frameworks"><a class="header" href="#shells--frameworks">Shells &amp; Frameworks</a></h2>
+<p>The <code>zsh</code> shell is a superset of <code>bash</code> and provides many convenient features out of the box such as:</p>
+<ul>
+<li>Smarter globbing, <code>**</code></li>
+<li>Inline globbing/wildcard expansion</li>
+<li>Spelling correction</li>
+<li>Better tab completion/selection</li>
+<li>Path expansion (<code>cd /u/lo/b</code> will expand as <code>/usr/local/bin</code>)</li>
+</ul>
+<p><strong>Frameworks</strong> can improve your shell as well. Some popular general frameworks are <a href="https://github.com/sorin-ionescu/prezto">prezto</a> or <a href="https://ohmyz.sh/">oh-my-zsh</a>, and smaller ones that focus on specific features such as <a href="https://github.com/zsh-users/zsh-syntax-highlighting">zsh-syntax-highlighting</a> or <a href="https://github.com/zsh-users/zsh-history-substring-search">zsh-history-substring-search</a>. Shells like <a href="https://fishshell.com/">fish</a> include many of these user-friendly features by default. Some of these features include:</p>
+<ul>
+<li>Right prompt</li>
+<li>Command syntax highlighting</li>
+<li>History substring search</li>
+<li>manpage based flag completions</li>
+<li>Smarter autocompletion</li>
+<li>Prompt themes</li>
+</ul>
+<p>One thing to note when using these frameworks is that they may slow down your shell, especially if the code they run is not properly optimized or it is too much code. You can always profile it and disable the features that you do not use often or value over speed.</p>
+<h2 id="terminal-emulators"><a class="header" href="#terminal-emulators">Terminal Emulators</a></h2>
+<p>Along with customizing your shell, it is worth spending some time figuring out your choice of <strong>terminal emulator</strong> and its settings.</p>
+<p>Since you might be spending hundreds to thousands of hours in your terminal it pays off to look into its settings. Some of the aspects that you may want to modify in your terminal include:</p>
+<ul>
+<li>Font choice</li>
+<li>Color Scheme</li>
+<li>Keyboard shortcuts</li>
+<li>Tab/Pane support</li>
+<li>Scrollback configuration</li>
+<li>Performance (some newer terminals like <a href="https://github.com/jwilm/alacritty">Alacritty</a> or <a href="https://sw.kovidgoyal.net/kitty/">kitty</a> offer GPU acceleration).</li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../missing-semester/missing-data-wrangling.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../missing-semester/missing-potpourri.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../missing-semester/missing-data-wrangling.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../missing-semester/missing-potpourri.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

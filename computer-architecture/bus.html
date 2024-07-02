@@ -1,0 +1,497 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>总线 - Ricardo&#x27;s Wiki</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="我在北京邮电大学计算机科学与技术专业学习三年的部分笔记">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../katex.min.css">
+
+        <!-- MathJax -->
+        <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../index.html">主页</a></li><li class="chapter-item expanded affix "><li class="spacer"></li><li class="chapter-item expanded "><a href="../ai-principle/index.html"><strong aria-hidden="true">1.</strong> 人工智能原理</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../ai-principle/intro.html"><strong aria-hidden="true">1.1.</strong> 概述</a></li><li class="chapter-item expanded "><a href="../ai-principle/question-knowledge.html"><strong aria-hidden="true">1.2.</strong> 问题和知识表示</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../algorithm/index.html"><strong aria-hidden="true">2.</strong> 算法</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../algorithm/intro.html"><strong aria-hidden="true">2.1.</strong> 概述</a></li><li class="chapter-item expanded "><a href="../algorithm/recurse-divide.html"><strong aria-hidden="true">2.2.</strong> 分治算法</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../compiler/index.html"><strong aria-hidden="true">3.</strong> 编译原理</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../compiler/intro.html"><strong aria-hidden="true">3.1.</strong> 概述</a></li><li class="chapter-item expanded "><a href="../compiler/lexical-analyzer.html"><strong aria-hidden="true">3.2.</strong> 词法分析</a></li><li class="chapter-item expanded "><a href="../compiler/grammar-analyzer.html"><strong aria-hidden="true">3.3.</strong> 语法分析</a></li><li class="chapter-item expanded "><a href="../compiler/grammar-driven-translation.html"><strong aria-hidden="true">3.4.</strong> 语法制导翻译</a></li><li class="chapter-item expanded "><a href="../compiler/syntax-analyser.html"><strong aria-hidden="true">3.5.</strong> 语义分析</a></li><li class="chapter-item expanded "><a href="../compiler/runtime.html"><strong aria-hidden="true">3.6.</strong> 运行环境</a></li><li class="chapter-item expanded "><a href="../compiler/intermediate-code.html"><strong aria-hidden="true">3.7.</strong> 中间代码生成</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../computer-architecture/index.html"><strong aria-hidden="true">4.</strong> 计算机组成原理</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../computer-architecture/overview.html"><strong aria-hidden="true">4.1.</strong> 计算机系统概论</a></li><li class="chapter-item expanded "><a href="../computer-architecture/calculator.html"><strong aria-hidden="true">4.2.</strong> 运算方法和运算器</a></li><li class="chapter-item expanded "><a href="../computer-architecture/instruction.html"><strong aria-hidden="true">4.3.</strong> 指令系统</a></li><li class="chapter-item expanded "><a href="../computer-architecture/cpu.html"><strong aria-hidden="true">4.4.</strong> 中央处理器</a></li><li class="chapter-item expanded "><a href="../computer-architecture/memory.html"><strong aria-hidden="true">4.5.</strong> 存储系统</a></li><li class="chapter-item expanded "><a href="../computer-architecture/io.html"><strong aria-hidden="true">4.6.</strong> 输入输出设备</a></li><li class="chapter-item expanded "><a href="../computer-architecture/external.html"><strong aria-hidden="true">4.7.</strong> 外部设备</a></li><li class="chapter-item expanded "><a href="../computer-architecture/bus.html" class="active"><strong aria-hidden="true">4.8.</strong> 总线</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../computer-networks/index.html"><strong aria-hidden="true">5.</strong> 计算机网络</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../computer-networks/overview.html"><strong aria-hidden="true">5.1.</strong> 引言</a></li><li class="chapter-item expanded "><a href="../computer-networks/physical-layer.html"><strong aria-hidden="true">5.2.</strong> 物理层</a></li><li class="chapter-item expanded "><a href="../computer-networks/data-link-layer.html"><strong aria-hidden="true">5.3.</strong> 数据链路层</a></li><li class="chapter-item expanded "><a href="../computer-networks/mac.html"><strong aria-hidden="true">5.4.</strong> 介质访问控制层</a></li><li class="chapter-item expanded "><a href="../computer-networks/network-layer.html"><strong aria-hidden="true">5.5.</strong> 网络层</a></li><li class="chapter-item expanded "><a href="../computer-networks/transport-layer.html"><strong aria-hidden="true">5.6.</strong> 传输层</a></li><li class="chapter-item expanded "><a href="../computer-networks/mid-term.html"><strong aria-hidden="true">5.7.</strong> 期中复习</a></li><li class="chapter-item expanded "><a href="../computer-networks/final-term.html"><strong aria-hidden="true">5.8.</strong> 期末复习</a></li><li class="chapter-item expanded "><a href="../computer-networks/lab2.html"><strong aria-hidden="true">5.9.</strong> 实验二</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../csapp/index.html"><strong aria-hidden="true">6.</strong> 计算机系统基础</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../csapp/bits.html"><strong aria-hidden="true">6.1.</strong> 数据的位级表示</a></li><li class="chapter-item expanded "><a href="../csapp/machine.html"><strong aria-hidden="true">6.2.</strong> 程序的机器级表示</a></li><li class="chapter-item expanded "><a href="../csapp/assembly-data.html"><strong aria-hidden="true">6.3.</strong> 程序的机器级表示——数据</a></li><li class="chapter-item expanded "><a href="../csapp/assembly-control.html"><strong aria-hidden="true">6.4.</strong> 程序的机器级表示——控制</a></li><li class="chapter-item expanded "><a href="../csapp/assembly-procedure.html"><strong aria-hidden="true">6.5.</strong> 程序的机器级表示——过程</a></li><li class="chapter-item expanded "><a href="../csapp/assembly-advanced.html"><strong aria-hidden="true">6.6.</strong> 程序的机器级表示——高级话题</a></li><li class="chapter-item expanded "><a href="../csapp/exception-control-flow.html"><strong aria-hidden="true">6.7.</strong> 异常控制流</a></li><li class="chapter-item expanded "><a href="../csapp/linking.html"><strong aria-hidden="true">6.8.</strong> 链接</a></li><li class="chapter-item expanded "><a href="../csapp/io.html"><strong aria-hidden="true">6.9.</strong> 输入输出系统</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../data-structure/index.html"><strong aria-hidden="true">7.</strong> 数据结构</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../data-structure/foundation.html"><strong aria-hidden="true">7.1.</strong> 算法基础</a></li><li class="chapter-item expanded "><a href="../data-structure/inner-sort.html"><strong aria-hidden="true">7.2.</strong> 内部排序</a></li><li class="chapter-item expanded "><a href="../data-structure/outer-sort.html"><strong aria-hidden="true">7.3.</strong> 外部排序</a></li><li class="chapter-item expanded "><a href="../data-structure/array-and-list.html"><strong aria-hidden="true">7.4.</strong> 数组和广义表</a></li><li class="chapter-item expanded "><a href="../data-structure/list.html"><strong aria-hidden="true">7.5.</strong> 线性表</a></li><li class="chapter-item expanded "><a href="../data-structure/stack-and-dequeue.html"><strong aria-hidden="true">7.6.</strong> 栈和队列</a></li><li class="chapter-item expanded "><a href="../data-structure/tree.html"><strong aria-hidden="true">7.7.</strong> 树</a></li><li class="chapter-item expanded "><a href="../data-structure/graph.html"><strong aria-hidden="true">7.8.</strong> 图</a></li><li class="chapter-item expanded "><a href="../data-structure/string.html"><strong aria-hidden="true">7.9.</strong> 字符串</a></li><li class="chapter-item expanded "><a href="../data-structure/find.html"><strong aria-hidden="true">7.10.</strong> 查找表</a></li><li class="chapter-item expanded "><a href="../data-structure/lab.html"><strong aria-hidden="true">7.11.</strong> 实验</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../database/index.html"><strong aria-hidden="true">8.</strong> 数据库</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../database/intro.html"><strong aria-hidden="true">8.1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="../database/relation-model.html"><strong aria-hidden="true">8.2.</strong> Relation Model</a></li><li class="chapter-item expanded "><a href="../database/relation-database-design.html"><strong aria-hidden="true">8.3.</strong> Relation Database Design</a></li><li class="chapter-item expanded "><a href="../database/sql.html"><strong aria-hidden="true">8.4.</strong> SQL</a></li><li class="chapter-item expanded "><a href="../database/intermediate-sql.html"><strong aria-hidden="true">8.5.</strong> Intermediate SQL</a></li><li class="chapter-item expanded "><a href="../database/entity-relation-model.html"><strong aria-hidden="true">8.6.</strong> Entity Relation Model</a></li><li class="chapter-item expanded "><a href="../database/data-storage-structure.html"><strong aria-hidden="true">8.7.</strong> Data Storage Structure</a></li><li class="chapter-item expanded "><a href="../database/database-index.html"><strong aria-hidden="true">8.8.</strong> Index</a></li><li class="chapter-item expanded "><a href="../database/query-processing.html"><strong aria-hidden="true">8.9.</strong> Query Processing</a></li><li class="chapter-item expanded "><a href="../database/query-optimization.html"><strong aria-hidden="true">8.10.</strong> Query Optimization</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../discrete-math/index.html"><strong aria-hidden="true">9.</strong> 离散数学</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../discrete-math/relation.html"><strong aria-hidden="true">9.1.</strong> Relation</a></li><li class="chapter-item expanded "><a href="../discrete-math/advanced-counting.html"><strong aria-hidden="true">9.2.</strong> Advanced Counting</a></li><li class="chapter-item expanded "><a href="../discrete-math/tree.html"><strong aria-hidden="true">9.3.</strong> Tree</a></li><li class="chapter-item expanded "><a href="../discrete-math/graph.html"><strong aria-hidden="true">9.4.</strong> Graph</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../formal-language/index.html"><strong aria-hidden="true">10.</strong> 形式语言和自动机</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../formal-language/fa.html"><strong aria-hidden="true">10.1.</strong> 有限状态自动机</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../missing-semester/index.html"><strong aria-hidden="true">11.</strong> 计算机教学中缺少的一课</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../missing-semester/missing-the-shell.html"><strong aria-hidden="true">11.1.</strong> Shell</a></li><li class="chapter-item expanded "><a href="../missing-semester/missing-shell-scripts.html"><strong aria-hidden="true">11.2.</strong> Shell Scripts</a></li><li class="chapter-item expanded "><a href="../missing-semester/missing-vim.html"><strong aria-hidden="true">11.3.</strong> Vim</a></li><li class="chapter-item expanded "><a href="../missing-semester/missing-data-wrangling.html"><strong aria-hidden="true">11.4.</strong> Data Wrangling</a></li><li class="chapter-item expanded "><a href="../missing-semester/missing-command-line.html"><strong aria-hidden="true">11.5.</strong> Command Line</a></li><li class="chapter-item expanded "><a href="../missing-semester/missing-potpourri.html"><strong aria-hidden="true">11.6.</strong> Potpourri</a></li><li class="chapter-item expanded "><a href="../missing-semester/missing-version-control.html"><strong aria-hidden="true">11.7.</strong> Version Control</a></li><li class="chapter-item expanded "><a href="../missing-semester/missing-debugging.html"><strong aria-hidden="true">11.8.</strong> Debug</a></li><li class="chapter-item expanded "><a href="../missing-semester/missing-metaprogramming.html"><strong aria-hidden="true">11.9.</strong> Metaprogram</a></li><li class="chapter-item expanded "><a href="../missing-semester/missing-security.html"><strong aria-hidden="true">11.10.</strong> Security</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../operating-system/index.html"><strong aria-hidden="true">12.</strong> 操作系统</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../operating-system/intro.html"><strong aria-hidden="true">12.1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="../operating-system/os-structures.html"><strong aria-hidden="true">12.2.</strong> OS Structure</a></li><li class="chapter-item expanded "><a href="../operating-system/processes.html"><strong aria-hidden="true">12.3.</strong> Process</a></li><li class="chapter-item expanded "><a href="../operating-system/process-synchronization.html"><strong aria-hidden="true">12.4.</strong> Process Synchronization</a></li><li class="chapter-item expanded "><a href="../operating-system/cpu-scheduling.html"><strong aria-hidden="true">12.5.</strong> CPU Scheduling</a></li><li class="chapter-item expanded "><a href="../operating-system/threads.html"><strong aria-hidden="true">12.6.</strong> Thread</a></li><li class="chapter-item expanded "><a href="../operating-system/memory-management.html"><strong aria-hidden="true">12.7.</strong> Memory Management</a></li><li class="chapter-item expanded "><a href="../operating-system/virtual-memory.html"><strong aria-hidden="true">12.8.</strong> Virtual Memory</a></li><li class="chapter-item expanded "><a href="../operating-system/fs-interface.html"><strong aria-hidden="true">12.9.</strong> Filesystem Interface</a></li><li class="chapter-item expanded "><a href="../operating-system/fs-implementation.html"><strong aria-hidden="true">12.10.</strong> Filesystem Implementation</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../socialist/index.html"><strong aria-hidden="true">13.</strong> 毛泽东思想和中国特色理论体系概论</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../socialist/maozedong.html"><strong aria-hidden="true">13.1.</strong> 毛概期末总结</a></li><li class="chapter-item expanded "><a href="../socialist/others.html"><strong aria-hidden="true">13.2.</strong> 课后大题</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Ricardo&#x27;s Wiki</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="总线系统"><a class="header" href="#总线系统">总线系统</a></h1>
+<h2 id="总线的概念和结构形态"><a class="header" href="#总线的概念和结构形态">总线的概念和结构形态</a></h2>
+<h3 id="总线的基本概念"><a class="header" href="#总线的基本概念">总线的基本概念</a></h3>
+<p>总线是构成计算机系统的互联机构，是系统内各功能不见之间进行信息传送的公共通路。</p>
+<p>按照不同的分类依据，总线有着不同的分类结果：</p>
+<p>如果按照传送信息分类：</p>
+<ul>
+<li>
+<p>地址总线：</p>
+<p>单向的三态总线，用于传送地址信息。其的位数决定可执行寻址的范围。</p>
+</li>
+<li>
+<p>数据总线：</p>
+<p>双向的三态总线，用于传送数据信息。位数有很多种。</p>
+</li>
+<li>
+<p>控制总线：</p>
+<p>传送控制和状态信息。</p>
+</li>
+</ul>
+<p>如果按照连接部件分类的总线</p>
+<ul>
+<li>内部总线：CPU内部逻辑不见的连接总线</li>
+<li>局部总线：CPU与其他部件的连接总线，介于CPU内部总线和系统总线之间</li>
+<li>系统总线：计算机各功能不见的连接总线</li>
+<li>通信总线（IO总线）：微机系统之间，微机系统和其他设备之间的连接总线</li>
+</ul>
+<h4 id="总线的特性"><a class="header" href="#总线的特性">总线的特性</a></h4>
+<ol>
+<li>
+<p>物理特性：</p>
+<p>总线的位数，总线插头、插座的形状，引脚的排列方式。</p>
+</li>
+<li>
+<p>功能特性</p>
+<p>确定每一根总线的名称、定义、功能与逻辑关系等。</p>
+</li>
+<li>
+<p>电器特性</p>
+<p>规定每一根总线上信号的传送方向及有效电平范围等内容。</p>
+</li>
+<li>
+<p>时间特性</p>
+<p>总线上各信号有效的时序关系。</p>
+</li>
+</ol>
+<h4 id="总线标准"><a class="header" href="#总线标准">总线标准</a></h4>
+<p>为了保证总线的性能充分发挥以及兼容问题将总线标准化，主要包括总线的各种特性：数据传输率，总线通信协议、仲裁协议等一系列规定和约定。</p>
+<p>总线标准的来源可以分为权威组织正式公布的标准和实际存在的工业标准。</p>
+<p>按照总线标准设计的总线结构就是<strong>通用接口</strong>。</p>
+<h4 id="总线的性能指标"><a class="header" href="#总线的性能指标">总线的性能指标</a></h4>
+<ol>
+<li>
+<p>总线宽度</p>
+<p>在一次总线操作中，最多可以传送的数据位数。</p>
+</li>
+<li>
+<p>总线周期</p>
+<p>一次总线操作所需要的最小间隔时间。</p>
+<blockquote>
+<p>总线周期与总线的时钟频率成反比。</p>
+</blockquote>
+</li>
+<li>
+<p>总线带宽</p>
+<p>单位时间内通过总线的数据位数，总线的数据传输率。</p>
+</li>
+</ol>
+<h3 id="总线的连接方式"><a class="header" href="#总线的连接方式">总线的连接方式</a></h3>
+<p>总线之间需要通过<strong>适配器</strong>连接起来。</p>
+<p>适配器（接口）：实现高速CPU同低速的外设之间工作速度上的匹配和同步，并完成计算机和外设之间的所有数据传送和控制。</p>
+<p>在单机结构中，总线的结构比较多样。</p>
+<h4 id="单总线结构"><a class="header" href="#单总线结构">单总线结构</a></h4>
+<p>系统内的所有不见均由系统总线连接。</p>
+<p><img src="./bus/image-20230504164241891.png" alt="image-20230504164241891" /></p>
+<p>优点：各部件之间可直接进行通信，系统易于扩充。</p>
+<p>缺点：总线负载重，如果系统中存在慢速设备，则会产生较大的时间延迟，降低系统的工作效率。</p>
+<h4 id="双总线设备"><a class="header" href="#双总线设备">双总线设备</a></h4>
+<p>系统内的所有部件均由系统总线连接，在CPU和主存之间再设置一组高速的存储总线。</p>
+<p><img src="./bus/image-20230504164455933.png" alt="image-20230504164455933" /></p>
+<p>特点：</p>
+<ul>
+<li>保持了单总线的优点：简单，易于扩充。</li>
+<li>减轻了系统总线的工作负担，使CPU工作效率有所提高。</li>
+<li>增加了硬件成本。</li>
+</ul>
+<h4 id="三总线结构"><a class="header" href="#三总线结构">三总线结构</a></h4>
+<p>系统总线负责连接CPU、主存、IO通道，存储总线负责连接CPU与主存，IO总线负责连接各个IO适配器。</p>
+<p><img src="./bus/image-20230504164830672.png" alt="image-20230504164830672" /></p>
+<p>特点：</p>
+<ul>
+<li>设置了通道，对外设进行统一的管理，分担了CPU的负担。</li>
+<li>提高了CPU的工作效率，同时也最大限度提高了外设的工作速度。</li>
+<li>但是硬件的成本进一步增加。</li>
+</ul>
+<p>三总线结构还有下面这种形式：</p>
+<p><img src="./bus/image-20230504165139674.png" alt="image-20230504165139674" /></p>
+<h4 id="多总线结构"><a class="header" href="#多总线结构">多总线结构</a></h4>
+<p><img src="./bus/image-20230504165213500.png" alt="image-20230504165213500" /></p>
+<h3 id="总线的内部结构"><a class="header" href="#总线的内部结构">总线的内部结构</a></h3>
+<p>早期的总线内部实际上就是CPU引脚的物理延伸。</p>
+<p><img src="./bus/image-20230504165316581.png" alt="image-20230504165316581" /></p>
+<p>CPU是总线上唯一的控制者。这种方式让总线结构和CPU紧密相关，通用性比较差。</p>
+<p>现代总线多采用标准总线。标准总线和结构、CPU、技术无关，亦被称作<strong>底板总线</strong>。</p>
+<p><img src="./bus/image-20230504165656450.png" alt="image-20230504165656450" /></p>
+<p>现代总线可以分成四个部分：</p>
+<ul>
+<li>数据传送总线：地址线、数据线和控制线</li>
+<li>仲裁总线：总线请求线，总线授权线</li>
+<li>中断和同步总线：中断请求线，中断认可线</li>
+<li>公用线：时钟信号，电源</li>
+</ul>
+<h3 id="总线结构实例"><a class="header" href="#总线结构实例">总线结构实例</a></h3>
+<p><img src="./bus/image-20230504170438566.png" alt="image-20230504170438566" /></p>
+<h2 id="总线接口"><a class="header" href="#总线接口">总线接口</a></h2>
+<h3 id="信息的传送方式"><a class="header" href="#信息的传送方式">信息的传送方式</a></h3>
+<ol>
+<li>串行传输：使用一条传输线，采用脉冲传输。成本低廉，但是信息的传送速度慢。</li>
+<li>并行传输：每一个数据位使用一条传输线，一般使用电位传送。系统总线的信息传送方式。</li>
+<li>分时传输：总线传输信息的分时复用，共享总线部件对总线的分时复用。</li>
+</ol>
+<h3 id="接口的基本概念"><a class="header" href="#接口的基本概念">接口的基本概念</a></h3>
+<p>接口是IO设备的适配器，CPU和主存，外围设备之间通过总线进行连接的逻辑部件。</p>
+<p><img src="./bus/image-20230504172745331.png" alt="image-20230504172745331" /></p>
+<p>接口一般具有下面这些功能：控制，缓冲，状态，转换，中断等。</p>
+<p>一个适配器必须要有两个接口：</p>
+<ul>
+<li>一个同系统总线相连接，采用并行的方式</li>
+<li>一个同设备相连，可能采用并行或者串行方式</li>
+</ul>
+<h2 id="总线的仲裁"><a class="header" href="#总线的仲裁">总线的仲裁</a></h2>
+<p>连接到总线上的功能模块有<strong>主动</strong>和<strong>被动</strong>两种形态：</p>
+<ul>
+<li>主方可以启动一个总线周期</li>
+<li>从方只能响应主方请求</li>
+<li>每次总线操作，只能有一个主方，但是可能存在多个从方</li>
+<li>主方持续控制总线的时间就是总线占用期</li>
+</ul>
+<p>多个功能部件争用总线时，需要由<strong>总线仲裁部件</strong>选择一个设备使用总线。</p>
+<p>总线仲裁有以下两种方式：</p>
+<ul>
+<li>集中式：由中央仲裁其决定总线使用权的归属</li>
+<li>分布式：多个仲裁器竞争使用总线</li>
+</ul>
+<h3 id="集中式仲裁"><a class="header" href="#集中式仲裁">集中式仲裁</a></h3>
+<ol>
+<li>
+<p>链式查询方式</p>
+<p>采用<strong>菊花链</strong>的方式连接所有具有总线使用能力的部件，各设备公用一根总线请求信号线<code>BR</code>，总线授权信号线<code>BG</code>，总线忙信号性<code>BS</code>和中央仲裁器连接。总线授权信号<code>BG</code>串行的从一个接口连接到下一个接口。</p>
+<p><img src="./bus/image-20230504173912747.png" alt="image-20230504173912747" /></p>
+<p>在这种控制模式下，设备的优先权同与总线控制器的距离有关系。</p>
+<p><img src="./bus/image-20230504174033750.png" alt="image-20230504174033750" /></p>
+<p>使用这种方式的特点是：</p>
+<ul>
+<li>硬件连接简单，判断优先级容易，设备的增删容易</li>
+<li>对电路故障敏感，各个部件的优先级固定</li>
+</ul>
+</li>
+<li>
+<p>计数器定时查询方式</p>
+<p>在链式查询方式的基础上省去了总线授权信号<code>BG</code>，增加了计数器和设备地址线，每次收到总线申请，由计数器决定响应的顺序。</p>
+<p><img src="./bus/image-20230504174504835.png" alt="image-20230504174504835" /></p>
+<p>在有总线请求时，发出计数值，选择设备查询请求状态，依次查询每一个设备的状态。</p>
+<p>在这种仲裁方式下，设备的优先级由计数值决定，计数值为0时同链式查询方式一样，</p>
+<p>这种方式的特点是：</p>
+<ul>
+<li>优先权控制灵活，对电路故障不敏感</li>
+<li>硬件成本增加，控制复杂度高</li>
+</ul>
+</li>
+<li>
+<p>独立请求方式</p>
+<p>每个部件均由独立的请求和响应信号线，由中央仲裁器的部分排队逻辑决定响应顺序。</p>
+<p><img src="./bus/image-20230504175136601.png" alt="image-20230504175136601" /></p>
+<p>设备的优先权有中央仲裁器的内部排队逻辑决定</p>
+<p>使用这种仲裁方式的特点为：</p>
+<ul>
+<li>响应时间快，确定优先响应的设备花费的时间少，对优先次序的控制也相当的灵活</li>
+<li>硬件的复杂程度高</li>
+</ul>
+</li>
+</ol>
+<h3 id="分布式仲裁"><a class="header" href="#分布式仲裁">分布式仲裁</a></h3>
+<p>分布式仲裁不需要使用中央仲裁器，由分布在各部件中的多个仲裁器竞争使用总线。</p>
+<p>每个潜在的主模块都有<strong>独立的仲裁器</strong>和<strong>唯一的仲裁号</strong>，通过仲裁总线上仲裁号大小的比较，决定可占用总线的部件。具体的仲裁步骤如下：</p>
+<ul>
+<li>某部件有总线申请，将其仲裁号发送到共享仲裁总线上</li>
+<li>每个仲裁器将仲裁总线上得到的号和自己的号相比较</li>
+<li>如果仲裁总线上的号大，则它的总线请求不予响应，并撤销它的仲裁号</li>
+<li>最后，获胜者的仲裁号保留在仲裁总线上</li>
+</ul>
+<p>分布式仲裁是以<strong>优先级仲裁策略</strong>为基础的。</p>
+<h2 id="总线的定时和数据传送模式"><a class="header" href="#总线的定时和数据传送模式">总线的定时和数据传送模式</a></h2>
+<h3 id="总线的定时"><a class="header" href="#总线的定时">总线的定时</a></h3>
+<p>总线的一次信息传送过程，大致可以分成以下五个阶段：</p>
+<ul>
+<li>请求总线</li>
+<li>总线仲裁</li>
+<li>寻址</li>
+<li>信息传送</li>
+<li>状态返回/错误报告</li>
+</ul>
+<p><strong>定时</strong>就是指事件出现在总线上的时序关系，为了同步主方、从方的操作，需要通过定时协定。在数据传送过程中，有下面几种定时协定：</p>
+<ul>
+<li>同步定时协定</li>
+<li>异步定时协定</li>
+<li>半同步定时协定</li>
+<li>周期分裂式总线协定</li>
+</ul>
+<p>下面介绍前两种定时协定：</p>
+<ol>
+<li>
+<p>同步定时协议：</p>
+<p><img src="./bus/image-20230504180422070.png" alt="image-20230504180422070" /></p>
+<p>优点：简单，传输的频率高</p>
+<p>缺点：只适用于总线长度短，功能模块存取时间接近的场景</p>
+</li>
+<li>
+<p>异步定时协定</p>
+<p><img src="./bus/image-20230504180534999.png" alt="image-20230504180534999" /></p>
+<p>优点：总线周期长度可变，允许快慢速功能模块都连接到同一总线上</p>
+<p>缺点：增加了总线的复杂性和成本</p>
+</li>
+</ol>
+<h3 id="总线数据传送模式"><a class="header" href="#总线数据传送模式">总线数据传送模式</a></h3>
+<p><img src="./bus/image-20230504180906059.png" alt="image-20230504180906059" /></p>
+<h4 id="读写操作"><a class="header" href="#读写操作">读、写操作</a></h4>
+<p>读操作是由从方到主方的数据传输，写操作是从主方到从方的大数据传送。</p>
+<p>一般的，主方先以一个总线周期发送命令和从方地址，经过一定的演示再开始数据传送总线周期。</p>
+<p>为了提高总线利用效率，减少延时损失，主方在完成寻址总线周期后可让出总线控制权，让其他主方完成更急迫的操作，然后再重新竞争总线控制权，完成数据传送总线周期。</p>
+<h4 id="块传送操作"><a class="header" href="#块传送操作">块传送操作</a></h4>
+<p>只需给定块的起始地址，然后对固定块长度的数据一个接一个的读出和写入。CPU读取存储器的块传送操作常称作猝发是传送。块的长度一般固定为数据线宽度（存储器字长）的4倍。</p>
+<h4 id="写后读读修改写操作"><a class="header" href="#写后读读修改写操作">写后读、读修改写操作</a></h4>
+<p>两种组合操作模式，只给出地址一次，或者进行先写后读操作，或者进行先读后写操作。先写后读操作常常用于校验目的，先读后写操作用于多程序系统中对于共享存储资源的保护。</p>
+<p>块传送操作和写后读、读修改写操作都是主方控制总线直到整个操作结束。</p>
+<h4 id="广播广集操作"><a class="header" href="#广播广集操作">广播、广集操作</a></h4>
+<p>广播、广集操作是一个较为特殊的操作。一般来说，总线只允许一个主方和一个从方之间进行通信，但是一些总线允许一个主方对多个从方进行操作。如果是对于多个从方进行写操作，这种操作称为<strong>广播</strong>，如果是从多个从方读取，并在总线上完成<code>and</code>或者<code>or</code>操作再被读取，这种操作称为<strong>广集</strong>。广集操作在检测多个中断源时非常好用。</p>
+<h2 id="pci总线和pcie总线"><a class="header" href="#pci总线和pcie总线">PCI总线和PCIe总线</a></h2>
+<h3 id="多总线结构-1"><a class="header" href="#多总线结构-1">多总线结构</a></h3>
+<p><img src="./bus/image-20230504205644399.png" alt="image-20230504205644399" /></p>
+<h4 id="host总线"><a class="header" href="#host总线">Host总线</a></h4>
+<p>有CPU总线，系统总线，主存总线，前端总线等等名称。</p>
+<p>连接北桥芯片和CPU之间的信息通路，是一个64位数据线和32位地址线的同步总线。</p>
+<h4 id="pci总线"><a class="header" href="#pci总线">PCI总线</a></h4>
+<p>连接各种高速的PCI设备，是一个与处理器无关的高速外围总线。</p>
+<p>采用同步时序协议和集中式仲裁策略，并且可以自动配置。PCI设备可以是主设备，也可以是从设备，或者兼而有之。</p>
+<h4 id="lagacy总线"><a class="header" href="#lagacy总线">LAGACY总线</a></h4>
+<p>此处疑有讹误，应为LEGACY总线。</p>
+<p>一般是<code>ISA</code>，<code>EISA</code>和<code>MCA</code>这类性能较低的传统总线，在这里的主要意义是提供向前的兼容性。</p>
+<h4 id="pci总线中的桥"><a class="header" href="#pci总线中的桥">PCI总线中的桥</a></h4>
+<p>桥起着将两条总线连接起来的作用。桥同时也是一个总线转换部件，将一条总线上的地址空间映射到另一条总线的地址空间中，使用两条总线上的设备可以直接通信。</p>
+<h3 id="pci-总线信号"><a class="header" href="#pci-总线信号">PCI 总线信号</a></h3>
+<p>PCI总线的基本传输机制是猝发式传输。</p>
+<p>在进行写操作时，桥把上层总线的写周期缓存起来，以后再在下层总线上生成写周期，即<strong>写延迟</strong>。当进行读操作时，桥可以早于上层总线，直接在下层总线上<strong>预读</strong>。无论延迟写还是预读，桥的作用可使所有的存取都按照CPU的要求出现在总线上。</p>
+<h3 id="pci总线仲裁"><a class="header" href="#pci总线仲裁">PCI总线仲裁</a></h3>
+<p>PCI总线采用集中式仲裁方式。每个设备都有总线请求<code>nREQ</code>线和总线授权<code>nGNT</code>线和中央仲裁器连接，中央仲裁器根据算法对设备的申请做出仲裁。</p>
+<h3 id="pcie总线"><a class="header" href="#pcie总线">PCIe总线</a></h3>
+<p>对于PCI总线的扩展，提供了更快的传输速度，在软件和应用上兼容PCI设备。</p>
+<p>PCIe总线相对于PCI总线做出了如下的改进：</p>
+<ul>
+<li>高速差分传输</li>
+<li>串行传输</li>
+<li>全双工端到端传输</li>
+<li>基于多通道的数据传递方式</li>
+<li>基于多通道的数据传递方式</li>
+<li>基于数据包的传输</li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../computer-architecture/external.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../computer-networks/index.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../computer-architecture/external.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../computer-networks/index.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

@@ -1,0 +1,526 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>引言 - Ricardo&#x27;s Wiki</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="我在北京邮电大学计算机科学与技术专业学习三年的部分笔记">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../katex.min.css">
+
+        <!-- MathJax -->
+        <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../index.html">主页</a></li><li class="chapter-item expanded affix "><li class="spacer"></li><li class="chapter-item expanded "><a href="../ai-principle/index.html"><strong aria-hidden="true">1.</strong> 人工智能原理</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../ai-principle/intro.html"><strong aria-hidden="true">1.1.</strong> 概述</a></li><li class="chapter-item expanded "><a href="../ai-principle/question-knowledge.html"><strong aria-hidden="true">1.2.</strong> 问题和知识表示</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../algorithm/index.html"><strong aria-hidden="true">2.</strong> 算法</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../algorithm/intro.html"><strong aria-hidden="true">2.1.</strong> 概述</a></li><li class="chapter-item expanded "><a href="../algorithm/recurse-divide.html"><strong aria-hidden="true">2.2.</strong> 分治算法</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../compiler/index.html"><strong aria-hidden="true">3.</strong> 编译原理</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../compiler/intro.html"><strong aria-hidden="true">3.1.</strong> 概述</a></li><li class="chapter-item expanded "><a href="../compiler/lexical-analyzer.html"><strong aria-hidden="true">3.2.</strong> 词法分析</a></li><li class="chapter-item expanded "><a href="../compiler/grammar-analyzer.html"><strong aria-hidden="true">3.3.</strong> 语法分析</a></li><li class="chapter-item expanded "><a href="../compiler/grammar-driven-translation.html"><strong aria-hidden="true">3.4.</strong> 语法制导翻译</a></li><li class="chapter-item expanded "><a href="../compiler/syntax-analyser.html"><strong aria-hidden="true">3.5.</strong> 语义分析</a></li><li class="chapter-item expanded "><a href="../compiler/runtime.html"><strong aria-hidden="true">3.6.</strong> 运行环境</a></li><li class="chapter-item expanded "><a href="../compiler/intermediate-code.html"><strong aria-hidden="true">3.7.</strong> 中间代码生成</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../computer-architecture/index.html"><strong aria-hidden="true">4.</strong> 计算机组成原理</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../computer-architecture/overview.html"><strong aria-hidden="true">4.1.</strong> 计算机系统概论</a></li><li class="chapter-item expanded "><a href="../computer-architecture/calculator.html"><strong aria-hidden="true">4.2.</strong> 运算方法和运算器</a></li><li class="chapter-item expanded "><a href="../computer-architecture/instruction.html"><strong aria-hidden="true">4.3.</strong> 指令系统</a></li><li class="chapter-item expanded "><a href="../computer-architecture/cpu.html"><strong aria-hidden="true">4.4.</strong> 中央处理器</a></li><li class="chapter-item expanded "><a href="../computer-architecture/memory.html"><strong aria-hidden="true">4.5.</strong> 存储系统</a></li><li class="chapter-item expanded "><a href="../computer-architecture/io.html"><strong aria-hidden="true">4.6.</strong> 输入输出设备</a></li><li class="chapter-item expanded "><a href="../computer-architecture/external.html"><strong aria-hidden="true">4.7.</strong> 外部设备</a></li><li class="chapter-item expanded "><a href="../computer-architecture/bus.html"><strong aria-hidden="true">4.8.</strong> 总线</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../computer-networks/index.html"><strong aria-hidden="true">5.</strong> 计算机网络</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../computer-networks/overview.html" class="active"><strong aria-hidden="true">5.1.</strong> 引言</a></li><li class="chapter-item expanded "><a href="../computer-networks/physical-layer.html"><strong aria-hidden="true">5.2.</strong> 物理层</a></li><li class="chapter-item expanded "><a href="../computer-networks/data-link-layer.html"><strong aria-hidden="true">5.3.</strong> 数据链路层</a></li><li class="chapter-item expanded "><a href="../computer-networks/mac.html"><strong aria-hidden="true">5.4.</strong> 介质访问控制层</a></li><li class="chapter-item expanded "><a href="../computer-networks/network-layer.html"><strong aria-hidden="true">5.5.</strong> 网络层</a></li><li class="chapter-item expanded "><a href="../computer-networks/transport-layer.html"><strong aria-hidden="true">5.6.</strong> 传输层</a></li><li class="chapter-item expanded "><a href="../computer-networks/mid-term.html"><strong aria-hidden="true">5.7.</strong> 期中复习</a></li><li class="chapter-item expanded "><a href="../computer-networks/final-term.html"><strong aria-hidden="true">5.8.</strong> 期末复习</a></li><li class="chapter-item expanded "><a href="../computer-networks/lab2.html"><strong aria-hidden="true">5.9.</strong> 实验二</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../csapp/index.html"><strong aria-hidden="true">6.</strong> 计算机系统基础</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../csapp/bits.html"><strong aria-hidden="true">6.1.</strong> 数据的位级表示</a></li><li class="chapter-item expanded "><a href="../csapp/machine.html"><strong aria-hidden="true">6.2.</strong> 程序的机器级表示</a></li><li class="chapter-item expanded "><a href="../csapp/assembly-data.html"><strong aria-hidden="true">6.3.</strong> 程序的机器级表示——数据</a></li><li class="chapter-item expanded "><a href="../csapp/assembly-control.html"><strong aria-hidden="true">6.4.</strong> 程序的机器级表示——控制</a></li><li class="chapter-item expanded "><a href="../csapp/assembly-procedure.html"><strong aria-hidden="true">6.5.</strong> 程序的机器级表示——过程</a></li><li class="chapter-item expanded "><a href="../csapp/assembly-advanced.html"><strong aria-hidden="true">6.6.</strong> 程序的机器级表示——高级话题</a></li><li class="chapter-item expanded "><a href="../csapp/exception-control-flow.html"><strong aria-hidden="true">6.7.</strong> 异常控制流</a></li><li class="chapter-item expanded "><a href="../csapp/linking.html"><strong aria-hidden="true">6.8.</strong> 链接</a></li><li class="chapter-item expanded "><a href="../csapp/io.html"><strong aria-hidden="true">6.9.</strong> 输入输出系统</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../data-structure/index.html"><strong aria-hidden="true">7.</strong> 数据结构</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../data-structure/foundation.html"><strong aria-hidden="true">7.1.</strong> 算法基础</a></li><li class="chapter-item expanded "><a href="../data-structure/inner-sort.html"><strong aria-hidden="true">7.2.</strong> 内部排序</a></li><li class="chapter-item expanded "><a href="../data-structure/outer-sort.html"><strong aria-hidden="true">7.3.</strong> 外部排序</a></li><li class="chapter-item expanded "><a href="../data-structure/array-and-list.html"><strong aria-hidden="true">7.4.</strong> 数组和广义表</a></li><li class="chapter-item expanded "><a href="../data-structure/list.html"><strong aria-hidden="true">7.5.</strong> 线性表</a></li><li class="chapter-item expanded "><a href="../data-structure/stack-and-dequeue.html"><strong aria-hidden="true">7.6.</strong> 栈和队列</a></li><li class="chapter-item expanded "><a href="../data-structure/tree.html"><strong aria-hidden="true">7.7.</strong> 树</a></li><li class="chapter-item expanded "><a href="../data-structure/graph.html"><strong aria-hidden="true">7.8.</strong> 图</a></li><li class="chapter-item expanded "><a href="../data-structure/string.html"><strong aria-hidden="true">7.9.</strong> 字符串</a></li><li class="chapter-item expanded "><a href="../data-structure/find.html"><strong aria-hidden="true">7.10.</strong> 查找表</a></li><li class="chapter-item expanded "><a href="../data-structure/lab.html"><strong aria-hidden="true">7.11.</strong> 实验</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../database/index.html"><strong aria-hidden="true">8.</strong> 数据库</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../database/intro.html"><strong aria-hidden="true">8.1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="../database/relation-model.html"><strong aria-hidden="true">8.2.</strong> Relation Model</a></li><li class="chapter-item expanded "><a href="../database/relation-database-design.html"><strong aria-hidden="true">8.3.</strong> Relation Database Design</a></li><li class="chapter-item expanded "><a href="../database/sql.html"><strong aria-hidden="true">8.4.</strong> SQL</a></li><li class="chapter-item expanded "><a href="../database/intermediate-sql.html"><strong aria-hidden="true">8.5.</strong> Intermediate SQL</a></li><li class="chapter-item expanded "><a href="../database/entity-relation-model.html"><strong aria-hidden="true">8.6.</strong> Entity Relation Model</a></li><li class="chapter-item expanded "><a href="../database/data-storage-structure.html"><strong aria-hidden="true">8.7.</strong> Data Storage Structure</a></li><li class="chapter-item expanded "><a href="../database/database-index.html"><strong aria-hidden="true">8.8.</strong> Index</a></li><li class="chapter-item expanded "><a href="../database/query-processing.html"><strong aria-hidden="true">8.9.</strong> Query Processing</a></li><li class="chapter-item expanded "><a href="../database/query-optimization.html"><strong aria-hidden="true">8.10.</strong> Query Optimization</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../discrete-math/index.html"><strong aria-hidden="true">9.</strong> 离散数学</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../discrete-math/relation.html"><strong aria-hidden="true">9.1.</strong> Relation</a></li><li class="chapter-item expanded "><a href="../discrete-math/advanced-counting.html"><strong aria-hidden="true">9.2.</strong> Advanced Counting</a></li><li class="chapter-item expanded "><a href="../discrete-math/tree.html"><strong aria-hidden="true">9.3.</strong> Tree</a></li><li class="chapter-item expanded "><a href="../discrete-math/graph.html"><strong aria-hidden="true">9.4.</strong> Graph</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../formal-language/index.html"><strong aria-hidden="true">10.</strong> 形式语言和自动机</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../formal-language/fa.html"><strong aria-hidden="true">10.1.</strong> 有限状态自动机</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../missing-semester/index.html"><strong aria-hidden="true">11.</strong> 计算机教学中缺少的一课</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../missing-semester/missing-the-shell.html"><strong aria-hidden="true">11.1.</strong> Shell</a></li><li class="chapter-item expanded "><a href="../missing-semester/missing-shell-scripts.html"><strong aria-hidden="true">11.2.</strong> Shell Scripts</a></li><li class="chapter-item expanded "><a href="../missing-semester/missing-vim.html"><strong aria-hidden="true">11.3.</strong> Vim</a></li><li class="chapter-item expanded "><a href="../missing-semester/missing-data-wrangling.html"><strong aria-hidden="true">11.4.</strong> Data Wrangling</a></li><li class="chapter-item expanded "><a href="../missing-semester/missing-command-line.html"><strong aria-hidden="true">11.5.</strong> Command Line</a></li><li class="chapter-item expanded "><a href="../missing-semester/missing-potpourri.html"><strong aria-hidden="true">11.6.</strong> Potpourri</a></li><li class="chapter-item expanded "><a href="../missing-semester/missing-version-control.html"><strong aria-hidden="true">11.7.</strong> Version Control</a></li><li class="chapter-item expanded "><a href="../missing-semester/missing-debugging.html"><strong aria-hidden="true">11.8.</strong> Debug</a></li><li class="chapter-item expanded "><a href="../missing-semester/missing-metaprogramming.html"><strong aria-hidden="true">11.9.</strong> Metaprogram</a></li><li class="chapter-item expanded "><a href="../missing-semester/missing-security.html"><strong aria-hidden="true">11.10.</strong> Security</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../operating-system/index.html"><strong aria-hidden="true">12.</strong> 操作系统</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../operating-system/intro.html"><strong aria-hidden="true">12.1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="../operating-system/os-structures.html"><strong aria-hidden="true">12.2.</strong> OS Structure</a></li><li class="chapter-item expanded "><a href="../operating-system/processes.html"><strong aria-hidden="true">12.3.</strong> Process</a></li><li class="chapter-item expanded "><a href="../operating-system/process-synchronization.html"><strong aria-hidden="true">12.4.</strong> Process Synchronization</a></li><li class="chapter-item expanded "><a href="../operating-system/cpu-scheduling.html"><strong aria-hidden="true">12.5.</strong> CPU Scheduling</a></li><li class="chapter-item expanded "><a href="../operating-system/threads.html"><strong aria-hidden="true">12.6.</strong> Thread</a></li><li class="chapter-item expanded "><a href="../operating-system/memory-management.html"><strong aria-hidden="true">12.7.</strong> Memory Management</a></li><li class="chapter-item expanded "><a href="../operating-system/virtual-memory.html"><strong aria-hidden="true">12.8.</strong> Virtual Memory</a></li><li class="chapter-item expanded "><a href="../operating-system/fs-interface.html"><strong aria-hidden="true">12.9.</strong> Filesystem Interface</a></li><li class="chapter-item expanded "><a href="../operating-system/fs-implementation.html"><strong aria-hidden="true">12.10.</strong> Filesystem Implementation</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../socialist/index.html"><strong aria-hidden="true">13.</strong> 毛泽东思想和中国特色理论体系概论</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../socialist/maozedong.html"><strong aria-hidden="true">13.1.</strong> 毛概期末总结</a></li><li class="chapter-item expanded "><a href="../socialist/others.html"><strong aria-hidden="true">13.2.</strong> 课后大题</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Ricardo&#x27;s Wiki</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="引言"><a class="header" href="#引言">引言</a></h1>
+<h2 id="什么是计算机网络"><a class="header" href="#什么是计算机网络">什么是计算机网络</a></h2>
+<p>通过<strong>同一种技术</strong>​相互连接的计算机就构成一种计算机网络。</p>
+<blockquote>
+<p>容易被混淆的概念：</p>
+<ul>
+<li>
+<p>通信\计算机</p>
+<p>通信处理数据从一个实体到另外一个实体的传输</p>
+<p>计算机负责帮助人类处理信息</p>
+</li>
+<li>
+<p>通信网络\计算机网络</p>
+<p>通信网络就是一个负责传输信息的链接和节点</p>
+<p>计算机网络是一组相互链接的互联网</p>
+</li>
+<li>
+<p>分布式系统\计算机网络</p>
+<p>分布式系统：将一系列独立的计算机组成一个逻辑上的计算机</p>
+<p>系统内部是对用户<strong>透明的</strong>​</p>
+</li>
+</ul>
+</blockquote>
+<p>计算机网络<strong>不是：</strong></p>
+<ul>
+<li>Internet：全球唯一的巨大互联网</li>
+<li>internet：多个计算机网络链接构成的计算机网络</li>
+<li>www：一种基于计算机网络提供的服务\应用</li>
+</ul>
+<h3 id="计算机网络的硬件组成"><a class="header" href="#计算机网络的硬件组成">计算机网络的硬件组成</a></h3>
+<ul>
+<li>计算机\主机<code>host</code>​​\终端系统<code>End System</code>​​</li>
+<li>通信链接：有线\无线</li>
+<li>交换机<code>switch</code>​​\路由器<code>router</code>​​</li>
+</ul>
+<h3 id="拓扑结构"><a class="header" href="#拓扑结构">拓扑结构</a></h3>
+<p>通过图的形式表示网络中节点，包括交换机和路由器，之间的连接关系。</p>
+<h3 id="计算机网络的组成"><a class="header" href="#计算机网络的组成">计算机网络的组成</a></h3>
+<ul>
+<li>硬件</li>
+<li>软件：操作系统以及一些应用软件</li>
+<li>计算机的标识：IP地址、域名</li>
+<li>通信规则</li>
+</ul>
+<h2 id="计算机网络的应用"><a class="header" href="#计算机网络的应用">计算机网络的应用</a></h2>
+<h3 id="商业应用"><a class="header" href="#商业应用">商业应用</a></h3>
+<ul>
+<li>资源共享</li>
+<li>同用户的交流通信</li>
+</ul>
+<h3 id="移动网络用户"><a class="header" href="#移动网络用户">移动网络用户</a></h3>
+<h2 id="计算机网络的分类"><a class="header" href="#计算机网络的分类">计算机网络的分类</a></h2>
+<h3 id="按照使用的范围进行分类"><a class="header" href="#按照使用的范围进行分类">按照使用的范围进行分类</a></h3>
+<ul>
+<li>
+<p>个域网</p>
+<p>通常采用蓝牙等技术进行链接</p>
+</li>
+<li>
+<p>局域网<code>LAN</code>​</p>
+<p>将主机同边缘路由器连接起来</p>
+<p>共有一个链接链路，一般是星型组网</p>
+</li>
+<li>
+<p>城域网<code>MAN</code>​</p>
+<p>通常是广电网络</p>
+<p>通常是树形组网</p>
+</li>
+<li>
+<p>广域网<code>WAN</code>​</p>
+<p>存储转发、分组交换、通过路由算法决定路由路径</p>
+<p>为了保证可靠性通常采用网孔型组网</p>
+</li>
+</ul>
+<h3 id="按照传输技术分类"><a class="header" href="#按照传输技术分类">按照传输技术分类</a></h3>
+<ul>
+<li>
+<p>广播网络</p>
+<p>将数据包发送给所有的目标主机，每个主机再来检查数据包的目标地址，如果这个数据包就是发给这台主机的就接受这个数据包，反之忽略这个数据包</p>
+<p>在局域网中广泛应用</p>
+<p>同时发送数据包可能存在冲突</p>
+</li>
+<li>
+<p>点对点网络</p>
+<p>数据包直接从源地址发送到目的地址</p>
+<p>在广域网中应用广泛。</p>
+</li>
+</ul>
+<h3 id="按照在互联网络中的位置"><a class="header" href="#按照在互联网络中的位置">按照在互联网络中的位置</a></h3>
+<ul>
+<li>
+<p>接入网<code>Access Networks</code>​</p>
+<p>在网络的边缘，主要辅助用户来接入互联网</p>
+</li>
+<li>
+<p>核心网<code>Core Networks</code>​</p>
+<p>将接入网和其他核心网连接在一起</p>
+</li>
+</ul>
+<h2 id="网络架构和网络协议"><a class="header" href="#网络架构和网络协议">网络架构和网络协议</a></h2>
+<h3 id="分层的网络体系结构"><a class="header" href="#分层的网络体系结构">分层的网络体系结构</a></h3>
+<p>网络是按照一个层栈的方式组成起来的。这样做可以：</p>
+<ul>
+<li>
+<p>这样设计简化了设计的复杂性</p>
+</li>
+<li>
+<p>每一层向更高层提供来具体的服务，同时屏蔽了具体实现的细节</p>
+</li>
+<li>
+<p>每一层都会和相邻的层之间进行交互（不是通信），每一层都和对方的对等层<code>Peers</code>​之间有着通信，<strong>协议</strong>就规定来对等层之间通信的协议</p>
+</li>
+<li>
+<p>相邻的两层直接通过<strong>接口</strong>定义了允许的操作和服务</p>
+</li>
+<li>
+<p>数据的流向实际上是U型的，发送系统自顶向下，最底层实际传输数据，接受系统自底向上</p>
+</li>
+<li>
+<p>每层可能在上一层交付数据的基础上进行<strong>封装</strong>，加上本层的控制信息，构成本层的数据包，控制信息和添加的方式是由协议规定的。每次构成的数据包称作协议数据包<code>PDU</code>​</p>
+</li>
+</ul>
+<h4 id="层次设计过程中需要注意的问题"><a class="header" href="#层次设计过程中需要注意的问题">层次设计过程中需要注意的问题</a></h4>
+<ul>
+<li>
+<p>可靠性</p>
+<ul>
+<li>差错检测和回复</li>
+<li>路由选择</li>
+</ul>
+</li>
+<li>
+<p>网络演进</p>
+<ul>
+<li>协议的分层设计：将问题细分，隐藏每层实现的细节</li>
+<li>地址：标识不同的发送者和接受者</li>
+<li>网络的互通性</li>
+<li>协议的可扩展性</li>
+</ul>
+</li>
+<li>
+<p>资源定位</p>
+<ul>
+<li>统计复用<code>Statistical Multiplexing</code>​</li>
+<li>流量控制：防止过快的发送倒是数据在接受方丢失</li>
+</ul>
+</li>
+<li>
+<p>服务质量<code>QoS</code>​</p>
+</li>
+<li>
+<p>安全</p>
+</li>
+</ul>
+<h4 id="层需要指定的标准"><a class="header" href="#层需要指定的标准">层需要指定的标准</a></h4>
+<p>同层之间通信的协议：</p>
+<ul>
+<li>语法<code>Syntax</code>​：协议的消息格式</li>
+<li>语义<code>Semantics</code>​：消息的字段区某个值的含义</li>
+</ul>
+<p>向上一层提供的服务接口</p>
+<p>服务接口可以分成两种类型：</p>
+<ul>
+<li>
+<p>面向连接的<code>Connection-oriented</code>​</p>
+<p>在连接的过程中连接就被建立起来，需要的资源就已经被分配好了，后续的数据将按照这条已经建立的道路前进</p>
+<p>连接将会使可靠的</p>
+<p>在建立连接的时候需要完整的地址，在之后只需要指定连接的就可以完全发送</p>
+</li>
+<li>
+<p>无连接的<code>Connectionless</code>​</p>
+<p>资源将会是动态分配的</p>
+<p>但是连接是不可靠的，数据包可以会丢失、放弃和乱序</p>
+<p>每次连接都需要完整的地址来建立连接</p>
+</li>
+</ul>
+<div class="table-wrapper"><table><thead><tr><th>连接类型</th><th>服务</th><th>例子</th></tr></thead><tbody>
+<tr><td>面向连接的</td><td>可靠的消息流</td><td>页面序列</td></tr>
+<tr><td>面向连接的</td><td>可靠的字节流</td><td>远程登录</td></tr>
+<tr><td>面向连接的</td><td>不可靠的连接</td><td>数字通话</td></tr>
+<tr><td>无连接的</td><td>不可靠的数据报</td><td>电子垃圾邮件</td></tr>
+<tr><td>无连接的</td><td>订阅数据报</td><td>注册邮件</td></tr>
+<tr><td>无连接的</td><td>查询-回复</td><td>数据库查询</td></tr>
+</tbody></table>
+</div>
+<p><strong>服务原语</strong>​<code>Service Primitives</code>​：描述层与层之间提供服务的方法。一个服务就是有一组服务原语来定义的。</p>
+<p>在计算机中实现服务原语：</p>
+<p>如果协议栈是由操作系统实现的：服务原语通过是通过系统调用的方式提供的。</p>
+<p>如果需要定义一个简单的面向连接的服务，一般需要5个服务原语：</p>
+<ul>
+<li>监听：阻塞直到收到一个连接请求</li>
+<li>连接：同对应层建立一个连接</li>
+<li>接收：阻塞直到收到数据</li>
+<li>发送：发送数据</li>
+<li>断开连接：终止一个连接</li>
+</ul>
+<h4 id="服务和协议的关系"><a class="header" href="#服务和协议的关系">服务和协议的关系</a></h4>
+<p>服务定义了本层对外提供的操作，而协议定义了同层之间通信的方式。</p>
+<p>服务是通过协议实现的，在服务不变的情况下，层可以自由改变协议。</p>
+<h2 id="参考模型"><a class="header" href="#参考模型">参考模型</a></h2>
+<h3 id="osi参考模型"><a class="header" href="#osi参考模型">OSI参考模型</a></h3>
+<p>模型将设备分为两类：主机和节点。</p>
+<p>主机不负责数据的转发，但是需要负责数据的处理，主机具有完整的七层。</p>
+<p>节点负责数据的转发，不具有处理数据的能力，节点只具有三层。</p>
+<p>参看模型的七层具体为：</p>
+<ul>
+<li>
+<p>物理层<code>Physical</code>​​</p>
+<p>直接通过通信设备处理字节流。</p>
+<p>定义了<code>1</code>​位和<code>0</code>​位的电压范围和位的数据率，定义了传输是全双工还是半双工的，定义了初始连接如何建立和终止，定义了接口的物理规格。</p>
+</li>
+<li>
+<p>数据链路层<code>Data Link</code>​​</p>
+<p>通过逻辑通道进行原始数据的传输。</p>
+<p>发送者会将数据封装为<strong>帧</strong>发送，接受者会在收到数据之后发送确认帧给发送者以确保服务的可靠性。数据链路层还会提供流量控制的功能，避免过快的发送阻塞了接受者。广播网络和单点网络的区分也是在数据链路层产生的。</p>
+</li>
+<li>
+<p>网络层<code>Network</code>​​</p>
+<p>控制子网上的操作。</p>
+<p>网络层主要的功能就是转发数据，<strong>路由</strong>的功能就主要在网络层实现。除此之外，网络层还提供拥塞控制，服务质量的控制等功能。</p>
+</li>
+<li>
+<p>传输层<code>Transport</code>​​</p>
+<p><strong>端到端层</strong>。从上层接受数据，将数据分成较小的数据包并且通过网络层正确的传输到对方。</p>
+<p>同一计算机上不同进程的区分也是在传输层完成的。</p>
+</li>
+<li>
+<p>会话层<code>Session</code></p>
+<p>提供会话控制、令牌管理和同步的功能。</p>
+</li>
+<li>
+<p>表示层<code>Presentation</code>​</p>
+<p>获得传输信息的语法和语义。</p>
+<p>在这层可以提供数据加密和数据压缩等的功能。</p>
+</li>
+<li>
+<p>应用层<code>Application</code>​​</p>
+<p>直接被用户使用的各种应用协议。</p>
+</li>
+</ul>
+<h3 id="tcpip参考模型"><a class="header" href="#tcpip参考模型">TCP/IP参考模型</a></h3>
+<p>该模型一般只有四层：</p>
+<ul>
+<li>链路层<code>Link</code>​</li>
+<li>网络层/网际层<code>Internet</code>​</li>
+<li>传输层<code>Transport</code>​</li>
+<li>应用层<code>Application</code>​</li>
+</ul>
+<h4 id="链路层"><a class="header" href="#链路层">链路层</a></h4>
+<p>协议并未强制规定，具体的实现由其他的机构规定，比如<code>Ethernet</code>​，<code>WiFi</code>​和<code>SDH</code>​。</p>
+<p>只负责传输<code>IP</code>​数据包。</p>
+<h4 id="网络层"><a class="header" href="#网络层">网络层</a></h4>
+<p>主要协议是<code>IP</code>​协议，是一个不可靠的传输协议。</p>
+<h4 id="传输层"><a class="header" href="#传输层">传输层</a></h4>
+<p>​<code>TCP</code>​传输协议：面向连接的可靠传输协议，传输字节流。</p>
+<p>​<code>UDP</code>​传输协议：无连接的不可靠传输协议，传输字节流。</p>
+<h4 id="应用层"><a class="header" href="#应用层">应用层</a></h4>
+<p>由用户使用的各种应用协议。</p>
+<h3 id="osi和tcpip参考模型的对比"><a class="header" href="#osi和tcpip参考模型的对比">OSI和TCP/IP参考模型的对比</a></h3>
+<p>​<img src="./assets/image-20230303101525-fcvns6w.png" alt="image" /></p>
+<h4 id="osi模型的特点优缺点"><a class="header" href="#osi模型的特点优缺点">OSI模型的特点、优缺点</a></h4>
+<p>特点：</p>
+<ul>
+<li>服务：某层实体对于上一层实体的支持</li>
+<li>结构：定义某层实体对于上一层提供的原语操作</li>
+<li>协议：两个系统同层之间同喜需要遵守的规范</li>
+</ul>
+<p>OSI模型没有能够取得主导地位的问题：</p>
+<ul>
+<li>生不逢时</li>
+<li>技术设计上有缺陷，比如会话层和展示层比较简单而且和应用关系密切，不算是很合适的抽象</li>
+</ul>
+<h4 id="tcpip模型的特点优缺点"><a class="header" href="#tcpip模型的特点优缺点">TCP/IP模型的特点、优缺点</a></h4>
+<ul>
+<li>服务、接口和协议没有很清晰的划分</li>
+<li>不算是很通用的模型</li>
+<li>链路层实际上不算层，并没有严格的规定</li>
+<li>物理层和数据链路层上没有区分</li>
+<li>部分老旧协议</li>
+</ul>
+<h3 id="混合模型"><a class="header" href="#混合模型">混合模型</a></h3>
+<blockquote>
+<p>注意：这个模型并不是实际标准化的模型，只是学习的过程中便于学习而提出的。</p>
+</blockquote>
+<p>两个模型都存在缺陷，因此为了较好的描述整个体系，我们将两个模型混合在一起：</p>
+<ul>
+<li>应用层</li>
+<li>传输层</li>
+<li>网络层</li>
+<li>数据链路层</li>
+<li>物理层</li>
+</ul>
+<p>‍</p>
+<p>‍</p>
+<p>‍</p>
+<p>‍</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../computer-networks/index.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../computer-networks/physical-layer.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../computer-networks/index.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../computer-networks/physical-layer.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

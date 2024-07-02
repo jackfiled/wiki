@@ -1,0 +1,878 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>网络层 - Ricardo&#x27;s Wiki</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="我在北京邮电大学计算机科学与技术专业学习三年的部分笔记">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../katex.min.css">
+
+        <!-- MathJax -->
+        <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../index.html">主页</a></li><li class="chapter-item expanded affix "><li class="spacer"></li><li class="chapter-item expanded "><a href="../ai-principle/index.html"><strong aria-hidden="true">1.</strong> 人工智能原理</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../ai-principle/intro.html"><strong aria-hidden="true">1.1.</strong> 概述</a></li><li class="chapter-item expanded "><a href="../ai-principle/question-knowledge.html"><strong aria-hidden="true">1.2.</strong> 问题和知识表示</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../algorithm/index.html"><strong aria-hidden="true">2.</strong> 算法</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../algorithm/intro.html"><strong aria-hidden="true">2.1.</strong> 概述</a></li><li class="chapter-item expanded "><a href="../algorithm/recurse-divide.html"><strong aria-hidden="true">2.2.</strong> 分治算法</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../compiler/index.html"><strong aria-hidden="true">3.</strong> 编译原理</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../compiler/intro.html"><strong aria-hidden="true">3.1.</strong> 概述</a></li><li class="chapter-item expanded "><a href="../compiler/lexical-analyzer.html"><strong aria-hidden="true">3.2.</strong> 词法分析</a></li><li class="chapter-item expanded "><a href="../compiler/grammar-analyzer.html"><strong aria-hidden="true">3.3.</strong> 语法分析</a></li><li class="chapter-item expanded "><a href="../compiler/grammar-driven-translation.html"><strong aria-hidden="true">3.4.</strong> 语法制导翻译</a></li><li class="chapter-item expanded "><a href="../compiler/syntax-analyser.html"><strong aria-hidden="true">3.5.</strong> 语义分析</a></li><li class="chapter-item expanded "><a href="../compiler/runtime.html"><strong aria-hidden="true">3.6.</strong> 运行环境</a></li><li class="chapter-item expanded "><a href="../compiler/intermediate-code.html"><strong aria-hidden="true">3.7.</strong> 中间代码生成</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../computer-architecture/index.html"><strong aria-hidden="true">4.</strong> 计算机组成原理</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../computer-architecture/overview.html"><strong aria-hidden="true">4.1.</strong> 计算机系统概论</a></li><li class="chapter-item expanded "><a href="../computer-architecture/calculator.html"><strong aria-hidden="true">4.2.</strong> 运算方法和运算器</a></li><li class="chapter-item expanded "><a href="../computer-architecture/instruction.html"><strong aria-hidden="true">4.3.</strong> 指令系统</a></li><li class="chapter-item expanded "><a href="../computer-architecture/cpu.html"><strong aria-hidden="true">4.4.</strong> 中央处理器</a></li><li class="chapter-item expanded "><a href="../computer-architecture/memory.html"><strong aria-hidden="true">4.5.</strong> 存储系统</a></li><li class="chapter-item expanded "><a href="../computer-architecture/io.html"><strong aria-hidden="true">4.6.</strong> 输入输出设备</a></li><li class="chapter-item expanded "><a href="../computer-architecture/external.html"><strong aria-hidden="true">4.7.</strong> 外部设备</a></li><li class="chapter-item expanded "><a href="../computer-architecture/bus.html"><strong aria-hidden="true">4.8.</strong> 总线</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../computer-networks/index.html"><strong aria-hidden="true">5.</strong> 计算机网络</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../computer-networks/overview.html"><strong aria-hidden="true">5.1.</strong> 引言</a></li><li class="chapter-item expanded "><a href="../computer-networks/physical-layer.html"><strong aria-hidden="true">5.2.</strong> 物理层</a></li><li class="chapter-item expanded "><a href="../computer-networks/data-link-layer.html"><strong aria-hidden="true">5.3.</strong> 数据链路层</a></li><li class="chapter-item expanded "><a href="../computer-networks/mac.html"><strong aria-hidden="true">5.4.</strong> 介质访问控制层</a></li><li class="chapter-item expanded "><a href="../computer-networks/network-layer.html" class="active"><strong aria-hidden="true">5.5.</strong> 网络层</a></li><li class="chapter-item expanded "><a href="../computer-networks/transport-layer.html"><strong aria-hidden="true">5.6.</strong> 传输层</a></li><li class="chapter-item expanded "><a href="../computer-networks/mid-term.html"><strong aria-hidden="true">5.7.</strong> 期中复习</a></li><li class="chapter-item expanded "><a href="../computer-networks/final-term.html"><strong aria-hidden="true">5.8.</strong> 期末复习</a></li><li class="chapter-item expanded "><a href="../computer-networks/lab2.html"><strong aria-hidden="true">5.9.</strong> 实验二</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../csapp/index.html"><strong aria-hidden="true">6.</strong> 计算机系统基础</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../csapp/bits.html"><strong aria-hidden="true">6.1.</strong> 数据的位级表示</a></li><li class="chapter-item expanded "><a href="../csapp/machine.html"><strong aria-hidden="true">6.2.</strong> 程序的机器级表示</a></li><li class="chapter-item expanded "><a href="../csapp/assembly-data.html"><strong aria-hidden="true">6.3.</strong> 程序的机器级表示——数据</a></li><li class="chapter-item expanded "><a href="../csapp/assembly-control.html"><strong aria-hidden="true">6.4.</strong> 程序的机器级表示——控制</a></li><li class="chapter-item expanded "><a href="../csapp/assembly-procedure.html"><strong aria-hidden="true">6.5.</strong> 程序的机器级表示——过程</a></li><li class="chapter-item expanded "><a href="../csapp/assembly-advanced.html"><strong aria-hidden="true">6.6.</strong> 程序的机器级表示——高级话题</a></li><li class="chapter-item expanded "><a href="../csapp/exception-control-flow.html"><strong aria-hidden="true">6.7.</strong> 异常控制流</a></li><li class="chapter-item expanded "><a href="../csapp/linking.html"><strong aria-hidden="true">6.8.</strong> 链接</a></li><li class="chapter-item expanded "><a href="../csapp/io.html"><strong aria-hidden="true">6.9.</strong> 输入输出系统</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../data-structure/index.html"><strong aria-hidden="true">7.</strong> 数据结构</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../data-structure/foundation.html"><strong aria-hidden="true">7.1.</strong> 算法基础</a></li><li class="chapter-item expanded "><a href="../data-structure/inner-sort.html"><strong aria-hidden="true">7.2.</strong> 内部排序</a></li><li class="chapter-item expanded "><a href="../data-structure/outer-sort.html"><strong aria-hidden="true">7.3.</strong> 外部排序</a></li><li class="chapter-item expanded "><a href="../data-structure/array-and-list.html"><strong aria-hidden="true">7.4.</strong> 数组和广义表</a></li><li class="chapter-item expanded "><a href="../data-structure/list.html"><strong aria-hidden="true">7.5.</strong> 线性表</a></li><li class="chapter-item expanded "><a href="../data-structure/stack-and-dequeue.html"><strong aria-hidden="true">7.6.</strong> 栈和队列</a></li><li class="chapter-item expanded "><a href="../data-structure/tree.html"><strong aria-hidden="true">7.7.</strong> 树</a></li><li class="chapter-item expanded "><a href="../data-structure/graph.html"><strong aria-hidden="true">7.8.</strong> 图</a></li><li class="chapter-item expanded "><a href="../data-structure/string.html"><strong aria-hidden="true">7.9.</strong> 字符串</a></li><li class="chapter-item expanded "><a href="../data-structure/find.html"><strong aria-hidden="true">7.10.</strong> 查找表</a></li><li class="chapter-item expanded "><a href="../data-structure/lab.html"><strong aria-hidden="true">7.11.</strong> 实验</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../database/index.html"><strong aria-hidden="true">8.</strong> 数据库</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../database/intro.html"><strong aria-hidden="true">8.1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="../database/relation-model.html"><strong aria-hidden="true">8.2.</strong> Relation Model</a></li><li class="chapter-item expanded "><a href="../database/relation-database-design.html"><strong aria-hidden="true">8.3.</strong> Relation Database Design</a></li><li class="chapter-item expanded "><a href="../database/sql.html"><strong aria-hidden="true">8.4.</strong> SQL</a></li><li class="chapter-item expanded "><a href="../database/intermediate-sql.html"><strong aria-hidden="true">8.5.</strong> Intermediate SQL</a></li><li class="chapter-item expanded "><a href="../database/entity-relation-model.html"><strong aria-hidden="true">8.6.</strong> Entity Relation Model</a></li><li class="chapter-item expanded "><a href="../database/data-storage-structure.html"><strong aria-hidden="true">8.7.</strong> Data Storage Structure</a></li><li class="chapter-item expanded "><a href="../database/database-index.html"><strong aria-hidden="true">8.8.</strong> Index</a></li><li class="chapter-item expanded "><a href="../database/query-processing.html"><strong aria-hidden="true">8.9.</strong> Query Processing</a></li><li class="chapter-item expanded "><a href="../database/query-optimization.html"><strong aria-hidden="true">8.10.</strong> Query Optimization</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../discrete-math/index.html"><strong aria-hidden="true">9.</strong> 离散数学</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../discrete-math/relation.html"><strong aria-hidden="true">9.1.</strong> Relation</a></li><li class="chapter-item expanded "><a href="../discrete-math/advanced-counting.html"><strong aria-hidden="true">9.2.</strong> Advanced Counting</a></li><li class="chapter-item expanded "><a href="../discrete-math/tree.html"><strong aria-hidden="true">9.3.</strong> Tree</a></li><li class="chapter-item expanded "><a href="../discrete-math/graph.html"><strong aria-hidden="true">9.4.</strong> Graph</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../formal-language/index.html"><strong aria-hidden="true">10.</strong> 形式语言和自动机</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../formal-language/fa.html"><strong aria-hidden="true">10.1.</strong> 有限状态自动机</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../missing-semester/index.html"><strong aria-hidden="true">11.</strong> 计算机教学中缺少的一课</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../missing-semester/missing-the-shell.html"><strong aria-hidden="true">11.1.</strong> Shell</a></li><li class="chapter-item expanded "><a href="../missing-semester/missing-shell-scripts.html"><strong aria-hidden="true">11.2.</strong> Shell Scripts</a></li><li class="chapter-item expanded "><a href="../missing-semester/missing-vim.html"><strong aria-hidden="true">11.3.</strong> Vim</a></li><li class="chapter-item expanded "><a href="../missing-semester/missing-data-wrangling.html"><strong aria-hidden="true">11.4.</strong> Data Wrangling</a></li><li class="chapter-item expanded "><a href="../missing-semester/missing-command-line.html"><strong aria-hidden="true">11.5.</strong> Command Line</a></li><li class="chapter-item expanded "><a href="../missing-semester/missing-potpourri.html"><strong aria-hidden="true">11.6.</strong> Potpourri</a></li><li class="chapter-item expanded "><a href="../missing-semester/missing-version-control.html"><strong aria-hidden="true">11.7.</strong> Version Control</a></li><li class="chapter-item expanded "><a href="../missing-semester/missing-debugging.html"><strong aria-hidden="true">11.8.</strong> Debug</a></li><li class="chapter-item expanded "><a href="../missing-semester/missing-metaprogramming.html"><strong aria-hidden="true">11.9.</strong> Metaprogram</a></li><li class="chapter-item expanded "><a href="../missing-semester/missing-security.html"><strong aria-hidden="true">11.10.</strong> Security</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../operating-system/index.html"><strong aria-hidden="true">12.</strong> 操作系统</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../operating-system/intro.html"><strong aria-hidden="true">12.1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="../operating-system/os-structures.html"><strong aria-hidden="true">12.2.</strong> OS Structure</a></li><li class="chapter-item expanded "><a href="../operating-system/processes.html"><strong aria-hidden="true">12.3.</strong> Process</a></li><li class="chapter-item expanded "><a href="../operating-system/process-synchronization.html"><strong aria-hidden="true">12.4.</strong> Process Synchronization</a></li><li class="chapter-item expanded "><a href="../operating-system/cpu-scheduling.html"><strong aria-hidden="true">12.5.</strong> CPU Scheduling</a></li><li class="chapter-item expanded "><a href="../operating-system/threads.html"><strong aria-hidden="true">12.6.</strong> Thread</a></li><li class="chapter-item expanded "><a href="../operating-system/memory-management.html"><strong aria-hidden="true">12.7.</strong> Memory Management</a></li><li class="chapter-item expanded "><a href="../operating-system/virtual-memory.html"><strong aria-hidden="true">12.8.</strong> Virtual Memory</a></li><li class="chapter-item expanded "><a href="../operating-system/fs-interface.html"><strong aria-hidden="true">12.9.</strong> Filesystem Interface</a></li><li class="chapter-item expanded "><a href="../operating-system/fs-implementation.html"><strong aria-hidden="true">12.10.</strong> Filesystem Implementation</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../socialist/index.html"><strong aria-hidden="true">13.</strong> 毛泽东思想和中国特色理论体系概论</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../socialist/maozedong.html"><strong aria-hidden="true">13.1.</strong> 毛概期末总结</a></li><li class="chapter-item expanded "><a href="../socialist/others.html"><strong aria-hidden="true">13.2.</strong> 课后大题</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Ricardo&#x27;s Wiki</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="网络层"><a class="header" href="#网络层">网络层</a></h1>
+<h2 id="网络层的位置和功能"><a class="header" href="#网络层的位置和功能">网络层的位置和功能</a></h2>
+<p><img src="./network-layer/image-20230418155555180.png" alt="image-20230418155555180" /></p>
+<p>网络层是处理端到端传输的最底层。</p>
+<blockquote>
+<p>"跳"的概念：</p>
+<p>相邻的主机和路由器之间，相邻的路由器之间的一次传输就是一跳。</p>
+<p>在一跳内的传输石油数据链路层来实现的。</p>
+</blockquote>
+<p>一般来说，网络层具有以下这些功能：</p>
+<ol>
+<li>
+<p>网络互联<code>Internetworking</code>。</p>
+<p>不同的网络可能具有不同的网络地址、实现技术，包格式。网络层需要处理这个不同并向上提供统一的接口。</p>
+</li>
+<li>
+<p>编址<code>Addressing</code></p>
+<p>不同的网络主机之间需要统一的地址进行通信。</p>
+</li>
+<li>
+<p>路由<code>Routing</code></p>
+<p>为了将包发送到目的的，需要决定这个数据包的下一跳，工作在第三层的路由器实现了这个功能。</p>
+</li>
+<li>
+<p>封包<code>Packetizing</code></p>
+<p>将上一层需要传输的数据封装成统一的包。</p>
+</li>
+<li>
+<p>分片/分段<code>Fragmenting</code></p>
+<p>不同的数据链路层网络支持的最大数据长度不同。</p>
+<p>网络层需要将上层传输过长的包切分成合乎长度的分片，并在传输结束之后再次拼接起来。</p>
+</li>
+</ol>
+<h3 id="在不同位置的网络层功能"><a class="header" href="#在不同位置的网络层功能">在不同位置的网络层功能</a></h3>
+<ol>
+<li>
+<p>发送方：</p>
+<p>在发送者处，网络层创建一个包含发送地址，目的地址，数据的包。</p>
+<p>网络层还会检查路由表确定这个网络包下一跳需要前往的地址。</p>
+</li>
+<li>
+<p>路由：</p>
+<p>在路由处的网络层负责决定数据包下一跳前往的位置：</p>
+<p>当一个数据包到达时，网络层会检查路由表确定这个数据包会前往哪个网络接口。</p>
+</li>
+<li>
+<p>这里的网络层负责检查数据包的目的地址和当前主机的地址一致。</p>
+</li>
+</ol>
+<p>网络层向上层提供的服务：</p>
+<ul>
+<li>同路由技术独立</li>
+<li>传输层将对路由完全透明</li>
+<li>传输层获得的地址是统一的，甚至是在局域网和广域网中</li>
+</ul>
+<h3 id="网络层提供的服务"><a class="header" href="#网络层提供的服务">网络层提供的服务</a></h3>
+<p>网络层提供了面向连接和无连接两种服务。</p>
+<p>网络层使用分组交换提供了：</p>
+<ul>
+<li>面向连接的网络：虚电路</li>
+<li>无连接的网络：数据报</li>
+</ul>
+<h4 id="数据报网络"><a class="header" href="#数据报网络">数据报网络</a></h4>
+<p><img src="./network-layer/image-20230421100815673.png" alt="image-20230421100815673" /></p>
+<p>在数据包中需要携带目的地的完整地址，在到达每个路由时，路由通过路由表决定下一跳的位置。</p>
+<p>每个包经过的路径可能是不一致的，因此包的到达可能是乱序的。</p>
+<h4 id="虚电路网络"><a class="header" href="#虚电路网络">虚电路网络</a></h4>
+<p><img src="./network-layer/image-20230421101209514.png" alt="image-20230421101209514" /></p>
+<p>是链路交换网络和数据报网络之间的一种网络，提供了面向连接的服务。</p>
+<p>在数据开始传输的时候，网络会建立一条端到端的虚拟电路。</p>
+<p>在传输的过程中，网络使用虚拟电路地址<code>Virtual Circuit Identifier</code>用作地址的标示，但是比标准的地址短得多。</p>
+<p>在传输的过程中，数据包将按顺序到达。</p>
+<h2 id="路由算法"><a class="header" href="#路由算法">路由算法</a></h2>
+<h3 id="路由的概念和路由表"><a class="header" href="#路由的概念和路由表">路由的概念和路由表</a></h3>
+<p>互联网就是通过路由将数量庞大的局域网连接起来的网络，因此当互联网上一个包从发送方传输到接收方时，可能会经过相当数量的路由。</p>
+<p>在数据包经过路由器时，路由器会通过<strong>路由表</strong>决定包应该被转发到哪个接口，因此路由表最好能够决定包转发的最佳路径。</p>
+<p>在查询路由表时，我们还希望路由表的大小时可以控制的，否则难以管理。</p>
+<p>路由表一般情况下可以分成两种：</p>
+<ol>
+<li>
+<p>静态路由：不会经常改变的路由。</p>
+<p>静态路由常常是手动管理的，往往保持不变。</p>
+</li>
+<li>
+<p>动态路由：在网络中发生变化时会自动发生变化的路由表。</p>
+<p>动态路由将通过动态路由协议<code>RIP</code>，<code>OSPF</code>，<code>BGP</code>定时或者在必要时自动更改。</p>
+</li>
+</ol>
+<p>在路由表中有两个重要的概念：</p>
+<ul>
+<li>
+<p>路由算法：用来构建和更新路由表的算法</p>
+<p>常见的路由算法有：<code>DVR</code>，<code>LSR</code>，<code>PVR</code></p>
+</li>
+<li>
+<p>路由协议：用于往路由之间相互通知的一组规则和流程。</p>
+<p>常见的路由协议有：<code>RIP</code>，<code>OSPF</code>，<code>BGP</code></p>
+</li>
+</ul>
+<h3 id="设计路由算法的原则"><a class="header" href="#设计路由算法的原则">设计路由算法的原则</a></h3>
+<ul>
+<li>
+<p>正确性</p>
+</li>
+<li>
+<p>简单型</p>
+</li>
+<li>
+<p>鲁棒性</p>
+</li>
+<li>
+<p>健壮性</p>
+</li>
+<li>
+<p>公平性</p>
+</li>
+<li>
+<p>高效性</p>
+<p>转发延迟最小，网络吞吐量最大</p>
+</li>
+</ul>
+<p>主要的路由策略有下面这几种：</p>
+<ul>
+<li>
+<p>固定查表路由<code>Fixed Routing</code></p>
+<p>从源到目的的简单固定映射</p>
+</li>
+<li>
+<p>洪泛<code>Flooding</code></p>
+<p>将包发送给所有邻近的设备</p>
+</li>
+<li>
+<p>随机选路<code>Random Routing</code></p>
+<p>随机选择一条发送的线路</p>
+</li>
+<li>
+<p>自适应线路</p>
+<p>当网络变化时自动改变路由表，但是需要网络的信息</p>
+</li>
+</ul>
+<h3 id="洪泛"><a class="header" href="#洪泛">洪泛</a></h3>
+<p>洪泛的设计思想：</p>
+<ul>
+<li>不需要路由表</li>
+<li>不需要网络中的信息</li>
+<li>收到的包将被发送到处理接受端口之外的所有端口</li>
+<li>最终可能会一个包多个相同副本到达目的地</li>
+</ul>
+<p>但是，洪泛存在一种严重的问题：会产生巨大数量的重复数据包。</p>
+<p>为了解决这个问题，人们提出了两种解决方案：</p>
+<ol>
+<li>
+<p>每个数据包的包头中包括一个<strong>跳计数器</strong></p>
+<p>每一跳，这个跳计数器都会被减一。</p>
+<p>当这个跳计数器到达0时，这个包就会被丢弃。</p>
+<p>发送方会利用从源地址到目的地址的长度或者子网的网络半径<code>subnet diameter</code>来初始化跳计数器。</p>
+</li>
+<li>
+<p>发送方在数据包的包头中设置<strong>序列号</strong></p>
+<p>每个路由都会记录每个发送方目前最大的序列表，表示这个序列号都已经通过该路由。</p>
+</li>
+</ol>
+<p>洪泛具有以下这些特点：</p>
+<ul>
+<li>
+<p>非常的可靠</p>
+</li>
+<li>
+<p>至少有一个数据包会按照最短的路由达到目的地</p>
+</li>
+<li>
+<p>网络中所有的节点都会被到达</p>
+<p>这就表明洪泛虽然在实际中可能不使用，但是在建立路由表的过程中可能会非常有用。</p>
+</li>
+</ul>
+<h3 id="最短路径选路"><a class="header" href="#最短路径选路">最短路径选路</a></h3>
+<p>首先利用<strong>有向有权图</strong>来表示网络的结构。</p>
+<p>其中网络拓扑图中的权可以具有多种含义：</p>
+<ul>
+<li>跳数</li>
+<li>路由器之间的物理距离</li>
+<li>平均传输时延</li>
+<li>，，，，</li>
+</ul>
+<p>然后利用<code>Dijkstra</code>算法在这个有向有权图中构建两个路由之间的最短路径。</p>
+<blockquote>
+<p>上面介绍的两种路由算法，在严格意义上都属于路由思想，在实际中并不能工作。</p>
+</blockquote>
+<h3 id="距离矢量选路distance-vector-routing"><a class="header" href="#距离矢量选路distance-vector-routing">距离矢量选路<code>Distance Vector Routing</code></a></h3>
+<p>每个路由都会维持一个路由表：</p>
+<ul>
+<li>到其他路由的最短距离</li>
+<li>下一跳使用的接口</li>
+</ul>
+<p>这个路由表将会通过和响铃的路由器交换信号来更新数据。</p>
+<ul>
+<li>
+<p>路由会按照<code>Destination, Distance</code>的格式周期性的发送自己的路由信息</p>
+</li>
+<li>
+<p>当其他的路由器收到这一信息：</p>
+<p>如果发现了更好的路由路径，路由器会更新自己的路由表</p>
+<p>刷新已经存在的路由表</p>
+</li>
+<li>
+<p>如果在一段时间之后都没有收到某一个路由器发送的信息，就把这个路由从路由表中删除</p>
+</li>
+</ul>
+<p>下面是一个网络中路由表建立的过程：</p>
+<p>首先是各个路由中路由表的初始状态：只有相邻路由的信息：</p>
+<p><img src="./network-layer/image-20230421110829015.png" alt="image-20230421110829015" /></p>
+<p>然后路由表进行第一次迭代：节点A收到了节点C发送的信息：</p>
+<p><img src="./network-layer/image-20230421110917961.png" alt="image-20230421110917961" /></p>
+<p>节点A收到了节点B发送的信息：</p>
+<p><img src="./network-layer/image-20230421111028776.png" alt="image-20230421111028776" /></p>
+<p>由此在第一次迭代结束之后，各个节点的路由表已经变成了这个样子：</p>
+<p><img src="./network-layer/image-20230421111149359.png" alt="image-20230421111149359" /></p>
+<p>然后路由表之间进行第二次迭代：</p>
+<p><img src="./network-layer/image-20230421111439317.png" alt="image-20230421111439317" /></p>
+<p>然后路由表之间进行第三次迭代：</p>
+<p><img src="./network-layer/image-20230421111547025.png" alt="image-20230421111547025" /></p>
+<p>当迭代之后，路由表不发生变化之后，算法就认为构建结束，算法退出。</p>
+<p><code>DVR</code>算法有着这些特点和问题：</p>
+<ul>
+<li>基于邻近节点共享的信号构建/更新路由表</li>
+<li>特点：
+<ul>
+<li>同邻近节点分享整个网络的信息（到所有节点的最短距离）</li>
+<li>只同初始的邻近节点共享信息</li>
+<li>在固定的间隔共享信息</li>
+</ul>
+</li>
+<li>缺点：
+<ul>
+<li>构建路由表需要的迭代次数多</li>
+<li>”好消息“迅速传遍整个网络，”坏消息“传得慢</li>
+</ul>
+</li>
+</ul>
+<p>在<code>DVR</code>算法中存在一个严重的问题——无穷计数问题。</p>
+<blockquote>
+<p>也被称为”无穷循环</p>
+</blockquote>
+<p><img src="./network-layer/image-20230421162218139.png" alt="image-20230421162218139" /></p>
+<p>大致意思就是在节点A下线之后，但是链路上节点不能正确的获得这条消息。这是因为在路由之间相互传递消息的过程中，只传递了距离信息没有传递路径信息，就会在传递的过程中发生循环。在这里，第一次节点B认为通过节点C可以到达节点C，第二次节点C又认为通过节点B可以到达节点A，，，，如此循环下去，算法不会停止。</p>
+<h3 id="链路状态选路link-state-routing"><a class="header" href="#链路状态选路link-state-routing">链路状态选路<code>Link State Routing</code></a></h3>
+<p>路由器将同网络中的所有其他路由器分享自己得到的信息；在路由本地构建好已知的最好路由拓扑图之后，路由会发送一个链路状态包<code>Link State Packet</code>来通知网络中的所有路由。这种分享主要有三个重点：</p>
+<ul>
+<li>会分享整个网络的拓扑结果</li>
+<li>会向网络中的所有路由分享</li>
+<li>在发生改变的时候也进行分享</li>
+</ul>
+<h4 id="lsr操作"><a class="header" href="#lsr操作">LSR操作</a></h4>
+<p>为了让每个节点建立起路由表，使用<code>LSR</code>协议的路由都需要执行这一系列的操作。</p>
+<ol>
+<li>
+<p>从邻近的节点学习。</p>
+<p>对于广播网络，广播一个特殊的<code>Hello</code>包，对于点对点的网络，多播这个<code>Hello</code>包。</p>
+<p>邻近的节点在收到这个包之后需要发送一个包含自己的名称的回复包，其中名称（路由ID）应该是全局唯一的。</p>
+<p>通过这种方式简化了网络的拓扑结构。</p>
+</li>
+<li>
+<p>测量线路参数。</p>
+<p>利用发送<code>echo</code>包得到线路的延迟，测量线路的带宽。</p>
+</li>
+<li>
+<p>构建链路状态包。</p>
+<p><img src="./network-layer/image-20230425150718105.png" alt="image-20230425150718105" /></p>
+<p>可以定时重新构建链路状态包，也可以在监听在某些特定事件发生的时候重建。</p>
+<p>包中的序列栈<code>Seq</code>是用来检验收到的链路状态包是否是最新的：</p>
+<ul>
+<li>收到一个新的<code>LSP</code>，洪泛这个包</li>
+<li>收到一个重复的<code>LSP</code>，丢弃这个包</li>
+<li>如果收到的<code>LSP</code>序列编号比已经收到的最大编号小，也丢弃这个包</li>
+</ul>
+<p>包中的年龄字段<code>Age</code>是用来删除循环的路由：</p>
+<ul>
+<li>当一个路由下线</li>
+<li>当一个路由的名称（路由ID）改变</li>
+<li>当一个路由需要删除一个<code>LSP</code></li>
+</ul>
+</li>
+<li>
+<p>发送<code>LSP</code></p>
+<p>显而易见，我们需要可靠的方式将<code>LSP</code>包发送出去。因此利用洪泛的方式发送<code>LSP</code>包，并且在两端都设置了错误侦测，收到<code>LSP</code>包之后都要求发送确认包。</p>
+<p><img src="./network-layer/image-20230425152051118.png" alt="image-20230425152051118" /></p>
+</li>
+<li>
+<p>计算新的路由</p>
+<p>当一个路由收到足够数量的<code>LSP</code>包之后，这个路由就可以将整个网络构建出来。</p>
+<p>在本地运行<code>Dijkstra</code>算法，构建到每个目的地的最短路径，并且把最短的结果写在路由表中。</p>
+</li>
+</ol>
+<p>在实际中，有<code>IS-IS</code>，Intermediate System-Intermediate System协议和<code>OSPF</code>，Open Shortest Path First协议使用这个算法。</p>
+<h3 id="分级路由"><a class="header" href="#分级路由">分级路由</a></h3>
+<p>首先出于效率原因，如果全球网络中所有的路由都需要建立一张共同的路由网络，那么这张网络中的路由数量将会非常庞大，导致整个网络的延迟很大。而且出于安全原因，单位内部的路由没有必要都暴露给互联网上的所有设备。基于这两个原因，分级路由出现了。</p>
+<p>分级路由将网络按照<strong>域</strong>进行路由，在域间只选路到域，在进入单个域内之后，才选路到路由器。</p>
+<h2 id="拥塞控制和互联"><a class="header" href="#拥塞控制和互联">拥塞控制和互联</a></h2>
+<p>不严谨的说，拥塞就是网络不足以处理大量发送到网络中的数据包。</p>
+<p><img src="./network-layer/image-20230425154409341.png" alt="image-20230425154409341" /></p>
+<blockquote>
+<p>拥塞会在任何含有等待/队列的系统当中。</p>
+<p>如果数据包到达的数据大于数据包处理的速度，那么输入队列就会越来越长，直到队列溢出。</p>
+<p>发送队列也是如此。</p>
+<p>在发生拥塞的时候，会出现很长的延迟和较高的丢包率。</p>
+</blockquote>
+<h3 id="拥塞控制的方法"><a class="header" href="#拥塞控制的方法">拥塞控制的方法</a></h3>
+<p>一般冲提升资源总量和降低负载两个角度上来考虑。</p>
+<ul>
+<li>提供资源总量：
+<ul>
+<li>规划调整网络</li>
+<li>选路时考虑负载的影响</li>
+</ul>
+</li>
+<li>降低负载：
+<ul>
+<li>接纳控制<code>Admission Control</code></li>
+<li>业务量减速<code>Traffic Throttling</code></li>
+<li>负载掉落<code>Load Shedding</code></li>
+</ul>
+</li>
+</ul>
+<h4 id="业务量减速"><a class="header" href="#业务量减速">业务量减速</a></h4>
+<ol>
+<li>
+<p>路由检测是否发送拥塞</p>
+<p>通过计算链路利用率，在路由内缓存的包数量，因为缓存不足而丢弃的包数量来检测。</p>
+<blockquote>
+<p>为了估计队列延迟，引入<code>EWMA</code> Exponentially Weighted Moving Average，指数甲醛移动均值算法。因为瞬时队列延迟是一个变化很大的值，利用这种算法得到一个较为合理的值。
+<span class="katex-display"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.5782em;vertical-align:-0.0391em;"></span><span class="mrel">&gt;</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8444em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">d</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">n</span><span class="mord mathnormal mtight">e</span><span class="mord mathnormal mtight" style="margin-right:0.02691em;">w</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8444em;vertical-align:-0.15em;"></span><span class="mord mathnormal" style="margin-right:0.0037em;">α</span><span class="mord"><span class="mord mathnormal">d</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">o</span><span class="mord mathnormal mtight" style="margin-right:0.01968em;">l</span><span class="mord mathnormal mtight">d</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.0037em;">α</span><span class="mclose">))</span><span class="mord mathnormal">s</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">&gt;</span></span></span></span></span>
+在公式中：</p>
+<ul>
+<li><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8444em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">d</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">n</span><span class="mord mathnormal mtight">e</span><span class="mord mathnormal mtight" style="margin-right:0.02691em;">w</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>表示最近队列的长度</li>
+<li><code>s</code>表示立即的队列长度</li>
+<li><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal" style="margin-right:0.0037em;">α</span></span></span></span>是一个平衡因子</li>
+</ul>
+</blockquote>
+</li>
+<li>
+<p>传递发送拥塞的信息</p>
+<p>发送一个<strong>抑制分组</strong>（Choke Packet）给源地址主机，告知源主机发送拥塞。</p>
+<p>为了避免再次提高网络的负载，路由会以一个非常低的速率发送抑制分组。</p>
+</li>
+<li>
+<p>调整系统</p>
+<p>在源地址主机收到抑制分组之后，源地址主机降低发送的速度。</p>
+</li>
+</ol>
+<p>除了这种方式，还有一个称作<code>ECN</code>的通知方式，<code>Explicit Congestion Notification</code>显式拥塞控制。</p>
+<p>这种方式被TCP协议和IP协议使用。在IP包的字段中，设置了两个比特位来表示这个包在转发的过程中是否发送了拥塞。当路由发现拥塞的时候，就修改这个字段。当接受方接收到标识了经历丢包的数据包时，会在下一次发送包给发送方时标记上发生拥塞。</p>
+<h4 id="负载掉落"><a class="header" href="#负载掉落">负载掉落</a></h4>
+<blockquote>
+<p>通俗的说，就是丢包。</p>
+</blockquote>
+<p>主要的问题就是，丢掉哪些包？</p>
+<p>不同的应用可能可以接受丢失掉不同的包，还可以通过事先指定的优先级来丢包。</p>
+<h4 id="随机早期检测"><a class="header" href="#随机早期检测">随机早期检测</a></h4>
+<blockquote>
+<p>在拥塞控制时，可以利用形如<code>CSMA/CA</code>的机制，提前侦测是否会发生拥塞。</p>
+</blockquote>
+<p>在路由完全失效之前就随机的丢弃掉一部分的包。</p>
+<p>当发送方侦测到部分发送的包不能收到确认包时，就认为发送了拥塞并降速了。这种“通知”被称为<strong>隐式通知</strong>。</p>
+<h3 id="服务质量"><a class="header" href="#服务质量">服务质量</a></h3>
+<p>一般来说，在网络层有这些衡量服务质量的参数：</p>
+<ol>
+<li>
+<p>可靠性：</p>
+<p>错误率和丢包率</p>
+</li>
+<li>
+<p>延迟：</p>
+<p>第一个字节发送知道最后一个字节被接受的时间</p>
+</li>
+<li>
+<p>抖动<code>Jitter</code>：</p>
+<p>传输过程中延迟的变化量</p>
+</li>
+<li>
+<p>带宽：</p>
+<p>最大数据率</p>
+</li>
+</ol>
+<p>不同的应用有着不同的服务质量要求特点：</p>
+<p><img src="./network-layer/image-20230425161842307.png" alt="image-20230425161842307" /></p>
+<p>下面是一些提高服务质量的方法。</p>
+<h4 id="流量整形traffic-shaping"><a class="header" href="#流量整形traffic-shaping">流量整形<code>Traffic Shaping</code></a></h4>
+<p>在实际的互联网上往往存在着很多的突发流量，虽然平均的流量不大，但是瞬时的流量可能很大。</p>
+<p><img src="./network-layer/image-20230425162213476.png" alt="image-20230425162213476" /></p>
+<p>流量整形就是一种去突发的技术，使得传输的速率接近平均速率。流量整形技术有着两个“桶”：漏桶和令牌桶。</p>
+<p>首先介绍“漏桶”算法，这种算法可以将一个数据包的不平稳流变成一个稳定的流。使用这种算法有着两个作用：第一可以缓解流量突发情况，第二可以减少拥塞出现的可能性，同时可能出现桶满了数据丢失的可能。</p>
+<p><img src="./network-layer/image-20230509145449418.png" alt="image-20230509145449418" /></p>
+<p>其次再来介绍“令牌桶”算法。在主机空闲的时候，在令牌桶中会开始积累令牌，当需要发送数据时，就需要从令牌桶中取出令牌。在这种情况下，当出现突发数据时，可以允许部分的数据突发，但是当令牌桶中的令牌耗尽之后，令牌桶会限制发送数据的速率，这样就限制了突发。同时，如果令牌桶满了，不会像漏桶一样出现数据丢失的现象。</p>
+<p><img src="./network-layer/image-20230509145825678.png" alt="image-20230509145825678" /></p>
+<p>我们还可以计算在经过令牌桶之后突发持续的最大时间：首先假设突发时间为<code>s</code>秒，令牌桶的容积为<code>B</code>字节，令牌产生的速率为<code>R</code>字节每秒，最大的输出速率为<code>M</code>字节每秒。因此，经过令牌桶最大突发的数据量为<code>B+RS</code>字节，而通过数据的速率我们还可以计算出突发所传输的数据量为<code>MS</code>，利用等式<code>B+RS=MS</code>可以计算出突发可以持续的时间为：
+<span class="katex-display"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">S</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.1297em;vertical-align:-0.7693em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3603em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.10903em;">M</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord mathnormal" style="margin-right:0.00773em;">R</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.05017em;">B</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.7693em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span></p>
+<h4 id="包调度packet-scheduling"><a class="header" href="#包调度packet-scheduling">包调度<code>Packet Scheduling</code></a></h4>
+<p>当一系列包从一个特定的源发送到目标是，如果假设这一系列包都经过相同的路由，我们就称这一系列包为<strong>流</strong><code>Flow</code>。如何调度路由器资源来处理流就成为一个问题。</p>
+<p>针对这个问题我们一般有四种算法：</p>
+<ol>
+<li>
+<p>先进先出队列。</p>
+<p>先到达的包就会优先被发送出去，但是这样后到达的包就可能因为资源不够而被丢弃掉。</p>
+</li>
+<li>
+<p>优先级队列。</p>
+<p>每个包都分配了一个优先级字段，每个优先级都有自己的队列，高优先级队列中的数据会先发送。但是这样可以会出现低优先级的队列始终是满的，难以发送的问题。</p>
+</li>
+<li>
+<p>公平队列</p>
+<p>设计多个队列，循环处理每个队列。</p>
+</li>
+<li>
+<p>公平加权队列</p>
+<p>仍然按照权值分成不同的队列，但是按照权值的不同分配不同队列发送的时间。</p>
+</li>
+</ol>
+<h4 id="资源预留resource-reservation和接纳控制admission-control"><a class="header" href="#资源预留resource-reservation和接纳控制admission-control">资源预留<code>Resource Reservation</code>和接纳控制<code>Admission Control</code></a></h4>
+<p>一般资源预留中的资源指：</p>
+<ul>
+<li>带宽</li>
+<li>缓冲空间</li>
+<li>CPU时间</li>
+</ul>
+<p>一般资源预留是按照<strong>流</strong>为单元进行的。</p>
+<h3 id="网络互联"><a class="header" href="#网络互联">网络互联</a></h3>
+<p>不同的网络有着不同的协议，为了能够在不同的网络之间传输信息，我们需要完成网络互联的功能。</p>
+<p>在不同的层次上有着不同的互联方式：</p>
+<ul>
+<li>物理层：放大器，集线器（尽管他们几乎没有互联的功能）</li>
+<li>数据链路层：网桥和交换机</li>
+<li>网络层：路由器</li>
+<li>传输层：传输网关</li>
+<li>应用层：应用网关</li>
+</ul>
+<h2 id="internet中的网络层"><a class="header" href="#internet中的网络层">Internet中的网络层</a></h2>
+<p>在设计Internet网络层的原则：</p>
+<ul>
+<li>确保可以工作</li>
+<li>保持实现简单</li>
+</ul>
+<p>Internet网络层的核心协议就是<code>IP</code>协议，<code>Internet Protocol</code>。</p>
+<ul>
+<li>这是使用最广泛的互联协议</li>
+<li>无连接的网络层协议</li>
+<li>基于用户报路由</li>
+<li>提供<strong>尽力</strong>服务，但是不保证可靠性</li>
+<li>使用分级路由，距离矢量，链路状态的混合选路算法</li>
+</ul>
+<p><img src="./network-layer/image-20230509161238553.png" alt="image-20230509161238553" /></p>
+<h3 id="ipv4-地址"><a class="header" href="#ipv4-地址"><code>IPv4</code> 地址</a></h3>
+<p>为了在网络中区分不同的网络设备而设计的网络标识符就是<strong>IP地址</strong>。<code>IPv4</code>地址长度32位，一般使用点分十进制来表示。每一个网络接口都有一个<code>IPv4</code>地址。</p>
+<h4 id="分类网络地址"><a class="header" href="#分类网络地址">分类网络地址</a></h4>
+<p>在A，B，C类地址中，传统的<code>IPv4</code>地址有着一个两层的分级地址机制：网络ID加上主机ID</p>
+<p><img src="./network-layer/image-20230509162138630.png" alt="image-20230509162138630" /></p>
+<p>其中网络号部分保留，主机号部分为0的地址不能分配给计算机，被称为<strong>网络地址</strong>，用作路由。可以通过该网段中默认的<strong>网络掩码</strong>和网络中的IP地址计算得到网络地址。</p>
+<p>在一个网络中有一些特殊的地址不能分配给计算机：</p>
+<ul>
+<li>网络地址：网络号部分保留，主机号留空的地址</li>
+<li>广播地址：网络号部分保留，主机号为全1的地址</li>
+</ul>
+<p>因此，对于一个网络来说，实际上可以分配的地址需要在理论数量上减2。</p>
+<p>除了上面两个特殊地址，还有几个其他的特殊地址：</p>
+<ul>
+<li><code>0.0.0.0</code>表示当前主机</li>
+<li>网络号部分为0，主机号地址留空的地址，表示当前网络上的主机</li>
+<li><code>255.255.255.255</code>表示当前网络的广播地址</li>
+<li>网络号部分保留，主机号为全1的地址，表示指定网络的广播地址</li>
+<li><code>127.x.y.z</code>本地环回地址</li>
+</ul>
+<h4 id="子网划分"><a class="header" href="#子网划分">子网划分</a></h4>
+<p>为了更加方便的管理和路由，子网划分被发明。</p>
+<p>一个网络可以被划分为数个不同的子网，但是对外就是一个网络，也就是说子网划分对于外部是不可见的。</p>
+<p>使用<strong>子网掩码</strong>可以方便的得到一个子网的网络地址，将子网掩码和主机地址进行按位与操作即可得到网络地址。</p>
+<h4 id="超网划分"><a class="header" href="#超网划分">超网划分</a></h4>
+<p>由于C类地址的网络可以提供的地址数量较少，因此实际上一个组织需要分配多个C类地址才够用，为了用一个地址简单的表示这个组织，我们可以使用超网技术将几个C类地址合成一个更大的网络。</p>
+<p>使用<strong>超网掩码</strong>，可以得到一个组织的网络地址。</p>
+<h4 id="无类别地址"><a class="header" href="#无类别地址">无类别地址</a></h4>
+<p>分类地址他妈的纯傻逼，屁用没有。</p>
+<p>无类别地址都是用多少个主机就分配多长。可以使用无类别域间选路<code>CIDR</code>来表示一个子网，<code>a.b.c.d/x</code>，其中<code>x</code>表示地址中网络部分的长度。</p>
+<p>使用<code>CIDR</code>既可以表示一个子网，也可以将多个子网聚合成一个超网。</p>
+<h4 id="nat"><a class="header" href="#nat">NAT</a></h4>
+<p>然而使用无类别地址还是不够用，于是网络地址翻译<code>NAT</code>技术被提出来。</p>
+<p>首先<code>NAT</code>使用了私有网络地址：</p>
+<ul>
+<li><code>10.0.0.0/8</code></li>
+<li><code>127.16.0.0/12</code></li>
+<li><code>192.168.0.0/16</code></li>
+</ul>
+<p>负责<code>NAT</code>的路由器将把内部地址转换为公共的地址，为了保持私有主机和外部的网络联通，路由器还会维持一个私有地址和外部地址的转换表。同时，如果内网内部有多个主机访问同一个外部主机，为了识别不同的主机，在转换表表中还需要记录端口号。</p>
+<p>所以，<code>NAT</code>路由器会进行如下操作：</p>
+<ul>
+<li>
+<p>对于发送的包，将内部的源地址替换为共同地址。</p>
+<p>同时将源地址，源端口号，目的地址，目的端口号记录在转发表中</p>
+</li>
+<li>
+<p>对于接受到的包，从转发表中查找源地址</p>
+<p>将目的地址替换为内部地址，发送给内部网络。</p>
+</li>
+</ul>
+<h3 id="ip包格式"><a class="header" href="#ip包格式">IP包格式</a></h3>
+<p><img src="./network-layer/20230516_14h57m00s_grim.png" alt="" /></p>
+<h4 id="ip包包头"><a class="header" href="#ip包包头">IP包包头</a></h4>
+<p><img src="./network-layer/20230516_15h01m32s_grim.png" alt="" /></p>
+<ul>
+<li>
+<p><code>Version</code>：前四个字节<code>0~3</code>，表示IP协议的版本。</p>
+</li>
+<li>
+<p><code>IHL</code>：表示IP包包头的长度，使用32位表示，实际上的取值范围为<code>5~15</code></p>
+</li>
+<li>
+<p><code>Type of Service</code>：表示服务质量的目的</p>
+</li>
+<li>
+<p><code>Total Length</code>：表示IP包的长度</p>
+</li>
+<li>
+<p><code>Time to live</code>：包的生存时间，虽然是使用秒定义的，但是实际上都是按照跳来计数</p>
+</li>
+<li>
+<p><code>Protocol</code>表示应该由何种协议来处理收到的数据，例如<code>tcp</code>、<code>udp</code>、<code>icmp</code></p>
+</li>
+<li>
+<p><code>Header Chechsum</code>：校验和，只对包头进行校验，不对数据进行校验</p>
+</li>
+<li>
+<p><code>Source IP Address</code>：发送IP包的主机地址</p>
+</li>
+<li>
+<p><code>Destination IP address</code>： 接受该IP包的主机地址</p>
+</li>
+<li>
+<p><code>Options</code>：选项部分</p>
+<ul>
+<li>安全选项</li>
+<li>严格源选路：通过指定一系列的IP地址来指定发送过程中的路由过程</li>
+<li>宽松源选路：只指定需要经过路径上的一系列IP地址</li>
+<li>记录路由：记录下经过的路由地址</li>
+<li>时间戳：除了记录一系列的路由地址，还加上经过这个路由的时间戳</li>
+</ul>
+</li>
+</ul>
+<p>分段和重装：也就是包头中的第二行。</p>
+<p>由于不同的网络有着不同的最大允许传输大小，一个IP包在传输的过程中可能分成多个包来传输，在到达源主机之后再拼装在一起。这个最大传输的长度称为<code>MTU</code>，<code>maximum transmission unit</code>，最大传输单元。</p>
+<p>几种典型的<code>MTU</code>大小如下：</p>
+<ul>
+<li>以太网中1500 字节</li>
+<li>Wi-Fi中2312字节</li>
+</ul>
+<p>其中，分段操作在源主机和路径中的任何路由上都有可能发生，但是拼装操作只在目的主机进行。</p>
+<p>下面介绍IP包中支持分段和拼装操作的字段。</p>
+<ul>
+<li>
+<p><code>Identification</code>：源主机在发送IP包时为每一个包指定的唯一地址，在进行分段操作时复制到每个包头中。</p>
+</li>
+<li>
+<p><code>DF</code>：将这个位设为1表示这个包不能进行分段操作了</p>
+</li>
+<li>
+<p><code>MF</code>：将这个位设为1表示这是最后一个分段了</p>
+</li>
+<li>
+<p><code>Offset</code>：为了表示不同分段的次序关系，使用该分段相对于原始数据包的偏移量来表示。同时因为这个字段的位数较少，这个偏移量的单位是8字节，在字面值的基础上乘上8字节才是郑珍的偏移量。</p>
+</li>
+<li>
+<p><code>NU</code>：没有被使用的位，值为0</p>
+</li>
+</ul>
+<p>当<code>MF</code>字段为0且<code>Offset</code>也为0 时，就表示这个IP包还没有被分段。</p>
+<h3 id="ipv6"><a class="header" href="#ipv6">IPv6</a></h3>
+<p>为了解决<code>IPv4</code>地址不够用的问题，人们提出了<code>IPv6</code>地址协议。</p>
+<ul>
+<li>为了提供更多的地址，<code>IPv6</code>地址使用128位长度的地址。</li>
+<li>简化了包头的结构</li>
+<li>提供了更好的路由选项</li>
+<li>提供了更好的安全</li>
+<li>提高的服务质量</li>
+</ul>
+<p><img src="./network-layer/20230516_15h49m45s_grim.png" alt="" /></p>
+<h4 id="ipv6包结构"><a class="header" href="#ipv6包结构">IPv6包结构</a></h4>
+<p><img src="./network-layer/20230516_15h52m45s_grim.png" alt="" /></p>
+<ul>
+<li><code>VER</code>：IP协议版本</li>
+<li><code>PRI</code>：包的优先级</li>
+<li><code>Flow label</code>：控制传输中占用的带宽和延迟，仍在试验中的属性</li>
+<li><code>Payload length</code>：传输数据的长度</li>
+<li><code>Next header</code>：在基础包头之后的子包头，一般就是指网络层协议的包头或者IP一些中其他控制协议</li>
+<li><code>hop limit</code>：跳限制，同<code>ttl</code>一个用途</li>
+<li><code>Extension Headers</code>：IPv4协议中可选的选项</li>
+</ul>
+<p>IPv6地址使用冒分十六进制来表示地址。如果在地址中连续的多个0，那么可以省略不写，但是需要注意的是在同一个地址中只能省略一次。</p>
+<h3 id="icmparpdhcp"><a class="header" href="#icmparpdhcp">ICMP、ARP、DHCP</a></h3>
+<h4 id="icmp"><a class="header" href="#icmp">ICMP</a></h4>
+<p>Internet控制报文协议。</p>
+<p>扩展了<code>IP</code>协议没有提供的功能。</p>
+<ol>
+<li>
+<p>向源主机报告错误</p>
+<p>例如路由无法确定前往目的地的路由，一个带有<code>DF=1</code>标志的包因此遇到了一个MTU较小的网络而被丢弃。这两种情况都是返回<code>Destination Unreachable</code>。</p>
+<p>如果一个包因为<code>ttl</code>到达0被丢弃就返回<code>Time Exceed</code>。</p>
+<p>因为流量控制或者阻塞的问题，需要源主机降速，返回<code>Source Quench</code>。</p>
+<p>如果一个路由注意到一个包可能被错误的路由了，就返回<code>Redirect</code>。</p>
+</li>
+<li>
+<p>测试网络是否联通</p>
+<p><code>ping</code>实用程序。</p>
+</li>
+</ol>
+<h4 id="arp"><a class="header" href="#arp">ARP</a></h4>
+<p>地址解析协议。</p>
+<p>解决如何从IP地址对应到数据链路层的<code>mac</code>地址的问题。</p>
+<p>ARP协议为维持一个IP地址到<code>mac</code>地址的对应表，在发送数据时，如果在表中没有查到对于的mac地址，那么就广播一个<code>arp</code>包向网络中的主机询问。</p>
+<p>除了ARP协议，还有<code>RARP</code>协议，逆向ARP协议，使用以太网地址获得对应的网络地址。</p>
+<h4 id="dhcp"><a class="header" href="#dhcp">DHCP</a></h4>
+<p>动态主机配置协议<code>Dynamic Host Configuration Protocol</code>。提供对于远程主机的自动配置，包括IP地址，路由器的地址，子网掩码，DNS服务器的地址，DHCP提供的信息都是有时间限制的，再到期之后会自动申请刷新。这是一个应用层的协议，使用客户端-服务器模式工作。</p>
+<h3 id="路由协议"><a class="header" href="#路由协议">路由协议</a></h3>
+<p>发送主机和路由器都需要考虑路由的问题。</p>
+<p>发送主机首先使用子网掩码和目的地址计算出目的的网络地址，如果目的网络地址就是本地网络，直接发送到目的地，如果不是，就发送到本地网络的路由。</p>
+<p>一般来说，路由表中至少需要以下四列：子网掩码，目的网络地址，下一跳地址，转发接口。到路由器收到一个包时，路由器首先使用子网掩码和包中的目标地址计算包发送目的地的网络地址，如果在路由表中发现了对应的记录，就通过指定的接口将包发送出去。也就是说，如果在路由表中存在多个匹配的网络地址，使用路由表中最上方的地址。</p>
+<p>在路由表中，也可以使用<code>CIDR</code>格式代替子网掩码和目的网络地址来表示目的网络地址。如果在路由表中发现了多个匹配的目的网络地址，那么使用掩码最长的那项作为目的路由。</p>
+<p>Internet的路由结构：Internet首先被分成多个有不同的组织自行管理的自治系统。每个组织在自治系统使用自己的路由选路协议<code>Interior Routing Protocol</code>，但是在不同的自治系统中交换信息使用一种特定的路由协议<code>Exterior Routing Protocol</code>。</p>
+<p>现在的Internet上流行的三种路由协议为</p>
+<ul>
+<li><code>RIP</code>：基于距离向量路由</li>
+<li><code>OSPF</code>：基于链路状态路由</li>
+<li><code>BGP</code>：使用距离向量路由的升级版——路径向量路由</li>
+</ul>
+<p>其中前两种协议用于自治系统中，是<code>Interior</code>，后面一种用于自治系统之间，是<code>Exterior</code>。</p>
+<h4 id="rip"><a class="header" href="#rip">RIP</a></h4>
+<p>路由信息协议<code>Routing Information Protocol</code>，是距离向量路由算法的直接实现，使用网络的跳数来表示不同路径长度的不同，但是该协议限制最大的跳数为16，这就限制了协议的规模。该协议使用<code>UDP</code>作为通信协议。</p>
+<h4 id="ospf"><a class="header" href="#ospf">OSPF</a></h4>
+<p>开放的最短路径有限<code>Open Shortest Path First</code>，基于链路状态路由算法。该协议使得每个路由都知道整个网络的完整拓扑结构，每个路由都需要通知其的邻近路由在网络中所有路由的信息。</p>
+<p>这个协议支持网络管理员手动指定一个网络的开销，还支持基于服务类型的路由、负载均衡和身份认证等功能。该协议直接使用<code>IP</code>进行通信。</p>
+<h4 id="bgp"><a class="header" href="#bgp">BGP</a></h4>
+<p>边界网关协议<code>Border Gateway Protocol</code>，在自治系统之间使用，基于距离矢量选路的升级版路径矢量选路算法。边界网关协议支持很多的路由策略。该协议使用<code>TCP</code>作为通信协议以提高可靠性。</p>
+<h3 id="ip-组播"><a class="header" href="#ip-组播">IP 组播</a></h3>
+<p>为了高效的将IP包发送给一系列地址的主机，IP组播使用<strong>组生成树</strong><code>Group Spanning Tree</code>，只发送组播信息一次，只在连接到多个网络之后才复制信息形成一个新的包。</p>
+<p>使用Internet组管理协议<code>Internet Group Management Protocol</code>协议来支持组播/多播，可以在单个网络中建立不同的主机分组。</p>
+<p>建立分组的过程大致如下：</p>
+<ul>
+<li>主机发送一个<code>IGMP</code>包给路由器声明其加入了一个组播组</li>
+<li>本地路由定时广播<code>IGMP</code>查询包，询问本地主机那些加入了组播组，加入了的主机回复<code>IGMP</code>包</li>
+</ul>
+<p><code>IGMP</code>协议使用<code>IP</code>发送信息。</p>
+<h3 id="移动ip"><a class="header" href="#移动ip">移动IP</a></h3>
+<p>在主机移动到另外一个网络中时，仍然能够接受发给原来归属地IP地址的数据包。这是通过一个被称为<strong>隧道</strong>的技术来实现的。</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../computer-networks/mac.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../computer-networks/transport-layer.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../computer-networks/mac.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../computer-networks/transport-layer.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

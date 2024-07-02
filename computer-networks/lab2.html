@@ -1,0 +1,628 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>实验二 - Ricardo&#x27;s Wiki</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="我在北京邮电大学计算机科学与技术专业学习三年的部分笔记">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../katex.min.css">
+
+        <!-- MathJax -->
+        <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../index.html">主页</a></li><li class="chapter-item expanded affix "><li class="spacer"></li><li class="chapter-item expanded "><a href="../ai-principle/index.html"><strong aria-hidden="true">1.</strong> 人工智能原理</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../ai-principle/intro.html"><strong aria-hidden="true">1.1.</strong> 概述</a></li><li class="chapter-item expanded "><a href="../ai-principle/question-knowledge.html"><strong aria-hidden="true">1.2.</strong> 问题和知识表示</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../algorithm/index.html"><strong aria-hidden="true">2.</strong> 算法</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../algorithm/intro.html"><strong aria-hidden="true">2.1.</strong> 概述</a></li><li class="chapter-item expanded "><a href="../algorithm/recurse-divide.html"><strong aria-hidden="true">2.2.</strong> 分治算法</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../compiler/index.html"><strong aria-hidden="true">3.</strong> 编译原理</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../compiler/intro.html"><strong aria-hidden="true">3.1.</strong> 概述</a></li><li class="chapter-item expanded "><a href="../compiler/lexical-analyzer.html"><strong aria-hidden="true">3.2.</strong> 词法分析</a></li><li class="chapter-item expanded "><a href="../compiler/grammar-analyzer.html"><strong aria-hidden="true">3.3.</strong> 语法分析</a></li><li class="chapter-item expanded "><a href="../compiler/grammar-driven-translation.html"><strong aria-hidden="true">3.4.</strong> 语法制导翻译</a></li><li class="chapter-item expanded "><a href="../compiler/syntax-analyser.html"><strong aria-hidden="true">3.5.</strong> 语义分析</a></li><li class="chapter-item expanded "><a href="../compiler/runtime.html"><strong aria-hidden="true">3.6.</strong> 运行环境</a></li><li class="chapter-item expanded "><a href="../compiler/intermediate-code.html"><strong aria-hidden="true">3.7.</strong> 中间代码生成</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../computer-architecture/index.html"><strong aria-hidden="true">4.</strong> 计算机组成原理</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../computer-architecture/overview.html"><strong aria-hidden="true">4.1.</strong> 计算机系统概论</a></li><li class="chapter-item expanded "><a href="../computer-architecture/calculator.html"><strong aria-hidden="true">4.2.</strong> 运算方法和运算器</a></li><li class="chapter-item expanded "><a href="../computer-architecture/instruction.html"><strong aria-hidden="true">4.3.</strong> 指令系统</a></li><li class="chapter-item expanded "><a href="../computer-architecture/cpu.html"><strong aria-hidden="true">4.4.</strong> 中央处理器</a></li><li class="chapter-item expanded "><a href="../computer-architecture/memory.html"><strong aria-hidden="true">4.5.</strong> 存储系统</a></li><li class="chapter-item expanded "><a href="../computer-architecture/io.html"><strong aria-hidden="true">4.6.</strong> 输入输出设备</a></li><li class="chapter-item expanded "><a href="../computer-architecture/external.html"><strong aria-hidden="true">4.7.</strong> 外部设备</a></li><li class="chapter-item expanded "><a href="../computer-architecture/bus.html"><strong aria-hidden="true">4.8.</strong> 总线</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../computer-networks/index.html"><strong aria-hidden="true">5.</strong> 计算机网络</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../computer-networks/overview.html"><strong aria-hidden="true">5.1.</strong> 引言</a></li><li class="chapter-item expanded "><a href="../computer-networks/physical-layer.html"><strong aria-hidden="true">5.2.</strong> 物理层</a></li><li class="chapter-item expanded "><a href="../computer-networks/data-link-layer.html"><strong aria-hidden="true">5.3.</strong> 数据链路层</a></li><li class="chapter-item expanded "><a href="../computer-networks/mac.html"><strong aria-hidden="true">5.4.</strong> 介质访问控制层</a></li><li class="chapter-item expanded "><a href="../computer-networks/network-layer.html"><strong aria-hidden="true">5.5.</strong> 网络层</a></li><li class="chapter-item expanded "><a href="../computer-networks/transport-layer.html"><strong aria-hidden="true">5.6.</strong> 传输层</a></li><li class="chapter-item expanded "><a href="../computer-networks/mid-term.html"><strong aria-hidden="true">5.7.</strong> 期中复习</a></li><li class="chapter-item expanded "><a href="../computer-networks/final-term.html"><strong aria-hidden="true">5.8.</strong> 期末复习</a></li><li class="chapter-item expanded "><a href="../computer-networks/lab2.html" class="active"><strong aria-hidden="true">5.9.</strong> 实验二</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../csapp/index.html"><strong aria-hidden="true">6.</strong> 计算机系统基础</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../csapp/bits.html"><strong aria-hidden="true">6.1.</strong> 数据的位级表示</a></li><li class="chapter-item expanded "><a href="../csapp/machine.html"><strong aria-hidden="true">6.2.</strong> 程序的机器级表示</a></li><li class="chapter-item expanded "><a href="../csapp/assembly-data.html"><strong aria-hidden="true">6.3.</strong> 程序的机器级表示——数据</a></li><li class="chapter-item expanded "><a href="../csapp/assembly-control.html"><strong aria-hidden="true">6.4.</strong> 程序的机器级表示——控制</a></li><li class="chapter-item expanded "><a href="../csapp/assembly-procedure.html"><strong aria-hidden="true">6.5.</strong> 程序的机器级表示——过程</a></li><li class="chapter-item expanded "><a href="../csapp/assembly-advanced.html"><strong aria-hidden="true">6.6.</strong> 程序的机器级表示——高级话题</a></li><li class="chapter-item expanded "><a href="../csapp/exception-control-flow.html"><strong aria-hidden="true">6.7.</strong> 异常控制流</a></li><li class="chapter-item expanded "><a href="../csapp/linking.html"><strong aria-hidden="true">6.8.</strong> 链接</a></li><li class="chapter-item expanded "><a href="../csapp/io.html"><strong aria-hidden="true">6.9.</strong> 输入输出系统</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../data-structure/index.html"><strong aria-hidden="true">7.</strong> 数据结构</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../data-structure/foundation.html"><strong aria-hidden="true">7.1.</strong> 算法基础</a></li><li class="chapter-item expanded "><a href="../data-structure/inner-sort.html"><strong aria-hidden="true">7.2.</strong> 内部排序</a></li><li class="chapter-item expanded "><a href="../data-structure/outer-sort.html"><strong aria-hidden="true">7.3.</strong> 外部排序</a></li><li class="chapter-item expanded "><a href="../data-structure/array-and-list.html"><strong aria-hidden="true">7.4.</strong> 数组和广义表</a></li><li class="chapter-item expanded "><a href="../data-structure/list.html"><strong aria-hidden="true">7.5.</strong> 线性表</a></li><li class="chapter-item expanded "><a href="../data-structure/stack-and-dequeue.html"><strong aria-hidden="true">7.6.</strong> 栈和队列</a></li><li class="chapter-item expanded "><a href="../data-structure/tree.html"><strong aria-hidden="true">7.7.</strong> 树</a></li><li class="chapter-item expanded "><a href="../data-structure/graph.html"><strong aria-hidden="true">7.8.</strong> 图</a></li><li class="chapter-item expanded "><a href="../data-structure/string.html"><strong aria-hidden="true">7.9.</strong> 字符串</a></li><li class="chapter-item expanded "><a href="../data-structure/find.html"><strong aria-hidden="true">7.10.</strong> 查找表</a></li><li class="chapter-item expanded "><a href="../data-structure/lab.html"><strong aria-hidden="true">7.11.</strong> 实验</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../database/index.html"><strong aria-hidden="true">8.</strong> 数据库</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../database/intro.html"><strong aria-hidden="true">8.1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="../database/relation-model.html"><strong aria-hidden="true">8.2.</strong> Relation Model</a></li><li class="chapter-item expanded "><a href="../database/relation-database-design.html"><strong aria-hidden="true">8.3.</strong> Relation Database Design</a></li><li class="chapter-item expanded "><a href="../database/sql.html"><strong aria-hidden="true">8.4.</strong> SQL</a></li><li class="chapter-item expanded "><a href="../database/intermediate-sql.html"><strong aria-hidden="true">8.5.</strong> Intermediate SQL</a></li><li class="chapter-item expanded "><a href="../database/entity-relation-model.html"><strong aria-hidden="true">8.6.</strong> Entity Relation Model</a></li><li class="chapter-item expanded "><a href="../database/data-storage-structure.html"><strong aria-hidden="true">8.7.</strong> Data Storage Structure</a></li><li class="chapter-item expanded "><a href="../database/database-index.html"><strong aria-hidden="true">8.8.</strong> Index</a></li><li class="chapter-item expanded "><a href="../database/query-processing.html"><strong aria-hidden="true">8.9.</strong> Query Processing</a></li><li class="chapter-item expanded "><a href="../database/query-optimization.html"><strong aria-hidden="true">8.10.</strong> Query Optimization</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../discrete-math/index.html"><strong aria-hidden="true">9.</strong> 离散数学</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../discrete-math/relation.html"><strong aria-hidden="true">9.1.</strong> Relation</a></li><li class="chapter-item expanded "><a href="../discrete-math/advanced-counting.html"><strong aria-hidden="true">9.2.</strong> Advanced Counting</a></li><li class="chapter-item expanded "><a href="../discrete-math/tree.html"><strong aria-hidden="true">9.3.</strong> Tree</a></li><li class="chapter-item expanded "><a href="../discrete-math/graph.html"><strong aria-hidden="true">9.4.</strong> Graph</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../formal-language/index.html"><strong aria-hidden="true">10.</strong> 形式语言和自动机</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../formal-language/fa.html"><strong aria-hidden="true">10.1.</strong> 有限状态自动机</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../missing-semester/index.html"><strong aria-hidden="true">11.</strong> 计算机教学中缺少的一课</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../missing-semester/missing-the-shell.html"><strong aria-hidden="true">11.1.</strong> Shell</a></li><li class="chapter-item expanded "><a href="../missing-semester/missing-shell-scripts.html"><strong aria-hidden="true">11.2.</strong> Shell Scripts</a></li><li class="chapter-item expanded "><a href="../missing-semester/missing-vim.html"><strong aria-hidden="true">11.3.</strong> Vim</a></li><li class="chapter-item expanded "><a href="../missing-semester/missing-data-wrangling.html"><strong aria-hidden="true">11.4.</strong> Data Wrangling</a></li><li class="chapter-item expanded "><a href="../missing-semester/missing-command-line.html"><strong aria-hidden="true">11.5.</strong> Command Line</a></li><li class="chapter-item expanded "><a href="../missing-semester/missing-potpourri.html"><strong aria-hidden="true">11.6.</strong> Potpourri</a></li><li class="chapter-item expanded "><a href="../missing-semester/missing-version-control.html"><strong aria-hidden="true">11.7.</strong> Version Control</a></li><li class="chapter-item expanded "><a href="../missing-semester/missing-debugging.html"><strong aria-hidden="true">11.8.</strong> Debug</a></li><li class="chapter-item expanded "><a href="../missing-semester/missing-metaprogramming.html"><strong aria-hidden="true">11.9.</strong> Metaprogram</a></li><li class="chapter-item expanded "><a href="../missing-semester/missing-security.html"><strong aria-hidden="true">11.10.</strong> Security</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../operating-system/index.html"><strong aria-hidden="true">12.</strong> 操作系统</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../operating-system/intro.html"><strong aria-hidden="true">12.1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="../operating-system/os-structures.html"><strong aria-hidden="true">12.2.</strong> OS Structure</a></li><li class="chapter-item expanded "><a href="../operating-system/processes.html"><strong aria-hidden="true">12.3.</strong> Process</a></li><li class="chapter-item expanded "><a href="../operating-system/process-synchronization.html"><strong aria-hidden="true">12.4.</strong> Process Synchronization</a></li><li class="chapter-item expanded "><a href="../operating-system/cpu-scheduling.html"><strong aria-hidden="true">12.5.</strong> CPU Scheduling</a></li><li class="chapter-item expanded "><a href="../operating-system/threads.html"><strong aria-hidden="true">12.6.</strong> Thread</a></li><li class="chapter-item expanded "><a href="../operating-system/memory-management.html"><strong aria-hidden="true">12.7.</strong> Memory Management</a></li><li class="chapter-item expanded "><a href="../operating-system/virtual-memory.html"><strong aria-hidden="true">12.8.</strong> Virtual Memory</a></li><li class="chapter-item expanded "><a href="../operating-system/fs-interface.html"><strong aria-hidden="true">12.9.</strong> Filesystem Interface</a></li><li class="chapter-item expanded "><a href="../operating-system/fs-implementation.html"><strong aria-hidden="true">12.10.</strong> Filesystem Implementation</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../socialist/index.html"><strong aria-hidden="true">13.</strong> 毛泽东思想和中国特色理论体系概论</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../socialist/maozedong.html"><strong aria-hidden="true">13.1.</strong> 毛概期末总结</a></li><li class="chapter-item expanded "><a href="../socialist/others.html"><strong aria-hidden="true">13.2.</strong> 课后大题</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Ricardo&#x27;s Wiki</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="实验二-抓包"><a class="header" href="#实验二-抓包">实验二-抓包</a></h1>
+<h2 id="实验内容和实验环境描述"><a class="header" href="#实验内容和实验环境描述">实验内容和实验环境描述</a></h2>
+<h3 id="实验环境"><a class="header" href="#实验环境">实验环境</a></h3>
+<p>系统环境：Windows 10、 Ubuntu 23.04（几个指令所访问的，自己的服务器）</p>
+<p>所用软件：wireshark 4.0.3、浏览器、cmd</p>
+<p>报告撰写：typora</p>
+<h3 id="实验任务"><a class="header" href="#实验任务">实验任务</a></h3>
+<ul>
+<li>捕获 DHCP 报文并分析</li>
+<li>发送 ICMP 报文，捕获并分析格式</li>
+<li>分析 IP 数据报的分片传输过程</li>
+<li>捕获建立连接和释放连接过程的 TCP 报文段并分析</li>
+</ul>
+<h3 id="实验内容"><a class="header" href="#实验内容">实验内容</a></h3>
+<p>如下</p>
+<p>##DHCP</p>
+<h3 id="dhcp概述"><a class="header" href="#dhcp概述">DHCP概述</a></h3>
+<p>DHCP（Dynamic Host Configuration Protocol，动态主机配置协议），使用UDP协议工作。端口为：67（服务器端），68（客户端）</p>
+<p>简单来说，DHCP就是一个不需要账号密码登录的、自动给内网机器分配IP地址等信息的协议。</p>
+<p>DHCP一共有8中报文，各种类型报文的基本功能如下：</p>
+<div class="table-wrapper"><table><thead><tr><th>报文类型</th><th>说明</th><th></th></tr></thead><tbody>
+<tr><td>Discover （0x01)</td><td>DHCP客户端在请求IP地址时并不知道DHCP服务器的位置，因此DHCP客户端会在本地网络内以广播方式发送Discover请求报文，以发现网络中的DHCP服务器。所有收到Discover报文的DHCP服务器都会发送应答报文，DHCP客户端据此可以知道网络中存在的DHCP服务器的位置。</td><td></td></tr>
+<tr><td>Offer（0x02）</td><td>DHCP服务器收到Discover报文后，就会在所配置的地址池中查找一个合适的IP地址，加上相应的租约期限和其他配置信息（如网关、DNS服务器等），构造一个Offer报文，发送给DHCP客户端，告知用户本服务器可以为其提供IP地址。但这个报文只是告诉DHCP客户端可以提供IP地址，最终还需要客户端通过ARP来检测该IP地址是否重复。</td><td></td></tr>
+<tr><td>Request（0x03）</td><td>DHCP客户端可能会收到很多Offer请求报文，所以必须在这些应答中选择一个。通常是选择第一个Offer应答报文的服务器作为自己的目标服务器，并向该服务器发送一个广播的Request请求报文，通告选择的服务器，希望获得所分配的IP地址。另外，DHCP客户端在成功获取IP地址后，在地址使用租期达到50%时，会向DHCP服务器发送单播Request请求报文请求续延租约，如果没有收到ACK报文，在租期达到87.5%时，会再次发送广播的Request请求报文以请求续延租约。</td><td></td></tr>
+<tr><td>ACK（0x05）</td><td>DHCP服务器收到Request请求报文后，根据Request报文中携带的用户MAC来查找有没有相应的租约记录，如果有则发送ACK应答报文，通知用户可以使用分配的IP地址。</td><td></td></tr>
+<tr><td>NAK（0x06）</td><td>如果DHCP服务器收到Request请求报文后，没有发现有相应的租约记录或者由于某些原因无法正常分配IP地址，则向DHCP客户端发送NAK应答报文，通知用户无法分配合适的IP地址。</td><td></td></tr>
+<tr><td>Release（0x07）</td><td>当DHCP客户端不再需要使用分配IP地址时（一般出现在客户端关机、下线等状况）就会主动向DHCP服务器发送RELEASE请求报文，告知服务器用户不再需要分配IP地址，请求DHCP服务器释放对应的IP地址。</td><td></td></tr>
+<tr><td>Decline（0x04）</td><td>DHCP客户端收到DHCP服务器ACK应答报文后，通过地址冲突检测发现服务器分配的地址冲突或者由于其他原因导致不能使用，则会向DHCP服务器发送Decline请求报文，通知服务器所分配的IP地址不可用，以期获得新的IP地址。</td><td></td></tr>
+<tr><td>Inform（0x08）</td><td>DHCP客户端如果需要从DHCP服务器端获取更为详细的配置信息，则向DHCP服务器发送Inform请求报文；DHCP服务器在收到该报文后，将根据租约进行查找到相应的配置信息后，向DHCP客户端发送ACK应答报文。目前基本上不用了。</td><td></td></tr>
+</tbody></table>
+</div>
+<h3 id="抓包操作"><a class="header" href="#抓包操作">抓包操作</a></h3>
+<h4 id="release释放ip"><a class="header" href="#release释放ip">release：释放IP</a></h4>
+<p><img src="./assets/image-20230604214351156.png" alt="image-20230604214351156" /></p>
+<p><img src="./assets/image-20230604164031796.png" alt="image-20230604164031796" /></p>
+<p>报文内容</p>
+<pre><code class="language-hex">0000   10 4f 58 6c 0c 00 48 51 c5 5e 4e 71 08 00 45 00
+0010   01 48 e1 bf 00 00 80 11 00 00 0a 1c a6 5b 0a 03
+0020   09 02 00 44 00 43 01 34 c4 c1 01 01 06 00 15 ad
+0030   10 b0 00 00 00 00 0a 1c a6 5b 00 00 00 00 00 00
+0040   00 00 00 00 00 00 48 51 c5 5e 4e 71 00 00 00 00
+0050   00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+0060   00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+0070   00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+0080   00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+0090   00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00a0   00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00b0   00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00c0   00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00d0   00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00e0   00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00f0   00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+0100   00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+0110   00 00 00 00 00 00 63 82 53 63 35 01 07 36 04 0a
+0120   03 09 02 3d 07 01 48 51 c5 5e 4e 71 ff 00 00 00
+0130   00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+0140   00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+0150   00 00 00 00 00 00
+</code></pre>
+<h5 id="其他包头"><a class="header" href="#其他包头">其他包头</a></h5>
+<h6 id="udp头"><a class="header" href="#udp头">UDP头</a></h6>
+<p>后面的DHCP包头中此字段类似，不再展示</p>
+<p><img src="./assets/image-20230604164149385.png" alt="image-20230604164149385" /></p>
+<p><img src="./assets/image-20230604164810923.png" alt="image-20230604164810923" /></p>
+<pre><code>0020   			00 44 00 43 01 34 c4 c1
+</code></pre>
+<div class="table-wrapper"><table><thead><tr><th>Hex值</th><th>字段类型</th><th>含义</th></tr></thead><tbody>
+<tr><td>00 44</td><td>源端口</td><td>端口68</td></tr>
+<tr><td>00 43</td><td>目的端口</td><td>端口67</td></tr>
+<tr><td>01 34</td><td>udp包长度</td><td>udp包长300</td></tr>
+<tr><td>c4 c1</td><td>校验和</td><td>0xc4c1</td></tr>
+</tbody></table>
+</div>
+<h6 id="ip头略"><a class="header" href="#ip头略">IP头（略）</a></h6>
+<p>具体分析内容<strong>见后面分析IP数据包的部分</strong></p>
+<p>（可以看到IP包长度328=UDP的308+20）</p>
+<p><img src="./assets/image-20230604164157993.png" alt="image-20230604164157993" /></p>
+<h6 id="以太网头"><a class="header" href="#以太网头">以太网头：</a></h6>
+<p>后面的DHCP包头中此字段类似，不再展示</p>
+<p><img src="./assets/image-20230604164211760.png" alt="image-20230604164211760" /></p>
+<p><img src="./assets/image-20230604170337845.png" alt="image-20230604170337845" /></p>
+<pre><code>0000   10 4f 58 6c 0c 00 48 51 c5 5e 4e 71 08 00 
+</code></pre>
+<div class="table-wrapper"><table><thead><tr><th>Hex值</th><th>字段类型</th><th>含义</th></tr></thead><tbody>
+<tr><td>10 4f 58 6c 0c 00</td><td>源MAC地址</td><td>48位MAC地址</td></tr>
+<tr><td>48 51 c5 5e 4e 71</td><td>目的源MAC地址</td><td>48位MAC地址</td></tr>
+<tr><td>08 00</td><td>协议类型</td><td>上层使用IPv4协议</td></tr>
+</tbody></table>
+</div>
+<p>注意长度为14字节，因此包总长度342=IP的328+14<img src="./assets/image-20230604170616771.png" alt="image-20230604170616771" /></p>
+<h5 id="dhcp报文内容"><a class="header" href="#dhcp报文内容">DHCP报文内容</a></h5>
+<p><img src="./assets/Center.png" alt="img" /></p>
+<p><img src="./assets/image-20230604164225254.png" alt="image-20230604164225254" /></p>
+<pre><code>0020								 01 01 06 00 15 ad
+0030   10 b0 00 00 00 00 0a 1c a6 5b 00 00 00 00 00 00
+0040   00 00 00 00 00 00 48 51 c5 5e 4e 71 00 00 00 00
+0050   00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+0060   00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+0070   00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+0080   00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+0090   00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00a0   00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00b0   00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00c0   00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00d0   00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00e0   00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00f0   00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+0100   00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+0110   00 00 00 00 00 00 63 82 53 63 35 01 07 36 04 0a
+0120   03 09 02 3d 07 01 48 51 c5 5e 4e 71 ff 00 00 00
+0130   00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+0140   00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+0150   00 00 00 00 00 00
+</code></pre>
+<div class="table-wrapper"><table><thead><tr><th>Hex值</th><th>字段类型</th><th>含义</th></tr></thead><tbody>
+<tr><td>01</td><td>OP:操作类型</td><td>01：发送给服务器的操作报文<br/>若为02，则是服务器发送的应答报文</td></tr>
+<tr><td>01</td><td>Htype:客户端的MAC地址类型</td><td>01：以太网地址</td></tr>
+<tr><td>06</td><td>Hlen:MAC地址长度</td><td>以太网地址长度为6</td></tr>
+<tr><td>00</td><td>Hops:经过DHCP中继的数目</td><td>未经过中继</td></tr>
+<tr><td>15 ad 10 b0</td><td>Xid:用来标识请求的随机数</td><td>无意义</td></tr>
+<tr><td>00 00</td><td>Secs：DHCP客户端开始请求后的时间，以秒为单位</td><td>此字段未使用，固定为0</td></tr>
+<tr><td>00 00</td><td>Flags：是否广播标志位，只使用最高一个比特</td><td>80：广播发送（申请ip时）<br />00，单播发送（释放/续约ip时）</td></tr>
+<tr><td>0a 1c a6 5b</td><td>Ciaddr：DHCP客户端的IP地址</td><td>仅在释放、续约中有值，此处为我电脑的IP:10.28.166.91</td></tr>
+<tr><td>00 00 00 00</td><td>Yiaddr：DHCP服务器分配给客户端的IP地址</td><td>仅在DHCP服务器发送的Offer和ACK报文中显示，其他报文中显示为0</td></tr>
+<tr><td>00 00 00 00</td><td>Siaddr：下一个为DHCP客户端分配IP地址等信息的DHCP服务器IP地址</td><td>仅在DHCP Offer、DHCP ACK报文中显示，其他报文中显示为0</td></tr>
+<tr><td>00 00 00 00</td><td>Giaddr：DHCP客户端发出请求报文后经过的第一个DHCP中继的IP地址。</td><td>如果没有经过DHCP中继， 则显示为0</td></tr>
+<tr><td>48 51 c5 5e 4e 71</td><td>Chaddr：DHCP客户端的MAC地址</td><td>由于服务器唯一标识客户端</td></tr>
+<tr><td>00 00 00 00   00 00 00 00 00 00</td><td>Chaddr padding：硬件地址最长可达16字节，以太网地址只使用了6字节，所以这里扩展到16</td><td>无意义，且不一定存在，为填充长度的内容</td></tr>
+<tr><td>00 00 00 00 00 00 00 00 00 00 00 00 <br />00 00 00 00 00 00 00 00 00 00 00 00 <br />00 00 00 00 00 00 00 00 00 00 00 00 <br />00 00 00 00 00 00 00 00 00 00 00 00 <br />00 00 00 00 00 00 00 00 00 00 00 00 <br />00 00 00 00</td><td>Sname：为DHCP客户端分配IP地址的DHCP服务器名称</td><td>DNS域名格式，在Offer和ACK报文中显示发送报文的DHCP服务器名称（如有域名，比如学校这个内网服务器只有ip，的这个字段就一直是空的）</td></tr>
+<tr><td>00 00 00 00 00 00 00 00 00 00 00 00 <br />00 00 00 00 00 00 00 00 00 00 00 00 <br />00 00 00 00 00 00 00 00 00 00 00 00 <br />00 00 00 00 00 00 00 00 00 00 00 00 <br />00 00 00 00 00 00 00 00 00 00 00 00 <br />00 00 00 00 00 00 00 00 00 00 00 00 <br />00 00 00 00 00 00 00 00 00 00 00 00 <br />00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</td><td>File：DHCP服务器为DHCP客户端指定的启动配置文件名称及路径信息</td><td>仅在DHCP Offer报文中显示（不一定有）</td></tr>
+<tr><td>………………</td><td>Options： 可选项字段</td><td>，长度可变，格式为"代码+长度+数据"。</td></tr>
+</tbody></table>
+</div>
+<h4 id="renew获取ip"><a class="header" href="#renew获取ip">renew：获取IP</a></h4>
+<p>DHCP的工作流程</p>
+<p><img src="./assets/image-20230604164504749.png" alt="image-20230604164504749" /></p>
+<p>DHCP具体的报文格式在上面已经分析展示过了，下面就只例举工作流程中变化的几个关键字段</p>
+<h5 id="dhcp-discover"><a class="header" href="#dhcp-discover">DHCP Discover</a></h5>
+<ul>
+<li>首先，此时我的电脑是没有获取IP地址的，也不知道该向谁请求IP分配，因此设置以太网的目的为全f，即广播地址</li>
+</ul>
+<p><img src="./assets/image-20230604174649223.png" alt="image-20230604174649223" /></p>
+<p>同样的原因，这整个流程中，客户端发出的DHCP包的source IP都是0.0.0.0。</p>
+<p><img src="./assets/image-20230604174843064.png" alt="image-20230604174843064" /></p>
+<ul>
+<li>DHCP字段中，设置发送方式为广播</li>
+</ul>
+<p><img src="./assets/image-20230604175033979.png" alt="image-20230604175033979" /></p>
+<ul>
+<li>并说明自己的MAC地址</li>
+</ul>
+<p><img src="./assets/image-20230604175107868.png" alt="image-20230604175107868" /></p>
+<p>即，向所在网络上的所有主机发出一个请求获取IP的DHCP包</p>
+<h5 id="dhcp-offer"><a class="header" href="#dhcp-offer">DHCP Offer</a></h5>
+<ul>
+<li>以太网字段中，源是DHCP服务器的地址（说明学校这个服务器还是阿鲁巴的）。目的是之前Discover中填写的本机MAC</li>
+</ul>
+<p><img src="./assets/image-20230604175215321.png" alt="image-20230604175215321" /></p>
+<ul>
+<li>此时由于客户端没有ip，服务器必须也以广播方式发送给所有的主机，因此目的ip是广播的255</li>
+</ul>
+<p><img src="./assets/image-20230604175436874.png" alt="image-20230604175436874" /></p>
+<ul>
+<li>此时，服务器其实已经从它的空闲ip中取出了对应的信息，拟定分配给这个客户端（使用MAC地址标识），在Yiaddr字段填上了打算分配的ip（由于我是释放之后立即申请，所以其实不是分配新的，而是从已分配的表里取到了这个ip然后发给我，不过流程是一样的）</li>
+</ul>
+<p><img src="./assets/image-20230604175634675.png" alt="image-20230604175634675" /></p>
+<ul>
+<li>同时说明这个操作经过了局域网（总DHCP服务器10.3.9.2，到10.28.128.0/17这个局域网主机）的中转<img src="./assets/image-20230604175759265.png" alt="image-20230604175759265" /></li>
+<li>同时，还携带了多个有用的optional字段</li>
+</ul>
+<p><img src="./assets/image-20230604180007828.png" alt="image-20230604180007828" /></p>
+<p>如这里：</p>
+<ul>
+<li>DHCP服务器IP：10.3.9.2</li>
+<li>分配到的这个ip的有效时长：7200s，两小时</li>
+<li>所在子网的掩码：17位</li>
+<li>子网的路由器地址：10.28.128.1</li>
+<li>所在网络的域名服务器：.44和.45（也就是学校的俩总ns服务器）</li>
+</ul>
+<h5 id="dhcp-request"><a class="header" href="#dhcp-request">DHCP Request</a></h5>
+<p>此时客户端已经收到了一个或多个DHCP服务器打算分配给自己的地址，并从中选择一个，发送request包，表示自己打算使用这个ip（学校的环境可能是只有一个服务器，所以没有体现出这个选择？），其他的ip仍然属于服务器</p>
+<ul>
+<li>由于这个报文需要告知可能的多个服务器说自己选择了哪个ip，因此目的地全部是广播</li>
+</ul>
+<p><img src="./assets/image-20230604180736301.png" alt="image-20230604180736301" /></p>
+<ul>
+<li>仍然以客户端ip作为标识</li>
+</ul>
+<p><img src="./assets/image-20230604180817529.png" alt="image-20230604180817529" /></p>
+<ul>
+<li>最重要的，通过option的这个字段说明自己选中的是哪个ip</li>
+</ul>
+<p><img src="./assets/image-20230604180900859.png" alt="image-20230604180900859" /></p>
+<ul>
+<li>顺带表示自己的主机名</li>
+</ul>
+<p><img src="./assets/image-20230604180949819.png" alt="image-20230604180949819" /></p>
+<h5 id="dhcp-ack"><a class="header" href="#dhcp-ack">DHCP ACK</a></h5>
+<p>现在，提供的ip被客户端选中的那个服务器收到request之后，确定将这个ip分配出去，在自己表里记录；而其他的服务器将之前拟分配的ip放回去。</p>
+<ul>
+<li>以太网地址确定是给那一个客户端，但是这个ACK报文还是需要给整个网络发送，以防万一</li>
+</ul>
+<p><img src="./assets/image-20230604181500423.png" alt="image-20230604181500423" /></p>
+<ul>
+<li>最后一次确认，告知客户端它的ip</li>
+</ul>
+<p><img src="./assets/image-20230604181249358.png" alt="image-20230604181249358" /></p>
+<ul>
+<li>消息类型为ACK，客户端收到这一条之后就可以放心使用分配到的ip了（如果没人静态ip撞了的话）</li>
+</ul>
+<p><img src="./assets/image-20230604181357072.png" alt="image-20230604181357072" /></p>
+<h4 id="租期续约"><a class="header" href="#租期续约">租期续约</a></h4>
+<p>由于写上面的内容耗时比较长，刚好等到了一次续约租期的请求，虽然不是要求的内容，但是这里也展示一下</p>
+<ul>
+<li>
+<p>Transaction ID改变了（最下面两个）</p>
+</li>
+<li>
+<p><img src="./assets/image-20230604181638498.png" alt="image-20230604181638498" /></p>
+</li>
+<li>
+<p>消息类型仍然是request</p>
+</li>
+</ul>
+<p><img src="./assets/image-20230604181835441.png" alt="image-20230604181835441" /></p>
+<ul>
+<li>发送类型变成了单播，只给分配的ip的那个服务器发送</li>
+</ul>
+<p><img src="./assets/image-20230604181759838.png" alt="image-20230604181759838" /></p>
+<ul>
+<li>Ciaddr字段有值了</li>
+</ul>
+<p><img src="./assets/image-20230604181826038.png" alt="image-20230604181826038" /></p>
+<ul>
+<li>ACK包与之前获取ip时的ACK内容一模一样，只有ip地址从广播变成了单播</li>
+</ul>
+<p>对比之前分配ip过程中的情况，，可以发现除了上面这几点基本没啥变化。</p>
+<p>所以我觉得，可以认为租期续约的请求基本和获取IP时request+ACK这个两个包类似，只不过是从广播变成了单播</p>
+<h2 id="icmp"><a class="header" href="#icmp">ICMP</a></h2>
+<h3 id="icmp概述"><a class="header" href="#icmp概述">ICMP概述</a></h3>
+<p>ICMP是 Internet Control Message Protocol 的缩写，即互联网控制消息协议。</p>
+<p>ICMP属于网络层的一部分，分为两大类，查询报文和差错报文</p>
+<h3 id="抓包操作-1"><a class="header" href="#抓包操作-1">抓包操作</a></h3>
+<p>指令：ping www.baidu.com</p>
+<p><img src="./assets/image-20230604183547173.png" alt="image-20230604183547173" /></p>
+<p>可以观察到，两条消息一组，共4组</p>
+<p>这里以第一组为例：<img src="./assets/image-20230604183645108.png" alt="image-20230604183645108" /></p>
+<h4 id="ip包头"><a class="header" href="#ip包头">ip包头</a></h4>
+<p>以太网头和UDP头在前面分析过了，这里再具体看一下IP包头</p>
+<p><img src="./assets/image-20230604184112632.png" alt="image-20230604184112632" /></p>
+<p><img src="./assets/image-20230604183826924.png" alt="image-20230604183826924" /></p>
+<pre><code>0000   											45 00 
+0010  00 3c 07 f4 00 00 40 01 00 00 0a 1c a6 5b 27 9c
+0020  42 0e
+</code></pre>
+<div class="table-wrapper"><table><thead><tr><th>Hex值</th><th>字段类型</th><th>含义</th></tr></thead><tbody>
+<tr><td>4</td><td>版本号</td><td>半个byte，4即ipv4，如果是6就是ipv6</td></tr>
+<tr><td>5</td><td>首部长度</td><td>5，但不是5byte。<br />这里的单位是32bit，也就是有5*4=20byte</td></tr>
+<tr><td>00</td><td>ToS：服务类型</td><td>不做详细说明，这里全为0</td></tr>
+<tr><td>00 3c</td><td>总长度</td><td>ip数据报的总长度，这里为0x3c=60byte</td></tr>
+<tr><td>07 f4</td><td>标识符</td><td>随机选择的数值，无意义。在分段时需相同</td></tr>
+<tr><td>000[B]</td><td>标志位（由于它以bit为单位，因此这一栏和下一栏均是bit描述）</td><td>用于分段时表示，依次为：首个bit不适用，第二个是DF，第三个是MF</td></tr>
+<tr><td>0 0000 0000 0000[B]</td><td>片偏倚</td><td>分段的片的偏移量。具体说明见后面ip分段的部分</td></tr>
+<tr><td>40</td><td>TTL</td><td>可生存的路由跳数，减为0时路由器丢弃</td></tr>
+<tr><td>01</td><td>协议</td><td>01即ICMP协议</td></tr>
+<tr><td>00 00</td><td>校验和</td><td>这里为0，是因为交给了网卡进行硬件层面的校验，提高速度</td></tr>
+<tr><td>0a 1c a6 5b</td><td>源IP</td><td>这里为我电脑的ip 10.28.166.91</td></tr>
+<tr><td>27 9c 42 0e</td><td>目的IP</td><td>这里为ping的目的ip，百度的39.156.66.14</td></tr>
+<tr><td>……</td><td>optional</td><td>可选项，icmp这里没有</td></tr>
+<tr><td>……</td><td>padding</td><td>如果有可选项，需要填充包头至32位的倍数</td></tr>
+</tbody></table>
+</div>
+<h4 id="icmp报文"><a class="header" href="#icmp报文">ICMP报文</a></h4>
+<p><img src="./assets/SouthEast.jpeg" alt="ICMP报头格式" /></p>
+<p>这里讲跟在ip包头20字节后的内容</p>
+<pre><code>0020         08 00 4d 5a 00 01 00 01 
+</code></pre>
+<div class="table-wrapper"><table><thead><tr><th>Hex值</th><th>字段类型</th><th>含义</th></tr></thead><tbody>
+<tr><td>08</td><td>类型</td><td>表示ICMP报文的类型，08表示Echo (ping) request</td></tr>
+<tr><td>00</td><td>代码</td><td>对应ICMP报文的代码，与上一字节共同确定ICMP报文的类型</td></tr>
+<tr><td>4d 5a</td><td>校验和</td><td>整个ICMP报文的校验和，包含IP包头</td></tr>
+<tr><td>00 01</td><td>标识</td><td>仅适用于回显请求和应答ICMP报文，用于标识本ICMP进程。<br />在一次请求与回显中一致，在一次ping中一共有四个不同的值</td></tr>
+<tr><td>00 01</td><td>序列号</td><td>标识一的ping中的多次请求。每发送一次就加一，用来确定是否有丢包</td></tr>
+</tbody></table>
+</div>
+<p>ICMP的data部分，这里是abcdefg……</p>
+<pre><code>0020   								 61 62 63 64 65 66
+0030   67 68 69 6a 6b 6c 6d 6e 6f 70 71 72 73 74 75 76
+0040   77 61 62 63 64 65 66 67 68 69
+
+</code></pre>
+<p><img src="./assets/image-20230604190853719.png" alt="image-20230604190853719" /></p>
+<p>响应的数据报：type变成0，其余的icmp字段无变化</p>
+<h5 id="ipv6-ping"><a class="header" href="#ipv6-ping">IPv6 ping</a></h5>
+<p>指令：ping nginx.show  （[2001:da8:215:3c02:8e1d:96ff:fef1:f2e3]）</p>
+<p><img src="./assets/image-20230604202548890.png" alt="image-20230604202548890" /></p>
+<p>和v4的基本相同，icmp报文部分只有类型字段从08变成了80，响应的类型变成了81</p>
+<h2 id="ip数据报的分段传输"><a class="header" href="#ip数据报的分段传输">ip数据报的分段传输</a></h2>
+<h4 id="抓包操作-2"><a class="header" href="#抓包操作-2">抓包操作</a></h4>
+<p>制定8000字节数据，ping一次：<code>ping 10.3.9.2 -l 8000 -n 1</code></p>
+<p><img src="./assets/image-20230604234507134.png" alt="image-20230604234507134" /></p>
+<p>设置wireshark过滤条件**：<code>ip.src eq 10.3.9.2 or ip.dst eq 10.3.9.2</code>**</p>
+<p>ip包头前面分析过了，这里主要看ip包头中，与分段-重组相关的几个地方</p>
+<div class="table-wrapper"><table><thead><tr><th>二进制值</th><th>字段类型</th><th>含义</th></tr></thead><tbody>
+<tr><td>0</td><td>未使用</td><td>无意义</td></tr>
+<tr><td>0</td><td>DF</td><td><strong>这个数据报不分段，如果超出了某一跳链路的MTU，就直接发送失败</strong></td></tr>
+<tr><td>1</td><td>MF</td><td><strong>这一个包不是最后一个时设置，表示还有更多的包</strong></td></tr>
+<tr><td>0 0000 0000 0000</td><td>片偏倚</td><td>分段的片的偏移量</td></tr>
+<tr><td>99 c6</td><td>标识符</td><td>同一个包的多个分段中，此值相同</td></tr>
+</tbody></table>
+</div>
+<h5 id="第一个包"><a class="header" href="#第一个包">第一个包：</a></h5>
+<p><img src="./assets/image-20230604215014953.png" alt="image-20230604215014953" /></p>
+<p>如图，MF设置为1，表示后续还有分段的片</p>
+<p><img src="./assets/image-20230604215041601.png" alt="image-20230604215041601" /></p>
+<p>偏移量为0，表示是第一个片</p>
+<h5 id="第二个包"><a class="header" href="#第二个包">第二个包</a></h5>
+<p><img src="./assets/image-20230604215112140.png" alt="image-20230604215112140" /></p>
+<p>flag同上</p>
+<p><img src="./assets/image-20230604215126263.png" alt="image-20230604215126263" /></p>
+<p><strong>注意偏移量</strong></p>
+<p><strong>这里偏移量实际值是1011 1001，为185，而不是这里wireshark给出的1480（以太网MTU=1500，减去IP包头20字节，因此ip的数据MTU为1480）</strong></p>
+<p><strong>实际上这里的偏移量单位是8个byte，也就是这个片在整个数据报中，开始的位置是185*8=1480。</strong></p>
+<p><strong>那么为什么有这个8byte的倍率呢——ip包头中，总长度字段是16字节的</strong><img src="./assets/image-20230604215417021.png" alt="image-20230604215417021" /></p>
+<p>而这里片偏移只有13字节，如果表示分片的精确起始位置的话是不够用的，于是就选择用偏倚的一个bit映射了包总长度的最低3个bit，也就是这个8倍的关系</p>
+<p><strong>也因此，当包分段时，要满足网络层数据+包头小于链路MTU，而且数据的长度得是8的整数倍</strong></p>
+<p>其余的包都和第二个类似。</p>
+<div class="table-wrapper"><table><thead><tr><th>第几个包</th><th>包长度</th><th>DF</th><th>MF</th><th>Offest</th><th>段标识符</th></tr></thead><tbody>
+<tr><td>1</td><td>1500</td><td>0</td><td>1</td><td>0</td><td>99 c6</td></tr>
+<tr><td>2</td><td>1500</td><td>0</td><td>1</td><td>185</td><td>99 c6</td></tr>
+<tr><td>3</td><td>1500</td><td>0</td><td>1</td><td>370</td><td>99 c6</td></tr>
+<tr><td>4</td><td>1500</td><td>0</td><td>1</td><td>555</td><td>99 c6</td></tr>
+<tr><td>5</td><td>1500</td><td>0</td><td>1</td><td>740</td><td>99 c6</td></tr>
+<tr><td>6</td><td>628</td><td>0</td><td>0</td><td>925</td><td>99 c6</td></tr>
+</tbody></table>
+</div>
+<p>（Offset写的是原始二进制值，换算成bit偏移量需要再乘8）</p>
+<h5 id="最后一个包"><a class="header" href="#最后一个包">最后一个包</a></h5>
+<p><img src="./assets/image-20230604215752228.png" alt="image-20230604215752228" /></p>
+<p>可以看到，flag中，MF字段变为0，表示它就是这个identification（0x99c6）所对应的最后一个包，主机收到之后就可以将它组装起来了，每个包放在偏移量*8的位置上即可，比如这个放在925*8=7400bit的位置上</p>
+<h2 id="tcp建立连接和释放连接"><a class="header" href="#tcp建立连接和释放连接">TCP建立连接和释放连接</a></h2>
+<p>通过浏览器访问网址 nginx.show，并捕获、分析TCP协议过程</p>
+<h3 id="三次握手"><a class="header" href="#三次握手">三次握手</a></h3>
+<p>如图，本机端口12971和服务器端口80之间的三次握手</p>
+<p><img src="./assets/image-20230604221147627.png" alt="image-20230604221147627" /></p>
+<h4 id="第一次握手syn-n"><a class="header" href="#第一次握手syn-n">第一次握手：SYN n</a></h4>
+<p><img src="./assets/image-20230604221245800.png" alt="image-20230604221245800" /></p>
+<p>客户端给服务器发送一个SYN段(在 TCP 标头中 SYN 位字段为 <strong>1</strong> 的 TCP/IP 数据包),</p>
+<p>该段中也包含客户端的初始序列号(Sequence number = J)，此例中客户端初始序列号为0，因此是SYN 0。</p>
+<h4 id="第二次握手ack-n1syn-m"><a class="header" href="#第二次握手ack-n1syn-m">第二次握手：ACK n+1,SYN m</a></h4>
+<p><img src="./assets/image-20230604221647179.png" alt="image-20230604221647179" /></p>
+<p>服务器返回客户端 SYN +ACK 段(在 TCP 标头中SYN和ACK位字段都为 1 的 TCP/IP 数据包)， 该段中包含服务器的初始序列号(Sequence number = K)。</p>
+<p>同时使 Acknowledgment number = J + 1来表示确认已收到客户端的 SYN段(Sequence number = J)。</p>
+<p>此例中，ACK 1，服务器序列号也恰为0，因此SYN 0</p>
+<h4 id="第三次握手ack-m1"><a class="header" href="#第三次握手ack-m1">第三次握手：ACK M+1</a></h4>
+<p><img src="./assets/image-20230604221701950.png" alt="image-20230604221701950" /></p>
+<p>客户端给服务器响应一个ACK段(在 TCP 标头中 ACK 位字段为 <strong>1</strong> 的 TCP/IP 数据包), 该段中使 Acknowledgment number = K + 1来表示确认已收到服务器的 SYN段(Sequence number = K)。</p>
+<p>此例中，为ACK 1</p>
+<h4 id="后续请求"><a class="header" href="#后续请求">后续请求</a></h4>
+<p>之后，双方就使用seq=1来开始通信</p>
+<p>比如这里握手之后，客户端第一次请求GET</p>
+<p><img src="./assets/image-20230604222034133.png" alt="image-20230604222034133" /></p>
+<p>seq为握手之后的1，负载的http请求长度为470</p>
+<p><img src="./assets/image-20230604222109056.png" alt="image-20230604222109056" /></p>
+<p>服务器的响应，seq=1，ack=471（get请求的tcp长度+1）</p>
+<p>客户端再次请求</p>
+<p><img src="./assets/image-20230604222326038.png" alt="image-20230604222326038" /></p>
+<p>seq变为上次ack的471，同时捎带确认上面一个http 301的374序号</p>
+<h4 id="时空图"><a class="header" href="#时空图">时空图</a></h4>
+<p><img src="./assets/image-20230604223246179.png" alt="image-20230604223246179" /></p>
+<h3 id="四次挥手"><a class="header" href="#四次挥手">四次挥手</a></h3>
+<p><img src="./assets/image-20230604224655336.png" alt="image-20230604224655336" /></p>
+<p>如图，本机端口1388和服务器端口80，执行四次挥手（第一条理论上是FIN，但是这里多带了ACK，应该是捎带确认了之前发的包，seq号是符合的）</p>
+<h4 id="第一次挥手"><a class="header" href="#第一次挥手">第一次挥手</a></h4>
+<p><img src="./assets/image-20230604230225259.png" alt="image-20230604230225259" /></p>
+<p>（不知道为啥，我这里是由服务器主动发起的fin，也就是那个80，1388是本机端口。不过不影响，分析的流程是一样的，只是调换学的客户端与服务器角色）</p>
+<p>服务器发起终止，设置<strong>FIN，seq=1</strong>。（ACK 2与挥手无关，是对之前的捎带确认）</p>
+<p>服务器等待来自客户端的确认</p>
+<h4 id="第二次挥手"><a class="header" href="#第二次挥手">第二次挥手</a></h4>
+<p><img src="./assets/image-20230604230414518.png" alt="image-20230604230414518" /></p>
+<p>本机返回ACK包，设置<strong>ACK 2</strong>，<strong>即上一个FIN的seq+1</strong></p>
+<p>等待1388这个socket的链接处理完了其他事情后，发送FIN</p>
+<p>在此期间内是<strong>仍然可以单方面的向对方发送数据</strong>的，直到要发的发完了，主动的给出一个FIN表示这边同意终止。</p>
+<h4 id="第三次挥手"><a class="header" href="#第三次挥手">第三次挥手</a></h4>
+<p><img src="./assets/image-20230604230543063.png" alt="image-20230604230543063" /></p>
+<p>本机向服务器发送<strong>ACK+FIN</strong>包，设置<strong>ACK 2，FIN 2</strong>，这里的<strong>ack与上一个相同，seq号自己指定</strong></p>
+<p>表示本机做好准备终止TCP链接了，发送出最后一个FIN包。此后如果收到了对面的ACK，就不再使用此连接发送，否则的话认为是这个FIN丢包，就不断重发</p>
+<h4 id="第四次挥手"><a class="header" href="#第四次挥手">第四次挥手</a></h4>
+<p><img src="./assets/image-20230604230941234.png" alt="image-20230604230941234" /></p>
+<p>服务器发出ACK包，为<strong>ACK 3</strong>，即本机发往服务器FIN 2的序号+1，进入最后的TIME_WAIT状态</p>
+<p>此状态持续两个MSL（Maximum Segment LifeTime 报文最大生存时间  2MSL即数据报来回的最大时间），如果此期间内没有收到重传的FIN，就认为成功终止了TCP连接；如果再次收到，就说明ACK丢包了，重新做出响应。</p>
+<h4 id="时空图-1"><a class="header" href="#时空图-1">时空图</a></h4>
+<p><img src="./assets/image-20230604232624375.png" alt="image-20230604232624375" /></p>
+<h2 id="实验结论和实验心得"><a class="header" href="#实验结论和实验心得">实验结论和实验心得</a></h2>
+<p>用时大约5小时</p>
+<p>在做实验之外，重新理解了一下各个协议的实现、字段，以及一些需要注意的点，起到了一些复习的作用，对网络层协议的理解更深入了。</p>
+<p>不过像拥塞控制、路由等，与实际发包/抓包无关的内容还需要专门复习</p>
+<p>另外发现对于TCP的握手和挥手的过程还是不太熟悉，需要再加强一下</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../computer-networks/final-term.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../csapp/index.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../computer-networks/final-term.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../csapp/index.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

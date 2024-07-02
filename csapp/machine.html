@@ -1,0 +1,463 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>程序的机器级表示 - Ricardo&#x27;s Wiki</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="我在北京邮电大学计算机科学与技术专业学习三年的部分笔记">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../katex.min.css">
+
+        <!-- MathJax -->
+        <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../index.html">主页</a></li><li class="chapter-item expanded affix "><li class="spacer"></li><li class="chapter-item expanded "><a href="../ai-principle/index.html"><strong aria-hidden="true">1.</strong> 人工智能原理</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../ai-principle/intro.html"><strong aria-hidden="true">1.1.</strong> 概述</a></li><li class="chapter-item expanded "><a href="../ai-principle/question-knowledge.html"><strong aria-hidden="true">1.2.</strong> 问题和知识表示</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../algorithm/index.html"><strong aria-hidden="true">2.</strong> 算法</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../algorithm/intro.html"><strong aria-hidden="true">2.1.</strong> 概述</a></li><li class="chapter-item expanded "><a href="../algorithm/recurse-divide.html"><strong aria-hidden="true">2.2.</strong> 分治算法</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../compiler/index.html"><strong aria-hidden="true">3.</strong> 编译原理</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../compiler/intro.html"><strong aria-hidden="true">3.1.</strong> 概述</a></li><li class="chapter-item expanded "><a href="../compiler/lexical-analyzer.html"><strong aria-hidden="true">3.2.</strong> 词法分析</a></li><li class="chapter-item expanded "><a href="../compiler/grammar-analyzer.html"><strong aria-hidden="true">3.3.</strong> 语法分析</a></li><li class="chapter-item expanded "><a href="../compiler/grammar-driven-translation.html"><strong aria-hidden="true">3.4.</strong> 语法制导翻译</a></li><li class="chapter-item expanded "><a href="../compiler/syntax-analyser.html"><strong aria-hidden="true">3.5.</strong> 语义分析</a></li><li class="chapter-item expanded "><a href="../compiler/runtime.html"><strong aria-hidden="true">3.6.</strong> 运行环境</a></li><li class="chapter-item expanded "><a href="../compiler/intermediate-code.html"><strong aria-hidden="true">3.7.</strong> 中间代码生成</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../computer-architecture/index.html"><strong aria-hidden="true">4.</strong> 计算机组成原理</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../computer-architecture/overview.html"><strong aria-hidden="true">4.1.</strong> 计算机系统概论</a></li><li class="chapter-item expanded "><a href="../computer-architecture/calculator.html"><strong aria-hidden="true">4.2.</strong> 运算方法和运算器</a></li><li class="chapter-item expanded "><a href="../computer-architecture/instruction.html"><strong aria-hidden="true">4.3.</strong> 指令系统</a></li><li class="chapter-item expanded "><a href="../computer-architecture/cpu.html"><strong aria-hidden="true">4.4.</strong> 中央处理器</a></li><li class="chapter-item expanded "><a href="../computer-architecture/memory.html"><strong aria-hidden="true">4.5.</strong> 存储系统</a></li><li class="chapter-item expanded "><a href="../computer-architecture/io.html"><strong aria-hidden="true">4.6.</strong> 输入输出设备</a></li><li class="chapter-item expanded "><a href="../computer-architecture/external.html"><strong aria-hidden="true">4.7.</strong> 外部设备</a></li><li class="chapter-item expanded "><a href="../computer-architecture/bus.html"><strong aria-hidden="true">4.8.</strong> 总线</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../computer-networks/index.html"><strong aria-hidden="true">5.</strong> 计算机网络</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../computer-networks/overview.html"><strong aria-hidden="true">5.1.</strong> 引言</a></li><li class="chapter-item expanded "><a href="../computer-networks/physical-layer.html"><strong aria-hidden="true">5.2.</strong> 物理层</a></li><li class="chapter-item expanded "><a href="../computer-networks/data-link-layer.html"><strong aria-hidden="true">5.3.</strong> 数据链路层</a></li><li class="chapter-item expanded "><a href="../computer-networks/mac.html"><strong aria-hidden="true">5.4.</strong> 介质访问控制层</a></li><li class="chapter-item expanded "><a href="../computer-networks/network-layer.html"><strong aria-hidden="true">5.5.</strong> 网络层</a></li><li class="chapter-item expanded "><a href="../computer-networks/transport-layer.html"><strong aria-hidden="true">5.6.</strong> 传输层</a></li><li class="chapter-item expanded "><a href="../computer-networks/mid-term.html"><strong aria-hidden="true">5.7.</strong> 期中复习</a></li><li class="chapter-item expanded "><a href="../computer-networks/final-term.html"><strong aria-hidden="true">5.8.</strong> 期末复习</a></li><li class="chapter-item expanded "><a href="../computer-networks/lab2.html"><strong aria-hidden="true">5.9.</strong> 实验二</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../csapp/index.html"><strong aria-hidden="true">6.</strong> 计算机系统基础</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../csapp/bits.html"><strong aria-hidden="true">6.1.</strong> 数据的位级表示</a></li><li class="chapter-item expanded "><a href="../csapp/machine.html" class="active"><strong aria-hidden="true">6.2.</strong> 程序的机器级表示</a></li><li class="chapter-item expanded "><a href="../csapp/assembly-data.html"><strong aria-hidden="true">6.3.</strong> 程序的机器级表示——数据</a></li><li class="chapter-item expanded "><a href="../csapp/assembly-control.html"><strong aria-hidden="true">6.4.</strong> 程序的机器级表示——控制</a></li><li class="chapter-item expanded "><a href="../csapp/assembly-procedure.html"><strong aria-hidden="true">6.5.</strong> 程序的机器级表示——过程</a></li><li class="chapter-item expanded "><a href="../csapp/assembly-advanced.html"><strong aria-hidden="true">6.6.</strong> 程序的机器级表示——高级话题</a></li><li class="chapter-item expanded "><a href="../csapp/exception-control-flow.html"><strong aria-hidden="true">6.7.</strong> 异常控制流</a></li><li class="chapter-item expanded "><a href="../csapp/linking.html"><strong aria-hidden="true">6.8.</strong> 链接</a></li><li class="chapter-item expanded "><a href="../csapp/io.html"><strong aria-hidden="true">6.9.</strong> 输入输出系统</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../data-structure/index.html"><strong aria-hidden="true">7.</strong> 数据结构</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../data-structure/foundation.html"><strong aria-hidden="true">7.1.</strong> 算法基础</a></li><li class="chapter-item expanded "><a href="../data-structure/inner-sort.html"><strong aria-hidden="true">7.2.</strong> 内部排序</a></li><li class="chapter-item expanded "><a href="../data-structure/outer-sort.html"><strong aria-hidden="true">7.3.</strong> 外部排序</a></li><li class="chapter-item expanded "><a href="../data-structure/array-and-list.html"><strong aria-hidden="true">7.4.</strong> 数组和广义表</a></li><li class="chapter-item expanded "><a href="../data-structure/list.html"><strong aria-hidden="true">7.5.</strong> 线性表</a></li><li class="chapter-item expanded "><a href="../data-structure/stack-and-dequeue.html"><strong aria-hidden="true">7.6.</strong> 栈和队列</a></li><li class="chapter-item expanded "><a href="../data-structure/tree.html"><strong aria-hidden="true">7.7.</strong> 树</a></li><li class="chapter-item expanded "><a href="../data-structure/graph.html"><strong aria-hidden="true">7.8.</strong> 图</a></li><li class="chapter-item expanded "><a href="../data-structure/string.html"><strong aria-hidden="true">7.9.</strong> 字符串</a></li><li class="chapter-item expanded "><a href="../data-structure/find.html"><strong aria-hidden="true">7.10.</strong> 查找表</a></li><li class="chapter-item expanded "><a href="../data-structure/lab.html"><strong aria-hidden="true">7.11.</strong> 实验</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../database/index.html"><strong aria-hidden="true">8.</strong> 数据库</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../database/intro.html"><strong aria-hidden="true">8.1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="../database/relation-model.html"><strong aria-hidden="true">8.2.</strong> Relation Model</a></li><li class="chapter-item expanded "><a href="../database/relation-database-design.html"><strong aria-hidden="true">8.3.</strong> Relation Database Design</a></li><li class="chapter-item expanded "><a href="../database/sql.html"><strong aria-hidden="true">8.4.</strong> SQL</a></li><li class="chapter-item expanded "><a href="../database/intermediate-sql.html"><strong aria-hidden="true">8.5.</strong> Intermediate SQL</a></li><li class="chapter-item expanded "><a href="../database/entity-relation-model.html"><strong aria-hidden="true">8.6.</strong> Entity Relation Model</a></li><li class="chapter-item expanded "><a href="../database/data-storage-structure.html"><strong aria-hidden="true">8.7.</strong> Data Storage Structure</a></li><li class="chapter-item expanded "><a href="../database/database-index.html"><strong aria-hidden="true">8.8.</strong> Index</a></li><li class="chapter-item expanded "><a href="../database/query-processing.html"><strong aria-hidden="true">8.9.</strong> Query Processing</a></li><li class="chapter-item expanded "><a href="../database/query-optimization.html"><strong aria-hidden="true">8.10.</strong> Query Optimization</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../discrete-math/index.html"><strong aria-hidden="true">9.</strong> 离散数学</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../discrete-math/relation.html"><strong aria-hidden="true">9.1.</strong> Relation</a></li><li class="chapter-item expanded "><a href="../discrete-math/advanced-counting.html"><strong aria-hidden="true">9.2.</strong> Advanced Counting</a></li><li class="chapter-item expanded "><a href="../discrete-math/tree.html"><strong aria-hidden="true">9.3.</strong> Tree</a></li><li class="chapter-item expanded "><a href="../discrete-math/graph.html"><strong aria-hidden="true">9.4.</strong> Graph</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../formal-language/index.html"><strong aria-hidden="true">10.</strong> 形式语言和自动机</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../formal-language/fa.html"><strong aria-hidden="true">10.1.</strong> 有限状态自动机</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../missing-semester/index.html"><strong aria-hidden="true">11.</strong> 计算机教学中缺少的一课</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../missing-semester/missing-the-shell.html"><strong aria-hidden="true">11.1.</strong> Shell</a></li><li class="chapter-item expanded "><a href="../missing-semester/missing-shell-scripts.html"><strong aria-hidden="true">11.2.</strong> Shell Scripts</a></li><li class="chapter-item expanded "><a href="../missing-semester/missing-vim.html"><strong aria-hidden="true">11.3.</strong> Vim</a></li><li class="chapter-item expanded "><a href="../missing-semester/missing-data-wrangling.html"><strong aria-hidden="true">11.4.</strong> Data Wrangling</a></li><li class="chapter-item expanded "><a href="../missing-semester/missing-command-line.html"><strong aria-hidden="true">11.5.</strong> Command Line</a></li><li class="chapter-item expanded "><a href="../missing-semester/missing-potpourri.html"><strong aria-hidden="true">11.6.</strong> Potpourri</a></li><li class="chapter-item expanded "><a href="../missing-semester/missing-version-control.html"><strong aria-hidden="true">11.7.</strong> Version Control</a></li><li class="chapter-item expanded "><a href="../missing-semester/missing-debugging.html"><strong aria-hidden="true">11.8.</strong> Debug</a></li><li class="chapter-item expanded "><a href="../missing-semester/missing-metaprogramming.html"><strong aria-hidden="true">11.9.</strong> Metaprogram</a></li><li class="chapter-item expanded "><a href="../missing-semester/missing-security.html"><strong aria-hidden="true">11.10.</strong> Security</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../operating-system/index.html"><strong aria-hidden="true">12.</strong> 操作系统</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../operating-system/intro.html"><strong aria-hidden="true">12.1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="../operating-system/os-structures.html"><strong aria-hidden="true">12.2.</strong> OS Structure</a></li><li class="chapter-item expanded "><a href="../operating-system/processes.html"><strong aria-hidden="true">12.3.</strong> Process</a></li><li class="chapter-item expanded "><a href="../operating-system/process-synchronization.html"><strong aria-hidden="true">12.4.</strong> Process Synchronization</a></li><li class="chapter-item expanded "><a href="../operating-system/cpu-scheduling.html"><strong aria-hidden="true">12.5.</strong> CPU Scheduling</a></li><li class="chapter-item expanded "><a href="../operating-system/threads.html"><strong aria-hidden="true">12.6.</strong> Thread</a></li><li class="chapter-item expanded "><a href="../operating-system/memory-management.html"><strong aria-hidden="true">12.7.</strong> Memory Management</a></li><li class="chapter-item expanded "><a href="../operating-system/virtual-memory.html"><strong aria-hidden="true">12.8.</strong> Virtual Memory</a></li><li class="chapter-item expanded "><a href="../operating-system/fs-interface.html"><strong aria-hidden="true">12.9.</strong> Filesystem Interface</a></li><li class="chapter-item expanded "><a href="../operating-system/fs-implementation.html"><strong aria-hidden="true">12.10.</strong> Filesystem Implementation</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../socialist/index.html"><strong aria-hidden="true">13.</strong> 毛泽东思想和中国特色理论体系概论</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../socialist/maozedong.html"><strong aria-hidden="true">13.1.</strong> 毛概期末总结</a></li><li class="chapter-item expanded "><a href="../socialist/others.html"><strong aria-hidden="true">13.2.</strong> 课后大题</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Ricardo&#x27;s Wiki</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="程序的机器级表示"><a class="header" href="#程序的机器级表示">程序的机器级表示</a></h1>
+<p>也就是汇编语言。不过根据<code>CSAPP</code>，我们并不需要完全掌握汇编语言，只需要学会阅读汇编语言，并通过对汇编语言的理解写出执行效率更高的<code>C</code>语言代码，毕竟在产生汇编语言这件事上，编译器比我们做得更好也更有耐心。</p>
+<h2 id="intel处理器和架构的历史"><a class="header" href="#intel处理器和架构的历史">Intel处理器和架构的历史</a></h2>
+<h3 id="intel-x86-处理器"><a class="header" href="#intel-x86-处理器">Intel x86 处理器</a></h3>
+<p>在桌面，笔记本和服务器市场都占据很大的市场份额。这主要是因为Intel长期坚持的向前兼容策略，现在生产的处理器仍然可以兼容到1978年出现的8086处理器。</p>
+<p>这类的处理器都是复杂指令计算机<code>CISC</code>，这类架构的特点就是提供极为复杂繁多的硬件指令供开发者使用，但是其中只有很小的一个子集是被<code>Linux</code>操作系统所使用的。</p>
+<h3 id="intel-64位处理器历史"><a class="header" href="#intel-64位处理器历史">Intel 64位处理器历史</a></h3>
+<p>2001年，Intel首次推出64位的计算机处理器，但是这款处理器几乎不兼容32位的应用程序，运行的效率极低，在推出之后的不久就被市场所拒绝。同时，AMD公司采用逐步演进的方式推进64位架构的普及，同时完全兼容之前的32为，在市场中获得了极大的成功，因此现在的64位架构也被称为<code>amd64</code>。</p>
+<p><code>IA32</code>就是Intel公司的32位指令集，<code>x86-64</code>就是64位的指令集了。</p>
+<h2 id="汇编语言基础"><a class="header" href="#汇编语言基础">汇编语言基础</a></h2>
+<h3 id="定义"><a class="header" href="#定义">定义</a></h3>
+<ul>
+<li>架构<code>Architecture</code>：也被称为<code>ISA</code>，为了编写汇编语言我们需要知道的处理器知识。比如具体的指令集和寄存器。</li>
+<li>微架构<code>Microarchitecture</code>：架构的具体实现。比如缓存的大小和处理器运行的频率。</li>
+<li>代码格式：
+<ul>
+<li>机器码：字节级别的程序代码，处理器可以直接执行</li>
+<li>汇编代码：机器码的文本表示方式。</li>
+</ul>
+</li>
+<li>ISAs举例：
+<ul>
+<li>Intel: IA32, x86-64</li>
+<li>Arm</li>
+<li>RSIC V</li>
+</ul>
+</li>
+</ul>
+<h3 id="汇编语言代码的运行环境"><a class="header" href="#汇编语言代码的运行环境">汇编语言代码的运行环境</a></h3>
+<p><img src="./assets/arth-20221120150652-e38vatd.png" alt="架构图" /></p>
+<p>在汇编语言运行时，处理器的下列信息是可以访问的：</p>
+<ul>
+<li><code>PC</code>: Program counter 程序计数器，也就是下一条需要执行的指令的地址</li>
+<li>寄存器文件：程序中大量使用的变量存储在这里</li>
+<li>条件码：存储各种操作的结果类型，比如运算中是否溢出，是否为0</li>
+</ul>
+<p>汇编语言支持多种不同的数据类型，在实际运行的过程中，针对不同的数据类型有着不同的指令，这些指令往往只有后缀上的区别。下面是支持的数据类型：</p>
+<ul>
+<li>1，2，3，8字节的整数</li>
+<li>4，8，10字节的浮点数</li>
+<li>8，16，32，64字节或者更多的向量数据，由<code>SIMD</code>指令集使用，通过被用在媒体数据中</li>
+<li>字节编码的指令</li>
+<li>在运行中没有任何聚合的数据类型，例如结构体或者联合</li>
+</ul>
+<p>在汇编语言运行的过程中还可以访问一系列的寄存器文件，有一些寄存器的具有着约定的含义，例如<code>%rsp</code>寄存器就储存着栈指针的地址。同时使用寄存器还得遵循一系列的规则。每个寄存器都是8个字节大小，但是我们可以通过一些其他的名称来访问这些寄存器的低字节空间。</p>
+<p>条件码在执行条件跳转指令，类似于C语言中的<code>if</code>时，有着很大的作用。不过我们通常不需要访问这些数据，而是通过一系列的指令来实现条件跳转操作。</p>
+<h3 id="汇编语言指令"><a class="header" href="#汇编语言指令">汇编语言指令</a></h3>
+<p>汇编语言中的可执行的操作：在内存和寄存器之前传送数据，对寄存器或者内存中存储的数据进行算术操作，在执行指令的过程中进行控制转移。</p>
+<h4 id="传送数据指令"><a class="header" href="#传送数据指令">传送数据指令</a></h4>
+<pre><code class="language-nasm">movq Source, Dest
+</code></pre>
+<p>指令的操作数：</p>
+<ul>
+<li>立即数：直接编写在代码中的整数，不可变。例如<code>$0x400$</code></li>
+<li>寄存器：十六个可以访问的寄存器中的一个</li>
+<li>内存：在内存中通过地址访问的一系列的连续的字符，这个地址一般通过一个寄存器指定。这串字符的长度通过指令操作的类型来确定，例如指令的后缀是<code>q</code>，就说明这是一个8字节的操作指令，这串字符的长度就是8个字节。指令操作的数据类型不仅在访问内存时有用，在访问寄存器时也有用，我们已经知道使用寄存器也可以访问寄存器低位的空间了。</li>
+</ul>
+<div class="table-wrapper"><table><thead><tr><th>数据类型</th><th>汇编代码后缀</th><th>大小</th></tr></thead><tbody>
+<tr><td>字节</td><td>b</td><td>1</td></tr>
+<tr><td>字</td><td>w</td><td>2</td></tr>
+<tr><td>双字</td><td>l</td><td>4</td></tr>
+<tr><td>四字</td><td>q</td><td>8</td></tr>
+<tr><td>单精度浮点数</td><td>s</td><td>4</td></tr>
+<tr><td>双精度浮点数</td><td>l</td><td>8</td></tr>
+</tbody></table>
+</div>
+<blockquote>
+<p>双精度浮点数和双字的后缀一样不会引起指令的歧义，操作整数和浮点数采用的两套不同的指令</p>
+</blockquote>
+<p>传送指令举例：</p>
+<p><code>movq $0x4 %ras</code>：将立即数4复制到寄存器<code>ras</code>。</p>
+<p>在汇编语言中，我们有以下的几种方式来访问内存：</p>
+<ul>
+<li><code>(R)</code>其中<code>R</code>是一个特定的寄存器，这句指令就是访问寄存器<code>R</code>存储地址的内存空间。例如：<code>movq $-0x134 (%rax)</code>：将一个立即数复制到内存中，目标内存地址由寄存器<code>%rax</code>指定。</li>
+<li><code>D(R)</code>其中<code>D</code>是一个立即数，<code>R</code>就是寄存器。这句指令就是在上一句指令的基础上添加了一个常数的偏移量<code>D</code>，所访问的内存地址就是<code>R</code>储存的值加上<code>D</code>，例如<code>movq $0x123 0x8(%rsp)</code>，将一个立即数复制到寄存器<code>%rsp</code>存储值加上8对应的内存空间中</li>
+<li><code>D(Rb,Ri,S)</code>，最为通用的内存访问方式。其中<code>D</code>是一个立即数，称作“偏移量”，<code>Rb,Ri</code>是两个寄存器，<code>s</code>也是一个立即数，称作“比例因子”，这个语句访问地址的计算公式是<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7778em;vertical-align:-0.0833em;"></span><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="mord mathnormal">b</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.7667em;vertical-align:-0.0833em;"></span><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="mord mathnormal">i</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.7667em;vertical-align:-0.0833em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">S</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">D</span></span></span></span>所对应的值</li>
+</ul>
+<blockquote>
+<p>其实访问内存的方式有且仅有一种，就是最通用的那种访问方式，前两种方式就是第三种方式的简化形式。同时需要说明的，简化的方式并不只有上述的两种。</p>
+</blockquote>
+<h4 id="地址计算指令"><a class="header" href="#地址计算指令">地址计算指令</a></h4>
+<p><code>leaq Src, Dest</code>：<code>Src</code>是一个地址表达式，<code>Dest</code>存放前述的表达式计算的值。地址表达式的格式和上面内存中寻址的方式是一致的。</p>
+<p>在实际中，地址计算指令并不全部是用于地址计算的。因为人们发现这个指令在进行一些运算是十分的方便，例如：为了计算<code>x+4 * y</code>，其中<code>x</code>储存在<code>%rdi</code>寄存器中，<code>y</code>存储在<code>%rsi</code>寄存器中，我们可以用这条指令来计算这个表达式的值<code>leaq (%rdi, %rsi, 4), %rdi</code>，并且把结果存储在<code>%rdi</code>寄存器中。</p>
+<h4 id="算术运算指令"><a class="header" href="#算术运算指令">算术运算指令</a></h4>
+<p><img src="./assets/arithmetic-20221120150652-d0dcuvh.png" alt="算数运算指令" /></p>
+<p>下面给出一段C语言程序编译为汇编代码的例子，辅助理解。首先，C语言代码如下：</p>
+<pre><code class="language-C">long arith(long x, long y, long z)
+{
+    long t1 = x+y;long t2 = z+t1;
+    long t3 = x+4;long t4 = y * 48;
+    long t5 = t3 + t4;long rval= t2 * t5;
+    return rval;
+}
+</code></pre>
+<p>这个函数编译为汇编代码是：</p>
+<pre><code class="language-nasm">arith:
+	leaq (%rdi,%rsi), %rax# t1
+	addq %rdx, %rax# t2
+	leaq (%rsi,%rsi,2), %rdx
+	salq $4, %rdx# t4
+	leaq 4(%rdi,%rdx), %rcx# t5
+	imulq %rcx, %rax# rval
+	ret
+</code></pre>
+<p>同时，在这段汇编代码中，寄存器和C语言中变量的对应关系为：</p>
+<div class="table-wrapper"><table><thead><tr><th>寄存器</th><th>C语言中的变量</th></tr></thead><tbody>
+<tr><td><code>%rdi</code></td><td><code>x</code></td></tr>
+<tr><td><code>%rsi</code></td><td><code>y</code></td></tr>
+<tr><td><code>%rdx</code></td><td><code>z</code>, <code>t4</code></td></tr>
+<tr><td><code>%rax</code></td><td><code>t1</code>, <code>t2</code>,<code>​ rval</code></td></tr>
+<tr><td><code>%rcx</code></td><td><code>t5</code></td></tr>
+</tbody></table>
+</div>
+<p><del>结合着下面给出的寄存器使用列表，这段汇编代码还是很好理解的。</del> 我们可以看见在汇编代码中，编译器使用的大量的<code>leaq</code>来实现算术运算。</p>
+<h3 id="从c语言到可执行程序"><a class="header" href="#从c语言到可执行程序">从C语言到可执行程序</a></h3>
+<p><img src="./assets/c-obj-20221120150652-l2vulyk.png" alt="过程" /></p>
+<h4 id="编译为汇编代码"><a class="header" href="#编译为汇编代码">编译为汇编代码</a></h4>
+<p>采用<code>gcc -Og -S</code>指令可以将C语言源文件编译为汇编语言文件，在指令中<code>-Og</code>表示让<code>gcc</code>采用比较低的优化等级，避免产生的汇编代码的结构和C语言相差过大，方便我们学习。</p>
+<blockquote>
+<p>需要注明的是，汇编语言和平台强相关，在不同平台上产生的汇编代码可能差异巨大</p>
+</blockquote>
+<p>我们用一个<code>hello.c</code>的C语言代码来作为示例：</p>
+<pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    printf("world, hello!\n");
+    return 0;
+}
+</code></pre>
+<p>使用<code>gcc -Og -S hello.c</code>来产生汇编语言：</p>
+<pre><code class="language-nasm">        .file   "001.c"
+        .text
+        .section        .rodata.str1.1,"aMS",@progbits,1
+.LC0:
+        .string "world, hello!"
+        .text
+        .globl  main
+        .type   main, @function
+main:
+.LFB23:
+        .cfi_startproc
+        endbr64
+        subq    $8, %rsp
+        .cfi_def_cfa_offset 16
+        leaq    .LC0(%rip), %rdi
+        call    puts@PLT
+        movl    $0, %eax
+        addq    $8, %rsp
+        .cfi_def_cfa_offset 8
+        ret
+        .cfi_endproc
+.LFE23:
+        .size   main, .-main
+        .ident  "GCC: (Ubuntu 9.4.0-1ubuntu1~20.04.1) 9.4.0"
+        .section        .note.GNU-stack,"",@progbits
+        .section        .note.gnu.property,"a"
+        .align 8
+        .long    1f - 0f
+        .long    4f - 1f
+        .long    5
+0:
+        .string  "GNU"
+1:
+        .align 8
+        .long    0xc0000002
+        .long    3f - 2f
+2:
+        .long    0x3
+3:
+        .align 8
+4:
+</code></pre>
+<h4 id="从汇编代码到可执行文件"><a class="header" href="#从汇编代码到可执行文件">从汇编代码到可执行文件</a></h4>
+<p>在这个过程中，涉及到两个程序——<code>assembler</code>汇编器和<code>linker</code>链接器。汇编器将上面产生的汇编代码翻译为二进制代码，链接器负责链接一些运行时库，比如在上面<code>hello.c</code>中使用到的<code>printf</code>函数。</p>
+<blockquote>
+<p>链接分为静态链接和动态链接，这个不过多叙述</p>
+</blockquote>
+<h4 id="可执行文件反编译为汇编文件"><a class="header" href="#可执行文件反编译为汇编文件">可执行文件反编译为汇编文件</a></h4>
+<p>有些时候，我们想查看手里的二进制文件的汇编代码，我们可以使用反汇编器和调试器。</p>
+<p>使用反汇编器：<code>objdump -d exec</code>其中<code>exec</code>是可执行文件的名称</p>
+<p>使用调试器：<code>gdb exec</code>其中<code>gdb</code>是一款功能强大的调试器，具体的使用不做叙述。</p>
+<blockquote>
+<p>注意：对不少商业软件进行反编译是违反用户协议的</p>
+</blockquote>
+<h2 id="华为鲲鹏处理器简介"><a class="header" href="#华为鲲鹏处理器简介">华为鲲鹏处理器简介</a></h2>
+<h3 id="arm处理器简介"><a class="header" href="#arm处理器简介">Arm处理器简介</a></h3>
+<p>Arm处理器是一种不同于<code>Intel</code>系列的处理器，采用一套完全不同的指令集架构。Arm处理器采用<strong>授权</strong>的方式在全球范围内进行生产和研发。华为购买了Arm处理器的<strong>架构授权</strong>，其的产品就是鲲鹏处理器。</p>
+<h3 id="鲲鹏处理器简介"><a class="header" href="#鲲鹏处理器简介">鲲鹏处理器简介</a></h3>
+<blockquote>
+<p>不搞硬件 略</p>
+</blockquote>
+<h3 id="arm寻址方式"><a class="header" href="#arm寻址方式">Arm寻址方式</a></h3>
+<p>在Arm中有这些重要的寄存器：</p>
+<p><img src="./assets/arm-register-20221120150652-ktylrqa.png" alt="Arm" /></p>
+<blockquote>
+<p>可以发现这寄存器的命名比<code>x86-64</code>那座屎山好多了</p>
+</blockquote>
+<p>下面这张图给出了<code>AArch64</code>和<code>x86</code>中寄存器的不少对比</p>
+<p><img src="./assets/register-difference-20221120150652-9h8tdk0.png" alt="register-difference" /></p>
+<p>和<code>x86</code>一样，在<code>AArch64</code>中也存在着状态寄存器，下表给出</p>
+<p><img src="./assets/flag-20221120150652-7xef85t.png" alt="flags" /></p>
+<p>在<code>AArch64</code>下有着下列的寻址方式：</p>
+<ul>
+<li>立即数寻址</li>
+<li>寄存器寻址</li>
+<li>寄存器间接寻址</li>
+<li>基址寻址</li>
+<li>相对寻址</li>
+</ul>
+<blockquote>
+<p>还有多寄存器寻址、堆栈寻址和寄存器移位寻址等方式，这里不做叙述</p>
+</blockquote>
+<h4 id="立即数寻址"><a class="header" href="#立即数寻址">立即数寻址</a></h4>
+<p>在立即数寻址指令中地址码就是操作数本身，可以直接使用。在<code>AArch64</code>中，立即数采用<code>#</code>开头。</p>
+<p>例如：<code>MOV R0, #0xFF000</code>，将立即数中的值存入<code>R0</code>寄存器中</p>
+<h4 id="寄存器寻址"><a class="header" href="#寄存器寻址">寄存器寻址</a></h4>
+<p>操作数的值存储在寄存器，在指令执行时直接去除寄存器中的值进行计算。</p>
+<p>例如：<code>MOV R1,R2</code>将<code>R2</code>寄存器的值复制到<code>R1</code>中。</p>
+<h4 id="寄存器间接寻址"><a class="header" href="#寄存器间接寻址">寄存器间接寻址</a></h4>
+<p>将操作时从寄存器中所指向的内存中取出，寄存器内存储的是内存地址。</p>
+<p>同时，在<code>AArch64</code>中，不能直接对内存中的数据进行运算，需要先用指令将数据从内存中取出，一般常用的指令是<code>LDR</code>读取内存数据，<code>STR</code>写入内存数据。</p>
+<p>例如：<code>LDR R1, [R2]</code>将<code>R2</code>地址中指向的数据写入<code>R1</code>。<code>STR R1,[R2]</code>将<code>R1</code>的值写入<code>R2</code>地址对应的内存空间</p>
+<h3 id="基址变址寻址"><a class="header" href="#基址变址寻址">基址变址寻址</a></h3>
+<p>将基址寄存器的内容和指令中给出的偏移量相加，在得到有效操作数的地址。基址变址寻址存在三种不同的寻址方式：</p>
+<ul>
+<li>前索引<code>LDR R0, [R1,#4]</code>，访问的地址是<code>R1</code>中的地址加上4。</li>
+<li>自动索引<code>LDR R0, [R1, #4]!</code>，访问的地址同上，但是会将新的地址再写入<code>R1</code>。</li>
+<li>后索引<code>LDR R0, [R1], #4</code>，访问的地址就是<code>R1</code>中存储的指令，但是在访问之后将相加的值写入<code>R1</code></li>
+</ul>
+<blockquote>
+<p><code>AArch64</code>不再做过多的介绍，如有兴趣自行学习</p>
+</blockquote>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../csapp/bits.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../csapp/assembly-data.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../csapp/bits.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../csapp/assembly-data.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

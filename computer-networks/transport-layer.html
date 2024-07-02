@@ -1,0 +1,482 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>传输层 - Ricardo&#x27;s Wiki</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="我在北京邮电大学计算机科学与技术专业学习三年的部分笔记">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../katex.min.css">
+
+        <!-- MathJax -->
+        <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../index.html">主页</a></li><li class="chapter-item expanded affix "><li class="spacer"></li><li class="chapter-item expanded "><a href="../ai-principle/index.html"><strong aria-hidden="true">1.</strong> 人工智能原理</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../ai-principle/intro.html"><strong aria-hidden="true">1.1.</strong> 概述</a></li><li class="chapter-item expanded "><a href="../ai-principle/question-knowledge.html"><strong aria-hidden="true">1.2.</strong> 问题和知识表示</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../algorithm/index.html"><strong aria-hidden="true">2.</strong> 算法</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../algorithm/intro.html"><strong aria-hidden="true">2.1.</strong> 概述</a></li><li class="chapter-item expanded "><a href="../algorithm/recurse-divide.html"><strong aria-hidden="true">2.2.</strong> 分治算法</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../compiler/index.html"><strong aria-hidden="true">3.</strong> 编译原理</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../compiler/intro.html"><strong aria-hidden="true">3.1.</strong> 概述</a></li><li class="chapter-item expanded "><a href="../compiler/lexical-analyzer.html"><strong aria-hidden="true">3.2.</strong> 词法分析</a></li><li class="chapter-item expanded "><a href="../compiler/grammar-analyzer.html"><strong aria-hidden="true">3.3.</strong> 语法分析</a></li><li class="chapter-item expanded "><a href="../compiler/grammar-driven-translation.html"><strong aria-hidden="true">3.4.</strong> 语法制导翻译</a></li><li class="chapter-item expanded "><a href="../compiler/syntax-analyser.html"><strong aria-hidden="true">3.5.</strong> 语义分析</a></li><li class="chapter-item expanded "><a href="../compiler/runtime.html"><strong aria-hidden="true">3.6.</strong> 运行环境</a></li><li class="chapter-item expanded "><a href="../compiler/intermediate-code.html"><strong aria-hidden="true">3.7.</strong> 中间代码生成</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../computer-architecture/index.html"><strong aria-hidden="true">4.</strong> 计算机组成原理</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../computer-architecture/overview.html"><strong aria-hidden="true">4.1.</strong> 计算机系统概论</a></li><li class="chapter-item expanded "><a href="../computer-architecture/calculator.html"><strong aria-hidden="true">4.2.</strong> 运算方法和运算器</a></li><li class="chapter-item expanded "><a href="../computer-architecture/instruction.html"><strong aria-hidden="true">4.3.</strong> 指令系统</a></li><li class="chapter-item expanded "><a href="../computer-architecture/cpu.html"><strong aria-hidden="true">4.4.</strong> 中央处理器</a></li><li class="chapter-item expanded "><a href="../computer-architecture/memory.html"><strong aria-hidden="true">4.5.</strong> 存储系统</a></li><li class="chapter-item expanded "><a href="../computer-architecture/io.html"><strong aria-hidden="true">4.6.</strong> 输入输出设备</a></li><li class="chapter-item expanded "><a href="../computer-architecture/external.html"><strong aria-hidden="true">4.7.</strong> 外部设备</a></li><li class="chapter-item expanded "><a href="../computer-architecture/bus.html"><strong aria-hidden="true">4.8.</strong> 总线</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../computer-networks/index.html"><strong aria-hidden="true">5.</strong> 计算机网络</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../computer-networks/overview.html"><strong aria-hidden="true">5.1.</strong> 引言</a></li><li class="chapter-item expanded "><a href="../computer-networks/physical-layer.html"><strong aria-hidden="true">5.2.</strong> 物理层</a></li><li class="chapter-item expanded "><a href="../computer-networks/data-link-layer.html"><strong aria-hidden="true">5.3.</strong> 数据链路层</a></li><li class="chapter-item expanded "><a href="../computer-networks/mac.html"><strong aria-hidden="true">5.4.</strong> 介质访问控制层</a></li><li class="chapter-item expanded "><a href="../computer-networks/network-layer.html"><strong aria-hidden="true">5.5.</strong> 网络层</a></li><li class="chapter-item expanded "><a href="../computer-networks/transport-layer.html" class="active"><strong aria-hidden="true">5.6.</strong> 传输层</a></li><li class="chapter-item expanded "><a href="../computer-networks/mid-term.html"><strong aria-hidden="true">5.7.</strong> 期中复习</a></li><li class="chapter-item expanded "><a href="../computer-networks/final-term.html"><strong aria-hidden="true">5.8.</strong> 期末复习</a></li><li class="chapter-item expanded "><a href="../computer-networks/lab2.html"><strong aria-hidden="true">5.9.</strong> 实验二</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../csapp/index.html"><strong aria-hidden="true">6.</strong> 计算机系统基础</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../csapp/bits.html"><strong aria-hidden="true">6.1.</strong> 数据的位级表示</a></li><li class="chapter-item expanded "><a href="../csapp/machine.html"><strong aria-hidden="true">6.2.</strong> 程序的机器级表示</a></li><li class="chapter-item expanded "><a href="../csapp/assembly-data.html"><strong aria-hidden="true">6.3.</strong> 程序的机器级表示——数据</a></li><li class="chapter-item expanded "><a href="../csapp/assembly-control.html"><strong aria-hidden="true">6.4.</strong> 程序的机器级表示——控制</a></li><li class="chapter-item expanded "><a href="../csapp/assembly-procedure.html"><strong aria-hidden="true">6.5.</strong> 程序的机器级表示——过程</a></li><li class="chapter-item expanded "><a href="../csapp/assembly-advanced.html"><strong aria-hidden="true">6.6.</strong> 程序的机器级表示——高级话题</a></li><li class="chapter-item expanded "><a href="../csapp/exception-control-flow.html"><strong aria-hidden="true">6.7.</strong> 异常控制流</a></li><li class="chapter-item expanded "><a href="../csapp/linking.html"><strong aria-hidden="true">6.8.</strong> 链接</a></li><li class="chapter-item expanded "><a href="../csapp/io.html"><strong aria-hidden="true">6.9.</strong> 输入输出系统</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../data-structure/index.html"><strong aria-hidden="true">7.</strong> 数据结构</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../data-structure/foundation.html"><strong aria-hidden="true">7.1.</strong> 算法基础</a></li><li class="chapter-item expanded "><a href="../data-structure/inner-sort.html"><strong aria-hidden="true">7.2.</strong> 内部排序</a></li><li class="chapter-item expanded "><a href="../data-structure/outer-sort.html"><strong aria-hidden="true">7.3.</strong> 外部排序</a></li><li class="chapter-item expanded "><a href="../data-structure/array-and-list.html"><strong aria-hidden="true">7.4.</strong> 数组和广义表</a></li><li class="chapter-item expanded "><a href="../data-structure/list.html"><strong aria-hidden="true">7.5.</strong> 线性表</a></li><li class="chapter-item expanded "><a href="../data-structure/stack-and-dequeue.html"><strong aria-hidden="true">7.6.</strong> 栈和队列</a></li><li class="chapter-item expanded "><a href="../data-structure/tree.html"><strong aria-hidden="true">7.7.</strong> 树</a></li><li class="chapter-item expanded "><a href="../data-structure/graph.html"><strong aria-hidden="true">7.8.</strong> 图</a></li><li class="chapter-item expanded "><a href="../data-structure/string.html"><strong aria-hidden="true">7.9.</strong> 字符串</a></li><li class="chapter-item expanded "><a href="../data-structure/find.html"><strong aria-hidden="true">7.10.</strong> 查找表</a></li><li class="chapter-item expanded "><a href="../data-structure/lab.html"><strong aria-hidden="true">7.11.</strong> 实验</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../database/index.html"><strong aria-hidden="true">8.</strong> 数据库</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../database/intro.html"><strong aria-hidden="true">8.1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="../database/relation-model.html"><strong aria-hidden="true">8.2.</strong> Relation Model</a></li><li class="chapter-item expanded "><a href="../database/relation-database-design.html"><strong aria-hidden="true">8.3.</strong> Relation Database Design</a></li><li class="chapter-item expanded "><a href="../database/sql.html"><strong aria-hidden="true">8.4.</strong> SQL</a></li><li class="chapter-item expanded "><a href="../database/intermediate-sql.html"><strong aria-hidden="true">8.5.</strong> Intermediate SQL</a></li><li class="chapter-item expanded "><a href="../database/entity-relation-model.html"><strong aria-hidden="true">8.6.</strong> Entity Relation Model</a></li><li class="chapter-item expanded "><a href="../database/data-storage-structure.html"><strong aria-hidden="true">8.7.</strong> Data Storage Structure</a></li><li class="chapter-item expanded "><a href="../database/database-index.html"><strong aria-hidden="true">8.8.</strong> Index</a></li><li class="chapter-item expanded "><a href="../database/query-processing.html"><strong aria-hidden="true">8.9.</strong> Query Processing</a></li><li class="chapter-item expanded "><a href="../database/query-optimization.html"><strong aria-hidden="true">8.10.</strong> Query Optimization</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../discrete-math/index.html"><strong aria-hidden="true">9.</strong> 离散数学</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../discrete-math/relation.html"><strong aria-hidden="true">9.1.</strong> Relation</a></li><li class="chapter-item expanded "><a href="../discrete-math/advanced-counting.html"><strong aria-hidden="true">9.2.</strong> Advanced Counting</a></li><li class="chapter-item expanded "><a href="../discrete-math/tree.html"><strong aria-hidden="true">9.3.</strong> Tree</a></li><li class="chapter-item expanded "><a href="../discrete-math/graph.html"><strong aria-hidden="true">9.4.</strong> Graph</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../formal-language/index.html"><strong aria-hidden="true">10.</strong> 形式语言和自动机</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../formal-language/fa.html"><strong aria-hidden="true">10.1.</strong> 有限状态自动机</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../missing-semester/index.html"><strong aria-hidden="true">11.</strong> 计算机教学中缺少的一课</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../missing-semester/missing-the-shell.html"><strong aria-hidden="true">11.1.</strong> Shell</a></li><li class="chapter-item expanded "><a href="../missing-semester/missing-shell-scripts.html"><strong aria-hidden="true">11.2.</strong> Shell Scripts</a></li><li class="chapter-item expanded "><a href="../missing-semester/missing-vim.html"><strong aria-hidden="true">11.3.</strong> Vim</a></li><li class="chapter-item expanded "><a href="../missing-semester/missing-data-wrangling.html"><strong aria-hidden="true">11.4.</strong> Data Wrangling</a></li><li class="chapter-item expanded "><a href="../missing-semester/missing-command-line.html"><strong aria-hidden="true">11.5.</strong> Command Line</a></li><li class="chapter-item expanded "><a href="../missing-semester/missing-potpourri.html"><strong aria-hidden="true">11.6.</strong> Potpourri</a></li><li class="chapter-item expanded "><a href="../missing-semester/missing-version-control.html"><strong aria-hidden="true">11.7.</strong> Version Control</a></li><li class="chapter-item expanded "><a href="../missing-semester/missing-debugging.html"><strong aria-hidden="true">11.8.</strong> Debug</a></li><li class="chapter-item expanded "><a href="../missing-semester/missing-metaprogramming.html"><strong aria-hidden="true">11.9.</strong> Metaprogram</a></li><li class="chapter-item expanded "><a href="../missing-semester/missing-security.html"><strong aria-hidden="true">11.10.</strong> Security</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../operating-system/index.html"><strong aria-hidden="true">12.</strong> 操作系统</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../operating-system/intro.html"><strong aria-hidden="true">12.1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="../operating-system/os-structures.html"><strong aria-hidden="true">12.2.</strong> OS Structure</a></li><li class="chapter-item expanded "><a href="../operating-system/processes.html"><strong aria-hidden="true">12.3.</strong> Process</a></li><li class="chapter-item expanded "><a href="../operating-system/process-synchronization.html"><strong aria-hidden="true">12.4.</strong> Process Synchronization</a></li><li class="chapter-item expanded "><a href="../operating-system/cpu-scheduling.html"><strong aria-hidden="true">12.5.</strong> CPU Scheduling</a></li><li class="chapter-item expanded "><a href="../operating-system/threads.html"><strong aria-hidden="true">12.6.</strong> Thread</a></li><li class="chapter-item expanded "><a href="../operating-system/memory-management.html"><strong aria-hidden="true">12.7.</strong> Memory Management</a></li><li class="chapter-item expanded "><a href="../operating-system/virtual-memory.html"><strong aria-hidden="true">12.8.</strong> Virtual Memory</a></li><li class="chapter-item expanded "><a href="../operating-system/fs-interface.html"><strong aria-hidden="true">12.9.</strong> Filesystem Interface</a></li><li class="chapter-item expanded "><a href="../operating-system/fs-implementation.html"><strong aria-hidden="true">12.10.</strong> Filesystem Implementation</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../socialist/index.html"><strong aria-hidden="true">13.</strong> 毛泽东思想和中国特色理论体系概论</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../socialist/maozedong.html"><strong aria-hidden="true">13.1.</strong> 毛概期末总结</a></li><li class="chapter-item expanded "><a href="../socialist/others.html"><strong aria-hidden="true">13.2.</strong> 课后大题</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Ricardo&#x27;s Wiki</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="传输层"><a class="header" href="#传输层">传输层</a></h1>
+<h2 id="传输层所在的功能和位置"><a class="header" href="#传输层所在的功能和位置">传输层所在的功能和位置</a></h2>
+<p>传输层是网络网络分层模型中较为重要的一层，提供了端到端的可靠、高效、低开销的数据传输服务，而且同当前的物理设备和网络无关。</p>
+<p>传输层提供了进程到进程级别的通信传输服务：</p>
+<p><img src="./transport-layer/image-20230523152502659.png" alt="image-20230523152502659" /></p>
+<h3 id="传输层提供的服务"><a class="header" href="#传输层提供的服务">传输层提供的服务</a></h3>
+<ul>
+<li>屏蔽了通信网络的复杂性并向上层提供了同一的通信接口</li>
+<li>通过单一的网络接口提供了多个服务访问点<code>Service Access Points</code></li>
+<li>提供了面向连接和无连接两种服务</li>
+</ul>
+<p>伯克利的套接字是目前在互联网上被广泛应用的传输层API：</p>
+<p><img src="./transport-layer/image-20230523154634286.png" alt="image-20230523154634286" /></p>
+<p><img src="./transport-layer/image-20230523154658014.png" alt="image-20230523154658014" /></p>
+<h2 id="传输协议的重点"><a class="header" href="#传输协议的重点">传输协议的重点</a></h2>
+<h3 id="传输层协议和数据链路层协议的比较"><a class="header" href="#传输层协议和数据链路层协议的比较">传输层协议和数据链路层协议的比较</a></h3>
+<p>都需要处理差错控制、序列、流量控制等等问题。</p>
+<p>但是数据链路层是节点到节点的传输，传输层是进程到进程。</p>
+<p>两者所在的环境是也不太相同：</p>
+<ul>
+<li>不同的地址</li>
+<li>连接建立的过程不同</li>
+<li>不同子网的容纳量不同</li>
+<li>缓冲的分配方式不同</li>
+</ul>
+<h3 id="地址编码方式端口号"><a class="header" href="#地址编码方式端口号">地址编码方式：端口号</a></h3>
+<p>决定不同的进程应该如何发送和收到不同的信息，也就是应用层进程的服务提供点。</p>
+<p>不同的端口号还提供了复用的功能：</p>
+<ul>
+<li>对于发送方：通过端口号区分从不同进程发送的数据包，实现对于传输层的复用</li>
+<li>对于接收方：通过端口号区分从不同进程接受的数据包，实现对于传输层的复用</li>
+</ul>
+<h3 id="连接建立过程中的问题"><a class="header" href="#连接建立过程中的问题">连接建立过程中的问题</a></h3>
+<p>基础的连接建立过程是通过两次握手：一方发送一个连接请求然后等待另一方发送一个接受连接的回复。</p>
+<p>但是存在问题：网络传输过程中可能存在延迟，导致重复的连接：</p>
+<p><img src="./transport-layer/image-20230523160209470.png" alt="image-20230523160209470" /></p>
+<p>通过三次握手就可以结果建立连接重复的问题：</p>
+<p><img src="./transport-layer/image-20230523160517039.png" alt="image-20230523160517039" /></p>
+<p>在释放连接的过程中也存在着类似的问题：也可以通过类似的三次握手消息来解决。</p>
+<p><img src="./transport-layer/image-20230523160757503.png" alt="image-20230523160757503" /></p>
+<p><img src="./transport-layer/image-20230523160823428.png" alt="image-20230523160823428" /></p>
+<h3 id="差错控制"><a class="header" href="#差错控制">差错控制</a></h3>
+<p>差错控制使用了自动请求重传的机制，提供了进程到进程的差错控制。</p>
+<p>在数据链路层和传输层都有差错控制，需要注意这两者的不同：</p>
+<ul>
+<li>功能上的不同</li>
+<li>尺度上的不同</li>
+</ul>
+<h3 id="拥塞控制"><a class="header" href="#拥塞控制">拥塞控制</a></h3>
+<p>如果发送了过多的包到一个网络中，就会发生拥塞的现象，会出现时延增加和丢包的情况。</p>
+<p>需要注意对比拥塞控制和流量控制之间的区别：</p>
+<p><img src="./transport-layer/image-20230526100015934.png" alt="image-20230526100015934" /></p>
+<p>如何在多个发送方之间合理的分配带宽？<strong>最大最小公平性</strong>原则。</p>
+<p>使得资源分配向量的最小分量的值最大，防止任何网络流被“饿死”，同时一定程度上尽可能增加每个流的速率。判断原则：在满足最小需求的前提下，各个流尽量均分带宽，如果增加任何一个参与者的带宽，将导致其他具有相同或者更少带宽的参与者的带宽下降，此时即满足了最大最下公平性。</p>
+<p>在<code>Internet</code>中的拥塞控制步骤：</p>
+<ul>
+<li>
+<p>发现拥塞：路由器更具队列长度或者线路利用率判断</p>
+</li>
+<li>
+<p>将拥塞情况通知源主机：</p>
+<p>显示拥塞通知：<code>TCP</code> with <code>ECN</code></p>
+<p>隐式拥塞通知：源主机按照丢包的情况自行判断（更加常用）</p>
+</li>
+<li>
+<p>源主机采取措施：</p>
+<p>在没有拥塞的时候，增加发送速率</p>
+<p>在存在拥塞的时候，降低发送速率</p>
+</li>
+</ul>
+<p>为了达到效率和公平的平衡点，使用<strong>加法增乘法减</strong>的控制策略：</p>
+<p><img src="./transport-layer/image-20230526102102387.png" alt="image-20230526102102387" /></p>
+<h2 id="internet中的传输层"><a class="header" href="#internet中的传输层"><code>Internet</code>中的传输层</a></h2>
+<h3 id="udp用户数据包协议"><a class="header" href="#udp用户数据包协议"><code>UDP</code>用户数据包协议</a></h3>
+<p>无连接的，不可靠的协议，类似于<code>IP</code>的“尽力”协议。</p>
+<ul>
+<li>没有确认帧</li>
+<li>没有丢包或者乱序的侦测机制</li>
+<li>没有重传机制</li>
+<li>没有流量控制机制</li>
+</ul>
+<p>相对于<code>IP</code>唯一多提供的功能就是基于端口号的复用功能。</p>
+<p><code>UDP</code>的包格式如图所示：</p>
+<p><img src="./transport-layer/image-20230526102756873.png" alt="image-20230526102756873" /></p>
+<p>在<code>UDP</code>计算的校验和时，会带上<code>IP</code>部分的包头一同计算。发送方为了计算校验和而创建的<code>IP</code>包头因为不会被实际发送出去，而且被称为<strong>伪包头</strong>。</p>
+<p><img src="./transport-layer/image-20230526104311483.png" alt="image-20230526104311483" /></p>
+<h3 id="tcp传输控制协议"><a class="header" href="#tcp传输控制协议"><code>TCP</code>传输控制协议</a></h3>
+<h4 id="tcp的特点"><a class="header" href="#tcp的特点"><code>TCP</code>的特点</a></h4>
+<ul>
+<li>
+<p>面向连接的传输</p>
+</li>
+<li>
+<p>可靠的传输（<code>ARQ</code>）</p>
+<p>使用确认帧</p>
+<p>使用校验和发现错误</p>
+<p>重传传输错误的详细</p>
+<p>使用序列号侦测丢失或者乱序的包</p>
+<p>流量控制</p>
+</li>
+<li>
+<p>基于字节的传输，不能保持消息的边界</p>
+</li>
+<li>
+<p>有拥塞控制</p>
+</li>
+</ul>
+<p>下面这种图说明了“不保留消息边界的含义”。</p>
+<p><img src="./transport-layer/image-20230526105001795.png" alt="image-20230526105001795" /></p>
+<h4 id="tcp报文段格式"><a class="header" href="#tcp报文段格式"><code>TCP</code>报文段格式</a></h4>
+<p><img src="./transport-layer/image-20230526105640584.png" alt="image-20230526105640584" /></p>
+<p>其中的部分控制字段含义如下：</p>
+<ul>
+<li><code>URG</code>指示紧急数据指针<code>urgent pointer</code>有效，该指针指向的数据需要提前处理</li>
+<li><code>ACK</code>表示确认字段有效</li>
+<li><code>PSH</code>指示数据需要尽快提交给应用层，但是优先级低于<code>URG</code></li>
+<li><code>RST</code>表示连接需要重置</li>
+<li><code>SYN</code>同步报文段序号</li>
+<li><code>FIN</code>表示连接即将结束</li>
+</ul>
+<p>最前面的两位<code>ECE</code>和<code>CWR</code>是用于显示拥塞控制的，将同<code>IP</code>包头中的<code>ECN</code>字段协同工作。其中<code>ECN</code>字段有路由器设置，<code>ECE</code>由接收方设置，<code>CWR</code>由发送方设置。</p>
+<p><img src="./transport-layer/image-20230526110641892.png" alt="image-20230526110641892" /></p>
+<p><code>TCP</code>协议中还有支持一些扩展选项：</p>
+<ul>
+<li>
+<p><code>MSS</code>最大报文段大小</p>
+<p>允许主机指定<code>TCP</code>的最大大小</p>
+</li>
+<li>
+<p><code>Window Scale</code></p>
+<p>允许指定扩大滑动窗口大小的倍数，在一些信道延迟很大的情况下很有用</p>
+</li>
+<li>
+<p><code>Timestamp</code></p>
+<p>可以记载时间戳，计算时延</p>
+</li>
+<li>
+<p><code>Selective ACK</code></p>
+<p>允许接收方通知发送方一系列收到的序号。</p>
+<p><img src="./transport-layer/image-20230526111609101.png" alt="image-20230526111609101" /></p>
+</li>
+</ul>
+<h4 id="连接管理"><a class="header" href="#连接管理">连接管理</a></h4>
+<p><code>TCP</code>首先需要三次握手同服务器建立连接。在这个过程中，客户端和服务端协商好开始序列号，同时解决重复连接的问题。</p>
+<p><img src="./transport-layer/image-20230526112537773.png" alt="image-20230526112537773" /></p>
+<p>在编号的方面需要注意：<code>SYN</code>和<code>ACK</code>报文段虽然不能携带数据，但是这两个哥们都需要算上一个序号。</p>
+<p>下面的图表示了在建立连接之后的数据传输过程：</p>
+<p><img src="./transport-layer/image-20230530145314113.png" alt="image-20230530145314113" /></p>
+<p>数据传输完成之后的关闭连接过程，也是三次握手：</p>
+<p><img src="./transport-layer/image-20230530145733336.png" alt="image-20230530145733336" /></p>
+<p>和建立连接握手的过程中一样，虽然<code>FIN</code>和<code>ACK</code>报文段不能携带数据，但是仍然要占据一个序号。</p>
+<p>但是在实际使用过程中，当一边的主机想要关闭链接的时候，另一边的主机不一定想要关闭连接，于是一种被称为<strong>半连接关闭</strong>的方式被广泛使用。在一边宣布关闭连接之后，另一边还可以继续传输数据，之后在宣布关闭连接。</p>
+<p><img src="./transport-layer/image-20230530150032573.png" alt="image-20230530150032573" /></p>
+<h4 id="流量控制和窗口大小管理"><a class="header" href="#流量控制和窗口大小管理">流量控制和窗口大小管理</a></h4>
+<p><img src="./transport-layer/image-20230530150447893.png" alt="image-20230530150447893" /></p>
+<p>在<code>TCP</code>协议中，主机之间可以使用协议中的<code>WIN</code>字段通知对方自己缓冲区中剩余的大小。</p>
+<p>这里需要对比<code>TCP</code>同数据链路层之间的区别：</p>
+<ul>
+<li>在<code>TCP</code>中窗口大小按照字节为单位，但是在数据链路层中按照帧为大小</li>
+<li>在<code>TCP</code>中窗口大小是可变的，但是在数据链路层中是固定的</li>
+</ul>
+<p>当收到对方的<code>WIN</code>字段为0时，主机的行为是：</p>
+<ul>
+<li>一般情况下不会再发送数据</li>
+<li>但是一些标记为紧急的分段仍然可能发送</li>
+<li>如果遇到死锁（更新窗口大小的帧在传输过程中丢失了），发送方可能会发送一个1字节大小的分段去确认缓存的大小是否仍然为0</li>
+</ul>
+<p>总的来说，<code>TCP</code>中的滑动窗口的大小具有如下的特点：</p>
+<ul>
+<li>
+<p>发送方不用发送整个窗口大小的数据</p>
+</li>
+<li>
+<p>动态的窗口大小：</p>
+<p>发送方的大小可以由接收端的<code>WIN</code>字段来控制。</p>
+<p>但是如果在网络中遇到拥塞，实际可以用到的窗口大小可能会更小。</p>
+</li>
+<li>
+<p>接收方可能在任何时候发送确认帧</p>
+</li>
+</ul>
+<p>在发送过程中还会遇到一系列有趣的问题：</p>
+<ol>
+<li>
+<p><code>Nagle</code>问题</p>
+<p>这个问题在初期的<code>TELNET</code>协议中遇到，这个协议以一次只发送一个字节的数据而闻名。但是为了发送这个字节的数据，可能会最多发送162字节的数据，这就造成了巨大的浪费。</p>
+<p><img src="./transport-layer/image-20230530151807099.png" alt="image-20230530151807099" /></p>
+<p>这个问题的解决办法就是尽量发送尽可能大的分段，提高利用率，具体的阈值为：</p>
+<ul>
+<li>已经接收到上一个分段的确认帧</li>
+<li>缓存的数据已经填满了半个窗口或者最大分段<code>MSS</code>的一半</li>
+</ul>
+</li>
+<li>
+<p><code>Silly Window Syndrome</code>现象</p>
+<p>大致就是接受方在窗口还在非常小的时候不要就通知发送方，较小的窗口大小会导致效率下降。</p>
+<p>处理方式就是等待一段时间直到窗口较大的时候再发送。</p>
+</li>
+</ol>
+<h4 id="错误控制"><a class="header" href="#错误控制">错误控制</a></h4>
+<p><code>TCP</code>的错误控制包括侦测损坏的分段、丢失的分段、乱序的分段以及重复的分段。</p>
+<p><code>TCP</code>仍然使用自动选择重传<code>ARQ</code>机制来进行错误控制。</p>
+<p>在正常情况下，没有遇到任何的错误。接收方会等待一段时间<code>500ms</code>，来判断是否有更多的分段在传输过程中，以提供<code>ACK</code>的效率。</p>
+<p><img src="./transport-layer/image-20230530152749365.png" alt="image-20230530152749365" /></p>
+<p>如果在传输过程中，遇到丢失的帧，使用选择重传处理。</p>
+<p><img src="./transport-layer/image-20230530152934847.png" alt="image-20230530152934847" /></p>
+<p>需要注意的是，在传输过程中，<code>ACK</code>帧不重传。</p>
+<p>在<code>TCP</code>中还存在一种特殊的机制称为<strong>快速重传</strong>，在收到三个重复的确认帧之后，发送方立刻发送这个丢失的帧。</p>
+<h4 id="定时器管理"><a class="header" href="#定时器管理">定时器管理</a></h4>
+<p>在<code>TCP</code>中一共存在四个定时器：</p>
+<ul>
+<li>
+<p>重传定时器</p>
+</li>
+<li>
+<p>持久定时器<code>Persistence</code>：当接收方发送0窗口大小的时候使用</p>
+<p>主要就是防止上文提到过的死锁问题，防止新的窗口通知帧在传输过程中丢失。</p>
+</li>
+<li>
+<p>保活定时器：当另一方长时间空闲的时候使用</p>
+<p>当另一方长时间沉默的时候问一下对面还活着吗。</p>
+</li>
+<li>
+<p>等待时间定时器<code>Time-waited</code>：在释放连接时等待</p>
+<p>避免“两军问题”。</p>
+</li>
+</ul>
+<p>在定时器管理中的主要问题就是重传定时器的时长怎么确定？如果太长会导致较低的吞吐量，太短又会导致大量的重复帧。</p>
+<p><img src="./transport-layer/image-20230530160046437.png" alt="image-20230530160046437" /></p>
+<p>在<code>TCP</code>中采用下列公式确定重传定时器的时长：
+<span class="katex-display"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">RTT</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6667em;vertical-align:-0.0833em;"></span><span class="mord mathnormal" style="margin-right:0.0037em;">α</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">RT</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:-0.1389em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">o</span><span class="mord mathnormal mtight" style="margin-right:0.01968em;">l</span><span class="mord mathnormal mtight">d</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.0037em;">α</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.05764em;">S</span><span class="mord mathnormal">am</span><span class="mord mathnormal" style="margin-right:0.01968em;">pl</span><span class="mord mathnormal">e</span><span class="mclose">)</span></span></span></span></span>
+其中的<code>Sample</code>是收到确认帧的时间减去发送帧的时间。</p>
+<h4 id="拥塞控制-1"><a class="header" href="#拥塞控制-1">拥塞控制</a></h4>
+<p>在没有端到端的带宽保证的情况下，拥塞控制是十分必要的。</p>
+<p><code>TCP</code>中的发送方通过隐式的拥塞通知得知发生了拥塞，同时按照加法增乘法减<code>AIMD</code>的算法控制其的发送速度。其中，<code>TCP</code>使用被称为<strong>慢启动</strong>的技术去快速得知一个合理的拥塞窗口待行区啊，使用<strong>快速重传</strong>避免超时。</p>
+<blockquote>
+<p>拥塞窗口是一个由发送方控制的变量，表示在网络中最多能发送的数据量。</p>
+<p><img src="./transport-layer/image-20230530161059980.png" alt="image-20230530161059980" /></p>
+</blockquote>
+<blockquote>
+<p>重传定时器超时就标志着发生拥塞</p>
+<p>收到确认帧就表示可发送数据</p>
+</blockquote>
+<p>为了简化描述，下面使用可发送的分段个数表示拥塞窗口。</p>
+<p><strong>慢启动</strong>技术：初始的发送速率设置的很小（1），每收到一个确认帧将窗口扩大1，如果定时器超时，再次窗口设置为1。</p>
+<p>虽然称为慢启动策略，但是启动过程中窗口的大小是指数级增长的。</p>
+<p><img src="./transport-layer/image-20230530161714395.png" alt="image-20230530161714395" /></p>
+<p>当当前窗口的大小达到发生重传的窗口大小的一半时，可以脱离慢启动的过程而进入<code>AIMD</code>。</p>
+<p>在引入快速重传（三次重复的确认帧就认为是丢失）之后，拥塞控制也引入<strong>快速恢复</strong>。当遇到快速重传之后，发送的速度像慢启动一样直接回到1，而至减半，同时也继续<code>AIMD</code>控制而不是开始慢启动。</p>
+<p><img src="./transport-layer/image-20230530162159523.png" alt="image-20230530162159523" /></p>
+<p>图中的蓝线是原始版本，黑线是引入快速重传和快速恢复之后。</p>
+<p><img src="./transport-layer/image-20230530162452378.png" alt="image-20230530162452378" /></p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../computer-networks/network-layer.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../computer-networks/mid-term.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../computer-networks/network-layer.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../computer-networks/mid-term.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>
