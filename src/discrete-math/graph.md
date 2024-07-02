@@ -266,9 +266,9 @@ A graph is planar if and only if it contains no subgraph obtained from $K_5$ or 
 
 ### Coloring graphs
 
-Suppose that $G=(V,E.\gamma)$ is a graph without no multiple edges, and $C={c_1, c_2, c_3,\cdots}$ is any set of $n$ colors. Any function $f:V \to C$ is called **a coloring of the graph ​**​**$G$**​**​ using ​**​**$n$**​**​ colors**.
+Suppose that $G=(V,E.\gamma)$ is a graph without no multiple edges, and $C={c_1, c_2, c_3,\cdots}$ is any set of $n$ colors. Any function $f:V \to C$ is called **a coloring of the graph ​$G$​ using ​$n$​ colors**.
 
-A coloring is proper if any two adjacent vertices $v$ and $u$ have different colors. The smallest number of colors needed to produce a proper coloring of a graph $G$ is called the **chromatic number of ​**​**$G$**, which is denoted by $\chi(G)$.
+A coloring is proper if any two adjacent vertices $v$ and $u$ have different colors. The smallest number of colors needed to produce a proper coloring of a graph $G$ is called the **chromatic number of ​$G$**, which is denoted by $\chi(G)$.
 
 ### Four-color Theorem
 
@@ -286,7 +286,7 @@ Let $G$ be a node-minimal counter-example to the theorem, for example,  a planar
 
 As $G$ is a planar graph, we can get $G$ must have a node $q$ with degree $\le 5$. Let the nodes adjacent to q be named as $v_1, v_2, v_3, v_4, v_5$, and this five nodes can not form $K_5$, also because this is a planar graph. So there must be two vertices $a_1, a_2$ in this five vertices that have no edge between them.
 
-So we can "contract" the edges $&lt;q,v_1&gt;$ and $&lt;a,v_2$ to get a new planar graph $G'$, and the vertices $v_1$, $v_2$ and $q$ become a new vertices in $G'$.  $G'$ is 5 colorable since it has fewer nodes than $G$, so we can find that we color the $G$ using the five colors in the $G'$, which meaning the counter example is not counter.
+So we can "contract" the edges $<q,v_1>$ and $<a,v_2>$ to get a new planar graph $G'$, and the vertices $v_1$, $v_2$ and $q$ become a new vertices in $G'$.  $G'$ is 5 colorable since it has fewer nodes than $G$, so we can find that we color the $G$ using the five colors in the $G'$, which meaning the counter example is not counter.
 
 ### Applications of Graph Coloring
 
@@ -310,7 +310,7 @@ $$
 
 ### Subgraph and Quotient Graphs
 
-One of the most important subgraphs is the one that arises by deleting one edge and no vertices. If $G=(V&gt;E,\gamma)$ is a graph and $e \in E$, then we denote by $G_e$ the subgraph obtained by omitting the edge $e$ from $E$ and keeping all vertices.
+One of the most important subgraphs is the one that arises by deleting one edge and no vertices. If $G=(V,E,\gamma)$ is a graph and $e \in E$, then we denote by $G_e$ the subgraph obtained by omitting the edge $e$ from $E$ and keeping all vertices.
 
 Suppose that $G=(V,E,\gamma)$ is a graph without multiple edges between the same vertices and that $R$ is an equivalence relation on the set $V$. Construct the quotient graphs $G^R$ as follow: The vertices of $G^R$ are the equivalence classes of $V$ produced by $R$. If $[v]$ and $[w]$ are the equivalence classes of vertices $v$ and $w$, then there is an edge in 	$G^R$ from $[v]$ to $[w]$ if and only if some vertices in $[v]$ is connected to sone vertices in $[w]$ in the graph $G$.
 

@@ -1,0 +1,15 @@
+[book]
+authors = ["jackfiled"]
+language = "zh-CN"
+multilingual = false
+src = "src"
+title = "Ricardo's Wiki"
+description = "我在北京邮电大学计算机科学与技术专业学习三年的部分笔记"
+
+[output.html]
+additional-css = ["katex.min.css"]
+mathjax-support = true
+
+[preprocessor.katex]
+after = ["links"]
+no-css = true

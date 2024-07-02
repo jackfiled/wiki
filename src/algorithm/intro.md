@@ -87,7 +87,7 @@ $$
 T(N) \le Cnlogn
 $$
 假设当$2^{k-1}n_o \le n \le 2^k n_0$，$k > 1$是，上面的推论成立，那么当$2^kn_0 \le n \le 2^{k+1}n_0$时，有：
-$$
+\\[
 \begin{eqnarray}
 T(n) &=& 2T(\lfloor \frac{n}{2} \rfloor) + n \\
 &\le& 2 C \lfloor \frac{n}{2} \rfloor log(\lfloor \frac{n}{2} \rfloor) + n \\
@@ -96,7 +96,7 @@ T(n) &=& 2T(\lfloor \frac{n}{2} \rfloor) + n \\
 &=& Cnlogn - (c-1)n \\
 &\le& Cnlogn
 \end{eqnarray}
-$$
+\\]
 原假设成立。
 
 #### 迭代法
@@ -112,14 +112,14 @@ T(n)=
 \end{cases}
 $$
 的渐进阶。
-$$
+\\[
 \begin{eqnarray}
 T(n) &=& 2T(\frac{n}{2}) + 5n^2 \\
 &=& 2(2T(\frac{n}{4}) + 5(\frac{n}{2}))^2 + 5n^2 \\
 &=& 2(2(2T(\frac{n}{8}) + 5 (\frac{n}{4}) ^ 2) + 5(\frac{n}{2}))^2 + 5n^2 \\
 &=& 2^kT(1) + 2^{k-1} 5(\frac{n}{2^{k-1}}) ^ 2 + \cdots + 2 \times 5 (\frac{n}{2})^2 + 5n^2
 \end{eqnarray}
-$$
+\\]
 不难发现：
 $$
 T(n) = O(n^2)

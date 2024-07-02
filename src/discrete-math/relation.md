@@ -26,8 +26,8 @@
 
 ### Relations on a Set
 
-- A binary from a set $A$ to itself is called a **relation on the set ​**​**$A$**.
-- A relation on a set A is **a subset of ​**​**$A^2$**.
+- A binary from a set $A$ to itself is called a **relation on the set ​$A$**.
+- A relation on a set A is **a subset of ​$A^2$**.
 
 ### Properties of Relations
 
